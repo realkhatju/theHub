@@ -69,6 +69,7 @@ class CustomerShopController extends Controller
         // dd($pending_lists->toArray());
         $table_id = Table::where('status',2)->first();
         // dd($table_id);
+        // dd($items->toArray());
         $table = 1;
         $ygn_towns = Town::where('state_id',13)->get();
         return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','table','cuisine_types','table_number','pending_lists','table_id'));

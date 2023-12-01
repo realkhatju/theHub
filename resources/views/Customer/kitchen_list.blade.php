@@ -43,7 +43,7 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <address>
-                                    <h4 class="font-weight-bold"> &nbsp;<b class="text-center">Law Ka Nat&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b></h4>
+                                    <h4 class="font-weight-bold"> &nbsp;<b class="text-center">The Hub&nbsp;&nbsp;(<span class="text-danger">Order Details</span>)</b></h4>
                                         <h5 class="font-weight-bold">Restaurant</h5>
                                 </address>
                             </div>
@@ -71,10 +71,11 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <td class="font-weight-bold">Kitchen</td>
+                                            <td class="font-weight-bold"></td>
                                             <td class="font-weight-bold">Menu Name</td>
-                                            <td class="font-weight-bold">Option & Size</td>
+                                            {{-- <td class="font-weight-bold">Option & Size</td> --}}
                                             <td class="font-weight-bold">Qty</td>
+                                            <td >Price</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,9 +89,10 @@
                                     <tr>
                                         <td class="font-weight-bold">(Salad)</td>
                                         <td class="font-weight-bold">{{$opname->name}}</td>
-                                        <td class="font-weight-bold">{{$opname->menu_item->item_name}}</td>
+                                        {{-- <td class="font-weight-bold">{{$opname->menu_item->item_name}}</td> --}}
                                         <td class="font-weight-bold">{{$optqty->quantity -$optqty->old_quantity}}</td>
                                         {{-- <td>{{$optqty->note}}</td> --}}
+                                        <td>{{$total_price}}</td>
                                     </tr>
                                     @foreach ($notte as $notes)
                                         @if ($notes->option_id == $opname->id)
@@ -399,10 +401,15 @@
 
             <div class="col-md-12">
                 <div class="text-center">
-                    <button id="print" class="btn btn-info" type="button">
+                    {{-- <button id="print" class="btn btn-info" type="button">
                         <span><i class="fa fa-print"></i> Print</span>
+                    </button> --}}
 
-                    </button>
+                    <a href="{{ route('add_more_customer_item',$pending_order_details->id) }}"  class="btn btn-info" type="button">
+                        <span><i class="fa-solid fa-plus"></i> Add More Item</span>
+
+                    </a>
+
                     {{-- @if ($tablenoo == 1)
                     <a href="{{route('delivery_pending_lists')}}" id="goto" class="btn btn-outline-danger" type="button">
                         <span><i class="fa fa-info"></i> To Pending Voucher Lists </span>

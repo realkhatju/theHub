@@ -86,7 +86,12 @@
                                                 <span class="badge-pill badge-success">Finished</span>
                                             </td>
                                             @endif --}}
-                                            <td><a href="{{route('customercanceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
+
+                                            <td>
+                                                @if ($pending_order_details->status == 1)
+                                                <a href="{{route('customercanceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
+                                                @endif
+
 
                                         </tr>
 
@@ -102,17 +107,19 @@
         </div>
     </div>
 
-    {{-- <div class="row justify-content-center">
-        <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
+    <div class="row justify-content-center">
+        @if ($pending_order_details['status'] == 1)
+            <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
+        @endif
 
-        <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="change_price({{$pending_order_details->id}})">Store Voucher</a>
 
-        <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a>
+        {{-- <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="change_price({{$pending_order_details->id}})">Store Voucher</a>
 
-    </div> --}}
+        <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a> --}}
+
+    </div>
     {{-- <div class="modal-footer" id="dis_footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="change_price()">Store Voucher</button>
+        <button type="button" class="btn btn-primary" onclick="change_price()">Back</button>
     </div> --}}
     </div>
     <div class="modal fade" id="voudiscount" role="dialog" aria-hidden="true">

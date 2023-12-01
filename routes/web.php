@@ -47,7 +47,7 @@ Route::get('customer/Shop-Order-Voucher/{order_id}', 'Web\SaleController@getCust
 // Route::post('CustomerShopVoucherStore', 'Web\SaleController@storeCustomerShopOrderVoucher')->name('shop.ordervoucher');
 Route::post('Customer/DiscountForm', 'Web\SaleController@storeCustomerShopDiscountForm')->name('shop.customer.discountform');
 Route::post('getCustomerCountingUnitsByItemId', 'Web\SaleController@getCustomerCountingUnitsByItemId');
-Route::post('Customer/Store', 'Web\SaleController@customerStoreShopOrder')->name('customerStore_shop_order');
+Route::post('customer/store', 'Web\SaleController@customerStoreShopOrder')->name('customerStore_shop_order');
 Route::post('customer-Add-More-Item', 'Web\SaleController@customerAddMoreItem')->name('add_more_item_customer');
 Route::get('customer/cancelOrder/{id}','Web\SaleController@customerCancelOrder')->name('customerCancelOrder');
 Route::get('customer/delivery', 'Web\SaleController@customerDeliveryPage')->name('customerDelivery');

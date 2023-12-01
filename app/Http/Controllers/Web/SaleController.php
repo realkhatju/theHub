@@ -357,7 +357,7 @@ class SaleController extends Controller
         // $option_lists = json_decode($request->option_lists);
         // dd($option_lists);
         // dd($pending_order_details);
-        return view('Customer.pending_order_Details', compact('pending_order_details','total_qty','total_price','table_number'));
+        return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
 
 
@@ -699,8 +699,8 @@ class SaleController extends Controller
     $fromadd = 0;
     // Need to Modify
     // dd($name);
-    //    return view('Customer.kitchen_list',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo'));
-    return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd'));
+       return view('Customer.kitchen_list',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo','pending_order_details','total_price'));
+    // return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd'));
     }
 
     protected function customerAddMoreItem(Request $request){ //Unfinished
@@ -886,8 +886,12 @@ class SaleController extends Controller
             }
         }
         $fromadd = 1;
+        $tablenoo = 0;
         // dd("heloo");
-        return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd'));
+        $real_date = $date->format('d-m-Y h:i:s');
+        $tableno = Table::find($orders->table_id);
+        $take_away = $request->take_away;
+        return view('Customer.kitchen_list', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd','real_date','tableno','tablenoo','take_away','orders'));
 
         // To Modify Pending Order Details Unique    } else {
 
@@ -952,7 +956,8 @@ protected function customerCancelDetails(Request $request){
 
         $total_price += $option->sale_price * $option->pivot->quantity;
     }
-    // dd($pending_order_details);
+    // dd($pending_order_details->toArray());
+    // dd($total_qty);
     return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
 }
 protected function getCustomerTableByFloor(Request $request){
@@ -1260,7 +1265,8 @@ protected function getCustomerTableByFloor(Request $request){
 		$date = new DateTime('Asia/Yangon');
 
 	  $real_date = $date->format('d-m-Y h:i:s');
-	  return view('Sale.kitchen_lists',compact('option_name','name','tableno','fromadd','tablenoo','real_date'));
+      $tableno = Table::find($orders->table_id);
+	  return view('Sale.kitchen_lists',compact('option_name','name','tableno','fromadd','tablenoo','real_date','tableno'));
 
 	}
 
@@ -1905,7 +1911,7 @@ protected function getCustomerTableByFloor(Request $request){
 		return response()->json($voucher);
 	}
 
-	protected function getShopOrderVoucher($order_id){
+	protected function getShopOrderVoucher(Request $request,$order_id){
         // dd($order_id);
 		try {
 
@@ -1920,8 +1926,15 @@ protected function getCustomerTableByFloor(Request $request){
     	}
         // dd($order->toArray());
     	$voucher = Voucher::where('id', $order->voucher_id)->first();
+        $option_shop_order = Order::get();
         // dd($voucher->toArray());
-    	return view('Sale.voucher', compact('voucher'));
+        // dd($option_shop_order->toArray());
+        // dd($request->toArray());
+        $notes = DB::table('option_shop_order')
+        ->where('shop_order_id', $order_id)
+        ->get();
+        // dd($notes->toArray());
+    	return view('Sale.voucher', compact('voucher','notes'));
 	}
 
     protected function getDeliOrderVoucher($order_id){

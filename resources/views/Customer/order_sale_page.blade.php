@@ -92,7 +92,7 @@
                     @if($item->cuisine_type_id == 1)
                     {{-- modify css  --}}
                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                        <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                         <div style="height:40px;">
                             <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                         </div>
@@ -110,7 +110,7 @@
                         @if($item->cuisine_type_id == 2)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -130,7 +130,7 @@
                         @if($item->cuisine_type_id == 3)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -150,7 +150,7 @@
                         @if($item->cuisine_type_id == 4)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -167,7 +167,7 @@
                         @if($item->cuisine_type_id == 5)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -188,7 +188,7 @@
                         @if($item->cuisine_type_id == 6)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -208,7 +208,7 @@
                         @if($item->cuisine_type_id == 7)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -228,7 +228,7 @@
                         @if($item->cuisine_type_id == 8)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -248,7 +248,7 @@
                         @if($item->cuisine_type_id == 9)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -268,7 +268,7 @@
                         @if($item->cuisine_type_id == 10)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -288,7 +288,7 @@
                         @if($item->cuisine_type_id == 11)
 
                         <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                            <img src="{{asset('/image/photo.jpg')}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                             <div style="height:40px;">
                                 <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
                             </div>
@@ -424,7 +424,7 @@
                             <i class="btn btn-success mr-2" onclick="DeliAddMoreItem({{$order->id}})"><i class="fas fa-plus"></i> Add More Item </i>
                         </div>
                         @elseif(isset($order))
-
+                        {{-- To Modify
                         <div class="col-md-2">
                             <i class="btn btn-success mr-2 floating_btn" onclick="AddMoreItem({{$order->id}})"><i class="fa-regular fa-circle-check text-success"></i> Check Out&nbsp;!
                                 <table class="text-warning font-weight-bold ml-4">
@@ -433,6 +433,19 @@
                                     </tr>
                                 </table>
                             </i>
+                        </div> --}}
+                        <div class="row ">
+                            <div class="col-md-4 d-flex">
+                                <i class="btn btn-success mr-2 floating_btn" onclick="AddMoreItem({{$order->id}})">
+                                    <table>
+                                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                                    </table>
+                                <i class="fas fa-calendar-check"></i> Check Out&nbsp;!
+                                    <table>
+                                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                                    </table>
+                                </i>
+                            </div>
                         </div>
                         @else
 
@@ -525,13 +538,15 @@
 
                         </div> --}}
                         <div class="row ">
-                            <div class="col-md-4 ">
-                                <i class="btn btn-success mr-2 floating_btn" onclick="showCheckOut()"><i class="fas fa-calendar-check"></i> Check Out&nbsp;!
-                                <table class="text-warning font-weight-bold ml-4">
-                                    <tr>
-                                        <td id="2sub_total">0</td>
-                                    </tr>
-                                </table>
+                            <div class="col-md-4 d-flex">
+                                <i class="btn btn-success mr-2 floating_btn" onclick="showCheckOut()">
+                                    <table>
+                                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                                    </table>
+                                <i class="fas fa-calendar-check"></i> Check Out&nbsp;!
+                                    <table>
+                                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                                    </table>
                                 </i>
                             </div>
                         </div>
@@ -1028,7 +1043,7 @@ else{
             }
 
             $("#total_quantity").text(grandTotal_obj.total_qty);
-
+            $("#2total_quantity").text(grandTotal_obj.total_qty);
             $("#sub_total").text(grandTotal_obj.sub_total);
             $("#1sub_total").text(grandTotal_obj.sub_total);
             $("#2sub_total").text(grandTotal_obj.sub_total+' Ks');
@@ -1155,8 +1170,8 @@ else{
         var mycart = localStorage.getItem('mycart');
 
         var myremark = localStorage.getItem('myremark');
-        console.log(mycart);
-        console.log(myremark);
+        // console.log(mycart);
+        // console.log(myremark);
         if(!mycart){
 
             swal({

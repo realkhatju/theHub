@@ -51,7 +51,7 @@
                                     </address>
                                 </div>
                                 <div class="pull-right text-left" style="margin-top:20px;">
-                                    <strong style="font-size:16px;font-weight:bold;">Cashier Name: {{$voucher->sale_by}}</strong><br>
+                                    {{-- <strong style="font-size:16px;font-weight:bold;">Cashier Name: {{$voucher->sale_by}}</strong><br> --}}
                                         <strong style="font-size:16px;font-weight:bold;">Date : <i class="fa fa-calendar"></i> {{$voucher->voucher_date}}</strong><br>
                                         <strong style="font-size:16px;font-weight:bold;">Table Number : {{$voucher->shopOrder->table->table_number}}</strong><br>
                                         <strong style="font-size:16px;font-weight:bold;">Voucher Number : {{$voucher->voucher_code}}</strong><br>
@@ -87,7 +87,19 @@
                                             </tr>
                                             @endforeach
                                         </tbody>
+                                        @foreach ($notes as $item)
+                                            {{-- @if ($item->option_id == $opname->id) --}}
+                                                <tr>
+                                                <th class="text-danger font-weight-bold">Notes</th>
+                                                <td class="text-danger" colspan="3">{{$item->note}}</td>
+                                                </tr>
+                                            {{-- @endif --}}
+                                        @endforeach
                                     </table>
+
+                                    {{-- @foreach ($notes as $item)
+                                       <span>{{$item->note}}</span>
+                                    @endforeach --}}
                                     @if($voucher->discount_type == null)
                                     <div style="text-align:right;margin-right:10px;margin-top:20px;font-size:17px;font-weight:bold;">
                                          <strong>Voucher Total - {{$voucher->total_price}}</strong><br>
