@@ -388,8 +388,6 @@
                                     @endforeach
                                    @endif
                                 </table>
-
-
                                 <h5 class="text-center font-weight-bold">***************</h5>
                         </div>
                     </div>

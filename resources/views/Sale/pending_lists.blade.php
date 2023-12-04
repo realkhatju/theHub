@@ -367,7 +367,6 @@ function change_price(){
             }, 1000);
             }
         }
-
     });
     }
   else{

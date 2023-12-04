@@ -9,6 +9,7 @@ use App\User;
 use Datetime;
 use App\Order;
 use App\Table;
+use Exception;
 use App\Option;
 use App\Voucher;
 use App\MenuItem;
@@ -27,37 +28,22 @@ use Illuminate\Support\Facades\Validator;
 class SaleController extends Controller
 {
 	protected function getShopOrderPanel(){
-
 		return view('Sale.shop_order_panel');
 	}
-
 	protected function getSalePage(){
-
 		$table_lists = Table::orderBy('table_type_id', 'ASC')->get();
-
 		$table_types = TableType::all();
-
 		return view('Sale.sale_page', compact('table_lists','table_types'));
 	}
-
 	protected function getPendingShopOrderList(){
-
 		$pending_lists = ShopOrder::where('status', 1)->get();
-
         $promotion = Promotion::all();
-
-        // dd($pending_lists->toArray());
-
-		return view('Sale.pending_lists', compact('pending_lists','promotion'));
+        return view('Sale.pending_lists', compact('pending_lists','promotion'));
 	}
-
     protected function getPendingDeliveryOrderList(){
-
 		$pending_lists = Order::where('status', 2)->get();
-        // dd('hello');
 		return view('Sale.delivery_pending_lists', compact('pending_lists'));
 	}
-
     protected function notification(Request $request){
         $shop_lists = ShopOrder::where('status', 1)->get();
         $deli_lists = Order::where('status', 2)->get();
@@ -66,175 +52,94 @@ class SaleController extends Controller
             'deli' => $deli_lists
         ],200);
     }
-
-    //Start Modify
+    //Customer Session Start
     protected function getCustomerOrderDetails(){
         $pending_lists = ShopOrder::where('status', 1)->get();
-
         $promotion = Promotion::all();
         $user = User::get();
-        // dd($pending_lists->toArray());
         return view('Customer.order_details', compact('pending_lists','promotion','user'));
     }
     protected function getCustomerShopOrderDetails($order_id){
-        // dd($order_id);
         $table_number = 0;
         $pending_lists = ShopOrder::where('status', 1)->get();
-        // dd($pending_lists->toArray());
         $promotion = Promotion::all();
         try {
-
         $pending_order_details = ShopOrder::findOrFail($order_id);
-            // dd($pending_order_details->option);
         } catch (\Exception $e) {
-
             alert()->error("Pending Order Not Found!")->persistent("Close!");
-
             return redirect()->back();
         }
-
         $total_qty = 0 ;
-
         $total_price = 0 ;
-
         foreach ($pending_order_details->option as $option) {
-
             $total_qty += $option->pivot->quantity;
-
             $total_price += $option->sale_price * $option->pivot->quantity;
         }
-        // dd($pending_order_details->toArray());
         return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number'));
-
-        // dd('Hello');
     }
     protected function addMoreCustomerItemUI($order_id){
-        // dd('hello');  //Finished UI
         $table = 1;
         try {
-
             $order = ShopOrder::findOrFail($order_id);
-
         } catch (\Exception $e) {
-
             alert()->error("Shop Order Not Found!")->persistent("Close!");
-
             return redirect()->back();
-
         }
-
         $items = MenuItem::all();
-
         $meal_types = Meal::all();
-
         $codes = Code::all();
-
         $cuisine_types = CuisineType::all();
-
-         DB::table('option_shop_order')
+        DB::table('option_shop_order')
         ->where('shop_order_id', $order_id)
         ->update(['tocook' => 0]);
-
-        $table_number = $order->table->table_number??0;
-        // dd($table);
+        $table_number = $order->table->table_number ?? 0;
         return view('Customer.order_sale_page', compact('codes','items','meal_types','cuisine_types','table_number','order','table'));
     }
-    // protected function getCustomerSalePage(){
-    //     $table_lists = Table::orderBy('table_type_id', 'ASC')->get();
-
-    //     $table_types = TableType::all();
-
-    //     return view('Customer.customer_sale_page', compact('table_lists','table_types'));
-    // }
     protected function getCustomerShopOrderSalePage($table_id){
-
         $items = MenuItem::all();
-
-        // dd($items);
-
         $meal_types = Meal::all();
-
-        // dd($meal_types);
-
         $codes = Code::all();
-
         $cuisine_types = CuisineType::all();
-
         if ($table_id == 0) {
-
             $table_number = 0;
-
         } else {
-
             $order = ShopOrder::where('table_id', $table_id)->where('status', 1)->first();
-
             if(!empty($order)){
-                // dd("hello");
                 return redirect()->route('pending_order_details',$order->id);
-
             }else{
-                // dd("hello2");
                 $table = Table::where('id', $table_id)->first();
-
                 $table_number = $table->id;
-
             }
         }
         $table = 1;
         $ygn_towns = Town::where('state_id',13)->get();
         return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','table','cuisine_types','table_number'));
     }
-
-    // customer voucher function
     protected function getCustomerShopOrderVoucher($order_id,Request $request){
-        // dd($request->all());
-
-
         try {
-
             $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
-
             if(empty($shop_order)){
-
                 return response()->json(['error' => 'Something Wrong! Cannot Checkbill again']);
-
             }
-
         } catch (\Exception $e) {
-
             return response()->json(['error' => 'Something Wrong! Shop Order Cannot Be Found'], 404);
-
         }
-        // dd($shop_order->toArray());
         $table = Table::where('id', $shop_order->table_id)->first();
-
         if (!empty($table)) {
-
             $table->status = 1;
-
             $table->save();
-
         }
-        // dd($table->toArray());
         $total = 0 ;
-
         $total_qty = 0 ;
-
         $date = new DateTime('Asia/Yangon');
-
         $real_date = $date->format('Y-m-d H:i:s');
-
         $re_date = $date->format('Y-m-d');
-
         foreach ($shop_order->option as $option) {
             $total += ($option->pivot->quantity * $option->sale_price);
-
             $total_qty += $option->pivot->quantity;
         }
-        //  dd($request->change_amount_dis);
-
         $voucher = Voucher::create([
-            'sale_by' => 'mg mg',
+            'sale_by' => 'customer',
             'total_price' =>  $total,
             'total_quantity' => $total_qty,
             'voucher_date' => $real_date,
@@ -242,8 +147,6 @@ class SaleController extends Controller
             'status' => 0,
             'date' => $re_date,
         ]);
-
-
         if($request->discount_type !=null && $request->discount_value != null){
             $voucher->discount_type = $request->discount_type;
             $voucher->discount_value = $request->discount_value;
@@ -257,99 +160,50 @@ class SaleController extends Controller
             $voucher->promotion = $request->promotion;
             $voucher->promotion_value = $request->promotionvalue;
         }
-
         $voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);
-
         $voucher->save();
-        // dd($voucher->toArray());
         foreach ($shop_order->option as $option) {
-
             $voucher->option()->attach($option->id, ['quantity' => $option->pivot->quantity,'price' => $option->sale_price, 'date' => $re_date]);
-
             $moption = Option::findorFail($option->id);
-            // dd($moption->id);
             $amount = DB::table('ingredient_option')
-
             ->where('option_id',$moption->id)
             ->get();
-            //   dd($amount);
             foreach($amount as $amt)
             $amountt = json_encode($amt->amount);
-            // dd($amountt);
-
-            // dd($amountt);
             $ingredien = DB::table('ingredient_option')
-            // ->select('ingredient_id')
             ->where('option_id',$moption->id)
             ->get();
             if($ingredien == null)
             {
             foreach($ingredien as $ingred)
-            // dd($ingredien);
             $ingreID = $ingred->ingredient_id;
-            // dd($ingreID);
-
             $ingredient_update = Ingredient::findorFail($ingreID);
             $balance_qty = $ingredient_update->instock_quantity - $amountt;
             $ingredient_update->instock_quantity = $balance_qty;
-            // dd("Hello");
             $ingredient_update->save();
             }
             }
             $shop_order->voucher_id = $voucher->id;
-
             $shop_order->status = 2;
-
             $shop_order->save();
-            // dd($shop_order->toArray());
-            // return response()->json($shop_order,);
             try {
-
                 $order = ShopOrder::findOrFail($order_id);
-
-                // $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
-                // $shop_order->voucher_id = $voucher->id;
-                // $shop_order->status = 2;
-
-                // $shop_order->save();
-                // dd($order->toArray());
-
             } catch (\Exception $e) {
-
                 alert()->error("Shop Order Not Found!")->persistent("Close!");
-
                 return redirect()->back();
-
             }
-        // $saveController = this->storeShopOrderVoucher(Request $request);
-        // $order = ShopOrder::first();
-        // dd($order->toArray());
-        // $testVoucher = Voucher::first();
-        // dd($testVoucher->toArray());
-        $voucher = Voucher::where('id', $order->voucher_id)->first();
-        // dd($voucher->toArray());
-        // return view('Customer.voucher', compact('voucher'));
-
+        $voucher = Voucher::where('id',$order->voucher_id)->first();
         $table_number = 0;
         try {
-
         $pending_order_details = ShopOrder::findOrFail($request->order_id);
-            // dd($pending_order_details->option);
         } catch (\Exception $e) {
-
             alert()->error("Pending Order Not Found!")->persistent("Close!");
-
             return redirect()->back();
         }
-
         $total_qty = 0 ;
-
         $total_price = 0 ;
-
         foreach ($pending_order_details->option as $option) {
-
             $total_qty += $option->pivot->quantity;
-
             $total_price += $option->sale_price * $option->pivot->quantity;
         }
         // $code_lists = json_decode($request);
@@ -359,60 +213,31 @@ class SaleController extends Controller
         // dd($pending_order_details);
         return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
-
-
-//
+    // get customer voucher
     protected function storeCustomerShopOrderVoucher(Request $request){
-
-        // dd($request->all());
-
         try {
-
             $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
-
             if(empty($shop_order)){
-
                 return response()->json(['error' => 'Something Wrong! Cannot Checkbill again']);
-
             }
-
         } catch (\Exception $e) {
-
             return response()->json(['error' => 'Something Wrong! Shop Order Cannot Be Found'], 404);
-
         }
-
-
-
         $table = Table::where('id', $shop_order->table_id)->first();
-
         if (!empty($table)) {
-
             $table->status = 1;
-
             $table->save();
-
         }
-
         $user_code = $request->session()->get('user')->name;
-
         $total = 0 ;
-
         $total_qty = 0 ;
-
         $date = new DateTime('Asia/Yangon');
-
         $real_date = $date->format('Y-m-d H:i:s');
-
         $re_date = $date->format('Y-m-d');
-
         foreach ($shop_order->option as $option) {
             $total += ($option->pivot->quantity * $option->sale_price);
-
             $total_qty += $option->pivot->quantity;
         }
-        //  dd($request->change_amount_dis);
-
         $voucher = Voucher::create([
             'sale_by' => $user_code,
             'total_price' =>  $total,
@@ -435,90 +260,55 @@ class SaleController extends Controller
             $voucher->promotion = $request->promotion;
             $voucher->promotion_value = $request->promotionvalue;
         }
-
         $voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);
-
         $voucher->save();
-
         foreach ($shop_order->option as $option) {
-
             $voucher->option()->attach($option->id, ['quantity' => $option->pivot->quantity,'price' => $option->sale_price, 'date' => $re_date]);
-
             $moption = Option::findorFail($option->id);
-            // dd($moption->id);
             $amount = DB::table('ingredient_option')
-
             ->where('option_id',$moption->id)
             ->get();
-            //   dd($amount);
             foreach($amount as $amt)
             $amountt = json_encode($amt->amount);
-            // dd($amountt);
-
-            // dd($amountt);
             $ingredien = DB::table('ingredient_option')
-            // ->select('ingredient_id')
             ->where('option_id',$moption->id)
             ->get();
             if($ingredien == null)
             {
             foreach($ingredien as $ingred)
-            // dd($ingredien);
             $ingreID = $ingred->ingredient_id;
-            // dd($ingreID);
-
             $ingredient_update = Ingredient::findorFail($ingreID);
             $balance_qty = $ingredient_update->instock_quantity - $amountt;
             $ingredient_update->instock_quantity = $balance_qty;
-            // dd("Hello");
             $ingredient_update->save();
             }
             }
             $shop_order->voucher_id = $voucher->id;
-
             $shop_order->status = 2;
-
             $shop_order->save();
-
             return response()->json($shop_order,);
     }
     protected function getCustomerCountingUnitsByItemId(Request $request){
-        // dd($request->all());
         $item_id = $request->item_id;
-
         $item = MenuItem::where('id', $item_id)->first();
-
         $units = Option::where('menu_item_id', $item->id)->with('menu_item')->get();
-        // dd($units);
         return response()->json($units);
     }
-
     protected function customerStoreShopOrder(Request $request){
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'table_id' => 'required',
             'option_lists' => 'required',
         ]);
-
         if ($validator->fails()) {
-
             alert()->error('Something Wrong! Validation Error.');
-
             return redirect()->back();
         }
-         $user_name =  'mg mg';
-        //  dd($user_name);
+        $user_name =  'mg mg';
         $take_away = $request->take_away;
         $option_lists = json_decode($request->option_lists);
-        // $agent = new \Jenssegers\Agent\Agent;
-        // $is_mobile = $agent->isMobile();
-        // $is_desktop = $agent->isDesktop();
         try {
-            // dd($is_mobile,$is_desktop);
             $table = Table::where('id', $request->table_id)->first();
-// dd($table);
                 if (empty($table)) {
-                    // if($is_desktop == true || $is_mobile == true){
                     $order = ShopOrder::create([
                         'table_id' => $request->table_id,
                         'status' => 1,
@@ -526,84 +316,53 @@ class SaleController extends Controller
                         'take_away_flag'=>$take_away,
                         'sale_by' =>$user_name,										// Order Status = 1
                     ]);
-                // }
                     $order->order_number = "ORD-".sprintf("%04s", $order->id);
-
                     $order->save();
-
                     foreach ($option_lists as $option) {
-
                         $order->option()->attach($option->id, ['quantity' => $option->order_qty,'note' => null,'status' => 7]);
                     }
-
                 } else {
-
                     if ($table->status == 2) {
-
                         alert()->error('Something Wrong! Table is not available.');
-
                         return redirect()->back();
-
                     } else {
-
                         $table->status = 2;
-
                         $table->save();
-                        // if($is_desktop == true || $is_mobile == true){
                         $order = ShopOrder::create([
                             'table_id' => $request->table_id,
-                            'status' => 1, 										// Order Status = 1
+                            'status' => 1,
                              'type' => 1,
                              'is_mobile'=> 1,
                              'take_away_flag'=>$take_away,
                              'sale_by' =>$user_name,
                         ]);
-                    // }
                         $order->order_number = "ORD-".sprintf("%04s", $order->id);
-
                         $order->save();
-
                         foreach ($option_lists as $option) {
-
                             $order->option()->attach($option->id, ['quantity' => $option->order_qty,'note' => null,'status' => 7]);
                         }
                     }
                 }
-
         } catch (Exception $e) {
-
             alert()->error("Something Wrong! When Store Shop Order");
-
             return redirect()->back();
         }
-
         alert()->success('Successfully Store Shop Order');
-        //   $allow_print = true;
         $orders = ShopOrder::find($order->id);
-        // dd($orders->option()->price);
         $tableno = Table::find($orders->table_id);
         $alloption = Option::all();
         $option_name = DB::table('option_shop_order')
         ->where('shop_order_id',$orders->id)
         ->get();
-        // dd($option_name);
         $name = [];
-        // $qty = [];
         foreach($option_name as $optionss)
         {
-        // dd($optionss->option_id);
         $oname = Option::find($optionss->option_id);
         array_push($name,$oname);
-        // array_push($qty,$oname->quantity);
-        // $temp['value']=array('key1'=>$oname->id,'key2'=>$oname->name);
         }
-        // dd($name);
-        // dd($orders->toArray());
-
         $fromadd = 0;
         $tablenoo = 0;
         $date = new DateTime('Asia/Yangon');
-
         $real_date = $date->format('d-m-Y h:i:s');
         $code_lists = json_decode($request->code_lists);
         $notte = [];
@@ -615,169 +374,73 @@ class SaleController extends Controller
         $note_remark = DB::table('option_shop_order')
                     ->where('option_id',$code->id)
                     ->first();
-         array_push($notte,$note_remark);
-}
-}
-        // dd($orders->toArray());
+        array_push($notte,$note_remark);
+            }
+        }
         $table_number = 0;
-
-
         $total_qty = 0 ;
-
         $total_price = 0 ;
-
         foreach ($orders->option as $option) {
-
             $total_qty += $option->pivot->quantity;
-
             $total_price += $option->sale_price * $option->pivot->quantity;
         }
-        // dd($orders->toArray());
-
-     // dd($order_id);
-
-
-    // kitchen list modify
-
-     // dd($order_id);
-     $table_number = 0;
-     $pending_lists = ShopOrder::where('status', 1)->get();
-     // dd($pending_lists->toArray());
-     $promotion = Promotion::all();
-     try {
-
-     $pending_order_details = ShopOrder::findOrFail($orders->id);
-         // dd($pending_order_details->option);
-     } catch (\Exception $e) {
-
-         alert()->error("Pending Order Not Found!")->persistent("Close!");
-
-         return redirect()->back();
-     }
-
-     $total_qty = 0 ;
-
-     $total_price = 0 ;
-
-     foreach ($pending_order_details->option as $option) {
-
-         $total_qty += $option->pivot->quantity;
-
-         $total_price += $option->sale_price * $option->pivot->quantity;
-     }
-    //  dd($total_price);
-    // kitchen list modify end
-    //  dd($notte);
-
-    $option_name = DB::table('option_shop_order')
-        ->where('shop_order_id', $orders->id)
-        ->get();
-    // dd($option_name);
-    $name = [];
-    // $qty = [];
-    foreach ($option_name as $optionss) {
-        // dd($optionss->option_id);
-        $oname = Option::find($optionss->option_id);
-        array_push($name, $oname);
-        // array_push($qty,$oname->quantity);
-        // $temp['value']=array('key1'=>$oname->id,'key2'=>$oname->name);
-    }
-    // dd($name);
-    $code_lists = json_decode($request->code_lists);
-    $notte = [];
-    if ($code_lists != null) {
-        foreach ($code_lists as $code) {
-            $remark_note = DB::table('option_shop_order')
-                ->where('option_id', $code->id)
-                ->update(['note' => $code->remark]);
-            $note_remark = DB::table('option_shop_order')
-                ->where('option_id', $code->id)
-                ->first();
-            array_push($notte, $note_remark);
+        $pending_lists = ShopOrder::where('status', 1)->get();
+        $promotion = Promotion::all();
+        try {
+        $pending_order_details = ShopOrder::findOrFail($orders->id);
+        } catch (\Exception $e) {
+            alert()->error("Pending Order Not Found!")->persistent("Close!");
+            return redirect()->back();
         }
+        // return view('Customer.kitchen_list',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo','pending_order_details','total_price'));
+        return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','take_away','orders','tableno','real_date','oname','alloption','fromadd','tablenoo',));
     }
-    $fromadd = 0;
-    // Need to Modify
-    // dd($name);
-       return view('Customer.kitchen_list',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo','pending_order_details','total_price'));
-    // return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd'));
-    }
-
-    protected function customerAddMoreItem(Request $request){ //Unfinished
-        // dd($request->all());
+    protected function customerAddMoreItem(Request $request){
     $validator = Validator::make($request->all(), [
         'order_id' => 'required',
         'option_lists' => 'required',
     ]);
-
     if ($validator->fails()) {
-
         alert()->error('Something Wrong! Validation Error.');
-
         return redirect()->back();
     }
-
     $option_lists = json_decode($request->option_lists);
-
-
     try {
-
         $shop_order = ShopOrder::findOrFail($request->order_id);
-
     } catch (\Exception $e) {
-
         alert()->error('Something Wrong! Shop Order Cannot be Found.');
-
         return redirect()->back();
     }
-
     if ($shop_order->status == 1) {
-
-
         foreach ($option_lists as $option) {
-
             $test = $shop_order->option()->where('option_id', $option->id)->first();
-
             if (empty($test)) {
-
                 $shop_order->option()->attach($option->id, ['quantity' => $option->order_qty,'tocook'=>1,'note' => "Note Default", 'status' => 0]);
-
             } else {
-
                 $update_qty = $option->order_qty + $test->pivot->quantity;
-
                 $shop_order->option()->updateExistingPivot($option->id, ['quantity' => $update_qty,'tocook'=>1,'add_same_item_status'=>1,'old_quantity'=>$test->pivot->quantity,'new_quantity'=>$option->order_qty,'status' => 5] );
-
             }
-
         }
-
         $shop_order->type=1;
         $shop_order->save();
-
         alert()->success('Successfully Added');
-
-        // return redirect()->route('sale_page');
-
-          $orders = ShopOrder::find($request->order_id);
-          $tableno = Table::find($orders->table_id);
-          $alloption = Option::all();
-          $option_name = DB::table('option_shop_order')
-          ->where('shop_order_id',$orders->id)
-          ->where('tocook',1)
-          ->get();
-          $name = [];
-          foreach($option_name as $optionss)
-          {
-          $oname = Option::find($optionss->option_id);
-          array_push($name,$oname);
-
-          }
-          $take_away = $request->take_away;
-          $fromadd = 1;
-          $tablenoo = 0;
-          $date = new DateTime('Asia/Yangon');
-
+        $orders = ShopOrder::find($request->order_id);
+        $tableno = Table::find($orders->table_id);
+        $alloption = Option::all();
+        $option_name = DB::table('option_shop_order')
+        ->where('shop_order_id',$orders->id)
+        ->where('tocook',1)
+        ->get();
+        $name = [];
+        foreach($option_name as $optionss)
+        {
+        $oname = Option::find($optionss->option_id);
+        array_push($name,$oname);
+        }
+        $take_away = $request->take_away;
+        $fromadd = 1;
+        $tablenoo = 0;
+        $date = new DateTime('Asia/Yangon');
         $real_date = $date->format('d-m-Y h:i:s');
         $code_lists = json_decode($request->code_lists);
         $notte = [];
@@ -790,88 +453,31 @@ class SaleController extends Controller
                             ->where('option_id',$code->id)
                             ->first();
                 array_push($notte,$note_remark);
+            }
         }
-        }
-
-
-
-
-        // dd($orders->toArray());
-        // add more item startmodify
-
-        // dd($order_id);
         $table_number = 0;
         $pending_lists = ShopOrder::where('status', 1)->get();
-        // dd($pending_lists->toArray());
         $promotion = Promotion::all();
         try {
-
         $pending_order_details = ShopOrder::findOrFail($orders->id);
-            // dd($pending_order_details->option);
         } catch (\Exception $e) {
-
             alert()->error("Pending Order Not Found!")->persistent("Close!");
-
             return redirect()->back();
         }
-
         $total_qty = 0 ;
-
         $total_price = 0 ;
-
         foreach ($pending_order_details->option as $option) {
-
             $total_qty += $option->pivot->quantity;
-
             $total_price += $option->sale_price * $option->pivot->quantity;
         }
-
-        // $option_name = DB::table('option_shop_order')
-        //     ->where('shop_order_id', $orders->id)
-        //     ->get();
-        // dd($option_name);
-        // $name = [];
-        // // $qty = [];
-        // foreach ($option_name as $optionss) {
-        //     // dd($optionss->option_id);
-        //     $oname = Option::find($optionss->option_id);
-        //     array_push($name, $oname);
-        //     // array_push($qty,$oname->quantity);
-        //     // $temp['value']=array('key1'=>$oname->id,'key2'=>$oname->name);
-        // }
-        // // dd($name);
-        // $code_lists = json_decode($request->code_lists);
-        // $notte = [];
-        // if ($code_lists != null) {
-        //     foreach ($code_lists as $code) {
-        //         $remark_note = DB::table('option_shop_order')
-        //             ->where('option_id', $code->id)
-        //             ->update(['note' => $code->remark]);
-        //         $note_remark = DB::table('option_shop_order')
-        //             ->where('option_id', $code->id)
-        //             ->first();
-        //         array_push($notte, $note_remark);
-        //     }
-        // }
-        // // add more item endModify
-
-        // // dd($notte);
-        // dd($name);
-        // return view('Customer.kitchen_list',compact('take_away','notte','option_name','name','tableno','fromadd','tablenoo','real_date','orders'));
         $option_name = DB::table('option_shop_order')
             ->where('shop_order_id', $orders->id)
             ->get();
-        // dd($option_name);
         $name = [];
-        // $qty = [];
         foreach ($option_name as $optionss) {
-            // dd($optionss->option_id);
             $oname = Option::find($optionss->option_id);
             array_push($name, $oname);
-            // array_push($qty,$oname->quantity);
-            // $temp['value']=array('key1'=>$oname->id,'key2'=>$oname->name);
         }
-        // dd($name);
         $code_lists = json_decode($request->code_lists);
         $notte = [];
         if ($code_lists != null) {
@@ -885,90 +491,59 @@ class SaleController extends Controller
                 array_push($notte, $note_remark);
             }
         }
-        $fromadd = 1;
-        $tablenoo = 0;
-        // dd("heloo");
         $real_date = $date->format('d-m-Y h:i:s');
         $tableno = Table::find($orders->table_id);
         $take_away = $request->take_away;
-        return view('Customer.kitchen_list', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd','real_date','tableno','tablenoo','take_away','orders'));
-
-        // To Modify Pending Order Details Unique    } else {
-
+        return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd','real_date','tableno','tablenoo','take_away','orders'));
         alert()->error('Something Wrong! Shop Order is colsed.');
-
         return redirect()->back();
+            }
+        }
+    protected function customerCancelOrder($id){
+        $order = ShopOrder::find($id);
+        $table = Table::find($order->table_id);
+        $table->status = 1;
+        $table->save();
+        $order->delete();
+        $promotion = Promotion::all();
+        DB::table('option_shop_order')->where('shop_order_id',$id)->delete();
+        $pending_lists = ShopOrder::where('status', 1)->get();
+        return view('Customer.order_details',compact('pending_lists','promotion'));
     }
-}
-protected function customerCancelOrder($id){
-    $order = ShopOrder::find($id);
-    $table = Table::find($order->table_id);
-    $table->status = 1;
-    $table->save();
-    $order->delete();
-    $promotion = Promotion::all();
-    DB::table('option_shop_order')->where('shop_order_id',$id)->delete();
-
-    $pending_lists = ShopOrder::where('status', 1)->get();
-
-    return view('Customer.order_details',compact('pending_lists','promotion'));
-}
-protected function customerDeliveryPage(){
-    // dd('customerdereal delivery');
-    $table_number = 0;
-    $table = 0;
-    $items = MenuItem::all();
-    // dd($items);
-
-    $meal_types = Meal::all();
-    $codes =Code::all();
-
-    $cuisine_types = CuisineType::all();
-    $ygn_towns = Town::where('state_id',17)->get();
-    return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','cuisine_types','table_number','table'));
-}
-protected function customerCancelDetails(Request $request){
-    // dd('hello');
-    // dd($request->option_id);
-    DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->delete();
-
-    alert()->success("Successfully Canceled!")->persistent("Close!");
-
-    $table_number = 0;
-    try {
-
-    $pending_order_details = ShopOrder::findOrFail($request->order_id);
-        // dd($pending_order_details->option);
-    } catch (\Exception $e) {
-
-        alert()->error("Pending Order Not Found!")->persistent("Close!");
-
-        return redirect()->back();
+    protected function customerDeliveryPage(){
+        $table_number = 0;
+        $table = 0;
+        $items = MenuItem::all();
+        $meal_types = Meal::all();
+        $codes =Code::all();
+        $cuisine_types = CuisineType::all();
+        $ygn_towns = Town::where('state_id',17)->get();
+        return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','cuisine_types','table_number','table'));
     }
-
-    $total_qty = 0 ;
-
-    $total_price = 0 ;
-
-    foreach ($pending_order_details->option as $option) {
-
-        $total_qty += $option->pivot->quantity;
-
-        $total_price += $option->sale_price * $option->pivot->quantity;
+    protected function customerCancelDetails(Request $request){
+        DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->delete();
+        alert()->success("Successfully Canceled!")->persistent("Close!");
+        $table_number = 0;
+        try {
+        $pending_order_details = ShopOrder::findOrFail($request->order_id);
+        } catch (\Exception $e) {
+            alert()->error("Pending Order Not Found!")->persistent("Close!");
+            return redirect()->back();
+        }
+        $total_qty = 0 ;
+        $total_price = 0 ;
+        foreach ($pending_order_details->option as $option) {
+            $total_qty += $option->pivot->quantity;
+            $total_price += $option->sale_price * $option->pivot->quantity;
+        }
+        return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
-    // dd($pending_order_details->toArray());
-    // dd($total_qty);
-    return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
-}
-protected function getCustomerTableByFloor(Request $request){
-
-    $floor = $request->floor_id;
-
-    $table_lists = Table::where('floor', $floor)->get();
-
-    return response()->json($table_lists);
-}
-    //End Modify
+    protected function getCustomerTableByFloor(Request $request){
+        $floor = $request->floor_id;
+        $table_lists = Table::where('floor', $floor)->get();
+        return response()->json($table_lists);
+    }
+    //Customer Session End
 
 	protected function gotopendinglists(){
 
@@ -1113,31 +688,21 @@ protected function getCustomerTableByFloor(Request $request){
     }
 
 	protected function storeShopOrder(Request $request){
-		// dd($request->all());
+        // Validation Start
 		$validator = Validator::make($request->all(), [
 			'table_id' => 'required',
 			'option_lists' => 'required',
 		]);
-
 		if ($validator->fails()) {
-
 			alert()->error('Something Wrong! Validation Error.');
-
             return redirect()->back();
 		}
 		 $user_name =  session()->get('user')->name;
-		//  dd($user_name);
 		$take_away = $request->take_away;
 		$option_lists = json_decode($request->option_lists);
-		// $agent = new \Jenssegers\Agent\Agent;
-		// $is_mobile = $agent->isMobile();
-        // $is_desktop = $agent->isDesktop();
 		try {
-			// dd($is_mobile,$is_desktop);
 			$table = Table::where('id', $request->table_id)->first();
-// dd($table);
 				if (empty($table)) {
-                    // if($is_desktop == true || $is_mobile == true){
 					$order = ShopOrder::create([
 		                'table_id' => $request->table_id,
 		                'status' => 1,
@@ -1145,30 +710,18 @@ protected function getCustomerTableByFloor(Request $request){
 						'take_away_flag'=>$take_away,
 						'sale_by' =>$user_name,										// Order Status = 1
 		            ]);
-                // }
 		            $order->order_number = "ORD-".sprintf("%04s", $order->id);
-
 		            $order->save();
-
 		            foreach ($option_lists as $option) {
-
 						$order->option()->attach($option->id, ['quantity' => $option->order_qty,'note' => null,'status' => 7]);
 					}
-
-				} else {
-
+                } else {
 					if ($table->status == 2) {
-
 						alert()->error('Something Wrong! Table is not available.');
-
 	            		return redirect()->back();
-
 					} else {
-
 						$table->status = 2;
-
 						$table->save();
-                        // if($is_desktop == true || $is_mobile == true){
 						$order = ShopOrder::create([
 			                'table_id' => $request->table_id,
 			                'status' => 1, 										// Order Status = 1
@@ -1177,52 +730,33 @@ protected function getCustomerTableByFloor(Request $request){
 							 'take_away_flag'=>$take_away,
 							 'sale_by' =>$user_name,
 			            ]);
-                    // }
 			            $order->order_number = "ORD-".sprintf("%04s", $order->id);
-
 			            $order->save();
-
-			            foreach ($option_lists as $option) {
-
+                    foreach ($option_lists as $option) {
 							$order->option()->attach($option->id, ['quantity' => $option->order_qty,'note' => null,'status' => 7]);
 						}
 					}
 				}
-
 		} catch (Exception $e) {
-
 			alert()->error("Something Wrong! When Store Shop Order");
-
 			return redirect()->back();
 		}
-
       	alert()->success('Successfully Store Shop Order');
-        //   $allow_print = true;
 		$orders = ShopOrder::find($order->id);
-		// dd($orders->option()->price);
 		$tableno = Table::find($orders->table_id);
 		$alloption = Option::all();
 		$option_name = DB::table('option_shop_order')
 		->where('shop_order_id',$orders->id)
 		->get();
-		// dd($option_name);
 		$name = [];
-		// $qty = [];
 		foreach($option_name as $optionss)
 		{
-		// dd($optionss->option_id);
 		$oname = Option::find($optionss->option_id);
 		array_push($name,$oname);
-		// array_push($qty,$oname->quantity);
-		// $temp['value']=array('key1'=>$oname->id,'key2'=>$oname->name);
 		}
-		// dd($name);
-
-
         $fromadd = 0;
         $tablenoo = 0;
         $date = new DateTime('Asia/Yangon');
-
         $real_date = $date->format('d-m-Y h:i:s');
         $code_lists = json_decode($request->code_lists);
         $notte = [];
@@ -1235,11 +769,9 @@ protected function getCustomerTableByFloor(Request $request){
                     ->where('option_id',$code->id)
                     ->first();
          array_push($notte,$note_remark);
-}
-}
-        // dd($name);
-		  return view('Sale.kitchen_lists',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo'));
-
+            }
+        }
+        return view('Sale.kitchen_lists',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo'));
 	}
 
 	public function toKitchenAddMore($id)

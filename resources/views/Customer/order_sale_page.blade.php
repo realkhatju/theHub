@@ -64,24 +64,27 @@
 
             </form>
 
-            <ul class="nav nav-tabs customtab" role="tablist">
+            <div class="nav_mobile">
+                <ul class="nav nav-tabs customtab" role="tablist">
 
-                @foreach($cuisine_types as $cuisine)
-                <li class="nav-item" style="font-size:14px;">
-                    <a class="nav-link" data-toggle="tab" href="#{{$cuisine->id}}" role="tab">
+                    @foreach($cuisine_types as $cuisine)
+                    <li class="nav-item flex-shrink-0" style="font-size:14px;">
+                        <a class="nav-link" data-toggle="tab" href="#{{$cuisine->id}}" role="tab">
 
-                        <span class="hidden-sm-up">
-                            <i class="fa-solid fa-plate-wheat text-warning"></i>
-                        </span>
-                        <span class="hidden-xs-down">
+                            <span class="hidden-sm-up">
+                                <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                <span>{{$cuisine->name}}</span>
+                            </span>
+                            <span class="hidden-xs-down">
+                                <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                {{$cuisine->name}}
+                            </span>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
 
-                            {{$cuisine->name}}
-
-                        </span>
-                    </a>
-                </li>
-                @endforeach
-            </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
@@ -335,7 +338,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button class="btn btn-info" onclick="save_note()">Save</button>
+                                <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
                             </div>
                         </div>
                     </div>
@@ -371,194 +374,117 @@
             </div>
         </div>
 
-        <div class="col-md-6">
 
-            <div class="card col-12">
-            @if($table == 0)
-            <h3 style="color:#49A8EF"><b>For Delivery<b></h3>
-            @endif
-                <div class="card-title">
-                    <a href="" class="float-right" onclick="deleteItems()">Refresh Here &nbsp<i class="fas fa-sync"></i></a>
+
+
+
+         <!-- Modal -->
+         <div class="modal fade hidden-sm-up" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <a type="button" class="btn"  aria-label="Close" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-xmark"></i></a>
                 </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        {{-- Modify Style BST --}}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="font-weight-bold text-info">Menu Item</th>
-                                    <th class="font-weight-bold text-info">Option</th>
-                                    <th class="font-weight-bold text-info">Quantity</th>
-                                    <th class="font-weight-bold text-info">Price</th>
-                                    <th class="font-weight-bold text-info">Note</th>
-                                </tr>
-                            </thead>
-                            <tbody id="sale">
-                               <tr>
+                <div class="modal-body" style="padding: 0px">
+                            <div class="card">
+                                @if($table == 0)
+                                <h3 style="color:#49A8EF"><b>For Delivery<b></h3>
+                                @endif
+                                    <div class="card-title">
+                                        <a href="" class="float-right" onclick="deleteItems()">Refresh Here &nbsp<i class="fas fa-sync"></i></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            {{-- Modify Style BST --}}
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="font-weight-bold text-info">Menu Item</th>
+                                                        <th class="font-weight-bold text-info">Option</th>
+                                                        <th class="font-weight-bold text-info">Quantity</th>
+                                                        <th class="font-weight-bold text-info">Price</th>
+                                                        <th class="font-weight-bold text-info">Note</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="sale">
+                                                   <tr>
 
-                               </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr class="text-center">
-                                    <td class="font-weight-bold text-info" colspan="3">Total Quantity</td>
-                                    <td class="font-weight-bold text-info" id="total_quantity">0</td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td class="font-weight-bold text-info" colspan="3">Sub Total Price</td>
-                                    <td class="font-weight-bold text-info" id="sub_total">0</td>
-                                    {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                                    {{-- <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
-                                    {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td>
-                                    <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
-                                </tr>
-                                {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                            </tfoot>
-                            {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                        </table>
+                                                   </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="text-center">
+                                                        <td class="font-weight-bold text-info" colspan="3">Total Quantity</td>
+                                                        <td class="font-weight-bold text-info" id="total_quantity">0</td>
+                                                    </tr>
+                                                    <tr class="text-center">
+                                                        <td class="font-weight-bold text-info" colspan="3">Sub Total Price</td>
+                                                        <td class="font-weight-bold text-info" id="sub_total">0</td>
+                                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
+                                                        {{-- <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
+                                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td>
+                                                        <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
+                                                    </tr>
+                                                    {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
+                                                </tfoot>
+                                                {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
+                                            </table>
+                                        </div>
+                                        <div class="row ml-2 justify-content-center">
 
-                    </div>
-
-                     <div class="row ml-2 justify-content-center">
-                        @if(isset($order) && $table==2)
-                        <div class="col-md-2">
-                            <i class="btn btn-success mr-2" onclick="DeliAddMoreItem({{$order->id}})"><i class="fas fa-plus"></i> Add More Item </i>
-                        </div>
-                        @elseif(isset($order))
-                        {{-- To Modify
-                        <div class="col-md-2">
-                            <i class="btn btn-success mr-2 floating_btn" onclick="AddMoreItem({{$order->id}})"><i class="fa-regular fa-circle-check text-success"></i> Check Out&nbsp;!
-                                <table class="text-warning font-weight-bold ml-4">
-                                    <tr>
-                                        <td id="2sub_total">0</td>
-                                    </tr>
-                                </table>
-                            </i>
-                        </div> --}}
-                        <div class="row ">
-                            <div class="col-md-4 d-flex">
-                                <i class="btn btn-success mr-2 floating_btn" onclick="AddMoreItem({{$order->id}})">
-                                    <table>
-                                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
-                                    </table>
-                                <i class="fas fa-calendar-check"></i> Check Out&nbsp;!
-                                    <table>
-                                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
-                                    </table>
-                                </i>
-                            </div>
-                        </div>
-                        @else
-
-                        @if($table_number == 0)
-                        <div class="col-md-2">
-                            <i class="btn btn-success mr-2"  data-toggle="modal" data-target="#myModal" onclick="storeoption()"><i class="fas fa-calendar-check"></i>Check Out</i>
-                        </div>
-                        @endif
-
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h4 class="modal-title"><b>Delivery Information<b></h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                                </div>
-                                <form action="{{route('storedelivery')}}" method="post">
-                                @csrf
-                                <input type="hidden" id="cus_remark" name="code_lists">
-                                <input type="hidden" id="itemdeli" name="option_lists">
-                                <input type="hidden" id="totalqty" name="total_qty">
-
-
-                                <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="usr">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Phone:</label>
-                                    <input type="text" class="form-control" id="phone" name="phone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Address:</label>
-                                    <input type="text" class="form-control" id="address" name="address">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Township:</label>
-                                    <select class="form-control" name="township" id="township" onchange="deli_pay(this.value)">
-                                        <option value="">Select Township</option>
-                                        @foreach ($ygn_towns as $towns)
-                                            <option value="{{$towns->id}}">{{$towns->town_name}}</option>
-                                        @endforeach
-                                    </select>
-                                    {{-- <input type="text" class="form-control" id="township" name="township"> --}}
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Delivery Charges:</label>
-                                    <input type="text" class="form-control" id="deli_charges" name="deli_charges">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Order Date:</label>
-                                    <input type="date" class="form-control" id="orderdate" name="order_date" value="<?= date("Y-m-d"); ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Note:</label>
-                                    <textarea class="form-control" rows="3" id="note" name="note"></textarea>
-                                </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" onclick="">Submit</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
-
-                            </div>
-                        </div>
-                        </form>
-                        @if($table_number != 0)
-                        {{-- <div class="row">
-                            <div class="col-md-4">
-                                <i class="btn text-white bg-dark d-flex" onclick="showCheckOut()"><i class="fa-regular fa-calendar-check"></i> Check Out&nbsp;!
-
-
-                                <a href="{{route('customer_shop_order_details', $pending_lists[0]->id)}}" class="btn btn-primary"></a>
-
-                                @foreach($pending_lists as $order)
-                                    <tr>
-
-                                        <td>
-                                            <a href="{{route('customer_shop_order_details', $order->id)}}" class="btn btn-info">tstCheck Order Details</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </div>
-
-                        </div> --}}
-                        <div class="row ">
-                            <div class="col-md-4 d-flex">
-                                <i class="btn btn-success mr-2 floating_btn" onclick="showCheckOut()">
-                                    <table>
-                                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
-                                    </table>
-                                <i class="fas fa-calendar-check"></i> Check Out&nbsp;!
-                                    <table>
-                                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
-                                    </table>
-                                </i>
-                            </div>
-                        </div>
-                        @endif
-                        @endif
-
-                    </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+
     </div>
 
+    <div class="container" style="bottom: 20px;position:absolute;;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
+        <!-- Start Button trigger modal -->
+        <a type="button" class="btn hidden-sm-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-cart-shopping text-danger"></i>
+        </a>
+        <!-- End Button trigger modal -->
+        @if(isset($order) && $table==2)
+        <div class="col-md-2">
+            <i class="btn btn-success mr-2" onclick="DeliAddMoreItem({{$order->id}})"><i class="fas fa-plus"></i> Add More Item </i>
+        </div>
+        @elseif(isset($order))
+                <a class="btn btn-success mr-2 hidden-sm-up d-flex" style="width: 250px;"  onclick="AddMoreItem({{$order->id}})">
+                    <table>
+                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                    </table>
+                    <span class="ml-4">
+                        <i class="fa-regular fa-circle-check"></i> Check Out&nbsp;!
+                    </span>
+                    <table>
+                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                    </table>
+                </a>
+        @else
+            @if($table_number != 0)
+                <a class="btn btn-primary hidden-sm-up d-flex" style="width: 250px;" onclick="showCheckOut()">
+                    <table>
+                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                    </table>
+                    <span class="ml-4">
+                        <i class="fa-regular fa-circle-check"></i> <span>Check Out&nbsp;!</span>
+                    </span>
+                    <table>
+                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                    </table>
+                </a>
+            </div>
+            @endif
+            @if($table_number == 0)
+            <div class="col-md-2">
+                <i class="btn btn-success mr-2"  data-toggle="modal" data-target="#myModal" onclick="storeoption()"><i class="fas fa-calendar-check"></i>Check Out</i>
+            </div>
+            @endif
+        @endif
+    </div>
 
 
 @endsection
@@ -1030,7 +956,7 @@ else{
                             </td>
 
                             <td class="text-success font-weight-bold">${v.selling_price}</td>
-                            <td class="text-success font-weight-bold"><button class="btn btn-sm btn-info" id="note_${id}" onclick="note(${id})">Note</button></td>
+                            <td class="text-success font-weight-bold"><button class="btn btn-sm btn-info" id="note_${id}" onclick="note(${id})" data-bs-dismiss="modal">Note</button></td>
                             </tr>
                             <tr>
                                 <th class="text-danger font-weight-bold">Notes:</th>

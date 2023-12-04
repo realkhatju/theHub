@@ -42,39 +42,37 @@
     @media screen and (max-width: 600px) {
     .floating_btn {
         position:    fixed;
-        bottom:      15px;
-        left:        10px;
-        width:       260px;
-        font-size:   1em;
+        bottom:      -300px;
+        left:        50%;
+        transform: translate(-50%);
         line-height: 1.8em;
         background-color: #c2fbd7;
         border-radius: 100px;
         box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 180, 187, 0.15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(36, 173, 236, 0.15) 0 16px 32px;
         color: rgb(0, 115, 128);
-        cursor: pointer;
-        display: inline-block;
         font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-        padding: 0px 0px;
+        /* padding: 0px 0px; */
         text-align: center;
         text-decoration: none;
         transition: all 250ms;
         border: 0;
         font-size: 16px;
-        user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
         width: 365px;
         font-weight: bold;
+        display: flex;
+        justify-content: center
         }
     .floating_btn:hover {
         box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-        transform: scale(1.05) rotate(-1deg);
+        /* transform: scale(1.05) rotate(-1deg); */
         }
     .floating_btn table tr td{
         /* background-color: rgb(1, 1, 15); */
         padding-left: 135px;
     }
-    .floating_btn:hover,
+
     .floating_btn:active {
         background-color: initial;
         background-position: 0 0;
@@ -84,11 +82,24 @@
     .floating_btn:active {
         opacity: .5;
     }
+
+    .nav_mobile {
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+    .nav_mobile .nav {
+        flex-wrap: nowrap;
+    }
+
+    .nav_mobile ul {
+        display: flex;
+    }
     }
 
 </style>
 
-<body class="fix-header fix-sidebar card-no-border logo-center">
+<body class="fix-header fix-sidebar card-no-border logo-center" style="height: 100vh">
 
 
     @include('sweet::alert')
@@ -100,7 +111,7 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
-<div id="main-wrapper">
+<div id="main-wrapper" style="height: 100%">
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -115,7 +126,7 @@
         </nav>
     </header>
 
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="height: 100%">
         <div class="container-fluid">
             <div class="noti" style="position: fixed">
            </div>
@@ -432,52 +443,53 @@
         }
     }, 3000);
 
-    $( document ).ready(function() {
-        $.ajax({
+    // $( document ).ready(function() {
+    //     $.ajax({
 
-            type:'POST',
+    //         type:'POST',
 
-            url:'/getnotification',
+    //         url:'/getnotification',
 
-            data:{
-                "_token":"{{csrf_token()}}",
-            },
+    //         data:{
+    //             "_token":"{{csrf_token()}}",
+    //         },
 
-            success:function(data){
-                var html = '';
-                if(data.shop.length != 0 ){
-                    // alert('hey');
-                    html += `
-        <a href="{{route('pending_lists')}}">
-            <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-            <div class="mail-contnet">
-                <h5>Pending Shop Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
-                <small>Check Orders</small>
-            </div>
-        </a>
-        `;
-                    $('#noti').html(html);
-                }
-                if(data.deli.length != 0){
-                    // alert(count(data.deli));
-                    // alert(data.deli.length);
-                    html += `
-        <a href="{{route('delivery_pending_lists')}}">
-            <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-            <div class="mail-contnet">
-                <h5>Pending Delivery Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
-                <small>Check Orders</small>
-            </div>
-        </a>
-        `;
-                    $('#noti').html(html);
-                }
-            }
-        })
-    });
+    //         success:function(data){
+    //             var html = '';
+    //             if(data.shop.length != 0 ){
+    //                 // alert('hey');
+    //                 html += `
+    //     <a href="{{route('pending_lists')}}">
+    //         <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+    //         <div class="mail-contnet">
+    //             <h5>Pending Shop Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
+    //             <small>Check Orders</small>
+    //         </div>
+    //     </a>
+    //     `;
+    //                 $('#noti').html(html);
+    //             }
+    //             if(data.deli.length != 0){
+    //                 // alert(count(data.deli));
+    //                 // alert(data.deli.length);
+    //                 html += `
+    //     <a href="{{route('delivery_pending_lists')}}">
+    //         <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+    //         <div class="mail-contnet">
+    //             <h5>Pending Delivery Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
+    //             <small>Check Orders</small>
+    //         </div>
+    //     </a>
+    //     `;
+    //                 $('#noti').html(html);
+    //             }
+    //         }
+    //     })
+    // });
 
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

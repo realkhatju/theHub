@@ -58,8 +58,8 @@
                                             <th>Sub Total Price</th>
                                             {{-- <th>Status</th> --}}
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                    {{-- </thead>
+                                    <tbody> --}}
                                         @foreach ($pending_order_details->option as $option)
                                             <tr>
 
@@ -72,7 +72,6 @@
                                                 <td>{{ $option->pivot->quantity }}</td>
                                                 {{-- <td>{{$option->sale_price}}</td> --}}
                                                 <td><?= $option->pivot->quantity * $option->sale_price ?></td>
-
                                                 {{-- @if ($option->pivot->status == 0)
                                             <td>
                                                 <span class="badge-pill badge-warning">Pending</span>
@@ -93,18 +92,9 @@
                                                     @if ($pending_order_details->status == 1)
                                                     <a href="{{route('customercanceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
                                                     @endif
-                                            </td>
-
+                                                </td>
                                             </tr>
-
-                                            {{-- start modify note --}}
-                                            {{-- @if ($fromadd == 0) --}}
-
-                                            {{-- @endif --}}
-                                            {{-- end modify note --}}
                                         @endforeach
-
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -117,7 +107,7 @@
         @if ($pending_order_details['status'] == 1)
             <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
         @endif
-        @if ($pending_order_details['status'] == 1 && $total_qty != 0)
+        @if ($pending_order_details->status == 1 && $total_qty != 0)
         <a href="#" class="btn btn-info ml-2" style="color:white;"
         onclick="change_price({{ $pending_order_details->id }})">Store Voucher</a>
         @endif
@@ -328,7 +318,7 @@
             localStorage.setItem("order_id", order_id);
             // $('#voudiscount').modal('hide');
             var order_id = $('#hid_order_id').val();
-            console.log(order_id);
+            // console.log(order_id);
             var discount_type = $('#dis_type').val();
             var discount_value = $('#dis_val').val();
             var pay_value = $('#pay_amount').val();
@@ -359,11 +349,12 @@
                     console.log("data", data);
                     // $('#voudiscount').modal('show');
                     var orderId = $('#hid_order_id').val(order_id);
-                    console.log('Data is', orderId);
+                    // console.log('Data is', orderId);
                     $('#dis_type').val();
                     $('#dis_val').val();
                     $('#voucher_total_dis').val(data);
                     $('#voucher_total').val(data);
+                    // console.log('mydata'+data);
                     if (data.error) {
                         swal({
                             title: "Failed!",
@@ -371,14 +362,11 @@
                             icon: "error",
                         });
                     } else {
-
-
                         swal({
                             title: "Success!",
                             text: "This Voucher Successfully Sent to Admin!",
                             icon: "success",
                         });
-
                         var url = '{{ route('customer_shop_order_voucher', ':order_id') }}';
                         let id = localStorage.getItem("order_id");
                         url = url.replace(':order_id', id);
@@ -433,40 +421,40 @@
             }
 
         }
-        // function storeVoucher(order_id){
-        // console.log(order_id);
-        //     $.ajax({
+        function storeVoucher(order_id){
+        console.log(order_id);
+            $.ajax({
 
-        //         type:'POST',
+                type:'POST',
 
-        //         url:'/DiscountForm',
+                url:'/DiscountForm',
 
-        //         data:{
-        //         "_token":"{{ csrf_token() }}",
-        //         "order_id":order_id,
-        //         },
+                data:{
+                "_token":"{{ csrf_token() }}",
+                "order_id":order_id,
+                },
 
-        //         success:function(data){
-        //             console.log(data);
-        //             // $('#voudiscount').modal('show');
-        //             var orderId = $('#hid_order_id').val(order_id);
-        //             console.log('Data is',orderId);
-        //             $('#dis_type').val();
-        //             $('#dis_val').val();
-        //             $('#voucher_total_dis').val(data);
-        //             $('#voucher_total').val(data);
-        //         }
-        //         // console.log(data);
+                success:function(data){
+                    console.log(data);
+                    // $('#voudiscount').modal('show');
+                    var orderId = $('#hid_order_id').val(order_id);
+                    console.log('Data is',orderId);
+                    $('#dis_type').val();
+                    $('#dis_val').val();
+                    $('#voucher_total_dis').val(data);
+                    $('#voucher_total').val(data);
+                }
+                // console.log(data);
 
-        //     })
-        //     $('#dis_radio_form').modal('show');
-        //     $('#dis_voucher_total').hide();
-        //     $('#dis_pay_amount').hide();
-        //     $('#dis_change_amount').hide();
-        //     $('#dis_footer').hide();
-        // }
+            })
+            $('#dis_radio_form').modal('show');
+            $('#dis_voucher_total').hide();
+            $('#dis_pay_amount').hide();
+            $('#dis_change_amount').hide();
+            $('#dis_footer').hide();
+        }
 
-        //end modify
+        // end modify
 
 
 
