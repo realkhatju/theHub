@@ -441,7 +441,7 @@
 
     </div>
 
-    <div class="container" style="bottom: 20px;position:absolute;;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
+    <div class="container" style="bottom: 20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
         <!-- Start Button trigger modal -->
         <a type="button" class="btn hidden-sm-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-cart-shopping text-danger"></i>
