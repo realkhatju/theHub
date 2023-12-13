@@ -76,7 +76,6 @@
             </ul>
 
             <div class="tab-content br-n pn">
-
                 <div id="navpills-1" class="tab-pane ">
                     <div class="card">
                         <div class="card-body">

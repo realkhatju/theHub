@@ -16,6 +16,7 @@
         "laravel/passport": "*",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
+        "minishlink/web-push": "^8.0",
         "prooph/common": "^4.0.0",
         "pusher/pusher-php-server": "~4.0",
         "simplesoftwareio/simple-qrcode": "^4.2",

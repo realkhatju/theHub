@@ -12,19 +12,20 @@ class MenuItem extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'item_code', 
-        'item_name', 
+        'item_code',
+        'item_name',
         'photo_path',
         'customer_console',
         'created_by',
         'cuisine_type_id',
-        'deleted_at'
+        'deleted_at',
+        'brake_flag'
     ];
-    
+
     protected $hidden = [
         'created_at','updated_at'
     ];
-    
+
 	public function cuisine_type() {
         return $this->belongsTo(CuisineType::class);
     }

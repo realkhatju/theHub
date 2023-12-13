@@ -91,8 +91,13 @@
                                                 @if ($pending_order_details->status == 1)
                                                 <a href="{{route('customercanceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
                                                 @endif
+                                        </tr>
 
+                                        {{-- Notes: {{$item}} --}}
 
+                                        <tr>
+                                            <th class="text-danger font-weight-bold">Notes</th>
+                                            <td class="text-danger" colspan="3">{{$option->pivot->note}}</td>
                                         </tr>
 
                                     @endforeach

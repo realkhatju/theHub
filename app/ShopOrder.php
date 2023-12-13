@@ -13,7 +13,7 @@ class ShopOrder extends Model
     ];
 
     protected $fillable = [
-       'order_number','status','table_id','voucher_id','type'
+       'order_number','status','table_id','voucher_id','type','brake_flag'
     ];
 
     public function option() {

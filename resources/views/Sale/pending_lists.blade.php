@@ -1,4 +1,5 @@
 @extends('master')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 @section('title','Shop Order Pending Page')
 
@@ -21,6 +22,7 @@
         <div class="card shadow">
             <div class="card-header">
                 <h4 class="font-weight-bold mt-2">Pending Shop Order List</h4>
+                <button class="btn btn-primary" onclick="requestPermission()"><i class="fa-solid fa-bell"></i></button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -42,21 +44,29 @@
                                     <td>{{$order->table->table_number}}</td>
                                     @endif
                                     <td>
-                                    	<a href="{{route('pending_order_details', $order->id)}}" class="btn btn-info">Check Order Details</a>
+                                            <a href="{{route('pending_order_details', $order->id)}}" class="btn btn-info">Check Order Details</a>
 
-                                    	<a href="{{route('add_more_item', $order->id)}}" class="btn btn-success">Add More Item</a>
-                                    	@if($user == 3)
-                                    	    <button class="btn" style="background-color:lightgreen;color:white;" onclick="done({{$order->table_id}})">Done</button>
-                                            {{-- <button class="btn btn-danger" style="color:white;" onclick="cancel({{$order->id}})">Cancel</button> --}}
-                                            <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
-                                    	@else
-                                    	    <button class="btn btn-primary" onclick="storeVoucher({{$order->id}})">Store Voucher</button>
-                                            <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
-                                    	@endif
-
-
-                                    </td>
-
+                                            <a href="{{route('add_more_item', $order->id)}}" class="btn btn-success">Add More Item</a>
+                                            @if($user == 3)
+                                                <button class="btn" style="background-color:lightgreen;color:white;" onclick="done({{$order->table_id}})">Done</button>
+                                                {{-- <button class="btn btn-danger" style="color:white;" onclick="cancel({{$order->id}})">Cancel</button> --}}
+                                                <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
+                                            @else
+                                                <button class="btn btn-primary" onclick="storeVoucher({{$order->id}})">Store Voucher</button>
+                                                <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
+                                            @endif
+                                            @if ($order->brake_flag == 1)
+                                            <button class="btn text-white" type="button" style="background-color:rgb(143, 143, 5);" disabled>
+                                                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                                <span role="status">Pending...</span>
+                                            </button>
+                                            @else
+                                            <button class="btn text-white" type="button" style="background-color:rgb(0, 158, 0);" disabled>
+                                                <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                                                <span role="status">Ordered</span>
+                                            </button>
+                                            @endif
+                                        </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -214,6 +224,33 @@
 @endsection
 
 @section('js')
+
+<script>
+    navigator.serviceWorker.register("sw.js");
+    function requestPermission(){
+        Notification.requestPermission().then((permission) => {
+            if(permission === 'granted'){
+
+                // get service worker
+                navigator.serviceWorker.ready.then((sw) => {
+
+                    // subscribe
+                    sw.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: "BHK-fZXWC80sFT9QJA-wr8Kd70XwmG_eBKCyaqRMd8F0Crkn3HetpzZU0fm3zDPQqd2dAWL1azODD6UP28bVUrA"
+                    }).then((subscription) => {
+
+                        // subscription successfull
+                        fetch("/api/push-subscribe",{
+                            method: "post",
+                            body:JSON.stringify(subscription)
+                        }).then( alert("ok"));
+                    });
+                });
+            }
+        });
+    }
+</script>
 
 <script>
 
@@ -479,8 +516,6 @@ function change_price(){
         })
 
     }
-
-
 </script>
 
 

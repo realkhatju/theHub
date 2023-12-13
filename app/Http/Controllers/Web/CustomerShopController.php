@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Web;
 
 use App\Code;
-use App\CuisineType;
-use App\Http\Controllers\Controller;
 use App\Meal;
-use App\MenuItem;
-use App\Option;
+use App\Town;
 use App\Order;
+use App\Table;
+use App\Option;
+use App\MenuItem;
 use App\Promotion;
 use App\ShopOrder;
-use App\Table;
 use App\TableType;
-use App\Town;
+use App\CuisineType;
 use Illuminate\Http\Request;
+use Minishlink\WebPush\WebPush;
+use App\PushSubscription;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Minishlink\WebPush\Subscription;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerShopController extends Controller
@@ -50,15 +53,19 @@ class CustomerShopController extends Controller
 
             $order = ShopOrder::where('table_id', $table_id)->where('status', 1)->first();
             // dd($order->toArray());
-            if(!empty($order)){
+
+            if(!empty($order) ){
                 // dd("You Don't have Permission");
-                return redirect()->back();
+                return redirect()->route('add_more_customer_item',$order->id);
+
+                // return redirect()->back();
 
             }else{
-                // dd("hello2");
+                // dd("hello2");add_more_cadd_more_customer_item
                 $table = Table::where('id', $table_id)->first();
 
                 $table_number = $table->id;
+                // dd('you have already order');
 
             }
         }
@@ -72,6 +79,28 @@ class CustomerShopController extends Controller
         // dd($items->toArray());
         $table = 1;
         $ygn_towns = Town::where('state_id',13)->get();
+        // $options = Option::get();
+        // dd($options->toArray());
+        // $options = Option::select('menu_item_id','brake_flag)->get();
+        // dd($options->toArray());
+        // dd($items->toArray());
+        // $options = Option::select('menu_item_id','brake_flag')->get();
+        $units = Option::get();
+        // $item_id = $request->item_id;
+        // $item = MenuItem::where('id', $item_id)->first();
+        // dd($units->toArray());
+        // $items = MenuItem::select('menu_item_id')->with('menu_item')->get();
+        // foreach($items as $item){
+        //     $units = Option::where('brake_flag', 2)->with('menu_item')->get();
+        //     // dd($units->toArray());
+        //     $bFlages = Option::where('brake_flag', 2)->get();
+        //     dd($bFlages->toArray());
+        //     if($units->brake_flag ){
+
+        //     }
+        // }
+        // dd($items->toArray());
+
         return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','table','cuisine_types','table_number','pending_lists','table_id'));
     }
 
@@ -124,6 +153,30 @@ class CustomerShopController extends Controller
 
         return view('Customer.sale_page', compact('table_lists','table_types','ygn_towns','codes','items','meal_types','table_id','cuisine_types','table_number','table'));
     }
+
+    // // notify Controller Start
+    // protected function notifyPost(PushSubscription $sub, Request $request){
+    //     dd('hello');
+    //     $webPush = new WebPush([
+    //         "VAPID" => [
+    //             "publicKey" => "BHK-fZXWC80sFT9QJA-wr8Kd70XwmG_eBKCyaqRMd8F0Crkn3HetpzZU0fm3zDPQqd2dAWL1azODD6UP28bVUrA",
+    //             "privateKey" => "I4qdNBJ07oJIDoKVstQXdT0xU9TjW-lABOw5fz2-oj4",
+    //             "subject" => "http://127.0.0.1"
+    //         ]
+    //     ]);
+    //     // dd($webPush);
+    //     $result = $webPush->sendOneNotification(
+    //         Subscription::create(json_decode($sub->data ,true)),
+    //         json_encode($request->input())
+    //     );
+    //     return redirect()->route('admin#home');
+    //     dd("Successfully sent to Admin");
+    //     // dd($result);
+    // }
+
+    // notify Controller End
+
+
     //end modify
     protected function getPendingShopOrderDetails($order_id){
         $table_number = 0;
@@ -333,4 +386,41 @@ class CustomerShopController extends Controller
 
         return view('Customer.pending_lists', compact('pending_lists','promotion'));
     }
+
+    // Notify Start
+
+    protected function notifyPost(PushSubscription $sub, Request $request){
+        // dd('hello');
+        $webPush = new WebPush([
+            "VAPID" => [
+                "publicKey" => "BHK-fZXWC80sFT9QJA-wr8Kd70XwmG_eBKCyaqRMd8F0Crkn3HetpzZU0fm3zDPQqd2dAWL1azODD6UP28bVUrA",
+                "privateKey" => "I4qdNBJ07oJIDoKVstQXdT0xU9TjW-lABOw5fz2-oj4",
+                "subject" => "http://127.0.0.1"
+            ]
+        ]);
+        // dd($webPush);
+        $result = $webPush->sendOneNotification(
+            Subscription::create(json_decode($sub->data ,true)),
+            json_encode($request->input()),
+            $req = $request->input(),
+        );
+        // dd($req);
+
+
+        // Start Noti Status
+
+            $change = ShopOrder::find($req['body']);
+            // dd($change);
+            $change->brake_flag = 2;
+            $change->save();
+            // return back();
+            alert()->success('Successfully Ordered');
+
+        // dd('Successfully Ordered');
+        return view('Customer.success');
+    }
+
+// Notify End
 }
+
+

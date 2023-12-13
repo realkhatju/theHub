@@ -75,7 +75,7 @@
                                     @if ($unit->brake_flag == 2)
                                     <a href="{{route('unbrake_status',$unit->id)}}" class="btn btn-danger">Unbrake</a>
                                     @else
-                                    <a href="{{route('brake_status',$unit->id)}}" class="btn btn-success">Brake</a>
+                                    <a href="{{route('brake_status_menu',$unit->id)}}" class="btn btn-success">Brake</a>
                                     @endif
 
                                     <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#edit_item{{$unit->id}}">

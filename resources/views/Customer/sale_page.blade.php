@@ -76,7 +76,6 @@
                 </ul>
 
                 <div class="tab-content br-n pn">
-
                     <div id="navpills-1" class="tab-pane ">
                         <div class="card">
                             <div class="card-body">
@@ -115,7 +114,7 @@
                             @foreach($table_lists as $table)
                                 <div class="col-md-4">
                                     <a href="{{route('customer_order_sale', $table->id)}}">
-                                        <div class="card">
+                                        <div class="card ">
                                             <div class="card-body">
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg m-2 align-self-start">

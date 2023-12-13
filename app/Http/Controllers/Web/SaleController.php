@@ -292,6 +292,7 @@ class SaleController extends Controller
         $item_id = $request->item_id;
         $item = MenuItem::where('id', $item_id)->first();
         $units = Option::where('menu_item_id', $item->id)->with('menu_item')->get();
+        // dd($units);
         return response()->json($units);
     }
     protected function customerStoreShopOrder(Request $request){
@@ -392,6 +393,7 @@ class SaleController extends Controller
             alert()->error("Pending Order Not Found!")->persistent("Close!");
             return redirect()->back();
         }
+        // dd($name);
         // return view('Customer.kitchen_list',compact('take_away','notte','orders','tableno','option_name','real_date','oname','name','alloption','fromadd','tablenoo','pending_order_details','total_price'));
         return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','take_away','orders','tableno','real_date','oname','alloption','fromadd','tablenoo',));
     }
@@ -522,6 +524,7 @@ class SaleController extends Controller
     }
     protected function customerCancelDetails(Request $request){
         DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->delete();
+        $code_lists = json_decode($request->code_lists);
         alert()->success("Successfully Canceled!")->persistent("Close!");
         $table_number = 0;
         try {
@@ -532,11 +535,24 @@ class SaleController extends Controller
         }
         $total_qty = 0 ;
         $total_price = 0 ;
+        // $note = 0;
         foreach ($pending_order_details->option as $option) {
             $total_qty += $option->pivot->quantity;
             $total_price += $option->sale_price * $option->pivot->quantity;
+            // $note = $option->pivot->note;
         }
-        return view('Customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
+        // dd($note);
+        // dd($total_qty);
+        // dd($pending_order_details->toArray());
+        // $notes = DB::table('option_shop_order')
+        // ->where('shop_order_id', $request->order_id)
+        // ->get();
+        // dd($notes);
+
+        // dd($pending_order_details->toArray());
+        // dd($note);
+        // return back();
+        return view('Customer.pending_order_Details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
     protected function getCustomerTableByFloor(Request $request){
         $floor = $request->floor_id;
@@ -1604,6 +1620,7 @@ class SaleController extends Controller
 
 			$total_price += $option->sale_price * $option->pivot->quantity;
 		}
+
 
     	return view('Sale.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }

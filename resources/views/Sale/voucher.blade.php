@@ -118,7 +118,6 @@
                                           <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                           <strong>Change - {{$voucher->change_value}}</strong><br>
                                          @endif
-
                                          @if ($voucher->promotion == 'FOC Items')
                                          <strong>{{$voucher->promotion}} - {{$voucher->promotion_value}}</strong><br>
                                          @endif
@@ -150,6 +149,12 @@
                                          <strong>Change - {{$voucher->change_value}}</strong><br>
                                    </div>
                                     @endif
+                                    <div style="text-align:right;margin-right:10px;font-size:17px;font-weight:bold;">
+                                        <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                        <strong>Service Charges 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                        <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.1)}}</strong><br>
+                                    </div>
+
                                     <h6  style="text-align:center;margin-top:10px;">**ကျေးဇူးတင်ပါသည်***</h6>
                             </div>
                         </div>

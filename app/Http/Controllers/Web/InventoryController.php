@@ -6,6 +6,7 @@ use App\Code;
 use App\Meal;
 use App\Option;
 use App\MenuItem;
+use App\ShopOrder;
 use App\Ingredient;
 use App\CuisineType;
 use Illuminate\Http\Request;
@@ -15,21 +16,21 @@ use Illuminate\Support\Facades\Validator;
 class InventoryController extends Controller
 {
     protected function getInventoryDashboard()
-	{
-		return view('Inventory.inv_dashboard');
-	}
+    {
+        return view('Inventory.inv_dashboard');
+    }
 
-	//Start Meal
-	protected function getMealList()
-	{
-		$meal_lists =  Meal::all();
+    //Start Meal
+    protected function getMealList()
+    {
+        $meal_lists =  Meal::all();
 
-		return view('Inventory.meal_list', compact('meal_lists'));
-	}
+        return view('Inventory.meal_list', compact('meal_lists'));
+    }
 
-	protected function storeMeal(Request $request)
-	{
-		$validator = Validator::make($request->all(), [
+    protected function storeMeal(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
 
@@ -47,7 +48,6 @@ class InventoryController extends Controller
                 'name' => $request->name,
                 'created_by' => $user_code,
             ]);
-
         } catch (\Exception $e) {
 
             alert()->error('Something Wrong! When Creating Meal.');
@@ -56,24 +56,22 @@ class InventoryController extends Controller
         }
 
 
-    	alert()->success('Successfully Added');
+        alert()->success('Successfully Added');
 
         return redirect()->route('meal_list');
-	}
+    }
 
-	protected function updateMeal($id, Request $request)
-	{
-		try {
+    protected function updateMeal($id, Request $request)
+    {
+        try {
 
-        	$meal = Meal::findOrFail($id);
+            $meal = Meal::findOrFail($id);
+        } catch (\Exception $e) {
 
-   		} catch (\Exception $e) {
-
-        	alert()->error("Meal Not Found!")->persistent("Close!");
+            alert()->error("Meal Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
-    	}
+        }
 
         $meal->name = $request->name;
 
@@ -82,22 +80,22 @@ class InventoryController extends Controller
         alert()->success('Successfully Updated!');
 
         return redirect()->route('meal_list');
-	}
-	//End Meal
+    }
+    //End Meal
 
-	//Start Cuisine Type
-	protected function getCuisineTypeList()
-	{
-		$cuisine_type_lists =  CuisineType::all();
+    //Start Cuisine Type
+    protected function getCuisineTypeList()
+    {
+        $cuisine_type_lists =  CuisineType::all();
 
-		$meal_lists =  Meal::all();
+        $meal_lists =  Meal::all();
 
-		return view('Inventory.cuisine_type_list', compact('cuisine_type_lists','meal_lists'));
-	}
+        return view('Inventory.cuisine_type_list', compact('cuisine_type_lists', 'meal_lists'));
+    }
 
-	protected function storeCuisineType(Request $request)
-	{
-		$validator = Validator::make($request->all(), [
+    protected function storeCuisineType(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'meal_id' => 'required',
         ]);
@@ -116,7 +114,6 @@ class InventoryController extends Controller
                 'meal_id' => $request->meal_id,
                 'created_by' => $user_code,
             ]);
-
         } catch (\Exception $e) {
 
             alert()->error('Something Wrong! When Creating Cuisine Type.');
@@ -125,24 +122,22 @@ class InventoryController extends Controller
         }
 
 
-    	alert()->success('Successfully Added');
+        alert()->success('Successfully Added');
 
         return redirect()->route('cuisine_type_list');
-	}
+    }
 
-	protected function updateCuisineType($id, Request $request)
-	{
-		try {
+    protected function updateCuisineType($id, Request $request)
+    {
+        try {
 
-        	$cuisine = CuisineType::findOrFail($id);
+            $cuisine = CuisineType::findOrFail($id);
+        } catch (\Exception $e) {
 
-   		} catch (\Exception $e) {
-
-        	alert()->error("Cuisine Type Not Found!")->persistent("Close!");
+            alert()->error("Cuisine Type Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
-    	}
+        }
 
         $cuisine->name = $request->name;
 
@@ -153,30 +148,30 @@ class InventoryController extends Controller
         alert()->success('Successfully Updated!');
 
         return redirect()->route('cuisine_type_list');
-	}
-	//End Cuisine Type
+    }
+    //End Cuisine Type
 
-	//Start Menu Item
-	protected function getMenuItemList()
-	{
-		$menu_item_lists =  MenuItem::whereNull("deleted_at")->orderBy('cuisine_type_id', 'ASC')->get();
+    //Start Menu Item
+    protected function getMenuItemList()
+    {
+        $menu_item_lists =  MenuItem::whereNull("deleted_at")->orderBy('cuisine_type_id', 'ASC')->get();
 
-		$cuisine_type_lists =  CuisineType::all();
+        $cuisine_type_lists =  CuisineType::all();
         // dd($menu_item_lists->toArray());
 
-		return view('Inventory.item_list', compact('menu_item_lists','cuisine_type_lists'));
-	}
+        return view('Inventory.item_list', compact('menu_item_lists', 'cuisine_type_lists'));
+    }
 
     protected function getCustomerComplainList()
-	{
+    {
         $codes = Code::all();
 
-		return view('Inventory.code_list',compact('codes'));
-	}
+        return view('Inventory.code_list', compact('codes'));
+    }
 
     protected function storeCode(Request $request)
-	{
-		$validator = Validator::make($request->all(), [
+    {
+        $validator = Validator::make($request->all(), [
             'code' => 'required',
             'name' => 'required',
         ]);
@@ -192,7 +187,6 @@ class InventoryController extends Controller
                 'code' => $request->code,
                 'name' => $request->name,
             ]);
-
         } catch (\Exception $e) {
 
             alert()->error('Something Wrong! When Creating Meal.');
@@ -201,24 +195,22 @@ class InventoryController extends Controller
         }
 
 
-    	alert()->success('Successfully Added');
+        alert()->success('Successfully Added');
 
         return redirect()->route('customer_complain_list');
-	}
+    }
 
     protected function updateCode($id, Request $request)
-	{
-		try {
+    {
+        try {
 
-        	$code = Code::findOrFail($id);
+            $code = Code::findOrFail($id);
+        } catch (\Exception $e) {
 
-   		} catch (\Exception $e) {
-
-        	alert()->error("Code Not Found!")->persistent("Close!");
+            alert()->error("Code Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
-    	}
+        }
 
         $code->code = $request->code;
         $code->name = $request->name;
@@ -228,12 +220,12 @@ class InventoryController extends Controller
         alert()->success('Successfully Updated!');
 
         return redirect()->route('customer_complain_list');
-	}
+    }
 
-	protected function storeMenuItem(Request $request)
-	{
+    protected function storeMenuItem(Request $request)
+    {
 
-		$validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'code' => 'required',
             'name' => 'required',
             'cuisine_type_id' => 'required',
@@ -241,7 +233,7 @@ class InventoryController extends Controller
 
         if ($validator->fails()) {
 
-        	alert()->error('Validation Error!');
+            alert()->error('Validation Error!');
 
             return redirect()->back();
         }
@@ -250,28 +242,26 @@ class InventoryController extends Controller
 
         if (isset($request->customer_console)) {
 
-        	$customer_console = 0;   //Customer ko pya mar
+            $customer_console = 0;   //Customer ko pya mar
 
-        }else{
+        } else {
 
-        	$customer_console = 1;	//Customer ko ma pya
+            $customer_console = 1;    //Customer ko ma pya
         }
 
         if ($request->hasfile('photo_path')) {
 
-			$image = $request->file('photo_path');
+            $image = $request->file('photo_path');
 
-			$name = $image->getClientOriginalName();
+            $name = $image->getClientOriginalName();
 
-			$photo_path =  time()."-".$name;
+            $photo_path =  time() . "-" . $name;
 
-			$image->move(public_path() . '/photo/', $photo_path);
-		}
-		else{
+            $image->move(public_path() . '/photo/', $photo_path);
+        } else {
 
-			$photo_path = "default.jpg";
-
-		}
+            $photo_path = "default.jpg";
+        }
 
         try {
 
@@ -283,7 +273,6 @@ class InventoryController extends Controller
                 'customer_console' => $customer_console,
                 'cuisine_type_id' => $request->cuisine_type_id,
             ]);
-
         } catch (\Exception $e) {
 
             alert()->error('Something Wrong! When Creating Menu Item.');
@@ -294,7 +283,7 @@ class InventoryController extends Controller
         alert()->success('Successfully Added');
 
         return redirect()->route('menu_item_list');
-	}
+    }
 
     protected function updateMenuItem($id, Request $request)
     {
@@ -313,39 +302,35 @@ class InventoryController extends Controller
         try {
 
             $item = MenuItem::findOrFail($id);
-
         } catch (\Exception $e) {
 
             alert()->error("Menu Item Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
         }
 
         if (isset($request->customer_console)) {
 
-        	$customer_console = 0;   //Customer ko pya mar
+            $customer_console = 0;   //Customer ko pya mar
 
-        }else{
+        } else {
 
-        	$customer_console = 1;	//Customer ko ma pya
+            $customer_console = 1;    //Customer ko ma pya
         }
 
         if ($request->hasfile('photo_path')) {
 
-			$image = $request->file('photo_path');
+            $image = $request->file('photo_path');
 
-			$name = $image->getClientOriginalName();
+            $name = $image->getClientOriginalName();
 
-			$photo_path =  time()."-".$name;
+            $photo_path =  time() . "-" . $name;
 
-			$image->move(public_path() . '/photo/', $photo_path);
-		}
-		else{
+            $image->move(public_path() . '/photo/', $photo_path);
+        } else {
 
-			$photo_path = "default.jpg";
-
-		}
+            $photo_path = "default.jpg";
+        }
 
         $item->item_code = $request->code;
 
@@ -394,7 +379,6 @@ class InventoryController extends Controller
         try {
 
             $item = MenuItem::findOrFail($item_id);
-
         } catch (\Exception $e) {
 
             alert()->error("Menu Item Not Found!")->persistent("Close!");
@@ -402,23 +386,44 @@ class InventoryController extends Controller
             return redirect()->back();
         }
 
-        return view('Inventory.unit_list', compact('units','item','ingredient_lists'));
+        return view('Inventory.unit_list', compact('units', 'item', 'ingredient_lists'));
     }
 
-    protected function changeBrake($id){
-            $change = Option::find($id);
-            // dd($change);
-            $change->brake_flag = 2;
-            $change->save();
-            return back();
+    protected function changeBrake($id)
+    {
+        $change = Option::find($id);
+        // dd($change);
+        $change->brake_flag = 2;
+        $change->save();
+        return back();
     }
-    protected function changeUnbrake($id){
+    protected function changeUnbrake($id)
+    {
         $change = Option::find($id);
         // dd($change);
         $change->brake_flag = 1;
         $change->save();
         return back();
-}
+    }
+
+    // Start Modify Menu
+    protected function changeBrakeMenu($id)
+    {
+        $change = MenuItem::find($id);
+        // dd($change);
+        $change->brake_flag = 2;
+        $change->save();
+        return back();
+    }
+    protected function changeUnBrakeMenu($id)
+    {
+        $change = MenuItem::find($id);
+        // dd($change);
+        $change->brake_flag = 1;
+        $change->save();
+        return back();
+    }
+    // End Modify Menu
 
     protected function storeOption(Request $request)
     {
@@ -470,18 +475,16 @@ class InventoryController extends Controller
         return redirect()->back();
     }
 
-    protected function updateOption($id,Request $request)
+    protected function updateOption($id, Request $request)
     {
         try {
 
             $unit = Option::findOrFail($id);
-
         } catch (\Exception $e) {
 
             alert()->error("Option Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
         }
 
         $unit->name = $request->name;
@@ -547,7 +550,6 @@ class InventoryController extends Controller
                 'brand_name' => $request->brand_name,
                 'supplier_name' => $request->supplier_name,
             ]);
-
         } catch (\Exception $e) {
 
             alert()->error('Something Wrong! When Creating Ingredients.');
@@ -565,19 +567,18 @@ class InventoryController extends Controller
 
     // }
 
-    protected function editUnitIngredient($id){
+    protected function editUnitIngredient($id)
+    {
 
         // dd($id);
         try {
 
             $option = Option::findOrFail($id);
-
         } catch (\Exception $e) {
 
             alert()->error("Option Type Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
         }
 
         $ingredients = $option->ingredient;
@@ -591,22 +592,20 @@ class InventoryController extends Controller
         // $ingredient_lists->option()->attach($option->id, ['amount' => $amount]);
         // dd(ingredient_lists);
         // dd($ingredients);
-        return view ('Inventory.edit_unit_ingredient', compact('ingredients','ingredient_lists','id'));
-
+        return view('Inventory.edit_unit_ingredient', compact('ingredients', 'ingredient_lists', 'id'));
     }
 
-    protected function updateUnitIngredient($id, Request $request){
+    protected function updateUnitIngredient($id, Request $request)
+    {
 
         try {
 
             $option = Option::findOrFail($id);
-
         } catch (\Exception $e) {
 
             alert()->error("Option Type Not Found!")->persistent("Close!");
 
             return redirect()->back();
-
         }
 
         $amount = $request->amount;
@@ -615,36 +614,36 @@ class InventoryController extends Controller
 
         $option->ingredient()->detach();
 
-        for($count = 0; $count < count($amount); $count++){
+        for ($count = 0; $count < count($amount); $count++) {
 
             $option->ingredient()->attach($ingredient[$count], ['amount' => $amount[$count]]);
-
         }
 
         alert()->success('Successfully Updated');
 
         return redirect()->back();
-
     }
 
-    protected function getReorderList(Request $Request){
+    protected function getReorderList(Request $Request)
+    {
 
         $reorder = Ingredient::all();
         // foreach($reorder as $reorders)
         // if()
-        return view('Inventory.reorder_list',compact('reorder'));
+        return view('Inventory.reorder_list', compact('reorder'));
     }
 
-    protected function stockCountUpdate(Request $Request){
+    protected function stockCountUpdate(Request $Request)
+    {
         $all_ingre = Ingredient::all();
-        return view('Inventory.stock_update',compact('all_ingre'));
+        return view('Inventory.stock_update', compact('all_ingre'));
     }
 
     protected function editIngredient(Request $request)
     {
         // dd($request->ingredient_id);
         $edit_ingre = Ingredient::find($request->ingredient_id);
-       return response()->json($edit_ingre);
+        return response()->json($edit_ingre);
     }
     protected function store_updateIngredient(Request $request)
     {

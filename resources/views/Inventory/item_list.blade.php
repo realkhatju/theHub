@@ -68,6 +68,11 @@
                                 </td>
 
                                 <td class="text-center" style="text-overflow: ellipsis; white-space: nowrap;">
+                                    @if ($item->brake_flag == 2)
+                                    <a href="{{route('unBrake_status_menu',$item->id)}}" class="btn btn-danger">Unbrake</a>
+                                    @else
+                                    <a href="{{route('brake_status_menu',$item->id)}}" class="btn btn-success">Brake</a>
+                                    @endif
                                     <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#edit_item{{$item->id}}">
                                         Edit Item
                                     </a>

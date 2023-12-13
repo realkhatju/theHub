@@ -2,8 +2,13 @@
 
 use App\ShopOrder;
 use App\Events\Test;
+use App\PushSubscription;
 use Jenssegers\Agent\Agent;
+use Illuminate\Http\Request;
+use Minishlink\WebPush\WebPush;
+use Minishlink\WebPush\Subscription;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 
 
 Route::get('/agent', function () {
@@ -53,6 +58,13 @@ Route::get('customer/cancelOrder/{id}','Web\SaleController@customerCancelOrder')
 Route::get('customer/delivery', 'Web\SaleController@customerDeliveryPage')->name('customerDelivery');
 Route::get('customer/canceldetail/{order_id}/{option_id}','Web\SaleController@customerCancelDetails')->name('customercanceldetail');
 Route::post('getCustomerTableByFloor', 'Web\SaleController@getCustomerTableByFloor');
+
+//Notify Function Start
+// Route::post("admin/sendNotif/{sub}",'Web\CustomerShopController@notifyPost')->name('createPostNotify');
+//Notify Function End
+Route::post("admin/sendNotif/{sub}",'Web\CustomerShopController@notifyPost');
+
+
 //endModify
 
 Route::get('Customer/Pending-Order-Details/{id}', 'Web\CustomerShopController@getPendingShopOrderDetails')->name('customer_pending_order_details');
@@ -111,6 +123,15 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('menu-item/update/{id}', 'Web\InventoryController@updateMenuItem')->name('menu_item_update');
     Route::post('menu-item/delete', 'Web\InventoryController@deleteMenuItem')->name('menu.delete');
 
+    //Menu Item Brake Start
+    Route::get('unit-ingredient/menu_item/brake/{id}','Web\InventoryController@changeBrakeMenu')->name('brake_status_menu');
+    Route::get('unit-ingredient/menu_item/unbrake/{id}','Web\InventoryController@changeUnBrakeMenu')->name('unBrake_status_menu');
+    //Menu Item Brake End
+
+    //Send Order Start
+    // Route::get('unit-ingredient/send_noti/pending/{id}','Web\InventoryController@pendingNotiStauts')->name('pending_status_noti');
+    Route::get('unit-ingredient/send_noti/success/{id}','Web\InventoryController@successNotiStatus')->name('success_status_noti');
+    //Send Order End
 
     //Ingredient List
     Route::get('ingredient-list', 'Web\InventoryController@getIngredientList')->name('ingredient_list');
@@ -182,8 +203,12 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('get-sale-record', 'Web\AdminController@getSaleRecord')->name('get_sale_record');
     Route::get('sale-record', 'Web\AdminController@saleRecord')->name('sale_record');
 
-    //notification
-    Route::post('getnotification', 'Web\SaleController@notification')->name('getnotification');
+    //notification start
+    // Route::post('getnotification', 'Web\SaleController@notification')->name('getnotification');
+    // Route::get('notifications',[NotificationController::class,'index'])->name('admin#notifications');
+
+    // Route::get('notifications',[NotificationController::class,'index'])->name('admin#notifications');
+    //notification end
 
 
     Route::get('Pending-Order', 'Web\SaleController@getPendingShopOrderList')->name('pending_lists');

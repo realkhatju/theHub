@@ -1,5 +1,6 @@
 <?php
 
+use App\PushSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -106,3 +107,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 });
 
+Route::post("push-subscribe",function(Request $request){
+    PushSubscription::create([
+        'data' => $request->getContent()
+    ]);
+});
