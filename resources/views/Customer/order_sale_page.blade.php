@@ -127,7 +127,7 @@
                             <div class="tab-pane active" id="1" role="tabpanel">
                                 <div class="row mt-3">
                                 @foreach($items as $item)
-                                @if($item->cuisine_type_id == 1 && $item->brake_flag == 1)
+                                @if($item->cuisine_type_id == 1 && $item->meal_id == 1 && $item->brake_flag == 1)
                                 {{-- modify css  --}}
                                 <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                     <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -145,7 +145,7 @@
 
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 2 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -165,7 +165,7 @@
                             <div class="tab-pane" id="3" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 3 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 3 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -185,7 +185,7 @@
                             <div class="tab-pane" id="4" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 4 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 4 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -202,7 +202,7 @@
                             <div class="tab-pane" id="5" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 5 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 5 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -220,7 +220,7 @@
 
                                         <div class="row mt-3">
                                             @foreach($items as $item)
-                                            @if($item->cuisine_type_id == 2 && $item->brake_flag == 1)
+                                            @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                                 <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -242,7 +242,7 @@
                             <div class="tab-pane" id="6" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 6  && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 6 && $item->meal_id == 1   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -262,7 +262,7 @@
                             <div class="tab-pane" id="7" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 7  && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 7 && $item->meal_id == 1   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -282,7 +282,7 @@
                             <div class="tab-pane" id="8" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 8 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 8  && $item->meal_id == 1 && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -302,7 +302,7 @@
                             <div class="tab-pane" id="9" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 9 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 9 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -322,7 +322,7 @@
                             <div class="tab-pane" id="10" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 10 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 10 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -342,7 +342,7 @@
                             <div class="tab-pane" id="11" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 11 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 11 && $item->meal_id == 1  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -360,71 +360,7 @@
 
                             </div>
 
-                            <div class="modal fade" id="remark_table_modal" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-m" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Choose Remark Infomation</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
 
-                                        <div class="modal-body" id="remark_modal_body">
-                                            <form action="" method="post">
-                                                @csrf
-                                                <input type="hidden" id="note_id">
-                                                <div class="form-group">
-                                                    <label for="">Choose Codes</label>
-
-                                                    <select name="cus_remark"  class="form-control" style="width: 100%" data-placeholder="Select Codes"  id="select2" multiple="multiple"  onchange="fill_remark()">
-
-                                                        @foreach ($codes as $code)
-                                                            <option value="{{$code->id}}">{{$code->code}}-({{$code->name}})</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">Remark</label>
-                                                    <textarea name="complain" id="complain" cols="30" rows="5" class="form-control"></textarea>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="unit_table_modal" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Choose Option Infomation</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body col-12" id="checkout_modal_body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr >
-                                                        <th>Item Name</th>
-                                                        <th>Unit Name</th>
-                                                        <th>Price</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="count_unit" >
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -456,7 +392,7 @@
                             <div class="tab-pane " id="drink1" role="tabpanel">
                                 <div class="row mt-3">
                                 @foreach($items as $item)
-                                @if($item->cuisine_type_id == 1 && $item->brake_flag == 1)
+                                @if($item->cuisine_type_id == 1 && $item->meal_id == 2   && $item->brake_flag == 1)
                                 {{-- modify css  --}}
                                 <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                     <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -474,7 +410,7 @@
 
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 2 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 2  && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -494,7 +430,7 @@
                             <div class="tab-pane" id="drink3" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 3 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 3  && $item->meal_id == 2  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -514,7 +450,7 @@
                             <div class="tab-pane" id="drink4" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 4 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 4 && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -531,7 +467,7 @@
                             <div class="tab-pane" id="drink5" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 5 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 5  && $item->meal_id == 2  && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -549,7 +485,7 @@
 
                                         <div class="row mt-3">
                                             @foreach($items as $item)
-                                            @if($item->cuisine_type_id == 2 && $item->brake_flag == 1)
+                                            @if($item->cuisine_type_id == 2  && $item->meal_id == 2  && $item->brake_flag == 1)
 
                                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                                 <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -571,7 +507,7 @@
                             <div class="tab-pane" id="drink6" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 6  && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 6  && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -591,7 +527,7 @@
                             <div class="tab-pane" id="drink7" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 7  && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 7 && $item->meal_id == 2    && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -608,10 +544,10 @@
                                     </div>
 
                             </div>
-                            <div class="tab-pane" id="drink8" role="tabpanel">
+                            <div class="tab-pane active" id="drink8" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 8 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 8 && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -631,7 +567,7 @@
                             <div class="tab-pane" id="drink9" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 9 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 9 && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -651,7 +587,7 @@
                             <div class="tab-pane" id="drink10" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 10 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 10 && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -671,7 +607,7 @@
                             <div class="tab-pane" id="drink11" role="tabpanel">
                                 <div class="row mt-3">
                                     @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 11 && $item->brake_flag == 1)
+                                    @if($item->cuisine_type_id == 11 && $item->meal_id == 2   && $item->brake_flag == 1)
 
                                     <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
                                         <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
@@ -688,84 +624,78 @@
                                     </div>
 
                             </div>
-
-                            <div class="modal fade" id="remark_table_modal" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-m" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Choose Remark Infomation</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body" id="remark_modal_body">
-                                            <form action="" method="post">
-                                                @csrf
-                                                <input type="hidden" id="note_id">
-                                                <div class="form-group">
-                                                    <label for="">Choose Codes</label>
-
-                                                    <select name="cus_remark"  class="form-control" style="width: 100%" data-placeholder="Select Codes"  id="select2" multiple="multiple"  onchange="fill_remark()">
-
-                                                        @foreach ($codes as $code)
-                                                            <option value="{{$code->id}}">{{$code->code}}-({{$code->name}})</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">Remark</label>
-                                                    <textarea name="complain" id="complain" cols="30" rows="5" class="form-control"></textarea>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="unit_table_modal" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Choose Option Infomation</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body col-12" id="checkout_modal_body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr >
-                                                        <th>Item Name</th>
-                                                        <th>Unit Name</th>
-                                                        <th>Price</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="count_unit" >
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-
-
-
         </div>
 
+        <div class="modal fade" id="remark_table_modal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-m" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Choose Remark Infomation</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
+                    <div class="modal-body" id="remark_modal_body">
+                        <form action="" method="post">
+                            @csrf
+                            <input type="hidden" id="note_id">
+                            <div class="form-group">
+                                <label for="">Choose Codes</label>
+
+                                <select name="cus_remark"  class="form-control" style="width: 100%" data-placeholder="Select Codes"  id="select2" multiple="multiple"  onchange="fill_remark()">
+
+                                    @foreach ($codes as $code)
+                                        <option value="{{$code->id}}">{{$code->code}}-({{$code->name}})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Remark</label>
+                                <textarea name="complain" id="complain" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="unit_table_modal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Choose Option Infomation</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body col-12" id="checkout_modal_body">
+                        <table class="table">
+                            <thead>
+                                <tr >
+                                    <th>Item Name</th>
+                                    <th>Unit Name</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="count_unit" >
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
