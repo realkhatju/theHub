@@ -325,7 +325,7 @@
         <form class="btn btn-primary shadow rounded ml-2" action="/admin/sendNotif/1" method="POST">
             <input  type="hidden" name="title" value="Customer Ordered" placeholder="title">
             <input  type="hidden" name="body" value="{{$pending_order_details->id}}" placeholder="body">
-            <input  type="hidden" name="url" value="http://192.168.104.105:8000/Pending-Order" placeholder="url">
+            <input  type="hidden" name="url" value="http://thehubhotel.kwintechnologykw11.com/Pending-Order" placeholder="url">
             <input  type="hidden" name="_token" value="{{ csrf_token() }}">
             <input  class="btn btn-primary"  type="submit" value="Send">
             {{-- <a href="{{route('success_status_noti',$pending_order_details->brake_flag)}}"></a> --}}

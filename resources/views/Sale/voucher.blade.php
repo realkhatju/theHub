@@ -89,10 +89,13 @@
                                         </tbody>
                                         @foreach ($notes as $item)
                                             {{-- @if ($item->option_id == $opname->id) --}}
-                                                <tr>
+                                            @if ($item->note != null && $item->note != 'Default')
+                                            <tr>
                                                 <th class="text-danger font-weight-bold">Notes</th>
                                                 <td class="text-danger" colspan="3">{{$item->note}}</td>
-                                                </tr>
+                                            </tr>
+                                            @endif
+
                                             {{-- @endif --}}
                                         @endforeach
                                     </table>

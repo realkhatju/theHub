@@ -19,7 +19,9 @@ class MenuItem extends Model
         'created_by',
         'cuisine_type_id',
         'deleted_at',
-        'brake_flag'
+        'brake_flag',
+        'meal_id',
+        'item_name_burmese'
     ];
 
     protected $hidden = [

@@ -559,6 +559,7 @@ class SaleController extends Controller
         $table_lists = Table::where('floor', $floor)->get();
         return response()->json($table_lists);
     }
+
     //Customer Session End
 
 	protected function gotopendinglists(){
@@ -1624,6 +1625,22 @@ class SaleController extends Controller
 
     	return view('Sale.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
+
+    // Cooking Status Start
+    protected function cookingStatus(Request $request){
+        DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->update(['tocook' => 1]);
+        return back();
+    }
+    protected function cookedStatus(Request $request){
+        DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->update(['tocook' => 2]);
+        return back();
+    }
+    protected function servedStatus(Request $request){
+        DB::table('option_shop_order')->where('shop_order_id',$request->order_id)->where('option_id',$request->option_id)->update(['tocook' => 3]);
+        return back();
+    }
+    // Cooking Status End
+
     protected function canceldelidetail(Request $request){
         // dd($request->option_id);
         DB::table('option_order')->where('order_id',$request->order_id)->where('option_id',$request->option_id)->delete();

@@ -67,6 +67,11 @@
                                             </button>
                                             @endif
                                         </td>
+                                        <td>
+                                            <span>{{ now()->diffInMinutes($order->updated_at) }}
+                                                min ago
+                                            </span>
+                                        </td>
                                 </tr>
                             @endforeach
                         </tbody>

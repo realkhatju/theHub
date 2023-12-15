@@ -128,6 +128,12 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::get('unit-ingredient/menu_item/unbrake/{id}','Web\InventoryController@changeUnBrakeMenu')->name('unBrake_status_menu');
     //Menu Item Brake End
 
+    // Cooking Status Start
+    Route::get('cooking_status/{order_id}/{option_id}','Web\SaleController@cookingStatus')->name('cooking_status');
+    Route::get('cooked_status/{order_id}/{option_id}','Web\SaleController@cookedStatus')->name('cooked_status');
+    Route::get('served_status/{order_id}/{option_id}','Web\SaleController@servedStatus')->name('served_status');
+    // Cooking Status End
+
     //Send Order Start
     // Route::get('unit-ingredient/send_noti/pending/{id}','Web\InventoryController@pendingNotiStauts')->name('pending_status_noti');
     Route::get('unit-ingredient/send_noti/success/{id}','Web\InventoryController@successNotiStatus')->name('success_status_noti');

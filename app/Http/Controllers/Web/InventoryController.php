@@ -158,8 +158,9 @@ class InventoryController extends Controller
 
         $cuisine_type_lists =  CuisineType::all();
         // dd($menu_item_lists->toArray());
+        $meal_lists =  Meal::all();
 
-        return view('Inventory.item_list', compact('menu_item_lists', 'cuisine_type_lists'));
+        return view('Inventory.item_list', compact('menu_item_lists', 'cuisine_type_lists','meal_lists'));
     }
 
     protected function getCustomerComplainList()
@@ -229,6 +230,7 @@ class InventoryController extends Controller
             'code' => 'required',
             'name' => 'required',
             'cuisine_type_id' => 'required',
+            'meal_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -272,6 +274,8 @@ class InventoryController extends Controller
                 'photo_path' => $photo_path,
                 'customer_console' => $customer_console,
                 'cuisine_type_id' => $request->cuisine_type_id,
+                'meal_id' => $request->meal_id,
+                'item_name_burmese' => $request->nameBurmese
             ]);
         } catch (\Exception $e) {
 

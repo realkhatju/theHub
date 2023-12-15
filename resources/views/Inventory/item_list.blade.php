@@ -180,6 +180,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="font-weight-bold">Menu Item Name(Burmese)</label>
+                        <input type="text" name="nameBurmese" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Menu Item Name" required>
+
+                        @error('name')
+                            <span class="invalid-feedback alert alert-danger" role="alert"  height="100">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+
+                    <div class="form-group">
                         <label class="control-label">Item's Photo</label>
                         <input type="file" name="photo_path" class="form-control">
                     </div>
@@ -190,6 +203,16 @@
                             <option value="">Select Cuisine Type</option>
                             @foreach($cuisine_type_lists as $cuisine)
                             <option value="{{$cuisine->id}}">{{$cuisine->name}} - {{$cuisine->meal->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-weight-bold">Choose Meal</label>
+                        <select class="form-control select2 m-b-10" name="meal_id" style="width: 100%" >
+                            <option value="">Select Meal</option>
+                            @foreach($meal_lists as $meal)
+                            <option value="{{$meal->id}}">{{$meal->name}}</option>
                             @endforeach
                         </select>
                     </div>

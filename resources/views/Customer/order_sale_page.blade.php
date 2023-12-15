@@ -4,6 +4,8 @@
 
 @section('place')
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <!--<div class="col-md-5 col-8 align-self-center">-->
 
 
@@ -859,7 +861,7 @@
                         <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
                     </table>
                     <span class="ml-4">
-                        <i class="fa-regular fa-circle-check"></i> <span> tst Check Out&nbsp;!</span>
+                        <i class="fa-regular fa-circle-check"></i> <span> Check Out&nbsp;!</span>
                     </span>
                     <table>
                             <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>

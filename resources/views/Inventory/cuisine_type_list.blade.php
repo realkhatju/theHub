@@ -121,7 +121,6 @@
                             <option value="{{$meal->id}}">{{$meal->name}}</option>
                             @endforeach
                         </select>
-
                     </div>
 
                     <input type="submit" name="btnsubmit" class="btnsubmit float-right btn btn-primary" value="Save Category">

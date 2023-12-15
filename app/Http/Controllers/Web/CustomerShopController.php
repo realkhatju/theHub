@@ -416,8 +416,11 @@ class CustomerShopController extends Controller
             // return back();
             alert()->success('Successfully Ordered');
 
+
+            $pending_order_details = ShopOrder::findOrFail($change->id);
+            // dd($pending_order_details->toArray());
         // dd('Successfully Ordered');
-        return view('Customer.success');
+        return view('Customer.success',compact('pending_order_details'));
     }
 
 // Notify End

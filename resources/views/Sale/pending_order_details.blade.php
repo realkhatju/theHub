@@ -86,6 +86,17 @@
                                             </td>
                                             @endif --}}
                                             <td><a href="{{route('canceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
+                                            <td>
+                                                @if ($option->pivot->tocook == 0)
+                                                    <a href="{{route('cooking_status', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}" class="btn btn-warning">Cooking</a>
+                                                @elseif($option->pivot->tocook == 1)
+                                                    <a href="{{route('cooked_status', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}" class="btn btn-success" href="">Cooked</a>
+                                                @elseif($option->pivot->tocook == 2)
+                                                    <a href="{{route('served_status', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}" class="btn btn-info" href="">Served</a>
+                                                @elseif($option->pivot->tocook ==3)
+                                                    <i class="fa-regular fa-circle-check" style="font-size: 20px;"></i>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -101,13 +112,13 @@
 
 <div class="row justify-content-center">
 
-    <a href="{{route('add_more_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
+    {{-- <a href="{{route('add_more_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
     @if($user != 3)
     <a href="#" class="btn  ml-2" style="background-color:lightgreen;color:white;" onclick="done({{$pending_order_details->id}})">Done</a>
 
-    @else
-    <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">tstStore Voucher</a>
-    @endif
+    @else --}}
+    <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a>
+    {{-- @endif --}}
 
 </div>
 <div class="modal fade" id="voudiscount" role="dialog" aria-hidden="true">
@@ -224,7 +235,7 @@
         </div>
         <div class="modal-footer" id="dis_footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="change_price()">TestStore Voucher</button>
+          <button type="button" class="btn btn-primary" onclick="change_price()">Store Voucher</button>
         </div>
       </div>
     </div>
