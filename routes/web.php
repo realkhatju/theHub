@@ -291,3 +291,7 @@ Route::group(['middleware' => ['UserAuth']], function () {
         event (new App\Events\OrderNoti(189,0));
         return "event successful";
     });
+
+
+    //Language Session Management
+    Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

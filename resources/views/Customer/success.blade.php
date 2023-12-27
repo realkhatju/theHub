@@ -72,17 +72,20 @@
                     <div class="row container d-flex">
                         <ul>
                             <li>
-                                <img src="https://www.pngkit.com/png/full/139-1398183_a-shiny-light-orange-button-orange-light-icon.png" height="20px" style="border-radius:50%;" title="Active">
-                                <span>Cooking</span>
+                                <img src="https://www.pngall.com/wp-content/uploads/15/Yellow-Circle-PNG-Free-Image.png" height="20px" style="border-radius:50%;">
+                                <span></span>
                             </li>
+                            <span>Cooking</span>
                             <li>
-                                <img src="https://img.favpng.com/25/18/19/red-circle-button-png-favpng-jHcWHy40hi7EfTVtFQegdS1i6.jpg" height="20px" style="border-radius:50%;">
-                                <span>Cooked</span>
+                                <img src="https://e7.pngegg.com/pngimages/411/208/png-clipart-red-circle-red-round.png" height="20px" style="border-radius:50%;">
+                                <span></span>
                             </li>
+                            <span>Cooked</span>
                             <li>
-                                <img src="https://toppng.com/uploads/preview/free-icons-png-green-button-icon-11562980484agrqdnwooe.png" height="20px" style="border-radius:50%;" title="Active">
-                                <span>Served</span>
+                                <img src="https://static-00.iconduck.com/assets.00/status-active-icon-512x512-cjq8exrc.png" height="20px" style="border-radius:50%;">
+
                             </li>
+                            <span>Served</span>
                         </ul>
                     </div>
                     <div class="row">
@@ -106,11 +109,11 @@
                                                 @if ($option->pivot->tocook == 0)
                                                 <p>sent</p>
                                                 @elseif($option->pivot->tocook == 1)
-                                                <img src="https://www.pngkit.com/png/full/139-1398183_a-shiny-light-orange-button-orange-light-icon.png" height="20px" style="border-radius:50%;" title="Active">
+                                                <img src="https://www.pngall.com/wp-content/uploads/15/Yellow-Circle-PNG-Free-Image.png" height="20px" style="border-radius:50%;">
                                                 @elseif($option->pivot->tocook == 2)
-                                                <img src="https://img.favpng.com/25/18/19/red-circle-button-png-favpng-jHcWHy40hi7EfTVtFQegdS1i6.jpg" height="20px" style="border-radius:50%;">
+                                                <img src="https://e7.pngegg.com/pngimages/411/208/png-clipart-red-circle-red-round.png" height="20px" style="border-radius:50%;">
                                                 @elseif($option->pivot->tocook == 3)
-                                                <img src="https://toppng.com/uploads/preview/free-icons-png-green-button-icon-11562980484agrqdnwooe.png" height="20px" style="border-radius:50%;" title="Active">
+                                                <img src="https://static-00.iconduck.com/assets.00/status-active-icon-512x512-cjq8exrc.png" height="20px" style="border-radius:50%;">
                                                 @endif
                                             </td>
                                         </tr>

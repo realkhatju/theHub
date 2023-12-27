@@ -68,8 +68,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <span>{{ now()->diffInMinutes($order->updated_at) }}
-                                                min ago
+                                            <span>
+                                                @if(now()->diffInHours($order->updated_at) >= 24)
+                                                {{ now()->diffInDays($order->updated_at) }} days ago
+                                                @elseif (now()->diffInMinutes($order->updated_at) >= 60)
+                                                {{ now()->diffInHours($order->updated_at) }} hr ago
+                                                @else
+                                                {{ now()->diffInMinutes($order->updated_at) }} min ago
+                                                @endif
                                             </span>
                                         </td>
                                 </tr>
