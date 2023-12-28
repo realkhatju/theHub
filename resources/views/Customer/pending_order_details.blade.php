@@ -314,7 +314,10 @@
     </div>
     <div class="row justify-content-center">
         @if ($pending_order_details['status'] == 1)
-            <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
+        <button class="btn btn-info">
+            <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="text-white"> Add More Item</a>
+        </button>
+
         @endif
         {{-- @if ($pending_order_details->status == 1 && $total_qty != 0)
         <a href="#" class="btn btn-info ml-2" style="color:white;"
@@ -327,7 +330,7 @@
             <input  type="hidden" name="body" value="{{$pending_order_details->id}}" placeholder="body">
             <input  type="hidden" name="url" value="http://thehubhotel.kwintechnologykw11.com/Pending-Order" placeholder="url">
             <input  type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input  class="btn btn-primary"  type="submit" value="Send">
+            <input  class="btn btn-primary"  type="submit" value="Order Confirmed">
             {{-- <a href="{{route('success_status_noti',$pending_order_details->brake_flag)}}"></a> --}}
         </form>
     </div>

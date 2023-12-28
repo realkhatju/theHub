@@ -94,12 +94,13 @@
                                         </tr>
 
                                         {{-- Notes: {{$item}} --}}
+                                        @if ($option->pivot->note != null && $option->pivot->note != 'Note Default')
 
                                         <tr>
                                             <th class="text-danger font-weight-bold">Notes</th>
                                             <td class="text-danger" colspan="3">{{$option->pivot->note}}</td>
                                         </tr>
-
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -114,10 +115,20 @@
 
     <div class="row justify-content-center">
         @if ($pending_order_details['status'] == 1)
-            <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="btn btn-info text-center"> Add More Item</a>
+        <button class="btn btn-info text-center">
+            <a href="{{route('add_more_customer_item', $pending_order_details->id)}}" class="text-white"> Add More Item</a>
+        </button>
         @endif
 
 
+        <form class="btn btn-primary shadow rounded ml-2" action="/admin/sendNotif/1" method="POST">
+            <input  type="hidden" name="title" value="Customer Ordered" placeholder="title">
+            <input  type="hidden" name="body" value="{{$pending_order_details->id}}" placeholder="body">
+            <input  type="hidden" name="url" value="http://thehubhotel.kwintechnologykw11.com/Pending-Order" placeholder="url">
+            <input  type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input  class="btn btn-primary"  type="submit" value="Order Confirmed">
+            {{-- <a href="{{route('success_status_noti',$pending_order_details->brake_flag)}}"></a> --}}
+        </form>
         {{-- <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="change_price({{$pending_order_details->id}})">Store Voucher</a>
 
         <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a> --}}
