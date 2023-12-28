@@ -1,94 +1,188 @@
 @extends('master')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-@section('title','Shop Order Pending Page')
+@section('title','Shop Order Details')
 
 @section('place')
 
 <!--<div class="col-md-5 col-8 align-self-center">-->
-<!--    <h3 class="text-themecolor m-b-0 m-t-0">Pending Shop Order Page</h3>-->
-<!--    <ol class="breadcrumb">-->
-<!--        <li class="breadcrumb-item"><a href="{{route('index')}}">Back to Dashborad</a></li>-->
-<!--        <li class="breadcrumb-item active">Pending Shop Order Page</li>-->
-<!--    </ol>-->
+<!--<h3 class="text-themecolor m-b-0 m-t-0">Pending Order Details</h3>-->
+<!--<ol class="breadcrumb">-->
+<!--<li class="breadcrumb-item"><a href="{{route('index')}}">Back to Dashborad</a></li>-->
+<!--<li class="breadcrumb-item active">Pending Order Details</li>-->
+<!--</ol>-->
 <!--</div>-->
 
 @endsection
 
+
 @section('content')
+
 <?php $user = session()->get('user')->role_flag;?>
-<div class="row">
-    <div class="col-md-12">
+@if ($mealItem1)
+<div class="page-wrapper" >
+<div class="container-fluid">
+<div class="row justify-content-center">
+    <div class="col-md-5 printableArea1" style="width:45%;">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="font-weight-bold mt-2">Pending Shop Order List</h4>
-                <button class="btn btn-primary" onclick="requestPermission()"><i class="fa-solid fa-bell"></i></button>
+                <h4 class="font-weight-bold mt-2">Kitchen Details</h4>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table" id="example23">
-                        <thead>
-                            <tr>
-                                <th>Order Number</th>
-                                <th>Table Number</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($pending_lists as $order)
-                                <tr>
-                                	<td>{{$order->order_number}}</td>
-                                    @if($order->table_id == 0)
-                                    <td>Take Away</td>
-                                    @else
-                                    <td>{{$order->table->table_number}}</td>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="font-weight-bold mt-2 text-primary text-center">Main Dish</h4>
+                        <div class="row">
+                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Order Number</div>
+                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Table Name</div>
+                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Counting Unit Name</th>
+                                        <th>Order Quantity</th>
+                                        {{-- <th>Status</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            @foreach($pending_order_details->option as $option)
+                                    @if ($option->menu_item->meal_id == 1)
+                                    @if ($option->pivot->tocook == 0)
+                                        <tr>
+                                            <td>{{$option->menu_item->item_name}}</td>
+                                            <td>{{$option->name}}</td>
+                                            <td>{{$option->pivot->quantity}}</td>
+                                        </tr>
                                     @endif
-                                    <td>
-                                            <a href="{{route('pending_order_details', $order->id)}}" class="btn btn-info">Check Order Details</a>
-
-                                            <a href="{{route('kitchen_details', $order->id)}}" class="btn btn-warning">Kitchen Print</a>
-
-                                            <a href="{{route('add_more_item', $order->id)}}" class="btn btn-success">Add More Item</a>
-                                            @if($user == 3)
-                                                <button class="btn" style="background-color:lightgreen;color:white;" onclick="done({{$order->table_id}})">Done</button>
-                                                {{-- <button class="btn btn-danger" style="color:white;" onclick="cancel({{$order->id}})">Cancel</button> --}}
-                                                <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
-                                            @else
-                                                <button class="btn btn-primary" onclick="storeVoucher({{$order->id}})">Store Voucher</button>
-                                                <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
-                                            @endif
-                                            @if ($order->brake_flag == 1)
-                                            <button class="btn text-white" type="button" style="background-color:rgb(143, 143, 5);" disabled>
-                                                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                                                <span role="status">Pending...</span>
-                                            </button>
-                                            @else
-                                            <button class="btn text-white" type="button" style="background-color:rgb(0, 158, 0);" disabled>
-                                                <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                                                <span role="status">Ordered</span>
-                                            </button>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <span>
-                                                @if(now()->diffInHours($order->updated_at) >= 24)
-                                                {{ now()->diffInDays($order->updated_at) }} days ago
-                                                @elseif (now()->diffInMinutes($order->updated_at) >= 60)
-                                                {{ now()->diffInHours($order->updated_at) }} hr ago
-                                                @else
-                                                {{ now()->diffInMinutes($order->updated_at) }} min ago
-                                                @endif
-                                            </span>
-                                        </td>
-                                </tr>
+                                    @endif
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+
+                                @foreach ($notes as $item)
+                                @foreach ($option_id as $opid)
+                                    @if ($item->option_id == $opid->id)
+                                    @if ($mealItem1)
+                                    @if ($item->note != null && $item->note != 'Note Default')
+                                    <tr>
+                                        <th class="text-danger font-weight-bold">Notes</th>
+                                        <td class="text-danger font-weight-bold">{{$opid->name}}</td>
+                                        <td class="text-danger" colspan="3">{{$item->note}}</td>
+                                    </tr>
+                                    @endif
+                                    @endif
+
+                                    @endif
+                                @endforeach
+                                @endforeach
+                                {{-- @endif --}}
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="text-center">
+            <button id="print1" class="btn btn-info" type="button">
+                <span><i class="fa fa-print"></i> Main Dish Print</span>
+            </button>
+        </div>
+    </div>
+
 </div>
+@endif
+<div class="row justify-content-center mt-3">
+    <div class="col-md-5 printableArea2" style="width:45%;">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4 class="font-weight-bold mt-2">Kitchen Details</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="font-weight-bold mt-2 text-primary text-center">Drinks</h4>
+                        <div class="row">
+                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Order Number</div>
+                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Table Name</div>
+                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Counting Unit Name</th>
+                                        <th>Order Quantity</th>
+
+                                        {{-- <th>Status</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($pending_order_details->option as $option)
+                                    @if ($option->menu_item->meal_id == 2)
+                                    @if ($option->pivot->tocook == 0)
+                                        <tr>
+                                            <td>{{$option->menu_item->item_name}}</td>
+                                            <td>{{$option->name}}</td>
+                                            <td>{{$option->pivot->quantity}}</td>
+
+                                            {{-- @if($option->pivot->status == 0)
+                                            <td>
+                                                <span class="badge-pill badge-warning">Pending</span>
+                                            </td>
+                                            @elseif($option->pivot->status == 1)
+                                            <td>
+                                                <span class="badge-pill badge-danger">Cooking</span>
+                                            </td>
+                                            @else
+                                            <td>
+                                                <span class="badge-pill badge-success">Finished</span>
+                                            </td>
+                                            @endif --}}
+                                        </tr>
+                                    @endif
+                                    @endif
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="text-center">
+            <button id="print2" class="btn btn-info" type="button">
+                <span><i class="fa fa-print"></i> Drink Print</span>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
 <div class="modal fade" id="voudiscount" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -154,7 +248,9 @@
                     <input type="text" class="form-control" readonly id="change_amount" value="">
                 </div>
                 <button type="button" class="btn btn-success mt-4" onclick="change_price()" btn-lg
-                    btn-block">Store Voucher</button>
+                    btn-block">Store Voucher
+                </button>
+
             </div>
 
 
@@ -200,32 +296,6 @@
                 <label class="font-weight-bold">Change</label>
                 <input type="text" class="form-control" readonly id="change_amount_dis" value="">
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group mt-3" id="promotion">
-                        <label class="control-label">Promotion</label>
-                           <div class="switch">
-                               <label>OFF
-                               <input type="checkbox"  name="customer_console" id="console" onchange="promotion_on()"><span class="lever"></span>ON</label>
-                            </div>
-                   </div>
-                </div>
-                <div class="col-9">
-                    <div class="form-group mt-3" id="promotion_name">
-                        <label class="font-weight-bold">Choose Promotion</label>
-                        <select class="form-control" name="purchaseitem" onchange="promotionchange(this.value)">
-                            <option value="" hidden>Select Promotion</option>
-                            @foreach ($promotion as $p)
-                            <option value="{{$p->id}}">{{$p->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row" id="ispromotion">
-
-            </div>
-
         </div>
         <div class="modal-footer" id="dis_footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -235,44 +305,39 @@
     </div>
   </div>
 @endsection
-
 @section('js')
-
 <script>
-    navigator.serviceWorker.register("sw.js");
-    function requestPermission(){
-        Notification.requestPermission().then((permission) => {
-            if(permission === 'granted'){
-
-                // get service worker
-                navigator.serviceWorker.ready.then((sw) => {
-
-                    // subscribe
-                    sw.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: "BHK-fZXWC80sFT9QJA-wr8Kd70XwmG_eBKCyaqRMd8F0Crkn3HetpzZU0fm3zDPQqd2dAWL1azODD6UP28bVUrA"
-                    }).then((subscription) => {
-
-                        // subscription successfull
-                        fetch("/api/push-subscribe",{
-                            method: "post",
-                            body:JSON.stringify(subscription)
-                        }).then( alert("ok"));
-                    });
-                });
-            }
-        });
-    }
-</script>
-
-<script>
-
  $(document).ready(function() {
     $('#dis_foc').hide();
     $('#dis_percent').hide();
     $('#dis_amount').hide();
-
 })
+
+// print start
+$(document).ready(function() {
+    $("#print1").click(function() {
+        // window.print();
+        var mode = 'iframe'; //popup
+        var close = mode == "popup";
+        var options = {
+            mode: mode,
+            popClose: close
+        };
+        $("div.printableArea1").printArea(options);
+    });
+    $("#print2").click(function() {
+        // window.print();
+        var mode = 'iframe'; //popup
+        var close = mode == "popup";
+        var options = {
+            mode: mode,
+            popClose: close
+        };
+        $("div.printableArea2").printArea(options);
+    });
+});
+
+// print end
 function yes_radio(){
     // alert('yes');
     $('#dis_radio_form').modal('hide');
@@ -283,7 +348,6 @@ function no_radio(){
     $('#dis_voucher_total').show();
     $('#dis_pay_amount').show();
     $('#dis_change_amount').show();
-    $('#promotion').show();
     $('#dis_footer').show();
 }
 function foc_radio(){
@@ -331,15 +395,6 @@ function pay_dis(val){
     var curr_amt = $('#voucher_total_dis').val();
     $('#change_amount_dis').val(val - curr_amt);
 }
-function promotion_on(){
-    if($('#console').prop("checked") == true){
-         var console = 1;
-         $('#promotion_name').show();
-    }else{
-       var console = 0;
-       $('#promotion_name').hide();
-    }
-}
 function change_price(){
     // $('#voudiscount').modal('hide');
     var order_id = $('#hid_order_id').val();
@@ -348,27 +403,9 @@ function change_price(){
     var pay_value = $('#pay_amount').val();
     var change_value = $('#change_amount').val();
     var pay_value_dis = $('#pay_amount_dis').val();
-    var change_value_dis = $('#change_amount_dis').val();
-    var ispromotion = $('#ispromotion').text();
-    if($('#console').prop("checked") == true){
-         var console = 1;
-        if(ispromotion == 'This promotion is expired.' || ispromotion == 'This voucher amount is less than promotion amount.'){
-          var promotion = 0;
-          var promotion_value = 0;
-        }else{
-          var p = ispromotion.split(":");
-          var promotion = p[0];
-          var promotion_value = p[1];
-        }
-    }else{
-       var console = 0;
-       var promotion = 0;
-       var promotion_value = 0;
-    }
+    var change_value_dis = $('#change_amount_dis').val()
 
-
-    if(change_value_dis>=0 && change_value>=0){
-        $.ajax({
+     $.ajax({
 
         type:'POST',
 
@@ -383,9 +420,6 @@ function change_price(){
         "change_amount" : change_value,
         "pay_amount_dis" : pay_value_dis,
         "change_amount_dis" : change_value_dis,
-        "customer_console" : console,
-        "promotion" : promotion,
-        "promotionvalue" : promotion_value,
         },
 
         success:function(data){
@@ -417,21 +451,12 @@ function change_price(){
             }, 1000);
             }
         }
-    });
-    }
-  else{
-    swal({
-                title: "Failed!",
-                text : "Your Pay Amount is less than Voucher Total!",
-                icon : "error",
-            });
-  }
+
+        });
 
 }
+function storeVoucher(order_id){
 
-
-    function storeVoucher(order_id){
-        //
         $.ajax({
 
             type:'POST',
@@ -456,10 +481,7 @@ function change_price(){
         $('#dis_voucher_total').hide();
         $('#dis_pay_amount').hide();
         $('#dis_change_amount').hide();
-        $('#promotion').hide();
-        $('#promotion_name').hide();
         $('#dis_footer').hide();
-        //
     }
 
     function done(table_id){
@@ -484,52 +506,5 @@ function change_price(){
             }
             })
     }
-
-    function promotionchange(id){
-        let order = $('#hid_order_id').val();
-        $.ajax({
-
-        type:'POST',
-
-        url:'/PromotionCheck',
-
-        data:{
-        "_token":"{{csrf_token()}}",
-        "promotion_id":id,
-        "order_id": order,
-        },
-
-        success:function(data){
-            let html = '';
-           if(data.promotion.length == 0){
-            $('#ispromotion').html('<span class="text-danger offset-3">This promotion is expired.</span>')
-           }else{
-             if(data.promotion.type == 1){
-                var vtotal = $('#voucher_total_dis').val();
-                if(data.promotion.voucher_amount <= vtotal){
-                if(data.promotion.reward == 1){
-                    html += `<span class="text-success text-center offset-1">Cash Back : ${data.promotion.amount}</span>`;
-                    $('#ispromotion').html(html);
-                }else if(data.promotion.reward == 2){
-                    html += `<span class="text-success text-center offset-1">FOC Items : ${data.promotion.foc_items}</span>`;
-                    $('#ispromotion').html(html);
-                }
-               else{
-                    html += `<span class="text-success text-center offset-1">Discount Percentage : ${data.promotion.percent} %</span>`;
-                    $('#ispromotion').html(html);
-                }
-            }
-            else{
-                $('#ispromotion').html('<span class="text-danger offset-3">This voucher amount is less than promotion amount.</span>');
-            }
-             }
-
-           }
-        }
-        })
-
-    }
-</script>
-
-
+    </script>
 @endsection

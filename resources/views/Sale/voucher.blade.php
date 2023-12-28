@@ -43,8 +43,8 @@
                             <div class="col-md-12">
                                 <div  style="text-align:center;">
                                     <address>
-                                        <strong style="font-size:17px;font-weight:bold;">The Hub Hotel Myanmar </strong><br>
-                                            <strong style="font-size:17px;font-weight:bold;"> Restaurant</strong><br>
+                                        <strong style="font-size:17px;font-weight:bold;">Upper Deck</strong><br>
+                                        <strong style="font-size:17px;font-weight:bold;">Bar & Restraurant</strong><br>
                                             <strong style="font-size:17px;font-weight:bold;">No.28A, 7 Miles, Pyay Road, Mayangone Township , </strong><br>
                                             <strong style="font-size:17px;font-weight:bold;"> Yangon, Myanmar</strong><br>
                                             <strong style="font-size:17px;font-weight:bold;"><i class="fas fa-mobile-alt"></i>09 790 530100</strong><br>
@@ -89,9 +89,10 @@
                                         </tbody>
                                         @foreach ($notes as $item)
                                             {{-- @if ($item->option_id == $opname->id) --}}
-                                            @if ($item->note != null && $item->note != 'Default')
+                                            @if ($item->note != null && $item->note != 'Note Default')
                                             <tr>
                                                 <th class="text-danger font-weight-bold">Notes</th>
+                                                <td class="text-danger font-weight-bold">{{$option->name}}</td>
                                                 <td class="text-danger" colspan="3">{{$item->note}}</td>
                                             </tr>
                                             @endif

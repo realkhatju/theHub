@@ -71,8 +71,8 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                            <img src="{{asset('image/thehubhotel.png')}}" alt="" width="40px" height="40px">
-                            <h2 class="text-white font-weight-bold font-italic ml-2">The Hub Hotel Myanmar </h2>
+                            <img src="{{asset('image/UpperDeck.png')}}" alt="" width="55px" height="55px">
+                            <h2 class="text-white font-weight-bold font-italic ml-2 mt-2">Upper Deck Bar & Restraurant</h2>
                             <input type="hidden" id="unique_role" value="{{session()->get('user')->role_flag}}">
                         <!-- ============================================================== -->
                         <!-- End Messages -->
@@ -177,7 +177,7 @@
                             </a>
                         </li>
                         @endif
-                        @if(session()->get('user')->role_flag == 1 || session()->get('user')->role_flag == 5)
+                        @if(session()->get('user')->role_flag == 1 || session()->get('user')->role_flag == 2)
                         <li>
                             <a class="has-arrow " href="#" aria-expanded="false">
                                 <i class="mdi mdi-store"></i>
@@ -227,7 +227,7 @@
                                 <li><a href="{{route('shop_order_panel')}}">Shop Order Panel</a></li>
                                 <li><a href="{{route('sale_page')}}">Shop Order</a></li>
                                 <li><a href="{{route('pending_lists')}}">Pending Shop Order List</a></li>
-                                <li><a href="{{route('delivery_pending_lists')}}">Pending Delivery Order List</a></li>
+                                {{-- <li><a href="{{route('delivery_pending_lists')}}">Pending Delivery Order List</a></li> --}}
                                 <li><a href="{{route('finished_lists')}}">Order Voucher List</a></li>
                             </ul>
                         </li>

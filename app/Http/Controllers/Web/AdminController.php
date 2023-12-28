@@ -241,7 +241,7 @@ class AdminController extends Controller
 
         }
 
-        $prefix = $type->prefix;
+        $prefix = $request->table_prefix;
 
         $table_prefix = $request->table_prefix;
 
@@ -253,9 +253,9 @@ class AdminController extends Controller
 
             $table = substr($table_prefix, 0, -1);
 
-            // $room_num = "$prefix". "-" ."$floor" . "$table" . $i;
+            $room_num = "$prefix". "-" ."$floor" . "$table" . $i;
 
-            $room_num = "T". "-" ."$floor" . "$table" . $i;
+            // $room_num = "T". "-" ."$floor" . "$table" . $i;
 
             //$room_num = "$build_name". "-" . "$i" . "$prefix" . $j;
 

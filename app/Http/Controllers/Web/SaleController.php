@@ -417,10 +417,10 @@ class SaleController extends Controller
         foreach ($option_lists as $option) {
             $test = $shop_order->option()->where('option_id', $option->id)->first();
             if (empty($test)) {
-                $shop_order->option()->attach($option->id, ['quantity' => $option->order_qty,'tocook'=>1,'note' => "Note Default", 'status' => 0]);
+                $shop_order->option()->attach($option->id, ['quantity' => $option->order_qty,'tocook'=>0,'note' => "Note Default", 'status' => 0]);
             } else {
                 $update_qty = $option->order_qty + $test->pivot->quantity;
-                $shop_order->option()->updateExistingPivot($option->id, ['quantity' => $update_qty,'tocook'=>1,'add_same_item_status'=>1,'old_quantity'=>$test->pivot->quantity,'new_quantity'=>$option->order_qty,'status' => 5] );
+                $shop_order->option()->updateExistingPivot($option->id, ['quantity' => $update_qty,'tocook'=>0,'add_same_item_status'=>1,'old_quantity'=>$test->pivot->quantity,'new_quantity'=>$option->order_qty,'status' => 5] );
             }
         }
         $shop_order->type=1;
@@ -431,7 +431,7 @@ class SaleController extends Controller
         $alloption = Option::all();
         $option_name = DB::table('option_shop_order')
         ->where('shop_order_id',$orders->id)
-        ->where('tocook',1)
+        ->where('tocook',0)
         ->get();
         $name = [];
         foreach($option_name as $optionss)
@@ -596,6 +596,56 @@ class SaleController extends Controller
         // dd($pending_order_details->toArray());
     	return view('Sale.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
 	}
+
+    //Kitchen Details Start
+    protected function getKitchenDetails($order_id){
+        // dd($order_id);
+        // dd($order_id);
+
+        $table_number = 0;
+        try {
+
+        $pending_order_details = ShopOrder::findOrFail($order_id);
+            // dd($pending_order_details->option);
+        } catch (\Exception $e) {
+
+            alert()->error("Pending Order Not Found!")->persistent("Close!");
+
+            return redirect()->back();
+        }
+
+        $total_qty = 0 ;
+
+        $total_price = 0 ;
+
+        foreach ($pending_order_details->option as $option) {
+
+            $total_qty += $option->pivot->quantity;
+
+            $total_price += $option->sale_price * $option->pivot->quantity;
+        }
+        $notes = DB::table('option_shop_order')
+        ->where('shop_order_id',$order_id)
+        ->get();
+        // dd($notes->toArray());
+        // dd($pending_order_details->toArray());
+        $option_id = DB::table('options')->get();
+        // dd($option_id->toArray());
+        // dd($option_id->toArray());
+        // dd($option_id);
+        // dd($pending_order_details->toArray());
+        // $meal1 = Meal::find(1);
+        // $meal2 = Meal::find(2);
+        $mealItem1 = MenuItem::where('meal_id',1)->get();
+        // return $mealItem1;
+        $mealItem2 = MenuItem::where('meal_id',2)->get();
+        // return $mealItem2;
+        // return $meal2;
+        // $meal1 = $meal->id = 1;
+        // dd($meal->toArray());
+        return view('Sale.kitchen_details', compact('pending_order_details','total_qty','total_price','table_number','notes','option_id','mealItem1','mealItem2'));
+    }
+    //Kitchen Details End
     protected function getPendingDeliveryOrderDetails($order_id){
 		$table_number = 0;
 		try {
@@ -714,7 +764,7 @@ class SaleController extends Controller
 			alert()->error('Something Wrong! Validation Error.');
             return redirect()->back();
 		}
-		 $user_name =  session()->get('user')->name;
+		$user_name =  session()->get('user')->name;
 		$take_away = $request->take_away;
 		$option_lists = json_decode($request->option_lists);
 		try {

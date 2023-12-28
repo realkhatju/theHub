@@ -28,7 +28,7 @@
 @endsection
 
 @section('content')
- <div class="row flex-column-reverse flex-md-row ">
+ <div class="row flex-column-reverse flex-md-row " style="margin:50px 0 0 0;">
         <div class="card col-md-6">
 
 
@@ -778,7 +778,7 @@
                         <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
                     </table>
                     <span class="ml-4">
-                        <i class="fa-regular fa-circle-check"></i> Check Out&nbsp;!
+                        <i class="fa-regular fa-circle-check"></i>Check Out&nbsp;!
                     </span>
                     <table>
                             <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>

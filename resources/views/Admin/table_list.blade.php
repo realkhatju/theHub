@@ -27,7 +27,7 @@
 </style>
 
 <div class="row page-titles">
-    <div class="col-md-6 col-6 align-self-center">        
+    <div class="col-md-6 col-6 align-self-center">
         <h2 class="font-weight-bold">Table List</h2>
     </div>
 
@@ -35,7 +35,7 @@
 
         <div class="d-flex m-t-10 justify-content-end">
              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create_item">
-                <i class="fas fa-plus"></i>                   
+                <i class="fas fa-plus"></i>
                 Add Table
             </a>
         </div>
@@ -54,7 +54,7 @@
                         <form class="form-material" method="post" action="{{route('store_table_list')}}" enctype='multipart/form-data'>
                             @csrf
                             <div class="form-body">
-                                
+
                                 <div class="form-group">
                                     <label class="control-label">Table Type</label>
                                     <select class="form-control" name="table_type" required>
@@ -68,20 +68,20 @@
                                 <div class="form-group">
                                     <label class="control-label">Enter Floor</label>
                                     <input type="number" name="floor" class="form-control" placeholder="eg..1,2,3" required>
-                                    <small class="form-control-feedback"> Enter Floor </small> 
+                                    <small class="form-control-feedback"> Enter Floor </small>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label">Number of Tables</label>
                                     <input type="number" name="quantity" class="form-control" placeholder="eg..1,2,3" required>
-                                    <small class="form-control-feedback"> Enter Table Quantity </small> 
-                                </div>  
+                                    <small class="form-control-feedback"> Enter Table Quantity </small>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="control-label">Table Number Prefix</label>
-                                    <input type="number" name="table_prefix" class="form-control" placeholder="eg..01, 001" required>
-                                    <small class="form-control-feedback"> Enter Table Number Prefix </small> 
-                                </div>                                
+                                    <input type="text" name="table_prefix" class="form-control" placeholder="eg..01, 001" required>
+                                    <small class="form-control-feedback"> Enter Table Number Prefix </small>
+                                </div>
                             </div>
 
                             <div class="form-actions">
@@ -92,17 +92,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>           
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>        
-    </div> 
+        </div>
+    </div>
 
     <div class="col-md-3 col-3 align-self-center">
         <div class="d-flex m-t-10 justify-content-end">
              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create_item_type">
-                <i class="fas fa-plus"></i>                   
+                <i class="fas fa-plus"></i>
                 Add Table Type
             </a>
         </div>
@@ -140,18 +140,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>           
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 
 </div>
 
 <div class="row">
-    
-    <div class="col-md-8">        
+
+    <div class="col-md-8">
         <div class="card shadow">
             <div class="card-body">
                 <h4 class="card-title">Table List</h4>
@@ -176,7 +176,7 @@
                                 <td>{{$table->floor}}</td>
                                 <td>{{$table->table_type->name}}</td>
                                 <td><a href="{{route('shop_order_sale', $table->id)}}" class="btn btn-primary">Go To Shop Order Page</a></td>
-                             
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -187,7 +187,7 @@
     </div>
 
     <div class="col-md-4">
-        
+
         <div class="card shadow">
             <div class="card-body">
                 <h4 class="card-title">Table Type List</h4>
@@ -213,7 +213,7 @@
                                     <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#edit_item{{$type->id}}"><i class="far fa-edit"></i>
                                     Edit</a>
                                 </td>
-                                
+
                                 <div class="modal fade" id="edit_item{{$type->id}}" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -227,14 +227,14 @@
                                     <div class="modal-body">
                                         <form class="form-material" method="post" action="{{route('update_table_type', $type->id)}}">
                                             @csrf
-                                            <div class="form-group">    
+                                            <div class="form-group">
                                                 <label class="font-weight-bold">Name</label>
-                                                <input type="text" name="name" class="form-control" value="{{$type->name}}"> 
+                                                <input type="text" name="name" class="form-control" value="{{$type->name}}">
                                             </div>
                                             <input type="submit" name="btnsubmit" class="btnsubmit float-right btn btn-primary" value="Update">
-                                        </form>           
+                                        </form>
                                     </div>
-                               
+
                               </div>
                                     </div>
                                 </div>
@@ -246,7 +246,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>
 
 
 

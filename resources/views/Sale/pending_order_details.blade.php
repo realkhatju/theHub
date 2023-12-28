@@ -19,7 +19,7 @@
 
 <?php $user = session()->get('user')->role_flag;?>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 printableArea">
         <div class="card shadow">
             <div class="card-header">
                 <h4 class="font-weight-bold mt-2">Pending Order Details</h4>
@@ -118,6 +118,10 @@
 
     @else --}}
     <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a>
+
+    {{-- <button id="print" class="btn btn-info" type="button">
+        <span><i class="fa fa-print"></i> Print</span>
+    </button> --}}
     {{-- @endif --}}
 
 </div>
@@ -186,7 +190,9 @@
                     <input type="text" class="form-control" readonly id="change_amount" value="">
                 </div>
                 <button type="button" class="btn btn-success mt-4" onclick="change_price()" btn-lg
-                    btn-block">Store Voucher</button>
+                    btn-block">Store Voucher
+                </button>
+
             </div>
 
 
@@ -248,6 +254,22 @@
     $('#dis_percent').hide();
     $('#dis_amount').hide();
 })
+
+// print start
+$(document).ready(function() {
+    $("#print").click(function() {
+        // window.print();
+        var mode = 'iframe'; //popup
+        var close = mode == "popup";
+        var options = {
+            mode: mode,
+            popClose: close
+        };
+        $("div.printableArea").printArea(options);
+    });
+});
+
+// print end
 function yes_radio(){
     // alert('yes');
     $('#dis_radio_form').modal('hide');

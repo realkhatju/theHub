@@ -119,8 +119,8 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
             <div class="navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-md-0">
-                    <img src="{{asset('image/thehubhotel.png')}}" alt="" width="40px" height="40px">
-                    <h2 class="text-white font-weight-bold font-italic ml-2">The Hub Hotel Myanmar </h2>
+                    <img src="{{asset('image/UpperDeck.png')}}" alt="" width="55px" height="55px" class="mt-3">
+                    <h2 class="text-white font-weight-bold font-italic ml-2 mt-3">Upper Deck Bar & Restraurant</h2>
                 </ul>
             </div>
         </nav>

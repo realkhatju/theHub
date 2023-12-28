@@ -6560,7 +6560,7 @@ File: scss
   /*Sidebar and wrapper*/
   .mini-sidebar .page-wrapper {
     margin-left: 0px;
-    padding-top: 70px; }
+    padding-top: 0px; }
   .comment-text .comment-footer .action-icons {
     display: block;
     padding: 10px 0; }

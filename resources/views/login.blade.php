@@ -40,11 +40,12 @@
             <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
                 <form class="login100-form validate-form flex-sb flex-w" action="{{route('loginProcess')}}" method="POST">
                     @csrf
-                    <img src="{{asset('image/thehubhotel.png')}}" alt="" width="120" height="120" style="  margin-left: auto;
+                    <img src="{{asset('image/UpperDeck.png')}}" alt="" width="120" height="120" style="  margin-left: auto;
                     margin-right: auto;margin-bottom: 20px;">
-                    <span class="login100-form-title p-b-32 text-success text-center">
-                        {{-- ​လောကနတ် --}}
-                        {{-- K-Win Restaurant POS --}}
+                    <span class="login100-form-title p-b-32 text-info text-center">
+                        Upper Deck
+                        <small style="font-size: 10px;">
+                            <span> Bar & Restraurant</span></small>
                     </span>
 
                     <span class="txt1 p-b-11">
