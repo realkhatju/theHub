@@ -87,18 +87,18 @@
                                             </tr>
                                             @endforeach
                                         </tbody>
-                                        @foreach ($notes as $item)
+                                        {{-- @foreach ($notes as $item) --}}
                                             {{-- @if ($item->option_id == $opname->id) --}}
-                                            @if ($item->note != null && $item->note != 'Note Default')
+                                            {{-- @if ($item->note != null && $item->note != 'Note Default')
                                             <tr>
                                                 <th class="text-danger font-weight-bold">Notes</th>
                                                 <td class="text-danger font-weight-bold">{{$option->name}}</td>
                                                 <td class="text-danger" colspan="3">{{$item->note}}</td>
                                             </tr>
-                                            @endif
+                                            @endif --}}
 
                                             {{-- @endif --}}
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </table>
 
                                     {{-- @foreach ($notes as $item)
@@ -155,11 +155,11 @@
                                     @endif
                                     <div style="text-align:right;margin-right:10px;font-size:17px;font-weight:bold;">
                                         <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
-                                        <strong>Service Charges 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                        <strong>Service Charges 10% - {{($voucher->total_price * 0.1)}}</strong><br>
                                         <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.1)}}</strong><br>
                                     </div>
 
-                                    <h6  style="text-align:center;margin-top:10px;">**ကျေးဇူးတင်ပါသည်***</h6>
+                                    <h6  style="text-align:center;margin-top:10px;" >**Thanks You***</h6>
                             </div>
                         </div>
                     </div>

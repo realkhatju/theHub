@@ -20,7 +20,15 @@ class Voucher extends Model
     	'voucher_date',
     	'status',
     	'deleted_at',
-        'date'
+        'date',
+        'foc_flag',
+        'foc_value',
+        'discount_flag',
+        'tax_flag',
+        'tax_value',
+        'net_price',
+        'pay_type',
+        'service_value'
     ];
 
     public function option() {

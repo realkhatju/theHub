@@ -20,26 +20,24 @@ class LoginController extends Controller
     protected function index(Request $request) {
 
         if (Session::has('user')) {
-
             if($request->session()->get('user')->role_flag == 1){
-
+                // dd($request->session()->get('user')->role_flag);
                 return view('dashboard');
 
             }elseif ($request->session()->get('user')->role_flag == 4) {
 
                 return redirect()->route('inven_dashboard');
 
+            }elseif($request->session()->get('user')->role_flag == 3){
+                return redirect()->route('pending_lists');
             }
             elseif ($request->session()->get('user')->role_flag == 2) {
-
                 dd("Hello");
-
             }
         }
         else{
             // dd('hello');
             return view('login');
-
         }
 
 	}
@@ -102,9 +100,9 @@ class LoginController extends Controller
         }
         elseif ($user->role_flag == 3) {
 
-            alert()->success("Successfully Login");
+            // alert()->success("Successfully Login");
 
-            return redirect()->route('shop_order_panel');
+            return redirect()->route('pending_lists');
 
         }
         // elseif ($user->role_flag == 4) {

@@ -177,7 +177,7 @@
                             </a>
                         </li>
                         @endif
-                        @if(session()->get('user')->role_flag == 1 || session()->get('user')->role_flag == 2)
+                        @if(session()->get('user')->role_flag == 1)
                         <li>
                             <a class="has-arrow " href="#" aria-expanded="false">
                                 <i class="mdi mdi-store"></i>
@@ -215,7 +215,7 @@
                                 <!-- <li><a href="{{route('order_history')}}">Order Voucher History</a></li>    -->
                             </ul>
                         </li> --}}
-                        @if(session()->get('user')->role_flag == 1 || session()->get('user')->role_flag == 2  || session()->get('user')->role_flag == 3 || session()->get('user')->role_flag == 4)
+                        @if(session()->get('user')->role_flag == 1 || session()->get('user')->role_flag == 2  || session()->get('user')->role_flag != 3 || session()->get('user')->role_flag == 4)
                         <li>
                             <a class="has-arrow " href="#" aria-expanded="false">
                                 <i class="mdi mdi-clipboard-text"></i>

@@ -99,7 +99,7 @@
                                 @endif
                                 <td>{{$vouc->date}}</td>
                                 <td>
-                                    @if ($vouc->type == 2)
+                                    {{-- @if ($vouc->type == 2)
                                     <a href="{{route('delivery_order_voucher',$vouc->order->id)}}" class="btn btn-info">Check Voucher</a>
                                         @if ($vouc->status == 0)
                                         <a class="btn btn-danger text-white" onclick="cancelvoucher({{$vouc->id}})" id="hide_{{$vouc->id}}">Cancel</a>
@@ -107,15 +107,15 @@
                                         @else
                                         <span>(CANCEL)</span>
                                         @endif
-                                    @else
+                                    @else --}}
                                     <a href="{{route('shop_order_voucher',$vouc->shopOrder->id)}}" class="btn btn-info">Check Voucher</a>
-                                        @if ($vouc->status == 0)
+                                        {{-- @if ($vouc->status == 0)
                                         <a class="btn btn-danger text-white" onclick="cancelvoucher({{$vouc->id}})" id="hide_{{$vouc->id}}">Cancel</a>
                                         <span id="cancel_{{$vouc->id}}" hidden>(CANCEL)</span>
                                         @else
                                         <span>(CANCEL)</span>
                                         @endif
-                                    @endif
+                                    @endif --}}
                                 </td>
 
                             </tr>

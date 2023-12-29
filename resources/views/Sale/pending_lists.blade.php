@@ -46,13 +46,18 @@
                                     <td>
                                             <a href="{{route('pending_order_details', $order->id)}}" class="btn btn-info">Check Order Details</a>
 
+                                            @if ($user != 3)
                                             <a href="{{route('kitchen_details', $order->id)}}" class="btn btn-warning">Kitchen Print</a>
+                                            @endif
 
-                                            <a href="{{route('add_more_item', $order->id)}}" class="btn btn-success">Add More Item</a>
+
+                                            {{-- <a href="{{route('add_more_item', $order->id)}}" class="btn btn-success">Add More Item</a> --}}
                                             @if($user == 3)
-                                                <button class="btn" style="background-color:lightgreen;color:white;" onclick="done({{$order->table_id}})">Done</button>
+                                                {{-- <button class="btn" style="background-color:lightgreen;color:white;" onclick="done({{$order->table_id}})">Done</button> --}}
                                                 {{-- <button class="btn btn-danger" style="color:white;" onclick="cancel({{$order->id}})">Cancel</button> --}}
+                                                @if($user != 3)
                                                 <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
+                                                @endif
                                             @else
                                                 <button class="btn btn-primary" onclick="storeVoucher({{$order->id}})">Store Voucher</button>
                                                 <a href="{{route('cancelorder', $order->id)}}" class="btn btn-danger">Cancel</a>
@@ -203,7 +208,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="form-group mt-3" id="promotion">
-                        <label class="control-label">Promotion</label>
+                        <label class="control-label">Service Charges</label>
                            <div class="switch">
                                <label>OFF
                                <input type="checkbox"  name="customer_console" id="console" onchange="promotion_on()"><span class="lever"></span>ON</label>
@@ -212,15 +217,23 @@
                 </div>
                 <div class="col-9">
                     <div class="form-group mt-3" id="promotion_name">
-                        <label class="font-weight-bold">Choose Promotion</label>
-                        <select class="form-control" name="purchaseitem" onchange="promotionchange(this.value)">
+                        <label class="font-weight-bold">Service Charges %</label>
+                        {{-- <select class="form-control" name="purchaseitem" onchange="promotionchange(this.value)">
                             <option value="" hidden>Select Promotion</option>
                             @foreach ($promotion as $p)
                             <option value="{{$p->id}}">{{$p->title}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        <input type="text" class="form-control" value="" placeholder="Enter Service percent (%)" onkeyup="percent_service(this.value)" class="service_val" id="service_val">
+                        {{-- <div class="form-group mt-3">
+                            <label class="font-weight-bold">Current Voucher Total</label>
+                            <input type="text" class="form-control" readonly id="curr_voucher_total_service" value="">
+                            <input type="hidden" id="service_val" name="service_val">
+                        </div> --}}
                     </div>
                 </div>
+
+
             </div>
             <div class="row" id="ispromotion">
 
@@ -314,6 +327,16 @@ function percent_dis(val){
     $('#curr_voucher_total').val(per_amt);
     $('#dis_val').val(val);
 }
+//start modify percent dis
+function percent_service(val){
+    // alert(val);
+    var v_total = $('#voucher_total').val();
+    // alert(v_total);
+    var per_amt = v_total + (val/100)*v_total;
+    $('#curr_voucher_total_service').val(per_amt);
+    $('#service_val').val(val);
+}
+//end modify percent dis
 function amount_dis(val){
     // alert(val);
     var v_total = $('#voucher_total').val();
@@ -343,8 +366,11 @@ function promotion_on(){
 function change_price(){
     // $('#voudiscount').modal('hide');
     var order_id = $('#hid_order_id').val();
+    // console.log(order_id);
     var discount_type = $('#dis_type').val();
     var discount_value = $('#dis_val').val();
+    var service_value = $('.service_val').val();
+    // console.log(service_value);
     var pay_value = $('#pay_amount').val();
     var change_value = $('#change_amount').val();
     var pay_value_dis = $('#pay_amount_dis').val();
@@ -366,7 +392,7 @@ function change_price(){
        var promotion_value = 0;
     }
 
-
+    // console.log(service_value);
     if(change_value_dis>=0 && change_value>=0){
         $.ajax({
 
@@ -379,6 +405,7 @@ function change_price(){
         "order_id":order_id,
         "discount_type" : discount_type ,
         "discount_value" : discount_value,
+        "service_value" : service_value,
         "pay_amount" : pay_value,
         "change_amount" : change_value,
         "pay_amount_dis" : pay_value_dis,
@@ -388,6 +415,7 @@ function change_price(){
         "promotionvalue" : promotion_value,
         },
 
+        // alert(data);
         success:function(data){
             // alert(data);
             if(data.error){
@@ -448,6 +476,7 @@ function change_price(){
                 $('#hid_order_id').val(order_id);
                 $('#dis_type').val();
                 $('#dis_val').val();
+                // $('#service_val').val()
                 $('#voucher_total_dis').val(data);
                 $('#voucher_total').val(data);
             }

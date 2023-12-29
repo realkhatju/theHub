@@ -636,7 +636,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Choose Remark Infomation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
                           <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -662,7 +662,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal" class="btn btn-secondary">Cancel</button>
                         <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
                     </div>
                 </div>

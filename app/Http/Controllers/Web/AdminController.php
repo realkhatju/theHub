@@ -791,15 +791,19 @@ class AdminController extends Controller
 
                     array_push($arr_ki,$item->option[$i]->id);
 
+
                     // $total_qty=[...$total_qty,[
                     //     'option_id'=>$item->option[$i]->id,
                     //     'qty'=>$item->option[$i]->pivot->quantity,
                     //     ],
                     // ];
+                    if($item->option[$i]->menu_item->meal_id == 2){
                     array_push($total_qty,[
                         'option_id'=>$item->option[$i]->id,
                         'qty'=>$item->option[$i]->pivot->quantity,
+                        'price'=>$item->option[$i]->pivot->price,
                         ]);
+                    }
 
                     array_push($options,$item->option[$i]);
                 }
@@ -829,7 +833,6 @@ class AdminController extends Controller
             }
 
         }
-
         return response()->json([
             "total_qty"=> $total_qty,
             "options" => $options,

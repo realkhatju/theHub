@@ -2,6 +2,8 @@
 
 @section('title','Sale Records')
 
+
+
 @section('place')
 
 <div class="col-md-5 col-8 align-self-center">
@@ -24,17 +26,17 @@
                <div class="row">
                 <div class="col-md-8">
                     <ul class="nav nav-pills m-t-30 m-b-30">
-                        <li class=" nav-item"> 
-                            <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">daily</a> 
+                        <li class=" nav-item">
+                            <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">daily</a>
                         </li>
-                        <li class="nav-item"> 
-                            <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">weekly</a> 
+                        <li class="nav-item">
+                            <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">weekly</a>
                         </li>
-                        <li class="nav-item"> 
-                            <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">monthly</a> 
+                        <li class="nav-item">
+                            <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">monthly</a>
                         </li>
                     </ul>
-    
+
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
@@ -43,11 +45,11 @@
                             <option value="2">Delivery</option>
                         </select>
                     </div>
-                </div>    
+                </div>
                </div>
-                        
-            
-                
+
+
+
                 <br/>
                 <div class="tab-content br-n pn">
                     <div id="navpills-1" class="tab-pane active">
@@ -60,11 +62,11 @@
                             </div>
 
                             <div class="col-md-3 pull-right">
-                                <button class="btn btn-success btn-submit" type="submit" onclick="showDailySale()">	
+                                <button class="btn btn-success btn-submit" type="submit" onclick="showDailySale()">
                                 	Search
                                 </button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
 
                     <div id="navpills-2" class="tab-pane">
@@ -83,11 +85,11 @@
                             </div>
 
                             <div class="col-md-3 pull-right">
-                                <button class="btn btn-success btn-submit" type="submit" onclick="showWeeklySale()">	
+                                <button class="btn btn-success btn-submit" type="submit" onclick="showWeeklySale()">
                                 	Search
                                 </button>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
                     <div id="navpills-3" class="tab-pane">
@@ -114,46 +116,113 @@
                             </div>
 
                             <div class="col-md-3 pull-right">
-                                <button class="btn btn-success btn-submit" type="submit" onclick="showMonthlySale()">	
+                                <button class="btn btn-success btn-submit" type="submit" onclick="showMonthlySale()">
                                 	Search
                                 </button>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-3" id="report">
-        	<div class="card-body">
-        		
-                <div class=" py-5 text-dark" style="font-weight: 500;">
-                    <div class="row text-success sale_count_header">
-                        <div class="col-md-3 offset-md-2 text-center">Item Name</div>
-                        <div class="col-md-2">
-                        <p>Option Name</p>
-                        </div>
-                        <div class="col-md-2">
-                            <p>Qty</p>
-                        </div>
-                        <div class="col-md-2">
-                            <p>Subtotal</p>
+
+
+        <div class="card">
+            <div class="card-body">
+               <div class="row">
+                <div class="col-md-8">
+                    <ul class="nav nav-pills m-t-30 m-b-30">
+                        <li class="nav-item">
+                            <a href="#navpills-djlsfj" class="nav-link active" data-toggle="tab" aria-expanded="false">All Summary</a>
+                        </li>
+
+                        <li class=" nav-item">
+                            <a href="#navpills-djlsfjFoods" class="nav-link" data-toggle="tab" aria-expanded="false">Food</a>
+                        </li>
+
+                        <li class=" nav-item">
+                            <a href="#navpills-djlsfjDrinks" class="nav-link" data-toggle="tab" aria-expanded="false">Drinks</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#jdfslfjs" class="nav-link" data-toggle="tab" aria-expanded="false">Table Room</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#jflsdfjlsll" class="nav-link" data-toggle="tab" aria-expanded="false">Summary Net Price</a>
+                        </li>
+                    </ul>
+
+                </div>
+               </div>
+                <br/>
+                <div class="tab-content br-n pn">
+                    <div id="navpills-djlsfj" class="tab-pane active">
+                        <li class="font-weight-bold text-dark">Food Total:<span id="total_qty_all" class="text-danger" style="font-weight:bold"></span></li>
+                        <li class="font-weight-bold text-dark">Drink Total:<span id="total_qty_drink" class="text-danger" style="font-weight:bold"></span></li>
+                        <li class="font-weight-bold text-dark">Foc Total:</li>
+                        <li class="font-weight-bold text-dark">Discount Total:</li>
+                        <li class="font-weight-bold text-dark">Tax Total:</li>
+                    </div>
+
+                    <div id="navpills-djlsfjFoods" class="tab-pane">
+
+                        <div class="card mt-3" id="report">
+                            <div class="card-body ">
+
+                                <div class=" py-5 text-dark" style="font-weight: 500;">
+                                    <div class="row text-success sale_count_header">
+                                        <div class="col-md-3 offset-md-2 text-center">Item Name</div>
+                                        <div class="col-md-2">
+                                        <p>Option Name</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p>Qty</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p>Subtotal</p>
+                                        </div>
+                                    </div>
+                                    <div class="row salecountlists">
+
+                                    </div>
+                                    <div class="row text-center sale_count_footer">
+                                        <div class="col-md-2 offset-md-6">
+                                            <p class="text-success">Total Qty:  <span id="total_qty" class="text-dark" style="font-weight:bold"></span></p>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="text-success">Total : <span id="total_price" class="text-dark" style="font-weight:bold"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row salecountlists">
-                      
+
+                    <div id="navpills-djlsfjDrinks" class="tab-pane">
+                        Drinks
                     </div>
-                    <div class="row text-center sale_count_footer">
-                        <div class="col-md-2 offset-md-6">
-                            <p class="text-success">Total Qty:  <span id="total_qty" class="text-dark" style="font-weight:bold"></span></p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="text-success">Total : <span id="total_price" class="text-dark" style="font-weight:bold"></span></p>
-                        </div>
+
+                    <div id="jdfslfjs" class="tab-pane">
+                        <li class="font-weight-bold text-dark">Table Total:</li>
+                        <li class="font-weight-bold text-dark">Room Total:</li>
+                        <li class="font-weight-bold text-dark">Spa Total:</li>
+                    </div>
+
+                    <div id="jflsdfjlsll" class="tab-pane">
+                        <li class="font-weight-bold text-dark">Net Price:</li>
                     </div>
                 </div>
-        	</div>        	
-        </div>       
+                {{-- <div class="col-md-12">
+                    <div class="text-center">
+                        <button id="print" class="btn btn-info" type="button">
+                            <span><i class="fa fa-print"></i> Print</span>
+                        </button>
+                    </div>
+                </div> --}}
+            </div>
+        </div>
     </div>
 </div>
 
@@ -164,9 +233,9 @@
 <script>
 
 	$(document).ready(function() {
-	        
-	    $('#report').hide();           
-      
+
+	    $('#report').hide();
+
 	});
 
     function saleRecord (data){
@@ -174,12 +243,12 @@
                     var html= "";
                     var total=0;
                     var total_qty=0;
-                    console.log(data.total_qty.length);
+                    // console.log(data.total_qty.length);
                     $.each(data.options,function(i,v){
                         $.each(data.menu_items,function(j,val){
                             $.each(data.total_qty,function(k,value){
                                 if(v.id== value.option_id && v.menu_item_id==val.id){
-                                  
+
                                     var subtotal= value.qty * v.sale_price;
                                     html+=`
                                     <div class="col-md-3 offset-md-2 text-center">${val.item_name}</div>
@@ -201,6 +270,8 @@
                     })
                     $('.salecountlists').html(html);
                     $('#total_qty').html(total_qty);
+                    $('#total_qty_all').html(total_qty);
+                    $('#total_qty_drink').html(total_qty_drink);
                     $('#total_price').html(total);
                     var html2="";
                     if(data.total_qty.length==0){
@@ -210,7 +281,7 @@
                         </div>
                         `;
                     $('.salecountlists').html(html2);
-                    
+
                     $('.sale_count_header').hide();
                     $('.sale_count_footer').hide();
                     }
@@ -227,7 +298,7 @@
 		$.ajax({
            type:'POST',
            url:'/get-sale-record',
-           data:{   
+           data:{
             "value": daily,
             "type": type,
             "shopOrdelivery" : shopOrdelivery,
@@ -235,7 +306,7 @@
            },
 
            	success:function(data){
-                
+
             saleRecord(data);
 
             }
@@ -253,7 +324,7 @@
 		$.ajax({
            type:'POST',
            url:'/get-sale-record',
-           data:{   
+           data:{
             "value": daily,
             "type": type,
             "shopOrdelivery": shopOrdelivery,
@@ -263,9 +334,9 @@
            	success:function(data){
 
                 saleRecord(data);
-               
+
             }
-        });		
+        });
 	}
 
 	function showMonthlySale() {
@@ -278,7 +349,7 @@
 		$.ajax({
            type:'POST',
            url:'/get-sale-record',
-           data:{   
+           data:{
             "value": daily,
             "type": type,
             "shopOrdelivery" : shopOrdelivery,
@@ -287,12 +358,45 @@
 
            	success:function(data){
 
-                saleRecord(data);                  
+                saleRecord(data);
             }
         });
-		
+
 	}
-	
+
+    $(document).ready(function() {
+        $("#print").click(function() {
+            // var mode = 'iframe'; //popup
+            // var close = mode == "popup";
+            // var options = {
+            //     mode: mode,
+            //     popClose: close
+            // };
+            // $("div.printableArea").printArea(options);
+
+
+            let html = document.getElementById('printableArea').innerHTML;
+            $('#mobileprint').html(html);
+
+            var printContent = $('#mobileprint')[0];
+            var WinPrint = window.open('', '', 'width=900,height=650');
+            WinPrint.document.write('<html><head><title>Print Voucher</title>');
+            WinPrint.document.write('<link rel="stylesheet" type="text/css" href="css/style.css">');
+            WinPrint.document.write('<link rel="stylesheet" type="text/css" media="print" href="css/print.css">');
+            WinPrint.document.write('</head><body >');
+            WinPrint.document.write(printContent.innerHTML);
+            WinPrint.document.write('</body></html>');
+
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.document.close();
+            WinPrint.close();
+        });
+    });
+
+
 </script>
+
+
 
 @endsection

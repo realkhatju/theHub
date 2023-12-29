@@ -117,7 +117,10 @@
     <a href="#" class="btn  ml-2" style="background-color:lightgreen;color:white;" onclick="done({{$pending_order_details->id}})">Done</a>
 
     @else --}}
+    @if ($user != 3)
     <a href="#" class="btn btn-info ml-2" style="color:white;" onclick="storeVoucher('{{$pending_order_details->id}}')">Store Voucher</a>
+    @endif
+
 
     {{-- <button id="print" class="btn btn-info" type="button">
         <span><i class="fa fa-print"></i> Print</span>

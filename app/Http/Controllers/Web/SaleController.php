@@ -1212,18 +1212,21 @@ class SaleController extends Controller
             'status' => 0,
             'date' => $re_date,
         ]);
-        if($request->discount_type !=null && $request->discount_value != null){
+        if($request->discount_type !=null && $request->discount_value != null  && $request->service_value != null  ){
             $voucher->discount_type = $request->discount_type;
             $voucher->discount_value = $request->discount_value;
+            $voucher->service_value = $request->service_value;
             $voucher->pay_value = $request->pay_amount;
             $voucher->change_value = $request->change_amount;
         }else{
             $voucher->pay_value = $request->pay_amount_dis;
             $voucher->change_value = $request->change_amount_dis;
+            $voucher->service_value =  $request->service_value;
         }
         if($request->promotion !=0 && $request->promotionvalue !=0){
             $voucher->promotion = $request->promotion;
             $voucher->promotion_value = $request->promotionvalue;
+            $voucher->service_value =  $request->service_value;
         }
 
     	$voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);

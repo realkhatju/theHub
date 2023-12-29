@@ -47,9 +47,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Item Name</th>
-                                        <th>Counting Unit Name</th>
-                                        <th>Order Quantity</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Item Name</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Counting Unit Name</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Order Quantity</th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
@@ -58,9 +58,9 @@
                                     @if ($option->menu_item->meal_id == 1)
                                     @if ($option->pivot->tocook == 0)
                                         <tr>
-                                            <td>{{$option->menu_item->item_name}}</td>
-                                            <td>{{$option->name}}</td>
-                                            <td>{{$option->pivot->quantity}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->menu_item->item_name}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->name}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->pivot->quantity}}</td>
                                         </tr>
                                     @endif
                                     @endif
@@ -127,9 +127,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Item Name</th>
-                                        <th>Counting Unit Name</th>
-                                        <th>Order Quantity</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Item Name</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Counting Unit Name</th>
+                                        <th class="font-weight-bold mt-2 text-dark text-center">Order Quantity</th>
 
                                         {{-- <th>Status</th> --}}
                                     </tr>
@@ -139,9 +139,9 @@
                                     @if ($option->menu_item->meal_id == 2)
                                     @if ($option->pivot->tocook == 0)
                                         <tr>
-                                            <td>{{$option->menu_item->item_name}}</td>
-                                            <td>{{$option->name}}</td>
-                                            <td>{{$option->pivot->quantity}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->menu_item->item_name}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->name}}</td>
+                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->pivot->quantity}}</td>
 
                                             {{-- @if($option->pivot->status == 0)
                                             <td>
