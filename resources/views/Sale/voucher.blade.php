@@ -72,8 +72,8 @@
                                         <tbody>
                                             @foreach($voucher->option as $option)
                                             <tr style="font-size:13px;">
-                                                <td >{{$option->menu_item->item_name}}</td>
-                                                <td >{{$option->name}}</td>
+                                                <td ><strong>{{$option->menu_item->item_name}}</strong></td>
+                                                <td ><strong>{{$option->name}}</strong></td>
 
                                                     {{-- @if($option->size == 1)
                                                 <td>{{$option->name}} & Small</td>
@@ -82,8 +82,8 @@
                                                     @else
                                                 <td>{{$option->name}} & Large</td>
                                                     @endif  --}}
-                                                <td >{{$option->pivot->price}} * {{$option->pivot->quantity}}</td>
-                                                <td >{{$option->pivot->price * $option->pivot->quantity}}</td>
+                                                <td ><strong>{{$option->pivot->price}} * {{$option->pivot->quantity}}</strong></td>
+                                                <td ><strong>{{$option->pivot->price * $option->pivot->quantity}}</strong></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -155,8 +155,9 @@
                                     @endif
                                     <div style="text-align:right;margin-right:10px;font-size:17px;font-weight:bold;">
                                         <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
-                                        <strong>Service Charges 10% - {{($voucher->total_price * 0.1)}}</strong><br>
-                                        <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.1)}}</strong><br>
+                                        <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                        <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.05) + ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                        <strong>Payment - @if($voucher->pay_type == 1)Bank @else Cash @endif </strong><br>
                                     </div>
 
                                     <h6  style="text-align:center;margin-top:10px;" >**Thanks You***</h6>

@@ -23,15 +23,34 @@
             </div>
             <div class="card-body">
                 <div class="row form-group">
-                    <div class="offset-md-3 col-md-3">
+                    <div class=" offset-md-2 col-md-2">
                         <label for="">Start Date</label>
                         <input type="date" class="form-control" id="start_date">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="">End Date</label>
                         <input type="date" class="form-control" id="end_date">
                     </div>
-                    <div class="col-md-3" style="margin-top:35px;">
+                    <div class="col-md-2">
+                        <label for="">Discount Type</label>
+                        <div class="form-group">
+                            <select class="form-control custom-select shopOrdelivery">
+                                <option value="1">Foc</option>
+                                <option value="2">Discount Amount</option>
+                                <option value="3">Discount Percent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="">Pay Type</label>
+                        <div class="form-group">
+                            <select class="form-control custom-select shopOrdelivery">
+                                <option value="1">Bank</option>
+                                <option value="2">Cash</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top:35px;">
                         <button class="btn btn-m btn-primary" onclick="datefilter()">Search</button>
                     </div>
                 </div>

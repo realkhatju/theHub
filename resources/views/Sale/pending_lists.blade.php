@@ -150,6 +150,15 @@
                     <label class="font-weight-bold">Current Voucher Total</label>
                     <input type="text" class="form-control" readonly id="curr_voucher_total" value="">
                 </div>
+                <div class="form-group mt-3" id="bankTypeYes">
+                    <label for="">Pay Type</label>
+                    <div class="form-group">
+                        <select class="form-control custom-select bankOrCash" id="payType">
+                            <option value="1">Bank</option>
+                            <option value="2">Cash</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group mt-3">
                     <label class="font-weight-bold">Pay Amount</label>
                     <input type="text" class="form-control"  value="" id="pay_amount" placeholder="Enter Pay Amount" onkeyup="pay_amt(this.value)">
@@ -205,6 +214,15 @@
                 <label class="font-weight-bold">Change</label>
                 <input type="text" class="form-control" readonly id="change_amount_dis" value="">
             </div>
+            <div class="form-group mt-3" id="bankType">
+                <label for="">Pay Type</label>
+                <div class="form-group">
+                    <select class="form-control custom-select bankOrCash" id="payType">
+                        <option value="1">Bank</option>
+                        <option value="2">Cash</option>
+                    </select>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-3">
                     <div class="form-group mt-3" id="promotion">
@@ -224,7 +242,8 @@
                             <option value="{{$p->id}}">{{$p->title}}</option>
                             @endforeach
                         </select> --}}
-                        <input type="text" class="form-control" value="" placeholder="Enter Service percent (%)" onkeyup="percent_service(this.value)" class="service_val" id="service_val">
+                        <input class="form-control" type="number"  onkeyup="percent_service(this.value)">
+                        <input type="hidden" id="service_val" name="service_charges">
                         {{-- <div class="form-group mt-3">
                             <label class="font-weight-bold">Current Voucher Total</label>
                             <input type="text" class="form-control" readonly id="curr_voucher_total_service" value="">
@@ -232,9 +251,8 @@
                         </div> --}}
                     </div>
                 </div>
-
-
             </div>
+
             <div class="row" id="ispromotion">
 
             </div>
@@ -284,12 +302,16 @@
     $('#dis_foc').hide();
     $('#dis_percent').hide();
     $('#dis_amount').hide();
+    $('#bankType').hide();
+    $('#bankTypeYes').hide();
 
 })
 function yes_radio(){
     // alert('yes');
     $('#dis_radio_form').modal('hide');
     $('#voudiscount').modal('show');
+    $('#bankTypeYes').show();
+    // $('#bankType').hide();
 }
 function no_radio(){
     // alert('no');
@@ -298,6 +320,8 @@ function no_radio(){
     $('#dis_change_amount').show();
     $('#promotion').show();
     $('#dis_footer').show();
+    $('#bankType').show();
+    // $('#bankTypeYes').hide();
 }
 function foc_radio(){
     $('#dis_foc').show();
@@ -336,6 +360,9 @@ function percent_service(val){
     $('#curr_voucher_total_service').val(per_amt);
     $('#service_val').val(val);
 }
+
+
+
 //end modify percent dis
 function amount_dis(val){
     // alert(val);
@@ -369,13 +396,17 @@ function change_price(){
     // console.log(order_id);
     var discount_type = $('#dis_type').val();
     var discount_value = $('#dis_val').val();
-    var service_value = $('.service_val').val();
-    // console.log(service_value);
+
     var pay_value = $('#pay_amount').val();
+    var service_value = $('#service_val').val();
+    // console.log(service_value);
     var change_value = $('#change_amount').val();
     var pay_value_dis = $('#pay_amount_dis').val();
     var change_value_dis = $('#change_amount_dis').val();
     var ispromotion = $('#ispromotion').text();
+    var pay_type = $('#payType').val();
+
+    // var bank_type = $("#bankOrCashId").val();
     if($('#console').prop("checked") == true){
          var console = 1;
         if(ispromotion == 'This promotion is expired.' || ispromotion == 'This voucher amount is less than promotion amount.'){
@@ -406,6 +437,7 @@ function change_price(){
         "discount_type" : discount_type ,
         "discount_value" : discount_value,
         "service_value" : service_value,
+        "pay_type": pay_type,
         "pay_amount" : pay_value,
         "change_amount" : change_value,
         "pay_amount_dis" : pay_value_dis,
@@ -476,7 +508,9 @@ function change_price(){
                 $('#hid_order_id').val(order_id);
                 $('#dis_type').val();
                 $('#dis_val').val();
-                // $('#service_val').val()
+                $('#service_val').val();
+                // $('#bankOrCashId').val();
+
                 $('#voucher_total_dis').val(data);
                 $('#voucher_total').val(data);
             }

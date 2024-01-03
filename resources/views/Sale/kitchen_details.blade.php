@@ -25,19 +25,19 @@
     <div class="col-md-5 printableArea1" style="width:45%;">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="font-weight-bold mt-2">Kitchen Details</h4>
+                <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="font-weight-bold mt-2 text-primary text-center">Main Dish</h4>
-                        <div class="row">
-                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Order Number</div>
+                    <div class="col-md-12" style="text-align:center;">
+                        <strong style="font-size:17px;font-weight:bold;">Main Dish</strong>
+                        <div class="row justify-content-center">
+                            <strong style="font-size:17px;font-weight:bold;">Order Number</strong>
                             <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
                         </div>
 
-                        <div class="row mt-1">
-                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Table Name</div>
+                        <div class="row mt-1 justify-content-center">
+                            <strong style="font-size:17px;font-weight:bold;">Table Name</strong>
                             <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
                         </div>
                     </div>
@@ -47,9 +47,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Item Name</th>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Counting Unit Name</th>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Order Quantity</th>
+                                        <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                        <th><strong style="font-size:16px;font-weight:bold;">Counting Unit Name</strong></th>
+                                        <th><strong style="font-size:17px;font-weight:bold;">Order Quantity</strong></th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
@@ -58,9 +58,9 @@
                                     @if ($option->menu_item->meal_id == 1)
                                     @if ($option->pivot->tocook == 0)
                                         <tr>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->menu_item->item_name}}</td>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->name}}</td>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->pivot->quantity}}</td>
+                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</strong></td>
+                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
+                                            <td><strong style="font-size:17px;font-weight:bold;">{{$option->pivot->quantity}}</strong></td>
                                         </tr>
                                     @endif
                                     @endif
@@ -102,23 +102,23 @@
 
 </div>
 @endif
-<div class="row justify-content-center mt-3">
-    <div class="col-md-5 printableArea2" style="width:45%;">
-        <div class="card shadow">
-            <div class="card-header">
-                <h4 class="font-weight-bold mt-2">Kitchen Details</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="font-weight-bold mt-2 text-primary text-center">Drinks</h4>
-                        <div class="row">
-                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Order Number</div>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
+<div class="row justify-content-center">
+<div class="col-md-5 printableArea1" style="width:45%;">
+    <div class="card shadow">
+        <div class="card-header">
+            <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12" style="text-align:center;">
+                    <strong style="font-size:17px;font-weight:bold;">Drink</strong>
+                    <div class="row justify-content-center">
+                        <strong style="font-size:17px;font-weight:bold;">Order Number</strong>
+                        <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</strong></h5>
                         </div>
 
-                        <div class="row mt-1">
-                            <div class="font-weight-bold text-primary col-md-6 offset-md-1">Table Name</div>
+                        <div class="row mt-1 justify-content-center">
+                            <strong style="font-size:17px;font-weight:bold;">Table Name</strong>
                             <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
                         </div>
                     </div>
@@ -127,10 +127,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Item Name</th>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Counting Unit Name</th>
-                                        <th class="font-weight-bold mt-2 text-dark text-center">Order Quantity</th>
-
+                                        <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                        <th><strong style="font-size:16px;font-weight:bold;">Counting Unit Name</strong></th>
+                                        <th><strong style="font-size:17px;font-weight:bold;">Order Quantity</strong></th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
@@ -139,9 +138,9 @@
                                     @if ($option->menu_item->meal_id == 2)
                                     @if ($option->pivot->tocook == 0)
                                         <tr>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->menu_item->item_name}}</td>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->name}}</td>
-                                            <td class="font-weight-bold mt-2 text-dark text-center">{{$option->pivot->quantity}}</td>
+                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</td>
+                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
+                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->pivot->quantity}}</strong></td>
 
                                             {{-- @if($option->pivot->status == 0)
                                             <td>

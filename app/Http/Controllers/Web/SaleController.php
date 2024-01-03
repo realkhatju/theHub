@@ -1152,56 +1152,62 @@ class SaleController extends Controller
 		}
 	}
 
-	protected function storeShopOrderVoucher(Request $request){
+    protected function storeShopOrderVoucher(Request $request){
 
-		// dd($request->all());
+        // dd($request->all());
 
-		try {
+        try {
 
-			$shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
+            $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
 
-			if(empty($shop_order)){
+            if(empty($shop_order)){
 
-				return response()->json(['error' => 'Something Wrong! Cannot Checkbill again']);
+                return response()->json(['error' => 'Something Wrong! Cannot Checkbill again']);
 
-			}
+            }
 
-		} catch (\Exception $e) {
+        } catch (\Exception $e) {
 
-			return response()->json(['error' => 'Something Wrong! Shop Order Cannot Be Found'], 404);
+            return response()->json(['error' => 'Something Wrong! Shop Order Cannot Be Found'], 404);
 
-		}
+        }
 
 
 
-		$table = Table::where('id', $shop_order->table_id)->first();
+        $table = Table::where('id', $shop_order->table_id)->first();
 
-		if (!empty($table)) {
+        if (!empty($table)) {
 
-			$table->status = 1;
+            $table->status = 1;
 
-    		$table->save();
+            $table->save();
 
-		}
+        }
 
-		$user_code = $request->session()->get('user')->name;
+        $user_code = $request->session()->get('user')->name;
 
-		$total = 0 ;
+        $total = 0 ;
 
-		$total_qty = 0 ;
+        $total_qty = 0 ;
 
-		$date = new DateTime('Asia/Yangon');
+        $date = new DateTime('Asia/Yangon');
 
-		$real_date = $date->format('Y-m-d H:i:s');
+        $real_date = $date->format('Y-m-d H:i:s');
 
         $re_date = $date->format('Y-m-d');
 
-		foreach ($shop_order->option as $option) {
+        $service_value = $request->service_value;
+
+        $pay_type = $request->pay_type;
+
+        foreach ($shop_order->option as $option) {
             $total += ($option->pivot->quantity * $option->sale_price);
 
             $total_qty += $option->pivot->quantity;
         }
         //  dd($request->change_amount_dis);
+
+
 
         $voucher = Voucher::create([
             'sale_by' => $user_code,
@@ -1211,61 +1217,79 @@ class SaleController extends Controller
             'type' => 1,
             'status' => 0,
             'date' => $re_date,
+            'foc_flag' => 0,
+            'foc_value'=> 0,
+            'discount_flag' => 0,
+            'tax_flag' => 0,
+            'tax_value' => 0,
+            'net_price' => 0,
+            'pay_type' => $pay_type,
         ]);
-        if($request->discount_type !=null && $request->discount_value != null  && $request->service_value != null  ){
+        // if(!empty($request->service_value)){
+        //     $voucher->service_value = $request->service_value;
+        // }else{
+        //     $voucher->service_value = 10;
+        // }
+        if($request->discount_type !=null && $request->discount_value != null){
             $voucher->discount_type = $request->discount_type;
             $voucher->discount_value = $request->discount_value;
-            $voucher->service_value = $request->service_value;
             $voucher->pay_value = $request->pay_amount;
             $voucher->change_value = $request->change_amount;
+            // $voucher->service_value = $request->service_value;
         }else{
             $voucher->pay_value = $request->pay_amount_dis;
             $voucher->change_value = $request->change_amount_dis;
-            $voucher->service_value =  $request->service_value;
+            // $voucher->service_value = $request->service_value;
         }
         if($request->promotion !=0 && $request->promotionvalue !=0){
             $voucher->promotion = $request->promotion;
             $voucher->promotion_value = $request->promotionvalue;
-            $voucher->service_value =  $request->service_value;
+            // $voucher->service_value = $request->service_value;
         }
 
-    	$voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);
+        if($request->service_value != 0 && $request->service_value != null){
+            $voucher->service_value = $request->service_value;
+        }else{
+            $voucher->service_value = 0;
+        }
+
+        $voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);
 
         $voucher->save();
 
-     	foreach ($shop_order->option as $option) {
+        foreach ($shop_order->option as $option) {
 
-        	$voucher->option()->attach($option->id, ['quantity' => $option->pivot->quantity,'price' => $option->sale_price, 'date' => $re_date]);
+            $voucher->option()->attach($option->id, ['quantity' => $option->pivot->quantity,'price' => $option->sale_price, 'date' => $re_date]);
 
-			$moption = Option::findorFail($option->id);
-			// dd($moption->id);
-			$amount = DB::table('ingredient_option')
+            $moption = Option::findorFail($option->id);
+            // dd($moption->id);
+            $amount = DB::table('ingredient_option')
 
-			->where('option_id',$moption->id)
-			->get();
-			//   dd($amount);
-			foreach($amount as $amt)
-			$amountt = json_encode($amt->amount);
-			// dd($amountt);
+            ->where('option_id',$moption->id)
+            ->get();
+            //   dd($amount);
+            foreach($amount as $amt)
+            $amountt = json_encode($amt->amount);
+            // dd($amountt);
 
-			// dd($amountt);
-			$ingredien = DB::table('ingredient_option')
-			// ->select('ingredient_id')
-			->where('option_id',$moption->id)
-			->get();
-			if($ingredien == null)
-			{
-			foreach($ingredien as $ingred)
-			// dd($ingredien);
-			$ingreID = $ingred->ingredient_id;
-			// dd($ingreID);
+            // dd($amountt);
+            $ingredien = DB::table('ingredient_option')
+            // ->select('ingredient_id')
+            ->where('option_id',$moption->id)
+            ->get();
+            if($ingredien == null)
+            {
+            foreach($ingredien as $ingred)
+            // dd($ingredien);
+            $ingreID = $ingred->ingredient_id;
+            // dd($ingreID);
 
             $ingredient_update = Ingredient::findorFail($ingreID);
-			$balance_qty = $ingredient_update->instock_quantity - $amountt;
-			$ingredient_update->instock_quantity = $balance_qty;
-			// dd("Hello");
-			$ingredient_update->save();
-			}
+            $balance_qty = $ingredient_update->instock_quantity - $amountt;
+            $ingredient_update->instock_quantity = $balance_qty;
+            // dd("Hello");
+            $ingredient_update->save();
+            }
             }
             $shop_order->voucher_id = $voucher->id;
             $shop_order->status = 2;
@@ -1480,30 +1504,30 @@ class SaleController extends Controller
         return response()->json(['total'=>$total,'order'=>$shop_order]);
     }
 
-	protected function getFinishedOrderList(){
+    protected function getFinishedOrderList(){
 
-		$order_lists = ShopOrder::where('status', 2)->get();
+        $order_lists = ShopOrder::where('status', 2)->get();
 
-		// dd($order_lists[200]);
-		$deli_order_lists = Order::where('status', 3)->get();
-		// dd($deli_order_lists[34]);
+        // dd($order_lists[200]);
+        $deli_order_lists = Order::where('status', 3)->get();
+        // dd($deli_order_lists[34]);
         // try {
 
         // 	$order = ShopOrder::findOrFail($order_id);
 
-   		// } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
         // 	alert()->error("Shop Order Not Found!")->persistent("Close!");
 
         //     return redirect()->back();
 
-    	// }
+        // }
 
-    	$voucher = Voucher::where('type', 1)->orWhere('type',2)->with('shopOrder')->with('order')->get();
+        $voucher = Voucher::where('type', 1)->orWhere('type',2)->with('shopOrder')->with('order')->get();
         // dd($voucher->toArray());
 // dd($voucher[5]->order->id);
-		return view('Sale.finished_lists', compact('order_lists','deli_order_lists','voucher'));
-	}
+        return view('Sale.finished_lists', compact('order_lists','deli_order_lists','voucher'));
+    }
 
     protected function getFilterFinishedOrderList(Request $request){
 

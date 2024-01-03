@@ -61,7 +61,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @if ($pending_order_details->status == 2)
+                                        {{-- @if ($pending_order_details->status == 2) --}}
                                         @foreach ($pending_order_details->option as $option)
                                         <tr>
 
@@ -97,9 +97,7 @@
                                             </td>
                                             customer/store                                   </tr>
                                         @endforeach
-                                        @endif
-
-
+                                        {{-- @endif --}}
                                 </table>
                             </div>
                         </div>

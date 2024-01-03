@@ -710,6 +710,7 @@ class AdminController extends Controller
     $options=[];
     $arr_ki=[];
     $total_qty=[];
+    $total_qty_drink = [];
 
         if($type == 1){
 
@@ -797,13 +798,20 @@ class AdminController extends Controller
                     //     'qty'=>$item->option[$i]->pivot->quantity,
                     //     ],
                     // ];
-                    if($item->option[$i]->menu_item->meal_id == 2){
+                    if($item->option[$i]->menu_item->meal_id == 1){
                     array_push($total_qty,[
                         'option_id'=>$item->option[$i]->id,
                         'qty'=>$item->option[$i]->pivot->quantity,
                         'price'=>$item->option[$i]->pivot->price,
                         ]);
                     }
+                    if($item->option[$i]->menu_item->meal_id == 2){
+                        array_push($total_qty_drink,[
+                            'option_id'=>$item->option[$i]->id,
+                            'qty'=>$item->option[$i]->pivot->quantity,
+                            'price'=>$item->option[$i]->pivot->price,
+                            ]);
+                        }
 
                     array_push($options,$item->option[$i]);
                 }
@@ -833,10 +841,14 @@ class AdminController extends Controller
             }
 
         }
+        $shopOrders = ShopOrder::all();
         return response()->json([
             "total_qty"=> $total_qty,
             "options" => $options,
-            "menu_items"=> $menu_items
+            "menu_items"=> $menu_items,
+            "voucher_lists" => $voucher_lists,
+            "total_qty_drink" => $total_qty_drink,
+            "shop_orders" => $shopOrders
         ]);
     // }
 
