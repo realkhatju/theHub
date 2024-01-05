@@ -643,6 +643,10 @@ class SaleController extends Controller
         // return $meal2;
         // $meal1 = $meal->id = 1;
         // dd($meal->toArray());
+
+        DB::table('option_shop_order')
+        ->where('shop_order_id', $order_id)
+        ->update(['tocook' => 1]);
         return view('Sale.kitchen_details', compact('pending_order_details','total_qty','total_price','table_number','notes','option_id','mealItem1','mealItem2'));
     }
     //Kitchen Details End
@@ -1531,7 +1535,50 @@ class SaleController extends Controller
 
     protected function getFilterFinishedOrderList(Request $request){
 
-    	$voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->with('shopOrder')->with('order')->get();
+
+        // if($request->discount_type == 1 ){
+        //     $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',1)->with('shopOrder')->with('order')->get();
+        // }else if($request->discount_type == 2 && $request->discount_type == 3){
+        //     if($request->pay_type == 1){
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',2)->orWhere('pay_type',1)->with('shopOrder')->with('order')->get();
+        //     }else if($request->pay_type == 1){
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',2)->orWhere('discount_type',3)->orWhere('pay_type',2)->with('shopOrder')->with('order')->get();
+        //     }else{
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',2)->orWhere('discount_type',3)->with('shopOrder')->with('order')->get();
+        //     }
+
+        // }else{
+        //     if($request->pay_type == 1){
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('pay_type',1)->with('shopOrder')->with('order')->get();
+        //     }else if($request->pay_type == 2){
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('pay_type',2)->with('shopOrder')->with('order')->get();
+        //     }else{
+        //         $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->with('shopOrder')->with('order')->get();
+        //     }
+        // }
+
+
+        if($request->pay_type == 1){    //Bank
+            if($request->discount_type == 1 ){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',1)->where('pay_type',1)->with('shopOrder')->with('order')->get();
+            }else if($request->discount_type == 2 || $request->discount_type == 3){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',2)->orWhere('discount_type',3)->where('pay_type',1)->with('shopOrder')->with('order')->get();
+            }else if($request->discount_type == 0){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('pay_type',1)->with('shopOrder')->with('order')->get();
+            }
+        }else if($request->pay_type == 2){  //Bank 2
+            if($request->discount_type == 1 ){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',1)->where('pay_type',2)->with('shopOrder')->with('order')->get();
+            }else if($request->discount_type == 2 || $request->discount_type == 3){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('discount_type',2)->where('pay_type',2)->with('shopOrder')->with('order')->get();
+            }else if($request->discount_type == 0){
+                $voucher = Voucher::whereBetween('date', [$request->start_date, $request->end_date])->where('pay_type',2)->with('shopOrder')->with('order')->get();
+            }
+        }
+
+
+        $foc = Voucher::where('discount_type',1)->get();
+        $discount = Voucher::where('discount_type',2)->orWhere('discount_type',3)->get();
         // dd($voucher[0]->shopOrder->id);
         // dd($deli);
 		return response()->json($voucher);
@@ -1658,17 +1705,51 @@ class SaleController extends Controller
     }
     protected function cancelorder($id){
         $order = ShopOrder::find($id);
-        // dd($order);
         $table = Table::find($order->table_id);
         $table->status = 1;
         $table->save();
-        $order->delete();
+
         $promotion = Promotion::all();
-        DB::table('option_shop_order')->where('shop_order_id',$id)->delete();
 
         $pending_lists = ShopOrder::where('status', 1)->get();
 
-        return view('Sale.pending_lists',compact('pending_lists','promotion'));
+
+        $table_number = 0;
+        try {
+
+        $pending_order_details = ShopOrder::findOrFail($id);
+        } catch (\Exception $e) {
+
+            alert()->error("Pending Order Not Found!")->persistent("Close!");
+
+            return redirect()->back();
+        }
+
+        $total_qty = 0 ;
+
+        $total_price = 0 ;
+
+        foreach ($pending_order_details->option as $option) {
+
+            $total_qty += $option->pivot->quantity;
+
+            $total_price += $option->sale_price * $option->pivot->quantity;
+        }
+        $notes = DB::table('option_shop_order')
+        ->where('shop_order_id',$id)
+        ->get();
+        $option_id = DB::table('options')->get();
+        $mealItem1 = MenuItem::where('meal_id',1)->get();
+        $mealItem2 = MenuItem::where('meal_id',2)->get();
+        $order->delete();
+        DB::table('option_shop_order')->where('shop_order_id',$id)->delete();
+        return view('Sale.kitchen_details', compact('pending_order_details','total_qty','total_price','table_number','notes','option_id','mealItem1','mealItem2'));
+
+
+
+
+
+        // return view('Sale.pending_lists',compact('pending_lists','promotion'));
     }
     protected function canceldetail(Request $request){
         // dd($request->option_id);

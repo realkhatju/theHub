@@ -113,14 +113,23 @@
                                           <strong>Total - {{$voucher->total_price-($voucher->total_price*(explode(' ',$voucher->promotion_value)[0])/100)}}</strong><br>
                                           <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                           <strong>Change - {{$voucher->pay_value - ($voucher->total_price-($voucher->total_price*(explode(' ',$voucher->promotion_value)[0])/100))}}</strong><br>
+                                          <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                          <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                          <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.05)+ ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                           @else
                                           <strong>Total - {{$voucher->total_price - $voucher->promotion_value}}</strong><br>
                                           <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                           <strong>Change - {{$voucher->pay_value - ($voucher->total_price - $voucher->promotion_value)}}</strong><br>
+                                          <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                          <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                          <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.05)+ ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                           @endif
                                           @else
                                           <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                           <strong>Change - {{$voucher->change_value}}</strong><br>
+                                          <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                          <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                          <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.05)+ ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                          @endif
                                          @if ($voucher->promotion == 'FOC Items')
                                          <strong>{{$voucher->promotion}} - {{$voucher->promotion_value}}</strong><br>
@@ -132,7 +141,10 @@
                                         <strong>Discount - FOC</strong><br>
                                         <strong>Total - 0</strong><br>
                                         <strong>Pay - 0</strong><br>
-                                         <strong>Change - 0</strong><br>
+                                        <strong>Change - 0</strong><br>
+                                        <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                        <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                        <strong>Total Cost - {{0 + ($voucher->total_price * 0.05)}}</strong><br>
                                    </div>
                                    @elseif ($voucher->discount_type == 2)
                                    <?php $total = $voucher->total_price - ($voucher->discount_value/100) * $voucher->total_price ; ?>
@@ -142,6 +154,9 @@
                                         <strong>Total - {{$total}}</strong><br>
                                         <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                          <strong>Change - {{$voucher->change_value}}</strong><br>
+                                         <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                         <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                         <strong>Total Cost - {{$total + ($voucher->total_price * 0.05) + ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                    </div>
                                    @elseif ($voucher->discount_type == 3)
                                    <?php $total = $voucher->total_price - $voucher->discount_value; ?>
@@ -150,13 +165,13 @@
                                         <strong>Discount - {{$voucher->discount_value}} </strong><br>
                                         <strong>Total - {{$total}}</strong><br>
                                         <strong>Pay - {{$voucher->pay_value}}</strong><br>
-                                         <strong>Change - {{$voucher->change_value}}</strong><br>
+                                        <strong>Change - {{$voucher->change_value}}</strong><br>
+                                        <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
+                                        <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
+                                        <strong>Total Cost - {{$total + ($voucher->total_price * 0.05) + ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                    </div>
                                     @endif
                                     <div style="text-align:right;margin-right:10px;font-size:17px;font-weight:bold;">
-                                        <strong>Gov Tex 5% - {{($voucher->total_price * 0.05)}}</strong><br>
-                                        <strong>Service Charges {{($voucher->service_value)}}% - {{($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
-                                        <strong>Total Cost - {{$voucher->total_price + ($voucher->total_price * 0.05) + ($voucher->total_price * ($voucher->service_value / 100) )}}</strong><br>
                                         <strong>Payment - @if($voucher->pay_type == 1)Bank @else Cash @endif </strong><br>
                                     </div>
 

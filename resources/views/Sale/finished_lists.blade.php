@@ -34,17 +34,17 @@
                     <div class="col-md-2">
                         <label for="">Discount Type</label>
                         <div class="form-group">
-                            <select class="form-control custom-select shopOrdelivery">
+                            <select class="form-control custom-select shopOrdelivery" id="discount_type">
+                                <option value="0">All</option>
                                 <option value="1">Foc</option>
-                                <option value="2">Discount Amount</option>
-                                <option value="3">Discount Percent</option>
+                                <option value="2">Discount</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <label for="">Pay Type</label>
                         <div class="form-group">
-                            <select class="form-control custom-select shopOrdelivery">
+                            <select class="form-control custom-select shopOrdelivery" id="pay_type">
                                 <option value="1">Bank</option>
                                 <option value="2">Cash</option>
                             </select>
@@ -98,6 +98,18 @@
                                     Table No.
                                 </th>
                                 <th>
+                                    Foc Value
+                                </th>
+                                <th>
+                                    Discount Value
+                                </th>
+                                <th>
+                                    Pay Type
+                                </th>
+                                <th>
+                                    Pay Remark
+                                </th>
+                                <th>
                                     Date
                                 </th>
                                 <th>
@@ -116,6 +128,28 @@
                                 @else
                                 <td>Delivery Order</td>
                                 @endif
+                                @if ($vouc->discount_type == 1)
+                                <td>{{$vouc->total_price}} Ks</td>
+                                @elseif($vouc->discount_type == null || $vouc->discount_type != 2 || $vouc->discount_type != 3)
+                                <td>0 Ks</td>
+                                @endif
+                                @if ($vouc->discount_type == 1)
+                                <td>0 Ks</td>
+                                @elseif ($vouc->discount_type == 2)
+                                <td>{{$vouc->discount_value}} %</td>
+                                @elseif($vouc->discount_type == 3)
+                                <td>{{$vouc->discount_value}} Ks</td>
+                                @elseif($vouc->discount_type == null)
+                                <td>0 Ks</td>
+                                @endif
+                                @if ($vouc->pay_type == 1)
+                                <td>Bank</td>
+                                @elseif($vouc->pay_type == 2)
+                                <td>Cash</td>
+                                @elseif ($vouc->pay_type == 0)
+                                <td>No type</td>
+                                @endif
+                                <td>Kpay or Wave</td>
                                 <td>{{$vouc->date}}</td>
                                 <td>
                                     {{-- @if ($vouc->type == 2)
@@ -154,6 +188,8 @@
     function datefilter(){
         let start_date = $('#start_date').val();
         let end_date = $('#end_date').val();
+        let pay_type = $('#pay_type').val();
+        let discount_type = $('#discount_type').val();
 
         $.ajax({
         type:'POST',
@@ -162,6 +198,8 @@
         "_token":"{{csrf_token()}}",
         "start_date":start_date,
         "end_date":end_date,
+        "pay_type":pay_type,
+        "discount_type":discount_type
         },
         success:function(data){
             let html = '';
@@ -179,12 +217,39 @@
                         <td>${v.shop_order.table.table_number}</td>
                         `;
                     }
-
                     else{
                         html += `
                         <td>Delivery Order</td>
                         `;
                     }
+                    if (v.discount_type == 1){
+                        html += `<td>${v.total_price}Ks</td>`
+                    }
+                    else if(v.discount_type == null || v.discount_type != 2 || v.discount_type != 3){
+                        html += `<td>0 Ks</td>`
+                    }
+                    if (v.discount_type == 1){
+                        html += `<td>0 Ks</td>`
+                    }
+                    else if (v.discount_type == 2){
+                        html += `<td>${v.discount_value} %</td>`
+                    }
+                    else if(v.discount_type == 3){
+                        html += `<td>${v.discount_value} Ks</td>`
+                    }
+                    else if(v.discount_type == null){
+                        html += `<td>0 Ks</td>`
+                    }
+                    if (v.pay_type == 1){
+                        html += `<td>Bank</td>`
+                    }
+                    else if(v.pay_type == 2){
+                        html += `<td>Cash</td>`
+                    }
+                    else if (v.pay_type == 0){
+                        html += `<td>No Type</td>`
+                    }
+                    html += `<td>Kpay or Wave</td>`
                     html += `
                     <td>${v.date}</td>
                     <td>

@@ -151,7 +151,7 @@
                     <input type="text" class="form-control" readonly id="curr_voucher_total" value="">
                 </div>
                 <div class="form-group mt-3" id="bankTypeYes">
-                    <label for="">Pay Type</label>
+                    <label for="">Pay Type No</label>
                     <div class="form-group">
                         <select class="form-control custom-select bankOrCash" id="payType">
                             <option value="1">Bank</option>
@@ -159,6 +159,25 @@
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group mt-3" id="promotionYes">
+                            <label class="control-label">Service Charges</label>
+                               <div class="switch">
+                                   <label>OFF
+                                   <input type="checkbox"  name="customer_console" id="consoleYes" onchange="promotion_on()"><span class="lever"></span>ON</label>
+                                </div>
+                       </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="form-group mt-3" id="promotion_nameYes">
+                            <label class="font-weight-bold">Service Charges %</label>
+                            <input class="form-control" type="number"  onkeyup="percent_service(this.value)">
+                            <input type="hidden" id="service_val" name="service_charges">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group mt-3">
                     <label class="font-weight-bold">Pay Amount</label>
                     <input type="text" class="form-control"  value="" id="pay_amount" placeholder="Enter Pay Amount" onkeyup="pay_amt(this.value)">
@@ -236,19 +255,8 @@
                 <div class="col-9">
                     <div class="form-group mt-3" id="promotion_name">
                         <label class="font-weight-bold">Service Charges %</label>
-                        {{-- <select class="form-control" name="purchaseitem" onchange="promotionchange(this.value)">
-                            <option value="" hidden>Select Promotion</option>
-                            @foreach ($promotion as $p)
-                            <option value="{{$p->id}}">{{$p->title}}</option>
-                            @endforeach
-                        </select> --}}
                         <input class="form-control" type="number"  onkeyup="percent_service(this.value)">
                         <input type="hidden" id="service_val" name="service_charges">
-                        {{-- <div class="form-group mt-3">
-                            <label class="font-weight-bold">Current Voucher Total</label>
-                            <input type="text" class="form-control" readonly id="curr_voucher_total_service" value="">
-                            <input type="hidden" id="service_val" name="service_val">
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -311,7 +319,8 @@ function yes_radio(){
     $('#dis_radio_form').modal('hide');
     $('#voudiscount').modal('show');
     $('#bankTypeYes').show();
-    // $('#bankType').hide();
+    $('#promotionYes').show();
+    $('#bankTypeYes').show();
 }
 function no_radio(){
     // alert('no');
@@ -389,7 +398,15 @@ function promotion_on(){
        var console = 0;
        $('#promotion_name').hide();
     }
+    if($('#consoleYes').prop("checked") == true){
+         var console = 1;
+        $('#promotion_nameYes').show();
+    }else{
+       var console = 0;
+       $('#promotion_nameYes').hide();
+    }
 }
+
 function change_price(){
     // $('#voudiscount').modal('hide');
     var order_id = $('#hid_order_id').val();
@@ -521,6 +538,7 @@ function change_price(){
         $('#dis_change_amount').hide();
         $('#promotion').hide();
         $('#promotion_name').hide();
+        $('#promotion_nameYes').hide();
         $('#dis_footer').hide();
         //
     }

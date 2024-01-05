@@ -459,12 +459,12 @@
             $.each(data.voucher_lists, function(i, vou) {
                 if(vou.discount_type == 1){
                     foc_total += vou.total_price;
-                    console.log('Foc Voucher Value => ',vou.total_price);
+                    // console.log('Foc Voucher Value => ',vou.total_price);
                 }
                 FinalTotal = total + totalD;
-                console.log('vou', vou);
-                console.log('vou total price', vou.total_price);
-                console.log('final total ', FinalTotal);
+                // console.log('vou', vou);
+                // console.log('vou total price', vou.total_price);
+                // console.log('final total ', FinalTotal);
                 foc_total += vou.foc_value;
                 if (vou.discount_type == 2) {
                     discount_total2 += vou.total_price * (vou.discount_value / 100);
@@ -530,8 +530,8 @@
                         //     // console.log('Tables',shopOrder.table_id);
                         // }
                         if(shopOrder.table_id > 50 && shopOrder.table_id <= 92){
-                            console.log('vou listssssss',shopOrder.table_id);
-                            console.log('vouchers with rooms',vou);
+                            // console.log('vou listssssss',shopOrder.table_id);
+                            // console.log('vouchers with rooms',vou);
                             netRoomTotal += vou.total_price;
                              // console.log('vouchers with tables',vou);
                             // foc += vou.foc_value;
@@ -560,19 +560,19 @@
                             netRoomPrice = vou.total_price - (0 + tax );
                             netVou += netRoomPrice;
                             // roomPriceTotal += netRoomPrice;
-                            console.log('table id',shopOrder.table_id,'Room total',netVou);
-                            console.log('Room total',netRoomPrice);
-                            console.log('total_price',vou.total_price);
+                            // console.log('table id',shopOrder.table_id,'Room total',netVou);
+                            // console.log('Room total',netRoomPrice);
+                            // console.log('total_price',vou.total_price);
                             // console.log('total_price percentage',vou.total_price * (5/100));
-                            console.log('Room tax',tax);
+                            // console.log('Room tax',tax);
 
                             // console.log('service_charges',service_charges);
-                            console.log('netTax Room',netTax);
+                            // console.log('netTax Room',netTax);
                             // netTableTotal += vou.total_price - (foc + discountValue + tax);
 
                             // tables = shopOrder.table_id;
                             // console.log('Tables',shopOrder.table_id);
-                            console.log('netTablePrice adding netRoomPrice',netRoomTotal);
+                            // console.log('netTablePrice adding netRoomPrice',netRoomTotal);
                         }
 
                         // console.log('netTableTotal',netTableTotal);
@@ -597,7 +597,7 @@
 
 
             net_total = (total + totalD) - (foc_total + discountTotalValue + tax_total);
-            console.log('net_total' + net_total);
+            // console.log('net_total' + net_total);
             $('.salecountlists').html(html);
             $('#total_qty').html(total_qty);
             $('#total_qty_all').html(total);

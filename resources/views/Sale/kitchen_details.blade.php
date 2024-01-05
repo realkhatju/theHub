@@ -56,13 +56,13 @@
                                 <tbody>
                             @foreach($pending_order_details->option as $option)
                                     @if ($option->menu_item->meal_id == 1)
-                                    @if ($option->pivot->tocook == 0)
+                                    {{-- @if ($option->pivot->tocook == 0) --}}
                                         <tr>
                                             <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</strong></td>
                                             <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
                                             <td><strong style="font-size:17px;font-weight:bold;">{{$option->pivot->quantity}}</strong></td>
                                         </tr>
-                                    @endif
+                                    {{-- @endif --}}
                                     @endif
                             @endforeach
                             </tbody>
@@ -99,10 +99,9 @@
             </button>
         </div>
     </div>
-
 </div>
 @endif
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-4">
 <div class="col-md-5 printableArea1" style="width:45%;">
     <div class="card shadow">
         <div class="card-header">
@@ -136,7 +135,7 @@
                                 <tbody>
                                     @foreach($pending_order_details->option as $option)
                                     @if ($option->menu_item->meal_id == 2)
-                                    @if ($option->pivot->tocook == 0)
+                                    {{-- @if ($option->pivot->tocook == 0) --}}
                                         <tr>
                                             <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</td>
                                             <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
@@ -156,7 +155,7 @@
                                             </td>
                                             @endif --}}
                                         </tr>
-                                    @endif
+                                    {{-- @endif --}}
                                     @endif
                                     @endforeach
                                 </tbody>

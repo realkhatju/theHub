@@ -28,7 +28,8 @@ class Voucher extends Model
         'tax_value',
         'net_price',
         'pay_type',
-        'service_value'
+        'service_value',
+        'pay_remark'
     ];
 
     public function option() {
