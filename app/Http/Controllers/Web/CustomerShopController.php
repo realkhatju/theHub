@@ -101,8 +101,20 @@ class CustomerShopController extends Controller
         // }
         // dd($items->toArray());
 
+
         return view('Customer.order_sale_page', compact('ygn_towns','codes','items','meal_types','table','cuisine_types','table_number','pending_lists','table_id'));
     }
+
+    // getting menu items list
+
+    public function menuItemListData(){
+        $menu_items = MenuItem::get();
+        return response()->json([
+            "menu_items"=> $menu_items,
+        ]);
+    }
+
+    //
 
     //start Modify
     protected function getShopOrderSaleMenu(){

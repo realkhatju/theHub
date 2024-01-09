@@ -15,13 +15,13 @@ class AddFocDiscountTaxNetPayFlagValueTypeToVouchersTable extends Migration
     {
         Schema::table('vouchers', function (Blueprint $table) {
             $table->tinyInteger('foc_flag')->default(0);
-            $table->Integer('foc_value')->nullable();
+            $table->Integer('foc_value')->default(0);
             $table->tinyInteger('discount_flag')->default(0);
             $table->tinyInteger('tax_flag')->default(0);
-            $table->Integer('tax_value')->nullable();
-            $table->Integer('net_price')->nullable();
+            $table->Integer('tax_value')->default(0);
+            $table->Integer('net_price')->default(0);
             $table->tinyInteger('pay_type')->default(0);
-            $table->Integer('service_charges')->nullable();
+            $table->Integer('service_charges')->default(0);
         });
     }
 

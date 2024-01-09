@@ -150,28 +150,41 @@
                     <label class="font-weight-bold">Current Voucher Total</label>
                     <input type="text" class="form-control" readonly id="curr_voucher_total" value="">
                 </div>
-                <div class="form-group mt-3" id="bankTypeYes">
-                    <label for="">Pay Type No</label>
-                    <div class="form-group">
-                        <select class="form-control custom-select bankOrCash" id="payType">
+                <div class="form-group mt-3 row" id="bankTypeYes">
+                    <label class="col" for="">Pay Type</label>
+                    <label class="col" for="">Pay Remark</label>
+                    <div class="form-group ">
+                        <select class="form-control custom-select bankOrCash col-3" id="pay_type_yes">
                             <option value="1">Bank</option>
                             <option value="2">Cash</option>
                         </select>
+                        <input type="text" class="form-control col-8" onkeyup="pay_remark(this.value)" name="pay_remarks">
+                        <input type="hidden" id="pay_remark">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <div class="form-group mt-3" id="promotionYes">
-                            <label class="control-label">Service Charges</label>
+                        <div class="form-group" id="promotionYes">
+                            <label class="control-label">Service%</label>
                                <div class="switch">
                                    <label>OFF
                                    <input type="checkbox"  name="customer_console" id="consoleYes" onchange="promotion_on()"><span class="lever"></span>ON</label>
                                 </div>
                        </div>
                     </div>
-                    <div class="col-9">
-                        <div class="form-group mt-3" id="promotion_nameYes">
-                            <label class="font-weight-bold">Service Charges %</label>
+                    <div class="col-3">
+                        <div class="form-group" id="">
+                            <label class="control-label">Tax</label>
+                               <div class="switch">
+                                   <label>OFF
+                                   <input type="checkbox"  name="" id="" onchange=""><span class="lever"></span>ON</label>
+                                   {{-- <input type="text" id="taxYes"> --}}
+                                </div>
+                       </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group" id="promotion_nameYes">
+                            <label class="font-weight-bold">Service Charges</label>
                             <input class="form-control" type="number"  onkeyup="percent_service(this.value)">
                             <input type="hidden" id="service_val" name="service_charges">
                         </div>
@@ -209,13 +222,13 @@
                     <h4 class="font-weight-bold">Discount:</h4>
                 </div>
                 <div class="col-md-4 form-check">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="radio_yes" onclick="yes_radio()">
+                    <input class="form-check-input" type="radio" name="flexRadio" id="radio_yes" onclick="yes_radio()" value="true">
                     <label class="form-check-label" for="radio_yes">
                       YES
                     </label>
                 </div>
                 <div class="col-md-4 form-check">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="radio_no" onclick="no_radio()">
+                    <input class="form-check-input" type="radio" name="flexRadio" id="radio_no" onclick="no_radio()" value="false">
                     <label class="form-check-label" for="radio_no">
                       NO
                     </label>
@@ -233,28 +246,40 @@
                 <label class="font-weight-bold">Change</label>
                 <input type="text" class="form-control" readonly id="change_amount_dis" value="">
             </div>
-            <div class="form-group mt-3" id="bankType">
-                <label for="">Pay Type</label>
+            <div class="form-group mt-3 row" id="bankType">
+                <label class="col" for="">Pay Type</label>
+                <label class="col" for="">Pay Remark</label>
                 <div class="form-group">
-                    <select class="form-control custom-select bankOrCash" id="payType">
+                    <select class="form-control col-3 custom-select bankOrCash" id="pay_type">
                         <option value="1">Bank</option>
                         <option value="2">Cash</option>
                     </select>
+                    <input type="text" class="form-control col-8" onkeyup="pay_remark(this.value)" name="pay_remarks">
+                    <input type="hidden" id="pay_remark">
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
-                    <div class="form-group mt-3" id="promotion">
-                        <label class="control-label">Service Charges</label>
+                    <div class="form-group" id="promotion">
+                        <label class="control-label">Service%</label>
                            <div class="switch">
                                <label>OFF
                                <input type="checkbox"  name="customer_console" id="console" onchange="promotion_on()"><span class="lever"></span>ON</label>
                             </div>
                    </div>
                 </div>
-                <div class="col-9">
-                    <div class="form-group mt-3" id="promotion_name">
-                        <label class="font-weight-bold">Service Charges %</label>
+                <div class="col-3">
+                    <div class="form-group" id="">
+                        <label class="control-label">Tax</label>
+                           <div class="switch">
+                               <label>OFF
+                               <input type="checkbox"  name="" id="" onchange=""><span class="lever"></span>ON</label>
+                            </div>
+                   </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group" id="promotion_name">
+                        <label class="font-weight-bold">Service %</label>
                         <input class="form-control" type="number"  onkeyup="percent_service(this.value)">
                         <input type="hidden" id="service_val" name="service_charges">
                     </div>
@@ -322,15 +347,14 @@ function yes_radio(){
     $('#promotionYes').show();
     $('#bankTypeYes').show();
 }
+
 function no_radio(){
-    // alert('no');
     $('#dis_voucher_total').show();
     $('#dis_pay_amount').show();
     $('#dis_change_amount').show();
     $('#promotion').show();
     $('#dis_footer').show();
     $('#bankType').show();
-    // $('#bankTypeYes').hide();
 }
 function foc_radio(){
     $('#dis_foc').show();
@@ -369,6 +393,10 @@ function percent_service(val){
     $('#curr_voucher_total_service').val(per_amt);
     $('#service_val').val(val);
 }
+//Pay Remark
+function pay_remark(val){
+    $('#pay_remark').val(val);
+}
 
 
 
@@ -406,6 +434,15 @@ function promotion_on(){
        $('#promotion_nameYes').hide();
     }
 }
+function tax_on(){
+    if($('#console').prop("checked") == true){
+         var console = 1;
+         $('#taxYes').val(1);
+    }else{
+       var console = 0;
+       $('#taxYes').val('console');
+    }
+}
 
 function change_price(){
     // $('#voudiscount').modal('hide');
@@ -421,7 +458,16 @@ function change_price(){
     var pay_value_dis = $('#pay_amount_dis').val();
     var change_value_dis = $('#change_amount_dis').val();
     var ispromotion = $('#ispromotion').text();
-    var pay_type = $('#payType').val();
+    var pay_type = 0;
+    var radio_yes = $('#radio_yes').val();
+    // var radio_no = $('#radio_no').val();
+    // console.log(radio_no);
+    if(radio_yes == true){
+        pay_type = $('#pay_type_yes').val();
+    }else{
+        pay_type = $('#pay_type').val();
+    }
+    var pay_remark = $('#pay_remark').val();
 
     // var bank_type = $("#bankOrCashId").val();
     if($('#console').prop("checked") == true){
@@ -462,11 +508,11 @@ function change_price(){
         "customer_console" : console,
         "promotion" : promotion,
         "promotionvalue" : promotion_value,
+        "pay_remark" : pay_remark,
         },
 
         // alert(data);
         success:function(data){
-            // alert(data);
             if(data.error){
                 swal({
                 title: "Failed!",
@@ -526,6 +572,7 @@ function change_price(){
                 $('#dis_type').val();
                 $('#dis_val').val();
                 $('#service_val').val();
+                $('#pay_remark').val()
                 // $('#bankOrCashId').val();
 
                 $('#voucher_total_dis').val(data);

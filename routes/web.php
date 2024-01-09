@@ -40,6 +40,8 @@ Route::get('/', 'Web\LoginController@index')->name('index');
 Route::get('customer', 'Web\CustomerShopController@shopMenuPage')->name('customer_sale_page');
 Route::get('customer/Shop-Order/{table_id}', 'Web\CustomerShopController@getShopOrderSalePage')->name('customer_order_sale');
 
+Route::get('customer/menuItemsList','Web\CustomerShopController@menuItemListData');
+
 //modify
 Route::get('customer/shop_order_menu', 'Web\CustomerShopController@getShopOrderSaleMenu')->name('customer_order_sale_menu');
 Route::get('customer/order_details', 'Web\SaleController@getCustomerOrderDetails')->name('customer_order_details');
@@ -73,6 +75,9 @@ Route::get('Customer/Add-More/{order_id}', 'Web\CustomerShopController@addMoreIt
 Route::post('Customer/Add-More-Item', 'Web\CustomerShopController@addMoreItem')->name('customer_add_item');
 Route::post('Customer/Shop-Order/getCountingUnitsByItemId', 'Web\CustomerShopController@getCountingUnitsByItemId');
 Route::get('/Customer/Pending-Order', 'Web\CustomerShopController@getPendingShopOrderList')->name('pending_lists');
+
+//Language Session Management
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 Route::post('/','Web\LoginController@loginProcess')->name('loginProcess');
 Route::get('LogoutProcess', 'Web\LoginController@logoutProcess')->name('logoutprocess');
@@ -296,5 +301,4 @@ Route::group(['middleware' => ['UserAuth']], function () {
     });
 
 
-    //Language Session Management
-    Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+

@@ -84,7 +84,14 @@
 
                 <input type="hidden" id="deli_order_id" name="deli_order_id">
             </form>
-
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control custom-select engMyanTran"  id="eng_myan" onclick="engMyanTranslate(this)">
+                            <option value="1">English</option>
+                            <option value="2">Myanmar</option>
+                        </select>
+                    </div>
+                </div>
 
             <ul class="nav nav-tabs customtab row text-center"  role="tablist">
 
@@ -99,7 +106,6 @@
             </ul>
             <div class="tab-content" >
                 <div class="tab-pane active" id="home" role="tabpanel">
-
                     <div class="container">
                         <div class="nav_mobile">
                             <ul class="nav nav-tabs customtab" role="tablist">
@@ -125,25 +131,29 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="1" role="tabpanel">
-                                <div class="row mt-3">
-                                @foreach($items as $item)
-                                @if($item->cuisine_type_id == 1 && $item->meal_id == 1 && $item->brake_flag == 1)
-                                {{-- modify css  --}}
-                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                <div class="row mt-3 myanTran">
+                                    <div class="row mt-3">
+                                        @foreach($items as $item)
+                                        @if($item->cuisine_type_id == 1 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                        <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                            <div style="height:40px;">
+                                                <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                            </div>
+
+
+                                            {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                        </div>
+                                        @endif
+                                        @endforeach
                                     </div>
-                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-                                </div>
-                                @endif
-                                @endforeach
                                 </div>
                             </div>
 
                             <div class="tab-pane" id="2" role="tabpanel">
-
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran2">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -163,7 +173,7 @@
                             </div>
 
                             <div class="tab-pane" id="3" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran3">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 3 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -183,7 +193,7 @@
                             </div>
 
                             <div class="tab-pane" id="4" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran4">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 4 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -200,7 +210,7 @@
                             </div>
 
                             <div class="tab-pane" id="5" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran5">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 5 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -240,7 +250,7 @@
                             </div>
 
                             <div class="tab-pane" id="6" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran6">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 6 && $item->meal_id == 1   && $item->brake_flag == 1)
 
@@ -260,7 +270,7 @@
 
                             </div>
                             <div class="tab-pane" id="7" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran7">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 7 && $item->meal_id == 1   && $item->brake_flag == 1)
 
@@ -280,7 +290,7 @@
 
                             </div>
                             <div class="tab-pane" id="8" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran8">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 8  && $item->meal_id == 1 && $item->brake_flag == 1)
 
@@ -300,7 +310,7 @@
 
                             </div>
                             <div class="tab-pane" id="9" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran9">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 9 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -320,7 +330,7 @@
 
                             </div>
                             <div class="tab-pane" id="10" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran10">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 10 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -340,7 +350,7 @@
 
                             </div>
                             <div class="tab-pane" id="11" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTran11">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 11 && $item->meal_id == 1  && $item->brake_flag == 1)
 
@@ -363,7 +373,6 @@
 
                         </div>
                     </div>
-
                 </div>
                 <div class="tab-pane" id="profile" role="tabpanel">
                     <div class="container">
@@ -390,7 +399,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane " id="drink1" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD">
                                 @foreach($items as $item)
                                 @if($item->cuisine_type_id == 1 && $item->meal_id == 2   && $item->brake_flag == 1)
                                 {{-- modify css  --}}
@@ -408,7 +417,7 @@
 
                             <div class="tab-pane active" id="drink2" role="tabpanel">
 
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD2">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 2  && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -428,7 +437,7 @@
                             </div>
 
                             <div class="tab-pane" id="drink3" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD3">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 3  && $item->meal_id == 2  && $item->brake_flag == 1)
 
@@ -448,7 +457,7 @@
                             </div>
 
                             <div class="tab-pane" id="drink4" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD4">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 4 && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -465,7 +474,7 @@
                             </div>
 
                             <div class="tab-pane" id="drink5" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD5">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 5  && $item->meal_id == 2  && $item->brake_flag == 1)
 
@@ -505,7 +514,7 @@
                             </div>
 
                             <div class="tab-pane" id="drink6" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD6">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 6  && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -525,7 +534,7 @@
 
                             </div>
                             <div class="tab-pane" id="drink7" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD7">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 7 && $item->meal_id == 2    && $item->brake_flag == 1)
 
@@ -545,7 +554,7 @@
 
                             </div>
                             <div class="tab-pane active" id="drink8" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD8">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 8 && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -565,7 +574,7 @@
 
                             </div>
                             <div class="tab-pane" id="drink9" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD9">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 9 && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -585,7 +594,7 @@
 
                             </div>
                             <div class="tab-pane" id="drink10" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD10">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 10 && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -605,7 +614,7 @@
 
                             </div>
                             <div class="tab-pane" id="drink11" role="tabpanel">
-                                <div class="row mt-3">
+                                <div class="row mt-3 myanTranD11">
                                     @foreach($items as $item)
                                     @if($item->cuisine_type_id == 11 && $item->meal_id == 2   && $item->brake_flag == 1)
 
@@ -628,7 +637,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="modal fade" id="remark_table_modal" role="dialog" aria-hidden="true">
@@ -762,7 +770,7 @@
 
     </div>
 
-    <div class="container" style="bottom: 20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
+    <div class="container" style="bottom:20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
         <!-- Start Button trigger modal -->
         <a type="button" class="btn hidden-sm-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-cart-shopping text-danger"></i>
@@ -819,11 +827,9 @@
         $('#select2').select2();
         showmodal();
         $('#table_1').DataTable( {
-
             "paging":   false,
             "ordering": false,
             "info":     false,
-
         });
 
         $('#table_2').DataTable( {
@@ -848,6 +854,500 @@
       localStorage.clear();
     }
 
+    function engMyanTranslate(){
+        var engMyanTran = $(".engMyanTran option:selected").val();
+        var html = "";
+        var html2 = "";
+        var html3 = "";
+        var html4 = "";
+        var html5 = "";
+        var html6 = "";
+        var html7 = "";
+        var html8 = "";
+        var html9 = "";
+        var html10 = "";
+        var html11 = "";
+
+        var htmlD = "";
+        var htmlD2 = "";
+        var htmlD3 = "";
+        var htmlD4 = "";
+        var htmlD5 = "";
+        var htmlD6 = "";
+        var htmlD7 = "";
+        var htmlD8 = "";
+        var htmlD9 = "";
+        var htmlD10 = "";
+        var htmlD11 = "";
+        var itemName = [];
+        $.ajax({
+            type: 'GET',
+            url: '/customer/menuItemsList',
+            contentType: 'application/json',
+            success: function(data) {
+                if(engMyanTran == 1){
+                    $.each(data.menu_items, function(i, v) {
+                        var itemName = [v.item_name,v.item_name_burmese];
+                        var photo_path =  '{{asset('/photo')}}'+ "/" + v.photo_path;
+                        var cuisine_type_id = v.cuisine_type_id;
+                        var meal_id =  v.meal_id;
+                        var brake_flag =  v.brake_flag;
+                        if(cuisine_type_id == 1 && meal_id == 1 && brake_flag ==1){
+                            html+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 2 && meal_id == 1 && brake_flag ==1){
+                            html2+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 3 && meal_id == 1 && brake_flag ==1){
+                            html3+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 4 && meal_id == 1 && brake_flag ==1){
+                            html4+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 5 && meal_id == 1 && brake_flag ==1){
+                            html5+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 6 && meal_id == 1 && brake_flag ==1){
+                            html6+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 7 && meal_id == 1 && brake_flag ==1){
+                            html7+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 8 && meal_id == 1 && brake_flag ==1){
+                            html8+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 9 && meal_id == 1 && brake_flag ==1){
+                            html9+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 10 && meal_id == 1 && brake_flag ==1){
+                            html10+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 11 && meal_id == 1 && brake_flag ==1){
+                            html11+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 1 && meal_id == 2 && brake_flag ==1){
+                            htmlD+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 2 && meal_id == 2 && brake_flag ==1){
+                            htmlD2+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 3 && meal_id == 2 && brake_flag ==1){
+                            htmlD3+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 4 && meal_id == 2 && brake_flag ==1){
+                            htmlD4+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 5 && meal_id == 2 && brake_flag ==1){
+                            htmlD5+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 6 && meal_id == 2 && brake_flag ==1){
+                            htmlD6+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 7 && meal_id == 2 && brake_flag ==1){
+                            htmlD7+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 8 && meal_id == 2 && brake_flag ==1){
+                            htmlD8+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 9 && meal_id == 2 && brake_flag ==1){
+                            htmlD9+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 10 && meal_id == 2 && brake_flag ==1){
+                            htmlD10+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 11 && meal_id == 2 && brake_flag ==1){
+                            htmlD11+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+
+                        $('.myanTran').html(html);
+                        $('.myanTran2').html(html2);
+                        $('.myanTran3').html(html3);
+                        $('.myanTran4').html(html4);
+                        $('.myanTran5').html(html5);
+                        $('.myanTran6').html(html6);
+                        $('.myanTran7').html(html7);
+                        $('.myanTran8').html(html8);
+                        $('.myanTran9').html(html9);
+                        $('.myanTran10').html(html10);
+                        $('.myanTran11').html(html11);
+                        $('.myanTranD').html(htmlD);
+                        $('.myanTranD2').html(htmlD2);
+                        $('.myanTranD3').html(htmlD3);
+                        $('.myanTranD4').html(htmlD4);
+                        $('.myanTranD5').html(htmlD5);
+                        $('.myanTranD6').html(htmlD6);
+                        $('.myanTranD7').html(htmlD7);
+                        $('.myanTranD8').html(htmlD8);
+                        $('.myanTranD9').html(htmlD9);
+                        $('.myanTranD10').html(htmlD10);
+                        $('.myanTranD11').html(htmlD11);
+                    });
+                }else{
+                    $.each(data.menu_items, function(i, v) {
+                        var itemName = [v.item_name,v.item_name_burmese];
+                        var photo_path =  '{{asset('/photo')}}'+ "/" + v.photo_path;
+                        var cuisine_type_id = v.cuisine_type_id;
+                        var meal_id =  v.meal_id;
+                        var brake_flag =  v.brake_flag;
+                        if(cuisine_type_id == 1 && meal_id == 1 && brake_flag ==1){
+                            html+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 2 && meal_id == 1 && brake_flag ==1){
+                                html2+=`
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                        <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                        <div style="height:40px;">
+                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                        </div>
+                                    </div>`;
+                        }
+                        if(cuisine_type_id == 3 && meal_id == 1 && brake_flag ==1){
+                            html3+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 4 && meal_id == 1 && brake_flag ==1){
+                            html4+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 5 && meal_id == 1 && brake_flag ==1){
+                            html5+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 6 && meal_id == 1 && brake_flag ==1){
+                            html6+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 7 && meal_id == 1 && brake_flag ==1){
+                            html7+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 8 && meal_id == 1 && brake_flag ==1){
+                            html8+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 9 && meal_id == 1 && brake_flag ==1){
+                            html9+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 10 && meal_id == 1 && brake_flag ==1){
+                            html10+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 11 && meal_id == 1 && brake_flag ==1){
+                            html11+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 1 && meal_id == 2 && brake_flag ==1){
+                            htmlD+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 2 && meal_id == 2 && brake_flag ==1){
+                            htmlD2+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 3 && meal_id == 2 && brake_flag ==1){
+                            htmlD3+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 4 && meal_id == 2 && brake_flag ==1){
+                            htmlD4+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 5 && meal_id == 2 && brake_flag ==1){
+                            htmlD5+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 6 && meal_id == 2 && brake_flag ==1){
+                            htmlD6+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 7 && meal_id == 2 && brake_flag ==1){
+                            htmlD7+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 8 && meal_id == 2 && brake_flag ==1){
+                            htmlD8+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 9 && meal_id == 2 && brake_flag ==1){
+                            htmlD9+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 10 && meal_id == 2 && brake_flag ==1){
+                            htmlD10+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        if(cuisine_type_id == 11 && meal_id == 2 && brake_flag ==1){
+                            htmlD11+=`
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                        }
+                        $('.myanTran').html(html);
+                        $('.myanTran2').html(html2);
+                        $('.myanTran3').html(html3);
+                        $('.myanTran4').html(html4);
+                        $('.myanTran5').html(html5);
+                        $('.myanTran6').html(html6);
+                        $('.myanTran7').html(html7);
+                        $('.myanTran8').html(html8);
+                        $('.myanTran9').html(html9);
+                        $('.myanTran10').html(html10);
+                        $('.myanTran11').html(html11);
+                        $('.myanTranD').html(htmlD);
+                        $('.myanTranD2').html(htmlD2);
+                        $('.myanTranD3').html(htmlD3);
+                        $('.myanTranD4').html(htmlD4);
+                        $('.myanTranD5').html(htmlD5);
+                        $('.myanTranD6').html(htmlD6);
+                        $('.myanTranD7').html(htmlD7);
+                        $('.myanTranD8').html(htmlD8);
+                        $('.myanTranD9').html(htmlD9);
+                        $('.myanTranD10').html(htmlD10);
+                        $('.myanTranD11').html(htmlD11);
+                    });
+                }
+            }
+        });
+
+
+    }
 
     function storeoption(){
         var mycart = localStorage.getItem('mycart');

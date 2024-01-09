@@ -66,7 +66,7 @@
 
         </form>
 
-        <ul class="nav nav-tabs customtab" role="tablist">
+        {{-- <ul class="nav nav-tabs customtab" role="tablist">
 
             @foreach($cuisine_types as $cuisine)
             <li class="nav-item" style="font-size:14px;">
@@ -83,11 +83,556 @@
                 </a>
             </li>
             @endforeach
+        </ul> --}}
+
+        <ul class="nav nav-tabs customtab row text-center"  role="tablist">
+
+            <li class="nav-item col">
+                <a class="nav-link" data-toggle="tab" href="#home" role="tab">Main Dish</a>
+              </li>
+              <li class="nav-item col">
+                  <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Drinks</a>
+              </li>
         </ul>
 
         <!-- Tab panes -->
+
+        <div class="tab-content" >
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <div class="container">
+                    <div class="nav_mobile">
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            @foreach($cuisine_types as $cuisine)
+                            @if ($cuisine->meal_id == 1)
+                            <li class="nav-item flex-shrink-0" style="font-size:14px;">
+                                <a class="nav-link" data-toggle="tab" href="#{{$cuisine->id}}" role="tab">
+                                    <span class="hidden-sm-up">
+                                        <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                        <span>{{$cuisine->name}}</span>
+                                    </span>
+                                    <span class="hidden-xs-down">
+                                        <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                        {{$cuisine->name}}
+                                    </span>
+                                </a>
+                            </li>
+                            @endif
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="1" role="tabpanel">
+                            <div class="row mt-3 myanTran">
+                                <div class="row mt-3">
+                                    @foreach($items as $item)
+                                    @if($item->cuisine_type_id == 1 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                        <div style="height:40px;">
+                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                        </div>
+
+
+                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="2" role="tabpanel">
+                            <div class="row mt-3 myanTran2">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="3" role="tabpanel">
+                            <div class="row mt-3 myanTran3">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 3 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="4" role="tabpanel">
+                            <div class="row mt-3 myanTran4">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 4 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+                        </div>
+
+                        <div class="tab-pane" id="5" role="tabpanel">
+                            <div class="row mt-3 myanTran5">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 5 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                <div class="tab-pane" id="2" role="tabpanel">
+
+                                    <div class="row mt-3">
+                                        @foreach($items as $item)
+                                        @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                        <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                            <div style="height:40px;">
+                                                <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                            </div>
+
+
+                                            {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </div>        </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="6" role="tabpanel">
+                            <div class="row mt-3 myanTran6">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 6 && $item->meal_id == 1   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="7" role="tabpanel">
+                            <div class="row mt-3 myanTran7">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 7 && $item->meal_id == 1   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="8" role="tabpanel">
+                            <div class="row mt-3 myanTran8">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 8  && $item->meal_id == 1 && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="9" role="tabpanel">
+                            <div class="row mt-3 myanTran9">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 9 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="10" role="tabpanel">
+                            <div class="row mt-3 myanTran10">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 10 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="11" role="tabpanel">
+                            <div class="row mt-3 myanTran11">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 11 && $item->meal_id == 1  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="profile" role="tabpanel">
+                <div class="container">
+                    <div class="nav_mobile">
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            @foreach($cuisine_types as $cuisine)
+                            @if ($cuisine->meal_id == 2)
+                            <li class="nav-item flex-shrink-0" style="font-size:14px;">
+                                <a class="nav-link" data-toggle="tab" href="#drink{{$cuisine->id}}" role="tab">
+                                    <span class="hidden-sm-up">
+                                        <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                        <span>{{$cuisine->name}}</span>
+                                    </span>
+                                    <span class="hidden-xs-down">
+                                        <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                        {{$cuisine->name}}
+                                    </span>
+                                </a>
+                            </li>
+                            @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane " id="drink1" role="tabpanel">
+                            <div class="row mt-3 myanTranD">
+                            @foreach($items as $item)
+                            @if($item->cuisine_type_id == 1 && $item->meal_id == 2   && $item->brake_flag == 1)
+                            {{-- modify css  --}}
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                <div style="height:40px;">
+                                    <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                </div>
+                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                            </div>
+                            @endif
+                            @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane active" id="drink2" role="tabpanel">
+
+                            <div class="row mt-3 myanTranD2">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 2  && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="drink3" role="tabpanel">
+                            <div class="row mt-3 myanTranD3">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 3  && $item->meal_id == 2  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="drink4" role="tabpanel">
+                            <div class="row mt-3 myanTranD4">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 4 && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+                        </div>
+
+                        <div class="tab-pane" id="drink5" role="tabpanel">
+                            <div class="row mt-3 myanTranD5">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 5  && $item->meal_id == 2  && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                <div class="tab-pane" id="drink2" role="tabpanel">
+
+                                    <div class="row mt-3">
+                                        @foreach($items as $item)
+                                        @if($item->cuisine_type_id == 2  && $item->meal_id == 2  && $item->brake_flag == 1)
+
+                                        <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                            <div style="height:40px;">
+                                                <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                            </div>
+
+
+                                            {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </div>        </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="drink6" role="tabpanel">
+                            <div class="row mt-3 myanTranD6">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 6  && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="drink7" role="tabpanel">
+                            <div class="row mt-3 myanTranD7">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 7 && $item->meal_id == 2    && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane active" id="drink8" role="tabpanel">
+                            <div class="row mt-3 myanTranD8">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 8 && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="drink9" role="tabpanel">
+                            <div class="row mt-3 myanTranD9">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 9 && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="drink10" role="tabpanel">
+                            <div class="row mt-3 myanTranD10">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 10 && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                        <div class="tab-pane" id="drink11" role="tabpanel">
+                            <div class="row mt-3 myanTranD11">
+                                @foreach($items as $item)
+                                @if($item->cuisine_type_id == 11 && $item->meal_id == 2   && $item->brake_flag == 1)
+
+                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
+                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                    </div>
+
+
+                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                </div>
+                                @endif
+                                @endforeach
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tab-content">
-            <div class="tab-pane active" id="1" role="tabpanel">
+            {{-- <div class="tab-pane active" id="1" role="tabpanel">
 
                 <div class="row mt-3">
                 @foreach($items as $item)
@@ -107,7 +652,6 @@
                 @endforeach
                 </div>
             </div>
-
             <div class="tab-pane" id="2" role="tabpanel">
 
                 <div class="row mt-3">
@@ -128,7 +672,6 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="tab-pane" id="3" role="tabpanel">
                 <div class="row mt-3">
                     @foreach($items as $item)
@@ -148,7 +691,6 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="tab-pane" id="4" role="tabpanel">
                 <div class="row mt-3">
                     @foreach($items as $item)
@@ -168,7 +710,6 @@
                     @endforeach
                     </div>
             </div>
-
             <div class="tab-pane" id="5" role="tabpanel">
                 <div class="row mt-3">
                     @foreach($items as $item)
@@ -189,7 +730,6 @@
                     </div>
 
             </div>
-
             <div class="tab-pane" id="6" role="tabpanel">
                 <div class="row mt-3">
                     @foreach($items as $item)
@@ -309,7 +849,7 @@
                     @endforeach
                     </div>
 
-            </div>
+            </div> --}}
 
             <div class="modal fade" id="remark_table_modal" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-m" role="document">

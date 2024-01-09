@@ -150,7 +150,7 @@
                                    <?php $total = $voucher->total_price - ($voucher->discount_value/100) * $voucher->total_price ; ?>
                                     <div style="text-align:right;margin-right:10px;margin-top:20px;font-size:17px;font-weight:bold;">
                                         <strong>Voucher Total - {{$voucher->total_price}}</strong><br>
-                                        <strong>Discount - {{$voucher->discount_value}} %</strong><br>
+                                        <strong>Discount - {{($voucher->discount_value / $voucher->total_price)* 100  }} %</strong><br>
                                         <strong>Total - {{$total}}</strong><br>
                                         <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                          <strong>Change - {{$voucher->change_value}}</strong><br>
@@ -162,7 +162,7 @@
                                    <?php $total = $voucher->total_price - $voucher->discount_value; ?>
                                     <div style="text-align:right;margin-right:10px;margin-top:20px;font-size:17px;font-weight:bold;">
                                         <strong>Voucher Total - {{$voucher->total_price}}</strong><br>
-                                        <strong>Discount - {{$voucher->discount_value}} </strong><br>
+                                        <strong>Discount - {{($voucher->discount_value / $voucher->total_price)* 100  }}  </strong><br>
                                         <strong>Total - {{$total}}</strong><br>
                                         <strong>Pay - {{$voucher->pay_value}}</strong><br>
                                         <strong>Change - {{$voucher->change_value}}</strong><br>
@@ -172,7 +172,11 @@
                                    </div>
                                     @endif
                                     <div style="text-align:right;margin-right:10px;font-size:17px;font-weight:bold;">
-                                        <strong>Payment - @if($voucher->pay_type == 1)Bank @else Cash @endif </strong><br>
+                                        <strong>Payment - @if($voucher->pay_type == 1)Bank @if ($voucher->pay_remark != null)
+                                            ({{$voucher->pay_remark}})
+                                        @endif @else Cash @if ($voucher->pay_remark != null)
+                                        ({{$voucher->pay_remark}})
+                                    @endif  @endif </strong><br>
                                     </div>
 
                                     <h6  style="text-align:center;margin-top:10px;" >**Thanks You***</h6>

@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <select class="form-control custom-select shopOrdelivery">
                                     <option value="1">Shop</option>
-                                    {{-- <option value="2">Delivery</option> --}}
+                                    <option value="2">Delivery</option>
                                 </select>
                             </div>
                         </div>
@@ -179,50 +179,101 @@
 
                                     <div class=" py-5 text-dark" style="font-weight: 500;">
                                         <div class="row text-success sale_count_header">
-                                            <div class="col-md-5 offset-md-2 text-center">Name</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Name</div>
+                                            <div class="col-md-2">
+                                                <p></p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p>Value</p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Food Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Food Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="total_qty_all" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Drink Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Drink Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="total_qty_drink" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Foc Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Foc Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="focTotal" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Discount Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Discount Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span class="text-danger" style="font-weight:bold"
                                                         id="disTotal"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Tax Total(5%)</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Tax Total(5%)</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span class="text-danger" style="font-weight:bold"
                                                         id="taxTotal"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Net Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Service Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p><span id="serviceTotal" class="text-danger"
+                                                        style="font-weight:bold"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 offset-md-2 text-center">Net Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="netTotal" class="text-danger"
+                                                        style="font-weight:bold"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 offset-md-2 text-center">Bank Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p><span id="bankTotal" class="text-danger"
+                                                        style="font-weight:bold"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 offset-md-2 text-center">Cash Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p><span id="cashTotal" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
@@ -310,28 +361,39 @@
                                 <div class="card-body ">
                                     <div class=" py-5 text-dark" style="font-weight: 500;">
                                         <div class="row text-success sale_count_header">
-                                            <div class="col-md-5 offset-md-2 text-center">Name</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Name</div>
+                                            <div class="col-md-2">
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p>Value</p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Table Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Table Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="tableTotal" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Room Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Room Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="roomTotal" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 offset-md-2 text-center">Spa Total</div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 offset-md-2 text-center">Spa Total</div>
+                                            <div class="col-md-2">
+                                                <p>-</p>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <p><span id="spaTotal" class="text-danger"
                                                         style="font-weight:bold"></span></p>
                                             </div>
@@ -386,6 +448,7 @@
             var table_total = 0;
             var room_total = 0;
             var spa_total = 0;
+            var ownerB_total = 0;
 
             var discountTotalValue = 0;
             var netTableTotal = 0;
@@ -400,6 +463,8 @@
             var discountFoc = 0;
             var service_charges = 0;
             var netTax = 0;
+            var bank_total = 0;
+            var cash_total = 0;
             console.log(data);
             // console.log(data.total_qty.length);
             $.each(data.options, function(i, v) {
@@ -466,6 +531,7 @@
                 // console.log('vou total price', vou.total_price);
                 // console.log('final total ', FinalTotal);
                 foc_total += vou.foc_value;
+                service_total += vou.total_price * (vou.service_value / 100)
                 if (vou.discount_type == 2) {
                     discount_total2 += vou.total_price * (vou.discount_value / 100);
                 } else if (vou.discount_type == 3) {
@@ -482,121 +548,54 @@
                 // service_total += FinalTotal * (vou.service_value / 100);
                 tax_total = FinalTotal * (5 / 100);
                 // net_total += vou.net_price;
+                if(vou.pay_type == 1){
+                    bank_total += vou.total_price
+                } else if(vou.pay_type == 2){
+                    cash_total += vou.total_price
+                }
             })
 
-            //shoper_order->voucher_id == Vouchers->id
-            $.each(data.shop_orders,function(i,shopOrder){
-                let netVou = 0;
-                $.each(data.voucher_lists,function(j,vou){
-                    if(shopOrder.voucher_id == vou.id){
-
-                        // if(shopOrder.table_id <= 50){
-                        //     console.log('vou listssssss',shopOrder.table_id);
-                        //     // console.log('vouchers with tables',vou);
-                        //     // foc += vou.foc_value;
-                        //     if(vou.discount_type == 1){
-                        //         discountFoc = 0;
-                        //     }
-                        //     // console.log('discountFoc',discountFoc);
-                        //     if (vou.discount_type == 2) {
-                        //         discountValuePercent = (vou.total_price * (vou.discount_value / 100));
-                        //     }
-                        //     // console.log('discountValuePercent',discountValuePercent);
-                        //     if (vou.discount_type == 3) {
-                        //         // discount1 = vou.discount_value;
-                        //         discountValueAmount = vou.discount_value;
-                        //     }
-                        //     // console.log('discountValueAmount',discountValueAmount);
-                        //     // console.log('discountValueAmount',discountValueAmount);
-                        //     discountValue = parseInt(discountValuePercent + discountValueAmount);
-                        //     // console.log('Total ===? ',discountValue);
-                        //     tax = vou.total_price * (5/100);
-                        //     // netTax += tax;
-                        //     service_charges = vou.total_price *  (vou.service_value / 100);
-                        //     netTablePrice = vou.total_price - (0 + tax );
-                        //     // console.log('netTablePrice',netTablePrice);
-
-                        //     console.log('table id',shopOrder.table_id,'table total',netTablePrice);
-                        //     netTableTotal += netTablePrice;
-                        //     // console.log('total_price',vou.total_price);
-                        //     // console.log('total_price percentage',vou.total_price * (5/100));
-                        //     // console.log('tax',tax);
-
-                        //     // console.log('service_charges',service_charges);
-                        //     // console.log('netTax ',netTax);
-                        //     // netTableTotal += vou.total_price - (foc + discountValue + tax);
-
-                        //     // tables = shopOrder.table_id;
-                        //     // console.log('Tables',shopOrder.table_id);
+            // Vouchers->id , Table Id
+            $.each(data.voucher_lists,function(j,vou){
+                    if(vou.table_id <= 50){
+                        // console.log('vou listssssss',vou.table_id);
+                        // if(vou.discount_type == 1){
+                        //     discountFoc = 0;
                         // }
-                        if(shopOrder.table_id > 50 && shopOrder.table_id <= 92){
-                            // console.log('vou listssssss',shopOrder.table_id);
-                            // console.log('vouchers with rooms',vou);
-                            netRoomTotal += vou.total_price;
-                             // console.log('vouchers with tables',vou);
-                            // foc += vou.foc_value;
-                            if(vou.discount_type == 1 && vou.discount_type == null){
-                                discountValuePercent = 0;
-                                discountValueAmount = 0;
-                            }
-                            // console.log('discountFoc',discountFoc);
-                            if (vou.discount_type == 2) {
-                                discountValuePercent = (vou.total_price * (vou.discount_value / 100));
-                            }
-                            // console.log('discountValuePercent',discountValuePercent);
-                            if (vou.discount_type == 3) {
-                                // discount1 = vou.discount_value;
-                                discountValueAmount = vou.discount_value;
-                            }
-                            // console.log('discountValueAmount',discountValueAmount);
-                            // console.log('discountValueAmount',discountValueAmount);
-                            discountValue = parseInt(discountValuePercent + discountValueAmount);
-                            // console.log('Total ===? ',discountValue);
-                            tax = vou.total_price * (5/100);
-                            // netTax += tax;
-                            var roomPriceTotal = 0;
-
-                            service_charges = vou.total_price *  (vou.service_value / 100);
-                            netRoomPrice = vou.total_price - (0 + tax );
-                            netVou += netRoomPrice;
-                            // roomPriceTotal += netRoomPrice;
-                            // console.log('table id',shopOrder.table_id,'Room total',netVou);
-                            // console.log('Room total',netRoomPrice);
-                            // console.log('total_price',vou.total_price);
-                            // console.log('total_price percentage',vou.total_price * (5/100));
-                            // console.log('Room tax',tax);
-
-                            // console.log('service_charges',service_charges);
-                            // console.log('netTax Room',netTax);
-                            // netTableTotal += vou.total_price - (foc + discountValue + tax);
-
-                            // tables = shopOrder.table_id;
-                            // console.log('Tables',shopOrder.table_id);
-                            // console.log('netTablePrice adding netRoomPrice',netRoomTotal);
-                        }
-
-                        // console.log('netTableTotal',netTableTotal);
-                        // console.log('netRoomTotal',netRoomTotal);
-                        // console.log('Totallllllllllll',netRoomTotal+netTableTotal);
-                        // if(shopOrder.table_id <= 98){
-                        //     console.log('vouchers with spa',vou);
-                        //     // spa = shopOrder.table_id
-                        //     // console.log('Spa',shopOrder.table_id);
+                        // if (vou.discount_type == 2) {
+                        //     discountValuePercent = (vou.total_price * (vou.discount_value / 100));
                         // }
-                        // if(shopOrder.table_id > 98){
-                        //     console.log('vouchers with owner and band',vou);
-                        //     // ownerAndBand = shopOrder.table_id;
-                        //     console.log('Table id ->',shopOrder.table_id);
+                        // if (vou.discount_type == 3) {
+                        //     discountValueAmount = vou.discount_value;
                         // }
+                        // discountValue = parseInt(discountValuePercent + discountValueAmount);
+                        // tax = vou.total_price * (5/100);
+                        // service_charges = vou.total_price *  (vou.service_value / 100);
+                        // netTablePrice = vou.total_price - (0 + tax );
+                        // console.log('table id',vou.table_id,'table total',netTablePrice);
+                        // netTableTotal += netTablePrice;
+                        table_total += vou.net_price;
                     }
-                })
-            });
-
+                    if(vou.table_id > 50 && vou.table_id <= 92){
+                        room_total += vou.net_price;
+                    }
+                    if(vou.table_id > 92 && vou.table_id <= 98){
+                        spa_total += vou.net_price;
+                    }
+                    if(vou.table_id > 98){
+                        ownerB_total += vou.net_price;
+                    }
+            })
+            console.log('Table Total',table_total);
+            console.log('Room Total',room_total);
+            console.log('Spa Total',spa_total);
+            console.log('Owner and Bank Total',ownerB_total);
 
             //shoper_order->voucher_id == Vouchers->id
 
 
             net_total = (total + totalD) - (foc_total + discountTotalValue + tax_total);
+
             // console.log('net_total' + net_total);
             $('.salecountlists').html(html);
             $('#total_qty').html(total_qty);
@@ -611,10 +610,13 @@
             $('#disTotal').html(discountTotalValue);
             $('#taxTotal').html(tax_total);
             $('#netTotal').html(net_total);
+            $('#serviceTotal').html(service_total);
 
             $('#tableTotal').html(table_total);
             $('#roomTotal').html(room_total);
             $('#spaTotal').html(spa_total);
+            $('#bankTotal').html(bank_total);
+            $('#cashTotal').html(cash_total);
 
             var html2 = "";
             if (data.total_qty.length == 0) {

@@ -20,6 +20,7 @@
         "prooph/common": "^4.0.0",
         "pusher/pusher-php-server": "~4.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
+        "stichoza/google-translate-php": "^5.1",
         "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {

@@ -1163,7 +1163,6 @@ class SaleController extends Controller
         try {
 
             $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
-
             if(empty($shop_order)){
 
                 return response()->json(['error' => 'Something Wrong! Cannot Checkbill again']);
@@ -1200,8 +1199,6 @@ class SaleController extends Controller
 
         $re_date = $date->format('Y-m-d');
 
-        $service_value = $request->service_value;
-
         $pay_type = $request->pay_type;
 
         foreach ($shop_order->option as $option) {
@@ -1211,6 +1208,13 @@ class SaleController extends Controller
         }
         //  dd($request->change_amount_dis);
 
+        // tax value Start
+        $tax_value = $total * 0.05;
+
+        $net_price = $total - ($total  * ($request->discount_value / 100) + $tax_value);
+        // tax value End
+
+        $table_id = $shop_order->table_id;
 
 
         $voucher = Voucher::create([
@@ -1225,30 +1229,30 @@ class SaleController extends Controller
             'foc_value'=> 0,
             'discount_flag' => 0,
             'tax_flag' => 0,
-            'tax_value' => 0,
-            'net_price' => 0,
+            'tax_value' => $tax_value,
             'pay_type' => $pay_type,
+            'table_id' => $table_id,
+            'net_price' => $net_price,
+            // 'pay_remark' => $pay_remark
         ]);
-        // if(!empty($request->service_value)){
-        //     $voucher->service_value = $request->service_value;
-        // }else{
-        //     $voucher->service_value = 10;
-        // }
+        // $voucher->net_price = 5;
         if($request->discount_type !=null && $request->discount_value != null){
             $voucher->discount_type = $request->discount_type;
-            $voucher->discount_value = $request->discount_value;
+            if($voucher->discount_type == 2){
+                $voucher->discount_value = $total * ($request->discount_value / 100);
+            }else if($voucher->discount_type == 3){
+                $voucher->discount_value = $request->discount_value;
+            }
+            // $voucher->discount_value = $request->discount_value;
             $voucher->pay_value = $request->pay_amount;
             $voucher->change_value = $request->change_amount;
-            // $voucher->service_value = $request->service_value;
         }else{
             $voucher->pay_value = $request->pay_amount_dis;
             $voucher->change_value = $request->change_amount_dis;
-            // $voucher->service_value = $request->service_value;
         }
         if($request->promotion !=0 && $request->promotionvalue !=0){
             $voucher->promotion = $request->promotion;
             $voucher->promotion_value = $request->promotionvalue;
-            // $voucher->service_value = $request->service_value;
         }
 
         if($request->service_value != 0 && $request->service_value != null){
@@ -1257,9 +1261,13 @@ class SaleController extends Controller
             $voucher->service_value = 0;
         }
 
+        $voucher->pay_remark = $request->pay_remark;
+
         $voucher->voucher_code = "VOU-".date('dmY')."-".sprintf("%04s", $voucher->id);
 
         $voucher->save();
+
+        // dd($table_id);
 
         foreach ($shop_order->option as $option) {
 
@@ -1743,7 +1751,7 @@ class SaleController extends Controller
         $mealItem2 = MenuItem::where('meal_id',2)->get();
         $order->delete();
         DB::table('option_shop_order')->where('shop_order_id',$id)->delete();
-        return view('Sale.kitchen_details', compact('pending_order_details','total_qty','total_price','table_number','notes','option_id','mealItem1','mealItem2'));
+        return view('Sale.kitchen_Details', compact('pending_order_details','total_qty','total_price','table_number','notes','option_id','mealItem1','mealItem2'));
 
 
 

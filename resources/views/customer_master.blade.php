@@ -121,6 +121,21 @@
                 <ul class="navbar-nav mr-auto mt-md-0">
                     <img src="{{asset('image/UpperDeck.png')}}" alt="" width="55px" height="55px" class="mt-3">
                     <h2 class="text-white font-weight-bold font-italic ml-2 mt-3">Upper Deck Bar & Restraurant</h2>
+
+                    {{-- Language Drop Down Start --}}
+                    {{-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach (Config::get('languages') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}"></span> {{$language['display']}}</a>
+                            @endif
+                        @endforeach
+                        </div>
+                    </li> --}}
+                    {{-- Language Drop Down End --}}
                 </ul>
             </div>
         </nav>

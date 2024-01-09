@@ -26,10 +26,11 @@ class Voucher extends Model
         'discount_flag',
         'tax_flag',
         'tax_value',
-        'net_price',
         'pay_type',
         'service_value',
-        'pay_remark'
+        'pay_remark',
+        'table_id',
+        'net_price'
     ];
 
     public function option() {
