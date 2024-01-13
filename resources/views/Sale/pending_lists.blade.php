@@ -32,6 +32,7 @@
                                 <th>Order Number</th>
                                 <th>Table Number</th>
                                 <th>Action</th>
+                                <th>Ordered Time</th>
                             </tr>
                         </thead>
                         <tbody>

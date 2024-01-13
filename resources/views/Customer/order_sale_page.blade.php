@@ -29,7 +29,7 @@
 
 @section('content')
  <div class="row flex-column-reverse flex-md-row " style="margin:50px 0 0 0;">
-        <div class="card col-md-6">
+        <div class="card col-md-12">
 
 
 
@@ -84,14 +84,17 @@
 
                 <input type="hidden" id="deli_order_id" name="deli_order_id">
             </form>
-                <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2 offset-md-5">
                     <div class="form-group">
-                        <select class="form-control custom-select engMyanTran"  id="eng_myan" onclick="engMyanTranslate(this)">
-                            <option value="1">English</option>
-                            <option value="2">Myanmar</option>
+                        <select class="form-control custom-select engMyanTran text-center btn btn-info text-white"  id="eng_myan" onclick="engMyanTranslate(this)">
+                            <option value="1">En</option>
+                            <option value="2">မြန်</option>
                         </select>
                     </div>
                 </div>
+            </div>
+
 
             <ul class="nav nav-tabs customtab row text-center"  role="tablist">
 
@@ -708,7 +711,7 @@
 
 
          <!-- Modal -->
-         <div class="modal fade hidden-sm-up" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -772,7 +775,7 @@
 
     <div class="container" style="bottom:20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
         <!-- Start Button trigger modal -->
-        <a type="button" class="btn hidden-sm-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-cart-shopping text-danger"></i>
         </a>
         <!-- End Button trigger modal -->

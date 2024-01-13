@@ -95,7 +95,7 @@
                                                 <a href="{{route('customercanceldetail', ['order_id' => $pending_order_details->id, 'option_id' => $option->id])}}"><span class="badge-pill badge-danger">-</span></a></td>
                                                 @endif
                                             </td>
-                                            customer/store                                   </tr>
+                                        </tr>
                                         @endforeach
                                         {{-- @endif --}}
                                 </table>

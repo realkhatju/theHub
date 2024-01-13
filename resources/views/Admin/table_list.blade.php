@@ -101,10 +101,10 @@
 
     <div class="col-md-3 col-3 align-self-center">
         <div class="d-flex m-t-10 justify-content-end">
-             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create_item_type">
+             {{-- <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create_item_type">
                 <i class="fas fa-plus"></i>
                 Add Table Type
-            </a>
+            </a> --}}
         </div>
 
         <div class="modal fade" id="create_item_type" role="dialog" aria-hidden="true">

@@ -53,7 +53,7 @@
 
                    <select class="form-control custom-select shopOrdelivery">
                        <option value="1">Shop</option>
-                       <option value="2">Delivery</option>
+                       {{-- <option value="2">Delivery</option> --}}
                        <option value="3">Total</option>
                    </select>
                </div>
@@ -335,7 +335,7 @@
             $('#total_sales').text(tot_sale);
             $('#profit').text(tot_sale-data.expenses_indate_amount);
 
-            
+
             $('#report').show();
             $('.allShopAndDeliZero').show();
 

@@ -30,13 +30,12 @@
                 <div class="row">
                     <div class="col-md-12" style="text-align:center;">
                         <div class="row justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;">Order Number</strong>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
+                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number --- {{$pending_order_details->order_number}}</h5></strong>
+
                         </div>
 
                         <div class="row mt-1 justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;">Table Name</strong>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
+                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name --- {{$pending_order_details->table->table_number??"Take Away"}}</h5></strong>
                         </div>
                     </div>
 

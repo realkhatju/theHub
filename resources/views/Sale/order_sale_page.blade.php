@@ -27,7 +27,7 @@
 
 @section('content')
 
-<div class="row flex-column-reverse flex-md-row ">
+<div class="row flex-md-row ">
 
     <div class="card col-md-6">
 

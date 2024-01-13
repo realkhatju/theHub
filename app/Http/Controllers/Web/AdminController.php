@@ -524,7 +524,7 @@ class AdminController extends Controller
             // dd($tableno->table_id);
             // console.log($option_name , $orders);
             $date = new DateTime('Asia/Yangon');
-             $real_date = $date->format('d-m-Y h:i:s');
+            $real_date = $date->format('d-m-Y h:i:s');
 
              $wname = session()->get('user')->name;
             $name = [];

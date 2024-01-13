@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <select class="form-control custom-select shopOrdelivery">
                                     <option value="1">Shop</option>
-                                    <option value="2">Delivery</option>
+                                    {{-- <option value="2">Delivery</option> --}}
                                 </select>
                             </div>
                         </div>
@@ -155,9 +155,6 @@
                                     <a href="#jdfslfjs" class="nav-link" data-toggle="tab" aria-expanded="false">Table &
                                         Room</a>
                                 </li>
-                                {{-- <li class="nav-item">
-                            <a href="#jflsdfjlsll" class="nav-link" data-toggle="tab" aria-expanded="false">Summary Net Price</a>
-                        </li> --}}
                             </ul>
 
                         </div>
@@ -524,30 +521,13 @@
             $.each(data.voucher_lists, function(i, vou) {
                 if(vou.discount_type == 1){
                     foc_total += vou.total_price;
-                    // console.log('Foc Voucher Value => ',vou.total_price);
                 }
                 FinalTotal = total + totalD;
-                // console.log('vou', vou);
-                // console.log('vou total price', vou.total_price);
-                // console.log('final total ', FinalTotal);
                 foc_total += vou.foc_value;
                 service_total += vou.total_price * (vou.service_value / 100)
-                if (vou.discount_type == 2) {
-                    discount_total2 += vou.total_price * (vou.discount_value / 100);
-                } else if (vou.discount_type == 3) {
-                    discount_total1 += vou.discount_value;
-                }
-                discountTotalValue = discount_total2 + discount_total1;
-                taxTotal = (FinalTotal - discountTotalValue) * (5 / 100);
-                // console.log('Tax Total', taxTotal);
-                // console.log('discountTotalValue',discountTotalValue);
-                // console.log('discount2',discount_total2);
-                // console.log('discount3',discount_total1);
-
-                // console.log('Discount Value', discountTotalValue);
-                // service_total += FinalTotal * (vou.service_value / 100);
-                tax_total = FinalTotal * (5 / 100);
-                // net_total += vou.net_price;
+                discountTotalValue += vou.discount_value;
+                // taxTotal = (FinalTotal - discountTotalValue) * (5 / 100);
+                tax_total += vou.tax_value;
                 if(vou.pay_type == 1){
                     bank_total += vou.total_price
                 } else if(vou.pay_type == 2){
@@ -558,22 +538,6 @@
             // Vouchers->id , Table Id
             $.each(data.voucher_lists,function(j,vou){
                     if(vou.table_id <= 50){
-                        // console.log('vou listssssss',vou.table_id);
-                        // if(vou.discount_type == 1){
-                        //     discountFoc = 0;
-                        // }
-                        // if (vou.discount_type == 2) {
-                        //     discountValuePercent = (vou.total_price * (vou.discount_value / 100));
-                        // }
-                        // if (vou.discount_type == 3) {
-                        //     discountValueAmount = vou.discount_value;
-                        // }
-                        // discountValue = parseInt(discountValuePercent + discountValueAmount);
-                        // tax = vou.total_price * (5/100);
-                        // service_charges = vou.total_price *  (vou.service_value / 100);
-                        // netTablePrice = vou.total_price - (0 + tax );
-                        // console.log('table id',vou.table_id,'table total',netTablePrice);
-                        // netTableTotal += netTablePrice;
                         table_total += vou.net_price;
                     }
                     if(vou.table_id > 50 && vou.table_id <= 92){
@@ -590,13 +554,7 @@
             console.log('Room Total',room_total);
             console.log('Spa Total',spa_total);
             console.log('Owner and Bank Total',ownerB_total);
-
-            //shoper_order->voucher_id == Vouchers->id
-
-
             net_total = (total + totalD) - (foc_total + discountTotalValue + tax_total);
-
-            // console.log('net_total' + net_total);
             $('.salecountlists').html(html);
             $('#total_qty').html(total_qty);
             $('#total_qty_all').html(total);

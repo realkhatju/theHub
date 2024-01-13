@@ -1157,9 +1157,6 @@ class SaleController extends Controller
 	}
 
     protected function storeShopOrderVoucher(Request $request){
-
-        // dd($request->all());
-
         try {
 
             $shop_order = ShopOrder::where('id',$request->order_id)->where('status','1')->first();
@@ -1206,16 +1203,9 @@ class SaleController extends Controller
 
             $total_qty += $option->pivot->quantity;
         }
-        //  dd($request->change_amount_dis);
-
         // tax value Start
         $tax_value = $total * 0.05;
-
-        $net_price = $total - ($total  * ($request->discount_value / 100) + $tax_value);
-        // tax value End
-
         $table_id = $shop_order->table_id;
-
 
         $voucher = Voucher::create([
             'sale_by' => $user_code,
@@ -1232,18 +1222,14 @@ class SaleController extends Controller
             'tax_value' => $tax_value,
             'pay_type' => $pay_type,
             'table_id' => $table_id,
-            'net_price' => $net_price,
-            // 'pay_remark' => $pay_remark
         ]);
-        // $voucher->net_price = 5;
-        if($request->discount_type !=null && $request->discount_value != null){
+        if($request->discount_type != null && $request->discount_value != null){
             $voucher->discount_type = $request->discount_type;
             if($voucher->discount_type == 2){
                 $voucher->discount_value = $total * ($request->discount_value / 100);
             }else if($voucher->discount_type == 3){
                 $voucher->discount_value = $request->discount_value;
             }
-            // $voucher->discount_value = $request->discount_value;
             $voucher->pay_value = $request->pay_amount;
             $voucher->change_value = $request->change_amount;
         }else{
@@ -1259,6 +1245,15 @@ class SaleController extends Controller
             $voucher->service_value = $request->service_value;
         }else{
             $voucher->service_value = 0;
+        }
+
+        if($request->discount_type == 1){
+            $voucher->net_price = 0;
+            $voucher->discount_value = 0;
+            $voucher->tax_value = 0;
+            $voucher->service_value = 0;
+        }else{
+            $voucher->net_price = $total - ($voucher->discount_value + $voucher->tax_value);
         }
 
         $voucher->pay_remark = $request->pay_remark;

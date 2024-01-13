@@ -32,13 +32,11 @@
                     <div class="col-md-12" style="text-align:center;">
                         <strong style="font-size:17px;font-weight:bold;">Main Dish</strong>
                         <div class="row justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;">Order Number</strong>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</h5>
+                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number ---  {{$pending_order_details->order_number}}</h5></strong>
                         </div>
 
                         <div class="row mt-1 justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;">Table Name</strong>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
+                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</h5></strong>
                         </div>
                     </div>
 
@@ -102,7 +100,7 @@
 </div>
 @endif
 <div class="row justify-content-center mt-4">
-<div class="col-md-5 printableArea1" style="width:45%;">
+<div class="col-md-5 printableArea2" style="width:45%;">
     <div class="card shadow">
         <div class="card-header">
             <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
@@ -112,14 +110,12 @@
                 <div class="col-md-12" style="text-align:center;">
                     <strong style="font-size:17px;font-weight:bold;">Drink</strong>
                     <div class="row justify-content-center">
-                        <strong style="font-size:17px;font-weight:bold;">Order Number</strong>
-                        <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->order_number}}</strong></h5>
-                        </div>
+                        <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number ---  {{$pending_order_details->order_number}}</h5></strong>
+                    </div>
 
-                        <div class="row mt-1 justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;">Table Name</strong>
-                            <h5 class="font-weight-bold col-md-4 mt-1">{{$pending_order_details->table->table_number??"Take Away"}}</h5>
-                        </div>
+                    <div class="row mt-1 justify-content-center">
+                        <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</h5></strong>
+                    </div>
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive">
