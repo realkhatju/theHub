@@ -43,8 +43,8 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <address>
-                                    <h4 class="font-weight-bold"> &nbsp;<b class="text-center">The Hub&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b></h4>
-                                        <h5 class="font-weight-bold">Restaurant</h5>
+                                    <h4 class="font-weight-bold"> &nbsp;<b class="text-center">Upper&nbsp;Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b></h4>
+                                        <h5 class="font-weight-bold">Bar & Restaurant</h5>
                                 </address>
                             </div>
 

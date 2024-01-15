@@ -96,6 +96,12 @@ Route::group(['middleware' => ['UserAuth']], function () {
     //Mobile Print
     Route::post('mobile-print','Web\AdminController@mobileprint');
     Route::post('add-mobile-print','Web\AdminController@addmobileprint');
+
+    // Print Status
+    Route::post('printStatusUpdate','Web\AdminController@printStatusUpdate');
+
+    //Mobile Print Pending Order
+    Route::post('mobile-print-pendingOrder','Web\AdminController@mobilePrintPendingOrder');
     /*
     Route::get('Stock-Dashboard', 'Web\StockController@getStockPanel')->name('stock_dashboard');
     Route::get('Sale-Dashboard', 'Web\SaleController@getSalePanel')->name('sale_panel');
@@ -215,7 +221,7 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::get('sale-record', 'Web\AdminController@saleRecord')->name('sale_record');
 
     //notification start
-    // Route::post('getnotification', 'Web\SaleController@notification')->name('getnotification');
+    Route::post('getnotification', 'Web\SaleController@notification')->name('getnotification');
     // Route::get('notifications',[NotificationController::class,'index'])->name('admin#notifications');
 
     // Route::get('notifications',[NotificationController::class,'index'])->name('admin#notifications');

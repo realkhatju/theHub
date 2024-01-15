@@ -78,6 +78,7 @@
                         <img src="{{ asset('image/UpperDeck.png') }}" alt="" width="55px" height="55px">
                         <h2 class="text-white font-weight-bold font-italic ml-2 mt-2">Upper Deck Bar & Restraurant</h2>
                         <input type="hidden" id="unique_role" value="{{ session()->get('user')->role_flag }}">
+
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
@@ -312,10 +313,15 @@
                     @yield('place')
                 </div>
 
+
+
                 @yield('content')
 
             </div>
             <div id="mobileprint" class="d-none">
+
+            </div>
+            <div id="pending" class="d-none">
 
             </div>
             <!-- ============================================================== -->
@@ -383,9 +389,6 @@
     <script src="{{ asset('assets/js/Chart.bundle.min.js') }}"></script>
 
     <script src="https://js.pusher.com/4.3.1/pusher.min.js"></script>
-
-
-
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -463,10 +466,10 @@
     <script>
         setInterval(() => {
             var rolename = $('#unique_role').val();
-
             // alert(rolename);
             var mobileprint = localStorage.getItem('mobileprint');
-            if (rolename == 1) {
+            // Casher Main Dish
+            if (rolename == 2) {
                 //    alert(rolename);
 
                 $.ajax({
@@ -485,138 +488,319 @@
                         }
 
                         if (data) {
+                                if (data.order_table.id > mobileprint) {
+                                            var items = ``;
+                                            var jj = 0;
+                                            $.each(data.name, function(i, v) {
 
-                            if (data.order_table.id > mobileprint) {
-                                var items = ``;
-                                var jj = 0;
-                                $.each(data.name, function(i, v) {
+                                                if (v.menu_item.cuisine_type_id == 1) {
+                                                    items += `
+                                    <tr style="width:100%; font-size:12px">
+                                        <td>(Salad)</td>
+                                        <td>${v.menu_item.item_name}</td>
+                                        <td>${v.name}</td>
+                                        <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
+                                    </tr>
+                                    <tr>
+                                    <th class="text-danger font-weight-bold">Notes</th>
+                                    <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
+                                    </tr>
+                                    `;
+                                                } else if (v.menu_item.cuisine_type_id == 2) {
+                                                    items += `
+                                    <tr style="width:100%; font-size:12px">
+                                        <td>(Breakfast)</td>
+                                        <td>${v.menu_item.item_name}</td>
+                                        <td>${v.name}</td>
+                                        <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
+                                    </tr>
+                                    <tr>
+                                    <th class="text-danger font-weight-bold">Notes</th>
+                                    <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
+                                    </tr>
+                                    `;
+                                                } else if (v.menu_item.cuisine_type_id == 3) {
+                                                    items += `
+                                    <tr style="width:100%; font-size:12px">
+                                        <td>(Healthy Food)</td>
+                                        <td>${v.menu_item.item_name}</td>
+                                        <td>${v.name}</td>
+                                        <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
+                                    </tr>
+                                    <tr>
+                                    <th class="text-danger font-weight-bold">Notes</th>
+                                    <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
+                                    </tr>
+                                    `;
+                                                } else if (v.menu_item.cuisine_type_id == 4) {
+                                                    items += `
+                                    <tr style="width:100%; font-size:12px">
+                                        <td>(Main)</td>
+                                        <td>${v.menu_item.item_name}</td>
+                                        <td>${v.name}</td>
+                                        <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
+                                    </tr>
+                                    <tr>
+                                    <th class="text-danger font-weight-bold">Notes</th>
+                                    <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
+                                    </tr>
+                                    `;
+                                                } else if (v.menu_item.cuisine_type_id == 5) {
+                                                    items += `
+                                    <tr style="width:100%; font-size:12px">
+                                        <td>(Snacks)</td>
+                                        <td>${v.menu_item.item_name}</td>
+                                        <td>${v.name}</td>
+                                        <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
+                                    </tr>
+                                    <tr>
+                                    <th class="text-danger font-weight-bold">Notes</th>
+                                    <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
+                                    </tr>
+                                    `;
+                                                }
+                                                jj = jj + 1;
+                                            });
+                                            // alert('success hello');
+                                            var html = `
+                                    <div class="row justify-content-center">
+                                    <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
+                                        <div class="card card-body">
+                                            <div class="row" style="margin:10px">
+                                                <div class="col-md-12">
+                                                <div style="text-align:center;">
+                                                    <address>
+                                                        <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                                                            <b style="font-size:17px;">Bar & Restaurant</b>
 
-                                    if (v.menu_item.cuisine_type_id == 1) {
-                                        items += `
-                        <tr style="width:100%; font-size:12px">
-                            <td>(Salad)</td>
-                            <td>${v.menu_item.item_name}</td>
-                            <td>${v.name}</td>
-                            <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
-                        </tr>
-                        <tr>
-                        <th class="text-danger font-weight-bold">Notes</th>
-                        <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
-                        </tr>
-                        `;
-                                    } else if (v.menu_item.cuisine_type_id == 2) {
-                                        items += `
-                        <tr style="width:100%; font-size:12px">
-                            <td>(Breakfast)</td>
-                            <td>${v.menu_item.item_name}</td>
-                            <td>${v.name}</td>
-                            <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
-                        </tr>
-                        <tr>
-                        <th class="text-danger font-weight-bold">Notes</th>
-                        <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
-                        </tr>
-                        `;
-                                    } else if (v.menu_item.cuisine_type_id == 3) {
-                                        items += `
-                        <tr style="width:100%; font-size:12px">
-                            <td>(Healthy Food)</td>
-                            <td>${v.menu_item.item_name}</td>
-                            <td>${v.name}</td>
-                            <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
-                        </tr>
-                        <tr>
-                        <th class="text-danger font-weight-bold">Notes</th>
-                        <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
-                        </tr>
-                        `;
-                                    } else if (v.menu_item.cuisine_type_id == 4) {
-                                        items += `
-                        <tr style="width:100%; font-size:12px">
-                            <td>(Main)</td>
-                            <td>${v.menu_item.item_name}</td>
-                            <td>${v.name}</td>
-                            <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
-                        </tr>
-                        <tr>
-                        <th class="text-danger font-weight-bold">Notes</th>
-                        <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
-                        </tr>
-                        `;
-                                    } else if (v.menu_item.cuisine_type_id == 5) {
-                                        items += `
-                        <tr style="width:100%; font-size:12px">
-                            <td>(Snacks)</td>
-                            <td>${v.menu_item.item_name}</td>
-                            <td>${v.name}</td>
-                            <td>${data.optqty[jj].quantity - data.optqty[jj].old_quantity}</td>
-                        </tr>
-                        <tr>
-                        <th class="text-danger font-weight-bold">Notes</th>
-                        <td class="text-danger" colspan="3">${data.optqty[jj].note}</td>
-                        </tr>
-                        `;
+                                                    </address>
+                                                </div>
+                                                <div class="pull-right text-left" style="margin-top:20px;">
+                                                <b style="font-size:16px;">Waiter Name : ${data.waiter}</b><br>
+                                                <b style="font-size:16px;">Date : <i class="fa fa-calendar"></i> ${data.date}</b><br>
+                                                <b style="font-size:16px;">Table-Number : ${data.tableno.table.table_number}</b><br>
+                                            </font>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12" style="margin-top:12px;">
+                                        <div class="table-responsive" style="clear: both;">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Kitchen</td>
+                                                        <td>Menu Name</td>
+                                                        <td>Option & Size</td>
+                                                        <td >Qty</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                     ${items}
+                                                </tbody>
+                                            </table>
+                                            <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                    </div>
+                                </div>
+                                    </div>
+                                    `;
+                                            var pending_items = ``;
+
+                                            $.each(data.shop_lists, function(i, shopList) {
+                                                if (shopList.print == 0 && shopList.voucher_id ==
+                                                    null) {
+                                                    $.each(shopList.option, function(i, option) {
+                                                        if (option.menu_item.meal_id == 1) {
+                                                            pending_items += `
+                                                            <tr style="width:100%; font-size:12px">
+                                                                <td><b>${option.name}</b></td>
+                                                                <td><b>${option.name}</b></td>
+                                                                <td><b>${option.pivot.quantity}</b></td>
+                                                            </tr>`;
+                                                        }
+                                                    });
+                                                }
+                                            });
+
+                                            var pending = " ";
+                                            $.each(data.shop_lists, function(i, shopList) {
+                                                pending = `<div class="row justify-content-center">
+                                                    <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
+                                                        <div class="card card-body">
+                                                            <div class="row" style="margin:10px">
+                                                                <div class="col-md-12">
+                                                                <div style="text-align:center;">
+                                                                    <address>
+                                                                        <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                                                                            <b style="font-size:17px;">Bar & Restaurant</b>
+
+                                                                    </address>
+                                                                </div>
+                                                                <div class="pull-right text-left" style="margin-top:20px;">
+                                                                        <b style="font-size:16px;">Waiter Name : ${data.waiter}</b><br>
+                                                                        <b style="font-size:16px;">Date : <i class="fa fa-calendar"></i> ${data.date}</b><br>
+                                                                        <b style="font-size:16px;">Table-Number : ${data.tableno.table.table_number}</b><br>
+                                                                    </font>
+                                                                </div>
+                                                            </div>
+
+                                                    <div class="col-md-12" style="margin-top:12px;">
+                                                        <div class="table-responsive" style="clear: both;">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Menu Name</td>
+                                                                        <td>Option & Size</td>
+                                                                        <td >Qty</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    ${pending_items}
+                                                                </tbody>
+                                                            </table>
+                                                            <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                                </div>
+                                                    </div>`;
+                                                    });
+                                                    $('#mobileprint').html(pending);
+                                                    var setItem = localStorage.setItem('mobileprint', JSON.stringify(
+                                                        data
+                                                        .order_table
+                                                        .id));
+                                                    var printContent = $('#mobileprint')[0];
+                                                    var WinPrint = window.open('', '', 'width=900,height=650');
+                                                    WinPrint.document.write('<html><head><title>Print Voucher</title>');
+                                                    WinPrint.document.write(
+                                                        '<link rel="stylesheet" type="text/css" href="css/style.css">'
+                                                    );
+                                                    WinPrint.document.write(
+                                                        '<link rel="stylesheet" type="text/css" media="print" href="css/print.css">'
+                                                    );
+                                                    WinPrint.document.write('</head><body >');
+                                                    WinPrint.document.write(printContent.innerHTML);
+                                                    WinPrint.document.write('</body></html>');
+
+                                                    // WinPrint.document.write(html);
+                                                    WinPrint.focus();
+                                                    WinPrint.print();
+                                                    WinPrint.document.close();
+                                                    WinPrint.close();
+                                                                }
+
+
+
+                                                }
+                                                updatePrintStatus();
+                                            }
+                                        });
                                     }
-                                    jj = jj + 1;
+            // Casher Drink
+            if (rolename == 4) {
+                //    alert(rolename);
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '/mobile-print',
+
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                    },
+
+                    success: function(data) {
+                        if (mobileprint == null) {
+                            mobileprint = 0;
+                        }
+
+                        if (data) {
+                            if (data.order_table.id > mobileprint) {
+                                console.log('Drink data is',data);
+                                var pending_items = ``;
+
+                                $.each(data.shop_lists, function(i, shopList) {
+                                    if (shopList.print == 0 && shopList.voucher_id == null) {
+                                        $.each(shopList.option, function(i, option) {
+                                            if(option.menu_item.meal_id == 2){
+                                            pending_items += `
+                                        <tr style="width:100%; font-size:12px">
+                                            <td><b>${option.name}</b></td>
+                                            <td><b>${option.name}</b></td>
+                                            <td><b>${option.pivot.quantity}</b></td>
+                                        </tr>`;
+                                            }
+
+                                        });
+                                    }
                                 });
-                                // alert('success hello');
-                                var html = `
-                        <div class="row justify-content-center">
-                <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
-                    <div class="card card-body">
-                        <div class="row" style="margin:10px">
-                            <div class="col-md-12">
-                            <div style="text-align:center;">
-                                <address>
-                                    <b style="font-size:17px;">Law Ka Nat&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
-                                        <b style="font-size:17px;">Restaurant</b>
 
-                                </address>
-                            </div>
-                            <div class="pull-right text-left" style="margin-top:20px;">
-                                    <b style="font-size:16px;">Waiter Name : ${data.waiter}</b><br>
-                                    <b style="font-size:16px;">Date : <i class="fa fa-calendar"></i> ${data.date}</b><br>
-                                    <b style="font-size:16px;">Table-Number : ${data.tableno.table.table_number}</b><br>
-                                </font>
-                            </div>
-                        </div>
+                                var pending = " ";
+                                $.each(data.shop_lists, function(i, shopList) {
+                                    $.each(shopList.option, function(i, option) {
+                                        if(option.menu_item.meal_id === 2){
+                                        pending = `<div class="row justify-content-center">
+                                        <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
+                                            <div class="card card-body">
+                                                <div class="row" style="margin:10px">
+                                                    <div class="col-md-12">
+                                                    <div style="text-align:center;">
+                                                        <address>
+                                                            <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                                                                <b style="font-size:17px;">Bar & Restaurant</b>
 
-                        <div class="col-md-12" style="margin-top:12px;">
-                            <div class="table-responsive" style="clear: both;">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <td>Kitchen</td>
-                                            <td>Menu Name</td>
-                                            <td>Option & Size</td>
-                                            <td >Qty</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                         ${items}
-                                    </tbody>
-                                </table>
-                                <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                        </div>
-                        `;
-                                $('#mobileprint').html(html);
-                                localStorage.setItem('mobileprint', JSON.stringify(data.order_table
+                                                        </address>
+                                                    </div>
+                                                    <div class="pull-right text-left" style="margin-top:20px;">
+                                                            <b style="font-size:16px;">Waiter Name : ${data.waiter}</b><br>
+                                                            <b style="font-size:16px;">Date : <i class="fa fa-calendar"></i> ${data.date}</b><br>
+                                                            <b style="font-size:16px;">Table-Number : ${data.tableno.table.table_number}</b><br>
+                                                        </font>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12" style="margin-top:12px;">
+                                                    <div class="table-responsive" style="clear: both;">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>Menu Name</td>
+                                                                    <td>Option & Size</td>
+                                                                    <td >Qty</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                 ${pending_items}
+                                                            </tbody>
+                                                        </table>
+                                                        <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                </div>
+                                            </div>
+                                                </div>`;
+                                }
+                            })
+                                });
+                                $('#mobileprint').html(pending);
+                                var setItem = localStorage.setItem('mobileprint', JSON.stringify(data
+                                    .order_table
                                     .id));
-
                                 var printContent = $('#mobileprint')[0];
                                 var WinPrint = window.open('', '', 'width=900,height=650');
                                 WinPrint.document.write('<html><head><title>Print Voucher</title>');
                                 WinPrint.document.write(
                                     '<link rel="stylesheet" type="text/css" href="css/style.css">'
-                                    );
+                                );
                                 WinPrint.document.write(
                                     '<link rel="stylesheet" type="text/css" media="print" href="css/print.css">'
-                                    );
+                                );
                                 WinPrint.document.write('</head><body >');
                                 WinPrint.document.write(printContent.innerHTML);
                                 WinPrint.document.write('</body></html>');
@@ -627,12 +811,26 @@
                                 WinPrint.document.close();
                                 WinPrint.close();
                             }
-
                         }
+                        updatePrintStatus();
                     }
                 });
             }
-        }, 1000);
+        }, 3000);
+
+
+        function updatePrintStatus(){
+            var printStatus = 0;
+            $.ajax({
+                url: "/printStatusUpdate",
+                method: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    print: printStatus
+                },
+            })
+        }
+
 
         $(document).ready(function() {
             $.ajax({
@@ -646,38 +844,39 @@
                 },
 
                 success: function(data) {
+
                     var html = '';
                     if (data.shop.length != 0) {
                         // alert('hey');
                         html += `
-        <a href="{{ route('pending_lists') }}">
-            <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-            <div class="mail-contnet">
-                <h5>Pending Shop Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
-                <small>Check Orders</small>
-            </div>
-        </a>
-        `;
+                            <a href="{{ route('pending_lists') }}">
+                                <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+                                <div class="mail-contnet">
+                                    <h5>Pending Shop Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
+                                    <small>Check Orders</small>
+                                </div>
+                            </a>
+                            `;
                         $('#noti').html(html);
                     }
                     if (data.deli.length != 0) {
                         // alert(count(data.deli));
                         // alert(data.deli.length);
                         html += `
-        <a href="{{ route('delivery_pending_lists') }}">
-            <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-            <div class="mail-contnet">
-                <h5>Pending Delivery Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
-                <small>Check Orders</small>
-            </div>
-        </a>
-        `;
+                            <a href="{{ route('delivery_pending_lists') }}">
+                                <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+                                <div class="mail-contnet">
+                                    <h5>Pending Delivery Order List<span class="badge badge-danger float-right" id="stockNoti"></span></h5>
+                                    <small>Check Orders</small>
+                                </div>
+                            </a>
+                        `;
                         $('#noti').html(html);
                     }
                 }
             })
-        }); <
-        /body>
+        });
+    </script>
+</body>
 
-        <
-        /html>
+</html>

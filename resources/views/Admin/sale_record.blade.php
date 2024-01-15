@@ -160,160 +160,194 @@
                         </div>
                     </div>
                     <br />
+
                     <div class="tab-content br-n pn">
                         <div id="navpills-djlsfj" class="tab-pane active">
-
-                            {{-- <li class="font-weight-bold text-dark">Food Total:<span id="" class="text-danger" style="font-weight:bold"></span></li>
-                        <li class="font-weight-bold text-dark">Drink Total:</li>
-                        <li class="font-weight-bold text-dark">Foc Total:</li>
-                        <li class="font-weight-bold text-dark">Discount Total:</li>
-                        <li class="font-weight-bold text-dark">Tax Total:</li>
-                        <li class="font-weight-bold text-dark">Net Total:</li> --}}
-
-
                             <div class="card mt-3" id="report">
                                 <div class="card-body text-center">
-
-                                    <div class=" py-5 text-dark" style="font-weight: 500;">
-                                        <div class="row text-success sale_count_header">
-                                            <div class="col-md-4 offset-md-2 text-center">Name</div>
-                                            <div class="col-md-2">
-                                                <p></p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p>Value</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Food Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="total_qty_all" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Drink Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="total_qty_drink" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Foc Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="focTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Discount Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span class="text-danger" style="font-weight:bold"
-                                                        id="disTotal"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Tax Total(5%)</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span class="text-danger" style="font-weight:bold"
-                                                        id="taxTotal"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Service Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="serviceTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Net Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="netTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Bank Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="bankTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Cash Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="cashTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
+                                    <div class="col-md-5 printableArea1" style="width:45%;">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Value</strong></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Food Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="total_qty_all" class="text-danger">
+                                                                                    </span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Drink Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="total_qty_drink" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Foc Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="focTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Discount Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span class="text-danger"
+                                                                                    id="disTotal"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Tax Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span class="text-danger"
+                                                                                    id="taxTotal"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Service Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="serviceTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Net Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="netTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Bank Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="bankTotal" class="text-danger"
+                                                                                    style="font-weight:bold"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Cash Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="cashTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <button id="print1" class="btn btn-info" type="button">
+                                            <span><i class="fa fa-print"></i> Print</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-
-
                         </div>
-
                         <div id="navpills-djlsfjFoods" class="tab-pane">
-
                             <div class="card mt-3" id="report">
-                                <div class="card-body ">
+                                <div class="card-body text-center">
+                                    <div class="col-md-5 printableArea2" style="width:45%;">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Option Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Qty</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Subtotal</strong></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="salecountlists">
 
-                                    <div class=" py-5 text-dark" style="font-weight: 500;">
-                                        <div class="row text-success sale_count_header">
-                                            <div class="col-md-3 offset-md-2 text-center">Item Name</div>
-                                            <div class="col-md-2">
-                                                <p>Option Name</p>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p>Qty</p>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p>Subtotal</p>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="row text-center sale_count_footer">
+                                                            <div class="col-md-6">
+                                                                <p class="text-success">Total Qty: <span id="total_qty" class="text-dark"
+                                                                        style="font-weight:bold">
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="text-success">Total : <span id="total_price" class="text-dark"
+                                                                        style="font-weight:bold">
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row salecountlists">
-
-                                        </div>
-                                        <div class="row text-center sale_count_footer">
-                                            <div class="col-md-2 offset-md-6">
-                                                <p class="text-success">Total Qty: <span id="total_qty" class="text-dark"
-                                                        style="font-weight:bold"></span></p>
-
-                                            </div>
-                                            <div class="col-md-3">
-                                                <p class="text-success">Total : <span id="total_price" class="text-dark"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <button id="print2" class="btn btn-info" type="button">
+                                            <span><i class="fa fa-print"></i> Print</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -321,33 +355,52 @@
 
                         <div id="navpills-djlsfjDrinks" class="tab-pane">
                             <div class="card mt-3" id="report">
-                                <div class="card-body ">
-                                    <div class=" py-5 text-dark" style="font-weight: 500;">
-                                        <div class="row text-success sale_count_header">
-                                            <div class="col-md-3 offset-md-2 text-center">Item Name</div>
-                                            <div class="col-md-2">
-                                                <p>Option Name</p>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p>Qty</p>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p>Subtotal</p>
-                                            </div>
-                                        </div>
-                                        <div class="row salecountlistsD">
+                                <div class="card-body text-center">
+                                    <div class="col-md-5 printableArea3" style="width:45%;">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Option Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Qty</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Subtotal</strong></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="salecountlistsD">
 
-                                        </div>
-                                        <div class="row text-center sale_count_footer">
-                                            <div class="col-md-2 offset-md-6">
-                                                <p class="text-success">Total Qty: <span id="total_qtyD"
-                                                        class="text-dark" style="font-weight:bold"></span></p>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="row text-center sale_count_footer">
+                                                            <div class="col-md-6">
+                                                                <p class="text-success">Total Qty: <span id="total_qtyD" class="text-dark"
+                                                                        style="font-weight:bold">
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="text-success">Total : <span id="total_priceD" class="text-dark"
+                                                                        style="font-weight:bold">
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <p class="text-success">Total : <span id="total_priceD" class="text-dark"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <button id="print3" class="btn btn-info" type="button">
+                                            <span><i class="fa fa-print"></i> Print</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -355,59 +408,73 @@
 
                         <div id="jdfslfjs" class="tab-pane">
                             <div class="card mt-3" id="report">
-                                <div class="card-body ">
-                                    <div class=" py-5 text-dark" style="font-weight: 500;">
-                                        <div class="row text-success sale_count_header">
-                                            <div class="col-md-4 offset-md-2 text-center">Name</div>
-                                            <div class="col-md-2">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p>Value</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Table Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="tableTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Room Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="roomTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 offset-md-2 text-center">Spa Total</div>
-                                            <div class="col-md-2">
-                                                <p>-</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><span id="spaTotal" class="text-danger"
-                                                        style="font-weight:bold"></span></p>
+                                <div class="card-body text-center">
+                                    <div class="col-md-5 printableArea4" style="width:45%;">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Name</strong></th>
+                                                                        <th class="text-info"><strong style="font-size:16px;font-weight:bold;">Value</strong></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Table Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="tableTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Room Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="roomTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">Spa Total
+                                                                                </strong>
+                                                                            </td>
+                                                                            <td>
+                                                                                <strong style="font-size:16px;font-weight:bold;">
+                                                                                    <span id="spaTotal" class="text-danger"></span>
+                                                                                </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <button id="print4" class="btn btn-info" type="button">
+                                            <span><i class="fa fa-print"></i> Print</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-                    {{-- <div class="col-md-12">
-                    <div class="text-center">
-                        <button id="print" class="btn btn-info" type="button">
-                            <span><i class="fa fa-print"></i> Print</span>
-                        </button>
-                    </div>
-                </div> --}}
                 </div>
             </div>
         </div>
@@ -421,6 +488,47 @@
         $(document).ready(function() {
 
             $('#report').hide();
+
+            $("#print1").click(function() {
+                // window.print();
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea1").printArea(options);
+            });
+            $("#print2").click(function() {
+                // window.print();
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea2").printArea(options);
+            });
+            $("#print3").click(function() {
+                // window.print();
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea3").printArea(options);
+            });
+            $("#print4").click(function() {
+                // window.print();
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea4").printArea(options);
+            });
 
         });
 
@@ -471,16 +579,12 @@
 
                             var subtotal = value.qty * v.sale_price;
                             html += `
-                                    <div class="col-md-3 offset-md-2 text-center">${val.item_name}</div>
-                                        <div class="col-md-2">
-                                        <p>${v.name}</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>${value.qty}</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                            <p>${subtotal}</p>
-                                    </div>
+                            <tr class="text-center">
+                                    <td>${val.item_name}</td>
+                                    <td><p>${v.name}</p></td>
+                                    <td><p>${value.qty}</p></td>
+                                    <td><p>${subtotal}</p></td>
+                            </tr>
                                     `;
                             total += subtotal;
                             total_qty += value.qty;
@@ -496,16 +600,12 @@
 
                             var subtotal = value.qty * v.sale_price;
                             htmlD += `
-                                    <div class="col-md-3 offset-md-2 text-center">${val.item_name}</div>
-                                        <div class="col-md-2">
-                                        <p>${v.name}</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>${value.qty}</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                            <p>${subtotal}</p>
-                                    </div>
+                            <tr class="text-center">
+                                <td>${val.item_name}</td>
+                                <td><p>${v.name}</p></td>
+                                <td><p>${value.qty}</p></td>
+                                <td><p>${subtotal}</p></td>
+                            </tr>
                                     `;
                             totalD += subtotal;
                             total_qtyD += value.qty;

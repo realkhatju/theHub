@@ -307,6 +307,7 @@
     $('#dis_amount').hide();
 })
 
+
 // print start
 $(document).ready(function() {
     $("#print1").click(function() {

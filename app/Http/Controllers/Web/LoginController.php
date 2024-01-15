@@ -32,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->route('pending_lists');
             }
             elseif ($request->session()->get('user')->role_flag == 2) {
-                dd("Hello");
+                return redirect()->route('pending_lists');
             }
         }
         else{

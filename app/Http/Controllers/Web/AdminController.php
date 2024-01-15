@@ -494,13 +494,9 @@ class AdminController extends Controller
 
     public function mobileprint(Request $request)
     {
-            // $orders = ShopOrder::where("is_mobile",1)->with('option')->with('table')->orderBy('id','desc')->first();
-            // dd($orders->id);
             $option_n = DB::table('option_shop_order')
             ->where('print',0)
             ->get();
-            // dd(count($option_n));
-
             if(count($option_n) == 0 ){
                 $option_name = DB::table('option_shop_order')
                 ->where('status',5)
@@ -515,50 +511,41 @@ class AdminController extends Controller
             ->where('print',0)
             ->update(['print' => 1]);
             }
-
-            // dd(count($option_name));
-
             $orders = DB::table('option_shop_order')->orderBy('id','desc')->first();
             $tableno = ShopOrder::find($orders->shop_order_id);
-
-            // dd($tableno->table_id);
-            // console.log($option_name , $orders);
             $date = new DateTime('Asia/Yangon');
             $real_date = $date->format('d-m-Y h:i:s');
 
              $wname = session()->get('user')->name;
             $name = [];
-		foreach($option_name as $optionss)
-		{
-		$oname = Option::where('id',$optionss->option_id)->with('menu_item')->first();
-		array_push($name,$oname);
-		}
-        // dd($name);
-        // if(count($option_n) == 0 ){
-        //     $print1 = DB::table('option_shop_order')
-        //     ->where('status',5)
-        //     ->update(['status' => 0]);
-        // }
-        // else{
-            // $print = DB::table('option_shop_order')
-            // ->where('print',0)
-            // ->update(['print' => 1]);
-        // }
+            foreach($option_name as $optionss)
+            {
+            $oname = Option::where('id',$optionss->option_id)->with('menu_item')->first();
+            array_push($name,$oname);
+            }
+            $shop_lists = ShopOrder::where('status', 1)->with('table','option')->get();
+            // $option = Option::where('status', 1)->get();
 
 
 
-            // if($orders){
-                return response()->json([
-                    'name' => $name,
-                    'optqty' => $option_name,
-                    'date' => $real_date,
-                    'waiter' => $wname,
-                    'order_table' => $orders,
-                    'tableno' => $tableno
-                ]);
-            // }else{
-                // return response()->json(null);
-            // }
+            return response()->json([
+                'name' => $name,
+                'optqty' => $option_name,
+                'date' => $real_date,
+                'waiter' => $wname,
+                'order_table' => $orders,
+                'tableno' => $tableno,
+                'shop_lists' => $shop_lists,
+            ]);
+
+
+    }
+
+    protected function printStatusUpdate(){
+        $print = ShopOrder::where('print',0)->where('voucher_id',null)->update(['print' => 1]);
+        return response()->json([
+            'print' => $print
+        ]);
     }
 
     protected function getFinicial(Request $request){

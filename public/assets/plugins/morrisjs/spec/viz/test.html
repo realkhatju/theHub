@@ -57,3 +57,174 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
+
+
+
+
+<script>
+
+setInterval(() => {
+        var rolename = $('#unique_role').val();
+        // alert(rolename);
+        var mobileprint = localStorage.getItem('mobileprint');
+        if (rolename == 1) {
+            //    alert(rolename);
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '/mobile-print',
+
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+
+                success: function(data) {
+                    if (mobileprint == null) {
+                        mobileprint = 0;
+                    }
+
+
+                }
+            });
+        }
+    }, 3000);
+
+</script>
+
+<section>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 printableArea1" style="width:45%;">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center;">
+                            <strong style="font-size:17px;font-weight:bold;">Main Dish</strong>
+                            <div class="row justify-content-center">
+                                <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number ---  Item</h5></strong>
+                            </div>
+
+                            <div class="row mt-1 justify-content-center">
+                                <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name ---  Item</h5></strong>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                            <th><strong style="font-size:16px;font-weight:bold;">Counting Unit Name</strong></th>
+                                            <th><strong style="font-size:17px;font-weight:bold;">Order Quantity</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td><strong style="font-size:16px;font-weight:bold;">Item</strong></td>
+                                                <td><strong style="font-size:16px;font-weight:bold;">Item</strong></td>
+                                                <td><strong style="font-size:17px;font-weight:bold;">Item</strong></td>
+                                            </tr>
+                                </tbody>
+                                        <tr>
+                                            <th class="text-danger font-weight-bold">Notes</th>
+                                            <td class="text-danger font-weight-bold">Item</td>
+                                            <td class="text-danger" colspan="3">Item</td>
+                                        </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
+            <div class="card card-body">
+                <div class="row" style="margin:10px">
+                    <div class="col-md-12">
+                    <div style="text-align:center;">
+                        <address>
+                            <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                                <b style="font-size:17px;">Bar & Restaurant</b>
+
+                        </address>
+                    </div>
+                    <div class="pull-right text-left" style="margin-top:20px;">
+                            <b style="font-size:16px;">Waiter Name : ${data.waiter}</b><br>
+                            <b style="font-size:16px;">Date : <i class="fa fa-calendar"></i> ${data.date}</b><br>
+                            <b style="font-size:16px;">Table-Number : ${data.tableno.table.table_number}</b><br>
+                        </font>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top:12px;">
+                    <div class="table-responsive" style="clear: both;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Menu Name</td>
+                                    <td>Option & Size</td>
+                                    <td >Qty</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 ${pending}
+                            </tbody>
+                        </table>
+                        <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+                </div>
+
+
+
+                <div class="col-md-5 printableArea2" style="width:45%;">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
+                                                    <th><strong style="font-size:16px;font-weight:bold;">Option Name</strong></th>
+                                                    <th><strong style="font-size:16px;font-weight:bold;">Qty</strong></th>
+                                                    <th><strong style="font-size:16px;font-weight:bold;">Subtotal</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                        <td><strong style="font-size:16px;font-weight:bold;"></strong></td>
+                                                        <td><strong style="font-size:16px;font-weight:bold;"></strong></td>
+                                                        <td><strong style="font-size:16px;font-weight:bold;"></strong></td>
+                                                        <td><strong style="font-size:16px;font-weight:bold;"></strong></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+</section>

@@ -1,3 +1,4 @@
+
 @extends('customer_master')
 
 @section('title','Kitchen List Details')
