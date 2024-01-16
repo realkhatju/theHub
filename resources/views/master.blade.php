@@ -500,8 +500,8 @@
                                                 .pivot.note != null) {
                                                 pending_items += `
                                                             <tr style="width:100%; font-size:12px">
-                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
-                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                             </tr>
                                                             <tr style="width:100%; font-size:12px">
@@ -514,8 +514,8 @@
                                                 option.pivot.note == null) {
                                                 pending_items += `
                                                             <tr style="width:100%; font-size:12px">
-                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
-                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                             </tr>`;
                                                 windowPrint = 1;
@@ -621,17 +621,17 @@
                         if (data) {
                             if (data.order_table.id > mobileprint) {
                                 console.log('Drink data is', data);
-                                var pending_items = ``;
+                                var pending_itemsD = ``;
 
                                 $.each(data.shop_lists, function(i, shopList) {
                                     if (shopList.print == 0 && shopList.voucher_id == null) {
                                         $.each(shopList.option, function(i, option) {
                                             if (option.menu_item.meal_id == 2 && option
                                                 .pivot.note != null) {
-                                                pending_items += `
+                                                pending_itemsD += `
                                                 <tr style="width:100%; font-size:12px">
-                                                    <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
-                                                    <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
                                                     <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                 </tr>
                                                 <tr style="width:100%; font-size:12px">
@@ -642,10 +642,10 @@
                                                 windowPrint1 = 1;
                                             } else if (option.menu_item.meal_id == 2 &&
                                                 option.pivot.note == null) {
-                                                pending_items += `
+                                                pending_itemsD += `
                                                 <tr style="width:100%; font-size:12px">
-                                                    <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
-                                                    <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
                                                     <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                 </tr>`;
                                                 windowPrint1 = 1;
@@ -689,7 +689,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    ${pending_items}
+                                                                    ${pending_itemsD}
                                                                 </tbody>
                                                             </table>
                                                             <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
