@@ -489,6 +489,7 @@
 
                         if (data) {
                                 if (data.order_table.id > mobileprint) {
+                                    console.log('Drink Data is',data);
                                             var items = ``;
                                             var jj = 0;
                                             $.each(data.name, function(i, v) {
@@ -607,7 +608,7 @@
                                     </div>
                                     `;
                                             var pending_items = ``;
-
+                                            var jj = 0;
                                             $.each(data.shop_lists, function(i, shopList) {
                                                 if (shopList.print == 0 && shopList.voucher_id ==
                                                     null) {
@@ -615,13 +616,19 @@
                                                         if (option.menu_item.meal_id == 1) {
                                                             pending_items += `
                                                             <tr style="width:100%; font-size:12px">
-                                                                <td><b>${option.name}</b></td>
-                                                                <td><b>${option.name}</b></td>
-                                                                <td><b>${option.pivot.quantity}</b></td>
-                                                            </tr>`;
+                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
+                                                            </tr>
+                                                            <tr style="width:100%; font-size:12px">
+                                                            <th class="font-weight-bold">Notes</th>
+                                                            <td class="font-weight-bold">${option.pivot.note}</td>
+                                                            </tr>
+                                                            `;
                                                         }
                                                     });
                                                 }
+                                                jj = jj + 1;
                                             });
 
                                             var pending = " ";
@@ -692,9 +699,6 @@
                                                     WinPrint.document.close();
                                                     WinPrint.close();
                                                                 }
-
-
-
                                                 }
                                                 updatePrintStatus();
                                             }
@@ -733,9 +737,13 @@
                                             <td><b>${option.name}</b></td>
                                             <td><b>${option.name}</b></td>
                                             <td><b>${option.pivot.quantity}</b></td>
-                                        </tr>`;
+                                        </tr>
+                                        <tr style="width:100%; font-size:12px">
+                                        <th class="font-weight-bold">Notes</th>
+                                        <td class="font-weight-bold">${option.pivot.note}</td>
+                                        </tr>
+                                        `;
                                             }
-
                                         });
                                     }
                                 });
