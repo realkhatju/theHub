@@ -488,15 +488,15 @@
                         }
 
                         if (data) {
-                                if (data.order_table.id > mobileprint) {
-                                    console.log('Drink Data is',data);
-                                            var pending_items = ``;
-                                            $.each(data.shop_lists, function(i, shopList) {
-                                                if (shopList.print == 0 && shopList.voucher_id ==
-                                                    null) {
-                                                    $.each(shopList.option, function(i, option) {
-                                                        if (option.menu_item.meal_id == 1 && option.pivot.note != null) {
-                                                            pending_items += `
+                            if (data.order_table.id > mobileprint) {
+                                console.log('Drink Data is', data);
+                                var pending_items = ``;
+                                $.each(data.shop_lists, function(i, shopList) {
+                                    if (shopList.print == 0 && shopList.voucher_id ==
+                                        null) {
+                                        $.each(shopList.option, function(i, option) {
+                                            if (option.menu_item.meal_id == 1 && option.pivot.note != null) {
+                                                pending_items += `
                                                             <tr style="width:100%; font-size:12px">
                                                                 <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
@@ -507,21 +507,22 @@
                                                                 <td class="font-weight-bold">${option.pivot.note}</td>
                                                                 </tr>
                                                             `;
-                                                        }else if(option.menu_item.meal_id == 1 && option.pivot.note == null){
-                                                            pending_items += `
+                                            } else if (option.menu_item.meal_id == 1 &&
+                                                option.pivot.note == null) {
+                                                pending_items += `
                                                             <tr style="width:100%; font-size:12px">
                                                                 <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                             </tr>`;
-                                                        }
-                                                    });
-                                                }
-                                            });
+                                            }
+                                        });
+                                    }
+                                });
 
-                                            var pending = " ";
-                                            $.each(data.shop_lists, function(i, shopList) {
-                                                pending = `<div class="row justify-content-center">
+                                var pending = " ";
+                                $.each(data.shop_lists, function(i, shopList) {
+                                    pending = `<div class="row justify-content-center">
                                                     <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
                                                         <div class="card card-body">
                                                             <div class="row" style="margin:10px">
@@ -562,36 +563,36 @@
                                                     </div>
                                                 </div>
                                                     </div>`;
-                                                    });
-                                                    $('#mobileprint').html(pending);
-                                                    var setItem = localStorage.setItem('mobileprint', JSON.stringify(
-                                                        data
-                                                        .order_table
-                                                        .id));
-                                                    var printContent = $('#mobileprint')[0];
-                                                    var WinPrint = window.open('', '', 'width=900,height=650');
-                                                    WinPrint.document.write('<html><head><title>Print Voucher</title>');
-                                                    WinPrint.document.write(
-                                                        '<link rel="stylesheet" type="text/css" href="css/style.css">'
-                                                    );
-                                                    WinPrint.document.write(
-                                                        '<link rel="stylesheet" type="text/css" media="print" href="css/print.css">'
-                                                    );
-                                                    WinPrint.document.write('</head><body >');
-                                                    WinPrint.document.write(printContent.innerHTML);
-                                                    WinPrint.document.write('</body></html>');
+                                });
+                                $('#mobileprint').html(pending);
+                                var setItem = localStorage.setItem('mobileprint', JSON.stringify(
+                                    data
+                                    .order_table
+                                    .id));
+                                var printContent = $('#mobileprint')[0];
+                                var WinPrint = window.open('', '', 'width=900,height=650');
+                                WinPrint.document.write('<html><head><title>Print Voucher</title>');
+                                WinPrint.document.write(
+                                    '<link rel="stylesheet" type="text/css" href="css/style.css">'
+                                );
+                                WinPrint.document.write(
+                                    '<link rel="stylesheet" type="text/css" media="print" href="css/print.css">'
+                                );
+                                WinPrint.document.write('</head><body >');
+                                WinPrint.document.write(printContent.innerHTML);
+                                WinPrint.document.write('</body></html>');
 
-                                                    // WinPrint.document.write(html);
-                                                    WinPrint.focus();
-                                                    WinPrint.print();
-                                                    WinPrint.document.close();
-                                                    WinPrint.close();
-                                                                }
-                                                }
-                                                updatePrintStatus();
-                                            }
-                                        });
-                                    }
+                                // WinPrint.document.write(html);
+                                WinPrint.focus();
+                                WinPrint.print();
+                                WinPrint.document.close();
+                                WinPrint.close();
+                            }
+                        }
+                        updatePrintStatus();
+                    }
+                });
+            }
             // Casher Drink
             if (rolename == 4) {
                 //    alert(rolename);
@@ -613,7 +614,7 @@
 
                         if (data) {
                             if (data.order_table.id > mobileprint) {
-                                console.log('Drink data is',data);
+                                console.log('Drink data is', data);
                                 var pending_items = ``;
 
                                 $.each(data.shop_lists, function(i, shopList) {
@@ -631,7 +632,8 @@
                                                     <td class="font-weight-bold">${option.pivot.note}</td>
                                                     </tr>
                                                 `;
-                                            }else if(option.menu_item.meal_id == 2 && option.pivot.note == null){
+                                            } else if (option.menu_item.meal_id == 2 &&
+                                                option.pivot.note == null) {
                                                 pending_items += `
                                                 <tr style="width:100%; font-size:12px">
                                                     <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
@@ -646,8 +648,8 @@
                                 var pending = " ";
                                 $.each(data.shop_lists, function(i, shopList) {
                                     $.each(shopList.option, function(i, option) {
-                                        if(option.menu_item.meal_id === 2){
-                                        pending = `<div class="row justify-content-center">
+                                        if (option.menu_item.meal_id === 2) {
+                                            pending = `<div class="row justify-content-center">
                                         <div class="col-md-5 printableArea" style="width:100%;" id="printableArea">
                                             <div class="card card-body">
                                                 <div class="row" style="margin:10px">
@@ -688,8 +690,8 @@
                                                 </div>
                                             </div>
                                                 </div>`;
-                                }
-                            })
+                                        }
+                                    })
                                 });
                                 $('#mobileprint').html(pending);
                                 var setItem = localStorage.setItem('mobileprint', JSON.stringify(data
@@ -722,7 +724,7 @@
         }, 3000);
 
 
-        function updatePrintStatus(){
+        function updatePrintStatus() {
             var printStatus = 0;
             $.ajax({
                 url: "/printStatusUpdate",
