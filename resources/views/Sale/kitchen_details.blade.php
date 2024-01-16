@@ -25,18 +25,18 @@
     <div class="col-md-5 printableArea1" style="width:45%;">
         <div class="card shadow">
             <div class="card-header">
-                <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
+                <h4><b style="font-size:17px;">Kitchen Details</b></h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12" style="text-align:center;">
-                        <strong style="font-size:17px;font-weight:bold;">Main Dish</strong>
+                        <b style="font-size:17px;">Main Dish</b>
                         <div class="row justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number ---  {{$pending_order_details->order_number}}</h5></strong>
+                            <h5><b style="font-size:17px;font-weight:bold;">Order Number ---  {{$pending_order_details->order_number}}</b></h5>
                         </div>
 
                         <div class="row mt-1 justify-content-center">
-                            <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</h5></strong>
+                            <h5><b style="font-size:17px;font-weight:bold;">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</b></h5>
                         </div>
                     </div>
 
@@ -45,9 +45,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
-                                        <th><strong style="font-size:16px;font-weight:bold;">Counting Unit Name</strong></th>
-                                        <th><strong style="font-size:17px;font-weight:bold;">Order Quantity</strong></th>
+                                        <th><b style="font-size:17px;">Item Name</b></th>
+                                        <th><b style="font-size:17px;">Counting Unit Name</b></th>
+                                        <th><b style="font-size:17px;">Order Quantity</b></th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
@@ -56,9 +56,9 @@
                                     @if ($option->menu_item->meal_id == 1)
                                     {{-- @if ($option->pivot->tocook == 0) --}}
                                         <tr>
-                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</strong></td>
-                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
-                                            <td><strong style="font-size:17px;font-weight:bold;">{{$option->pivot->quantity}}</strong></td>
+                                            <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
                                         </tr>
                                     {{-- @endif --}}
                                     @endif
@@ -100,21 +100,21 @@
 </div>
 @endif
 <div class="row justify-content-center mt-4">
-<div class="col-md-5 printableArea2" style="width:45%;">
+<div class="col-md-5 printableArea2" style="width:100%;">
     <div class="card shadow">
         <div class="card-header">
-            <h4><strong style="font-size:17px;font-weight:bold;">Kitchen Details</strong></h4>
+            <h4><b style="font-size:17px;">Kitchen Details</b></h4>
         </div>
-        <div class="card-body">
+        <div class="card card-body">
             <div class="row">
                 <div class="col-md-12" style="text-align:center;">
-                    <strong style="font-size:17px;font-weight:bold;">Drink</strong>
+                    <b style="font-size:17px;">Drink</b>
                     <div class="row justify-content-center">
-                        <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Order Number ---  {{$pending_order_details->order_number}}</h5></strong>
+                        <h5><b style="font-size:17px;">Order Number ---  {{$pending_order_details->order_number}}</b></h5>
                     </div>
 
                     <div class="row mt-1 justify-content-center">
-                        <strong style="font-size:17px;font-weight:bold;"><h5 class="font-weight-bold mt-1">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</h5></strong>
+                        <h5><b style="font-size:17px;">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</b></h5>
                     </div>
                     </div>
                     <div class="col-md-12">
@@ -122,9 +122,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th><strong style="font-size:16px;font-weight:bold;">Item Name</strong></th>
-                                        <th><strong style="font-size:16px;font-weight:bold;">Counting Unit Name</strong></th>
-                                        <th><strong style="font-size:17px;font-weight:bold;">Order Quantity</strong></th>
+                                        <th><b style="font-size:16px;">Item Name</b></th>
+                                        <th><b style="font-size:16px;">Counting Unit Name</b></th>
+                                        <th><b style="font-size:17px;">Order Quantity</b></th>
                                         {{-- <th>Status</th> --}}
                                     </tr>
                                 </thead>
@@ -133,9 +133,9 @@
                                     @if ($option->menu_item->meal_id == 2)
                                     {{-- @if ($option->pivot->tocook == 0) --}}
                                         <tr>
-                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->menu_item->item_name}}</td>
-                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->name}}</strong></td>
-                                            <td><strong style="font-size:16px;font-weight:bold;">{{$option->pivot->quantity}}</strong></td>
+                                            <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
 
                                             {{-- @if($option->pivot->status == 0)
                                             <td>
