@@ -18,158 +18,151 @@
 @section('content')
 
 <?php $user = session()->get('user')->role_flag;?>
-@if ($mealItem1)
+
 <div class="page-wrapper" >
 <div class="container-fluid">
+@if ($mealItem1)
 <div class="row justify-content-center">
     <div class="col-md-5 printableArea1" style="width:45%;">
-        <div class="card shadow">
-            <div class="card-header">
-                <h4><b style="font-size:17px;">Kitchen Details</b></h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12" style="text-align:center;">
-                        <b style="font-size:17px;">Main Dish</b>
-                        <div class="row justify-content-center">
-                            <h5><b style="font-size:17px;font-weight:bold;">Order Number ---  {{$pending_order_details->order_number}}</b></h5>
-                        </div>
-
-                        <div class="row mt-1 justify-content-center">
-                            <h5><b style="font-size:17px;font-weight:bold;">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</b></h5>
-                        </div>
+        <div class="card card-body">
+            <div class="row" style="margin:10px">
+                <div class="col-md-12">
+                    <div style="text-align:center;">
+                        <address>
+                            <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                            <b style="font-size:17px;">Bar & Restaurant</b><br>
+                            <b style="font-size:17px;" class="text-dark">Main Dish</b>
+                        </address>
                     </div>
-
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th><b style="font-size:17px;">Item Name</b></th>
-                                        <th><b style="font-size:17px;">Counting Unit Name</b></th>
-                                        <th><b style="font-size:17px;">Order Quantity</b></th>
-                                        {{-- <th>Status</th> --}}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                            @foreach($pending_order_details->option as $option)
-                                    @if ($option->menu_item->meal_id == 1)
-                                    {{-- @if ($option->pivot->tocook == 0) --}}
-                                        <tr>
-                                            <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
-                                            <td><b style="font-size:17px;">{{$option->name}}</b></td>
-                                            <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
-                                        </tr>
-                                    {{-- @endif --}}
-                                    @endif
-                            @endforeach
+                    <div class="pull-right text-left" style="margin-top:20px;">
+                        <b style="font-size:16px;">Order Number&nbsp;&nbsp;{{$pending_order_details->order_number}}</b><br>
+                        <b style="font-size:16px;">Table Name&nbsp;&nbsp;{{$pending_order_details->table->table_number??"Take Away"}}</b><br>
+                    </font>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top:12px;">
+                    <div class="table-responsive" style="clear: both;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Item Name</td>
+                                    <td>Counting Unit Name</td>
+                                    <td>Order Quantity</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($pending_order_details->option as $option)
+                                        @if ($option->menu_item->meal_id == 1)
+                                        {{-- @if ($option->pivot->tocook == 0) --}}
+                                            <tr>
+                                                <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
+                                                <td><b style="font-size:17px;">{{$option->name}}</b></td>
+                                                <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
+                                            </tr>
+                                        {{-- @endif --}}
+                                        @endif
+                                @endforeach
                             </tbody>
-
                                 @foreach ($notes as $item)
-                                @foreach ($option_id as $opid)
-                                    @if ($item->option_id == $opid->id)
-                                    @if ($mealItem1)
-                                    @if ($item->note != null && $item->note != 'Note Default')
-                                    <tr>
-                                        <th class="text-danger font-weight-bold">Notes</th>
-                                        <td class="text-danger font-weight-bold">{{$opid->name}}</td>
-                                        <td class="text-danger" colspan="3">{{$item->note}}</td>
-                                    </tr>
-                                    @endif
-                                    @endif
-
-                                    @endif
+                                    @foreach ($option_id as $opid)
+                                        @if ($item->option_id == $opid->id)
+                                            @if ($mealItem1)
+                                                @if ($item->note != null && $item->note != 'Note Default')
+                                                <tr>
+                                                    <th class="text-danger font-weight-bold">Notes</th>
+                                                    <td class="text-danger font-weight-bold">{{$opid->name}}</td>
+                                                    <td class="text-danger" colspan="3">{{$item->note}}</td>
+                                                </tr>
+                                                @endif
+                                            @endif
+                                        @endif
+                                    @endforeach
                                 @endforeach
-                                @endforeach
-                                {{-- @endif --}}
-                            </table>
-                        </div>
+                        </table>
+                        <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="text-center">
-            <button id="print1" class="btn btn-info" type="button">
-                <span><i class="fa fa-print"></i> Main Dish Print</span>
-            </button>
         </div>
     </div>
 </div>
+<div class="col-md-12">
+    <div class="text-center">
+        <button id="print1" class="btn btn-info" type="button">
+            <span><i class="fa fa-print"></i> Main Dish Print</span>
+        </button>
+    </div>
+</div>
 @endif
-<div class="row justify-content-center mt-4">
-<div class="col-md-5 printableArea2" style="width:100%;">
-    <div class="card shadow">
-        <div class="card-header">
-            <h4><b style="font-size:17px;">Kitchen Details</b></h4>
-        </div>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5 printableArea2" style="width:45%;">
         <div class="card card-body">
-            <div class="row">
-                <div class="col-md-12" style="text-align:center;">
-                    <b style="font-size:17px;">Drink</b>
-                    <div class="row justify-content-center">
-                        <h5><b style="font-size:17px;">Order Number ---  {{$pending_order_details->order_number}}</b></h5>
+            <div class="row" style="margin:10px">
+                <div class="col-md-12">
+                    <div style="text-align:center;">
+                        <address>
+                            <b style="font-size:17px;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Kitchen</span>)</b><br>
+                            <b style="font-size:17px;">Bar & Restaurant</b><br>
+                            <b style="font-size:17px;" class="text-dark">Main Dish</b>
+                        </address>
                     </div>
-
-                    <div class="row mt-1 justify-content-center">
-                        <h5><b style="font-size:17px;">Table Name ---  {{$pending_order_details->table->table_number??"Take Away"}}</b></h5>
+                    <div class="pull-right text-left" style="margin-top:20px;">
+                        <b style="font-size:16px;">Order Number&nbsp;&nbsp;{{$pending_order_details->order_number}}</b><br>
+                        <b style="font-size:16px;">Table Name&nbsp;&nbsp;{{$pending_order_details->table->table_number??"Take Away"}}</b><br>
+                    </font>
                     </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th><b style="font-size:16px;">Item Name</b></th>
-                                        <th><b style="font-size:16px;">Counting Unit Name</b></th>
-                                        <th><b style="font-size:17px;">Order Quantity</b></th>
-                                        {{-- <th>Status</th> --}}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($pending_order_details->option as $option)
-                                    @if ($option->menu_item->meal_id == 2)
-                                    {{-- @if ($option->pivot->tocook == 0) --}}
-                                        <tr>
-                                            <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
-                                            <td><b style="font-size:17px;">{{$option->name}}</b></td>
-                                            <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
-
-                                            {{-- @if($option->pivot->status == 0)
-                                            <td>
-                                                <span class="badge-pill badge-warning">Pending</span>
-                                            </td>
-                                            @elseif($option->pivot->status == 1)
-                                            <td>
-                                                <span class="badge-pill badge-danger">Cooking</span>
-                                            </td>
-                                            @else
-                                            <td>
-                                                <span class="badge-pill badge-success">Finished</span>
-                                            </td>
-                                            @endif --}}
-                                        </tr>
-                                    {{-- @endif --}}
-                                    @endif
+                </div>
+                <div class="col-md-12" style="margin-top:12px;">
+                    <div class="table-responsive" style="clear: both;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Item Name</td>
+                                    <td>Counting Unit Name</td>
+                                    <td>Order Quantity</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($pending_order_details->option as $option)
+                                        @if ($option->menu_item->meal_id == 2)
+                                        {{-- @if ($option->pivot->tocook == 0) --}}
+                                            <tr>
+                                                <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
+                                                <td><b style="font-size:17px;">{{$option->name}}</b></td>
+                                                <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
+                                            </tr>
+                                        {{-- @endif --}}
+                                        @endif
+                                @endforeach
+                            </tbody>
+                                @foreach ($notes as $item)
+                                    @foreach ($option_id as $opid)
+                                        @if ($item->option_id == $opid->id)
+                                            @if ($mealItem1)
+                                                @if ($item->note != null && $item->note != 'Note Default')
+                                                <tr>
+                                                    <th class="text-danger font-weight-bold">Notes</th>
+                                                    <td class="text-danger font-weight-bold">{{$opid->name}}</td>
+                                                    <td class="text-danger" colspan="3">{{$item->note}}</td>
+                                                </tr>
+                                                @endif
+                                            @endif
+                                        @endif
                                     @endforeach
-                                </tbody>
-
-                            </table>
-                        </div>
+                                @endforeach
+                        </table>
+                        <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="text-center">
-            <button id="print2" class="btn btn-info" type="button">
-                <span><i class="fa fa-print"></i> Drink Print</span>
-            </button>
-        </div>
+</div>
+<div class="col-md-12">
+    <div class="text-center">
+        <button id="print2" class="btn btn-info" type="button">
+            <span><i class="fa fa-print"></i>Drink Print</span>
+        </button>
     </div>
 </div>
 </div>

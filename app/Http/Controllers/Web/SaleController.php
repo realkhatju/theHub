@@ -493,12 +493,17 @@ class SaleController extends Controller
                 array_push($notte, $note_remark);
             }
         }
+        $pending_order_details->print = 0;
+        $pending_order_details->save();
         $real_date = $date->format('d-m-Y h:i:s');
         $tableno = Table::find($orders->table_id);
         $take_away = $request->take_away;
+
+
         return view('Customer.pending_order_details', compact('promotion','pending_lists','pending_order_details','total_qty','total_price','table_number','notte','name','option_name','fromadd','real_date','tableno','tablenoo','take_away','orders'));
         alert()->error('Something Wrong! Shop Order is colsed.');
         return redirect()->back();
+
             }
         }
     protected function customerCancelOrder($id){
