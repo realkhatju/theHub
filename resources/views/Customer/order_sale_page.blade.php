@@ -656,16 +656,7 @@
                         <form action="" method="post">
                             @csrf
                             <input type="hidden" id="note_id">
-                            <div class="form-group">
-                                <label for="">Choose Codes</label>
 
-                                <select name="cus_remark"  class="form-control" style="width: 100%" data-placeholder="Select Codes"  id="select2" multiple="multiple"  onchange="fill_remark()">
-
-                                    @foreach ($codes as $code)
-                                        <option value="{{$code->id}}">{{$code->code}}-({{$code->name}})</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label for="">Remark</label>
                                 <textarea name="complain" id="complain" cols="30" rows="5" class="form-control"></textarea>

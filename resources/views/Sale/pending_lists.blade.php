@@ -303,9 +303,6 @@
         </div>
     </div>
 
-    <div id="mobilePrintNew" class="d-none">
-
-    </div>
 
 
 @endsection

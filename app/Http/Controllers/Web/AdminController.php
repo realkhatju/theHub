@@ -525,7 +525,7 @@ class AdminController extends Controller
             }
             $shop_lists = ShopOrder::where('status', 1)->with('table','option')->get();
             // $option = Option::where('status', 1)->get();
-
+            // $print = ShopOrder::where('print',0)->where('voucher_id',null)->update(['print' => 1]);
 
 
             return response()->json([

@@ -468,6 +468,8 @@
             var rolename = $('#unique_role').val();
             // alert(rolename);
             var mobileprint = localStorage.getItem('mobileprint');
+            var windowPrint = 0;
+            var windowPrint1 = 0;
             // Casher Main Dish
             if (rolename == 2) {
                 //    alert(rolename);
@@ -486,7 +488,7 @@
                         if (mobileprint == null) {
                             mobileprint = 0;
                         }
-                        var windowPrint = 0;
+
 
                         if (data) {
                             if (data.order_table.id > mobileprint) {
@@ -496,12 +498,11 @@
                                     if (shopList.print == 0 && shopList.voucher_id ==
                                         null) {
                                         $.each(shopList.option, function(i, option) {
-                                            if (option.menu_item.meal_id == 1 && option
-                                                .pivot.note != null) {
+                                            if (option.menu_item.meal_id == 1) {
                                                 pending_items += `
                                                             <tr style="width:100%; font-size:12px">
                                                                 <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                                <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
                                                                 <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                             </tr>
                                                             <tr style="width:100%; font-size:12px">
@@ -509,16 +510,7 @@
                                                                 <td class="font-weight-bold">${option.pivot.note}</td>
                                                             </tr>
                                                             `;
-                                                windowPrint = 1;
-                                            } else if (option.menu_item.meal_id == 1 &&
-                                                option.pivot.note == null) {
-                                                pending_items += `
-                                                            <tr style="width:100%; font-size:12px">
-                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                                <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                                <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
-                                                            </tr>`;
-                                                windowPrint = 1;
+                                                    windowPrint = 1;
                                             }
                                         });
                                     }
@@ -567,6 +559,7 @@
                                                 </div>
                                                     </div>`;
                                 });
+                                console.log('windowPrint',windowPrint);
                                 if (windowPrint == 1) {
                                     $('#mobileprint').html(pending);
                                     var setItem = localStorage.setItem('mobileprint', JSON.stringify(
@@ -591,10 +584,12 @@
                                     WinPrint.print();
                                     WinPrint.document.close();
                                     WinPrint.close();
+                                    windowPrint = 0;
                                 }
                             }
                         }
                         updatePrintStatus();
+                        location.reload();
                     }
                 });
             }
@@ -616,7 +611,7 @@
                         if (mobileprint == null) {
                             mobileprint = 0;
                         }
-                        var windowPrint1 = 0;
+
 
                         if (data) {
                             if (data.order_table.id > mobileprint) {
@@ -626,12 +621,11 @@
                                 $.each(data.shop_lists, function(i, shopList) {
                                     if (shopList.print == 0 && shopList.voucher_id == null) {
                                         $.each(shopList.option, function(i, option) {
-                                            if (option.menu_item.meal_id == 2 && option
-                                                .pivot.note != null) {
+                                            if (option.menu_item.meal_id == 2) {
                                                 pending_itemsD += `
                                                 <tr style="width:100%; font-size:12px">
                                                     <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
+                                                    <td class="text-danger font-weight-bold"><b>${option.name}</b></td>
                                                     <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
                                                 </tr>
                                                 <tr style="width:100%; font-size:12px">
@@ -639,15 +633,6 @@
                                                     <td class="font-weight-bold">${option.pivot.note}</td>
                                                 </tr>
                                                 `;
-                                                windowPrint1 = 1;
-                                            } else if (option.menu_item.meal_id == 2 &&
-                                                option.pivot.note == null) {
-                                                pending_itemsD += `
-                                                <tr style="width:100%; font-size:12px">
-                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                    <td class="text-danger font-weight-bold"><b>${option.menu_item.item_name}</b></td>
-                                                    <td class="text-danger font-weight-bold"><b>${option.pivot.quantity}</b></td>
-                                                </tr>`;
                                                 windowPrint1 = 1;
                                             }
                                         });
@@ -702,6 +687,7 @@
                                         }
                                     })
                                 });
+                                console.log('windowPrint1',windowPrint1);
                                 if (windowPrint1 == 1) {
                                     $('#mobileprint').html(pending);
                                     var setItem = localStorage.setItem('mobileprint', JSON.stringify(
@@ -726,10 +712,12 @@
                                     WinPrint.print();
                                     WinPrint.document.close();
                                     WinPrint.close();
+                                    windowPrint1 = 0;
                                 }
                             }
                         }
                         updatePrintStatus();
+                        location.reload();
                     }
                 });
             }
