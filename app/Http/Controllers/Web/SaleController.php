@@ -648,6 +648,8 @@ class SaleController extends Controller
         // return $meal2;
         // $meal1 = $meal->id = 1;
         // dd($meal->toArray());
+        $optionShopOrder = ShopOrder::find($order_id)->with('table','option')->get();
+        // dd($pending_order_details->toArray());
 
         DB::table('option_shop_order')
         ->where('shop_order_id', $order_id)

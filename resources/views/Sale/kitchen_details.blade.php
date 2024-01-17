@@ -59,6 +59,10 @@
                                                 <td><b style="font-size:17px;">{{$option->name}}</b></td>
                                                 <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
                                             </tr>
+                                            <tr style="width:100%; font-size:12px">
+                                                <th class="font-weight-bold">Notes</th>
+                                                <td class="font-weight-bold">note</td>
+                                            </tr>
                                         {{-- @endif --}}
                                         @endif
                                 @endforeach

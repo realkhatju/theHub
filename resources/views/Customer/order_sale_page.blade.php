@@ -1548,8 +1548,8 @@
                             html+=`<tr>
                                 <input type="hidden" id="item_name" value="${unit.menu_item.item_name}">
                                 <input type="hidden" id="price_${unit.id}" value="${unit.sale_price}">
-                                <td ><p style="width: 45px;white-space: nowrap;overflow: hidden;text-overflow: clip;">${unit.menu_item.item_name}</p></td>
-                                <td  id="name_${unit.id}"><p style="width: 45px;white-space: nowrap;overflow: hidden;text-overflow: clip;">${unit.name}</p></td>
+                                <td >${unit.menu_item.item_name}</td>
+                                <td  id="name_${unit.id}">${unit.name}</td>
                                 <td>${unit.sale_price}</td>
                                 <td><i class="btn btn-primary" onclick="tgPanel(${unit.id})"><i class="fas fa-plus"></i>Add</i></td>
                                 </tr>

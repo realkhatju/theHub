@@ -111,6 +111,11 @@
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <label class="font-weight-bold">Burmese Name</label>
+                                                        <input type="text" name="nameBurmese" class="form-control" value="{{$item->item_name_burmese}}" required>
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <label class="control-label">Item's Photo</label>
                                                         <input type="file" name="photo_path" class="form-control">
                                                     </div>

@@ -340,6 +340,8 @@ class InventoryController extends Controller
 
         $item->item_name = $request->name;
 
+        $item->item_name_burmese = $request->nameBurmese;
+
         $item->customer_console = $customer_console;
 
         $item->photo_path = $photo_path;

@@ -170,6 +170,13 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 text-center">
+                                                        <address>
+                                                            <strong style="font-size:17px;font-weight:bold;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Report</span>)</strong><br>
+                                                            <strong style="font-size:17px;font-weight:bold;">Bar & Restraurant</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;">No.28A, 7 Miles, Pyay Road, Mayangone Township , </strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"> Yangon, Myanmar</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"><i class="fas fa-mobile-alt"></i>09 790 530100</strong><br>
+                                                        </address>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead>
@@ -308,6 +315,13 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 text-center">
+                                                        <address>
+                                                            <strong style="font-size:17px;font-weight:bold;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Report</span>)</strong><br>
+                                                            <strong style="font-size:17px;font-weight:bold;">Bar & Restraurant</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;">No.28A, 7 Miles, Pyay Road, Mayangone Township , </strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"> Yangon, Myanmar</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"><i class="fas fa-mobile-alt"></i>09 790 530100</strong><br>
+                                                        </address>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead>
@@ -361,6 +375,13 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 text-center">
+                                                        <address>
+                                                            <strong style="font-size:17px;font-weight:bold;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Report</span>)</strong><br>
+                                                            <strong style="font-size:17px;font-weight:bold;">Bar & Restraurant</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;">No.28A, 7 Miles, Pyay Road, Mayangone Township , </strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"> Yangon, Myanmar</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"><i class="fas fa-mobile-alt"></i>09 790 530100</strong><br>
+                                                        </address>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead>
@@ -414,6 +435,13 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 text-center">
+                                                        <address>
+                                                            <strong style="font-size:17px;font-weight:bold;">Upper Deck&nbsp;&nbsp;(<span class="text-danger">Report</span>)</strong><br>
+                                                            <strong style="font-size:17px;font-weight:bold;">Bar & Restraurant</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;">No.28A, 7 Miles, Pyay Road, Mayangone Township , </strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"> Yangon, Myanmar</strong><br>
+                                                                <strong style="font-size:17px;font-weight:bold;"><i class="fas fa-mobile-alt"></i>09 790 530100</strong><br>
+                                                        </address>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead>

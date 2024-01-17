@@ -119,14 +119,14 @@
         @endif --}}
         {{-- <a href="#" class="btn ml-2" style="color:white;background-color:green;" onclick="alert('Order Confirmed')">Confirm Order</a> --}}
 
-        <form class="btn btn-primary shadow rounded ml-2" action="/admin/sendNotif/1" method="POST">
+        {{-- <form class="btn btn-primary shadow rounded ml-2" action="/admin/sendNotif/1" method="POST">
             <input  type="hidden" name="title" value="Customer Ordered" placeholder="title">
             <input  type="hidden" name="body" value="{{$pending_order_details->id}}" placeholder="body">
             <input  type="hidden" name="url" value="http://thehubhotel.kwintechnologykw11.com/Pending-Order" placeholder="url">
             <input  type="hidden" name="_token" value="{{ csrf_token() }}">
             <input  class="btn btn-primary"  type="submit" value="Order Confirmed">
-            {{-- <a href="{{route('success_status_noti',$pending_order_details->brake_flag)}}"></a> --}}
-        </form>
+            <a href="{{route('success_status_noti',$pending_order_details->brake_flag)}}"></a>
+        </form> --}}
     </div>
     </div>
     <div class="modal fade" id="voudiscount" role="dialog" aria-hidden="true">
