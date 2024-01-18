@@ -23,15 +23,14 @@ class LoginController extends Controller
             if($request->session()->get('user')->role_flag == 1){
                 // dd($request->session()->get('user')->role_flag);
                 return view('dashboard');
-
-            }elseif ($request->session()->get('user')->role_flag == 4) {
-
-                return redirect()->route('inven_dashboard');
-
-            }elseif($request->session()->get('user')->role_flag == 3){
-                return redirect()->route('pending_lists');
             }
             elseif ($request->session()->get('user')->role_flag == 2) {
+                return redirect()->route('pending_lists');
+            }
+            elseif($request->session()->get('user')->role_flag == 3){
+                return redirect()->route('pending_lists');
+            }
+            elseif ($request->session()->get('user')->role_flag == 4) {
                 return redirect()->route('pending_lists');
             }
         }
@@ -73,7 +72,7 @@ class LoginController extends Controller
 
         session()->put('user', $user);
 
-        if ($user->role_flag == 1 || $user->role_flag == 2 || $user->role_flag == 4 || $user->role_flag == 5 || $user->role_flag == 6) {
+        if ($user->role_flag == 1 || $user->role_flag == 5 || $user->role_flag == 6) {
 
             alert()->success("Successfully Login");
 
@@ -98,10 +97,7 @@ class LoginController extends Controller
             $menu = MenuItem::all()->count();
             return view('report',compact('total_sale','today_sale','total_inventory','menu','total_expense'));
         }
-        elseif ($user->role_flag == 3) {
-
-            // alert()->success("Successfully Login");
-
+        elseif ($user->role_flag == 2 || $user->role_flag == 3 || $user->role_flag == 4) {
             return redirect()->route('pending_lists');
 
         }

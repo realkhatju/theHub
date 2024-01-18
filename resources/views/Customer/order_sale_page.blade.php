@@ -777,7 +777,7 @@
         @elseif(isset($order))
                 <a class="btn btn-success mr-2 hidden-sm-up d-flex" style="width: 250px;"  onclick="AddMoreItem({{$order->id}})">
                     <table>
-                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                        <span id="2total_quantity" class="text-white font-weight-bold">0</span>
                     </table>
                     <span class="ml-4">
                         <i class="fa-regular fa-circle-check"></i>Check Out&nbsp;!
@@ -790,7 +790,7 @@
             @if($table_number != 0)
                 <a class="btn btn-primary hidden-sm-up d-flex" style="width: 250px;" onclick="showCheckOut()">
                     <table>
-                        <span id="2total_quantity" class="text-secondary font-weight-bold">0</span>
+                        <span id="2total_quantity" class="text-white font-weight-bold">0</span>
                     </table>
                     <span class="ml-4">
                         <i class="fa-regular fa-circle-check"></i> <span> Check Out&nbsp;!</span>

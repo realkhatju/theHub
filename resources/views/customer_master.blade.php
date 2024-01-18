@@ -115,10 +115,10 @@
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <header class="topbar">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <header class="fixed-top">
+        <nav class="navbar top-navbar navbar-expand-md bg-info">
             <div class="navbar-collapse">
-                <ul class="navbar-nav mr-auto mt-md-0">
+                <ul class="navbar-nav mr-auto mt-md-0 flex-row">
                     <img src="{{asset('image/UpperDeck.png')}}" alt="" width="55px" height="55px" class="mt-3">
                     <h2 class="text-white font-weight-bold font-italic ml-2 mt-3">Upper Deck Bar & Restraurant</h2>
                 </ul>
@@ -126,10 +126,10 @@
         </nav>
     </header>
 
-    <div class="page-wrapper" style="height: 100%">
+    <div class="page-wrapper" style="height: 100%; margin-top: 20px">
         <div class="container-fluid">
-            <div class="noti" style="position: fixed">
-           </div>
+            {{-- <div class="noti" style="position: fixed">
+           </div> --}}
             <div class="row page-titles">
                 @yield('place')
             </div>

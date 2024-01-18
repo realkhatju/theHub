@@ -65,12 +65,8 @@
                                         @foreach ($pending_order_details->option as $option)
                                         <tr>
 
-                                            <td>
-                                                <p
-                                                    style="width: 90px;white-space: nowrap;overflow: hidden;text-overflow: clip;">
-                                                    {{ $option->menu_item->item_name }}</p>
-                                            </td>
-                                            {{-- <td>{{$option->name}}</td> --}}
+                                            <td>{{ $option->menu_item->item_name }}</td>
+                                            <td>{{$option->name}}</td>
                                             <td>{{ $option->pivot->quantity }}</td>
                                             {{-- <td>{{$option->sale_price}}</td> --}}
                                             <td><?= $option->pivot->quantity * $option->sale_price ?></td>

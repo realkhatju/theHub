@@ -74,7 +74,7 @@ Route::post('Customer/Sale/Store', 'Web\CustomerShopController@storeShopOrder')-
 Route::get('Customer/Add-More/{order_id}', 'Web\CustomerShopController@addMoreItemUI')->name('customer_add_more_item');
 Route::post('Customer/Add-More-Item', 'Web\CustomerShopController@addMoreItem')->name('customer_add_item');
 Route::post('Customer/Shop-Order/getCountingUnitsByItemId', 'Web\CustomerShopController@getCountingUnitsByItemId');
-Route::get('/Customer/Pending-Order', 'Web\CustomerShopController@getPendingShopOrderList')->name('pending_lists');
+// Route::get('Customer/Pending-Order', 'Web\CustomerShopController@getPendingShopOrderList')->name('pending_lists');
 
 //Language Session Management
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
