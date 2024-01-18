@@ -1,41 +1,44 @@
 @extends('customer_master')
 
-@section('title','Shop Order Sale Page')
+@section('title', 'Shop Order Sale Page')
 
 @section('place')
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<!--<div class="col-md-5 col-8 align-self-center">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <!--<div class="col-md-5 col-8 align-self-center">-->
 
 
 
-<!--    <h3 class="text-themecolor m-b-0 m-t-0">Order Sale Page</h3>-->
+    <!--    <h3 class="text-themecolor m-b-0 m-t-0">Order Sale Page</h3>-->
 
 
-<!--    <ol class="breadcrumb">-->
-<!--        <li class="breadcrumb-item"><a href="{{route('index')}}">Back to Dashborad</a></li>-->
-<!--        <li class="breadcrumb-item active">Order Sale Page</li>-->
-<!--        <div class="custom-control custom-switch" style="margin-left: 90px;">-->
-<!--            <input type="checkbox" class="custom-control-input" id="customSwitch2">-->
-<!--            <label class="custom-control-label text-info" for="customSwitch2">Take Away</label>-->
-<!--        </div>-->
+    <!--    <ol class="breadcrumb">-->
+    <!--        <li class="breadcrumb-item"><a href="{{ route('index') }}">Back to Dashborad</a></li>-->
+    <!--        <li class="breadcrumb-item active">Order Sale Page</li>-->
+    <!--        <div class="custom-control custom-switch" style="margin-left: 90px;">-->
+    <!--            <input type="checkbox" class="custom-control-input" id="customSwitch2">-->
+    <!--            <label class="custom-control-label text-info" for="customSwitch2">Take Away</label>-->
+    <!--        </div>-->
 
-<!--    </ol>-->
+    <!--    </ol>-->
 
-<!--</div>-->
+    <!--</div>-->
 
 @endsection
 
 @section('content')
- <div class="row flex-column-reverse flex-md-row " style="margin:50px 0 0 0;">
+    <div class="row flex-column-reverse flex-md-row " style="margin:50px 0 0 0;">
         <div class="card col-md-12">
 
 
 
             {{-- <div class="nav_mobile">
                 <ul class="nav nav-tabs customtab" role="tablist">
-                    @foreach($meal_types as $item)
+                    @foreach ($meal_types as $item)
                     <li class="nav-item flex-shrink-0" style="font-size:14px;">
                         <a class="nav-link" data-toggle="tab" href="#{{$item->id}}" role="tab">
                             <span class="hidden-sm-up">
@@ -52,19 +55,19 @@
                 </ul>
             </div> --}}
 
-            <form action="{{route('customerStore_shop_order')}}" method="post" id="vourcher_page">
+            <form action="{{ route('customerStore_shop_order') }}" method="post" id="vourcher_page">
                 @csrf
                 <input type="hidden" id="cus_complain" name="code_lists">
 
                 <input type="hidden" id="item" name="option_lists">
 
-                <input type="hidden" name="table_id" value="{{$table_number}}">
+                <input type="hidden" name="table_id" value="{{ $table_number }}">
 
                 <input type="hidden" name="take_away" id="t_away">
 
             </form>
 
-            <form action="{{route('add_more_item_customer')}}" method="post" id="add_more_item">
+            <form action="{{ route('add_more_item_customer') }}" method="post" id="add_more_item">
                 @csrf
                 <input type="hidden" id="add_complain" name="code_lists">
 
@@ -76,7 +79,7 @@
 
             </form>
 
-            <form action="{{route('deli_add_item')}}" method="post" id="deli_add_more_item">
+            <form action="{{ route('deli_add_item') }}" method="post" id="deli_add_more_item">
                 @csrf
                 <input type="hidden" id="add_deli_complain" name="code_lists">
 
@@ -87,7 +90,8 @@
             <div class="row">
                 <div class="col-md-2 offset-md-5">
                     <div class="form-group">
-                        <select class="form-control custom-select engMyanTran text-center btn btn-info text-white"  id="eng_myan" onclick="engMyanTranslate(this)">
+                        <select class="form-control custom-select engMyanTran text-center btn btn-info text-white"
+                            id="eng_myan" onclick="engMyanTranslate(this)">
                             <option value="1">En</option>
                             <option value="2">မြန်</option>
                         </select>
@@ -96,37 +100,38 @@
             </div>
 
 
-            <ul class="nav nav-tabs customtab row text-center"  role="tablist">
+            <ul class="nav nav-tabs customtab row text-center" role="tablist">
 
-                    <li class="nav-item col">
-                        <a class="nav-link" data-toggle="tab" href="#home" role="tab">Main Dish</a>
-                      </li>
-                      <li class="nav-item col">
-                          <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Drinks</a>
-                      </li>
+                <li class="nav-item col">
+                    <a class="nav-link" data-toggle="tab" href="#home" role="tab">Main Dish</a>
+                </li>
+                <li class="nav-item col">
+                    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Drinks</a>
+                </li>
 
 
             </ul>
-            <div class="tab-content" >
+            <div class="tab-content">
                 <div class="tab-pane active" id="home" role="tabpanel">
                     <div class="container">
                         <div class="nav_mobile">
                             <ul class="nav nav-tabs customtab" role="tablist">
-                                @foreach($cuisine_types as $cuisine)
-                                @if ($cuisine->meal_id == 1)
-                                <li class="nav-item flex-shrink-0" style="font-size:14px;">
-                                    <a class="nav-link" data-toggle="tab" href="#{{$cuisine->id}}" role="tab">
-                                        <span class="hidden-sm-up">
-                                            <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
-                                            <span>{{$cuisine->name}}</span>
-                                        </span>
-                                        <span class="hidden-xs-down">
-                                            <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
-                                            {{$cuisine->name}}
-                                        </span>
-                                    </a>
-                                </li>
-                                @endif
+                                @foreach ($cuisine_types as $cuisine)
+                                    @if ($cuisine->meal_id == 1)
+                                        <li class="nav-item flex-shrink-0" style="font-size:14px;">
+                                            <a class="nav-link" data-toggle="tab" href="#{{ $cuisine->id }}"
+                                                role="tab">
+                                                <span class="hidden-sm-up">
+                                                    <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                                    <span>{{ $cuisine->name }}</span>
+                                                </span>
+                                                <span class="hidden-xs-down">
+                                                    <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                                    {{ $cuisine->name }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -136,20 +141,23 @@
                             <div class="tab-pane active" id="1" role="tabpanel">
                                 <div class="row mt-3 myanTran">
                                     <div class="row mt-3">
-                                        @foreach($items as $item)
-                                        @if($item->cuisine_type_id == 1 && $item->meal_id == 1  && $item->brake_flag == 1)
+                                        @foreach ($items as $item)
+                                            @if ($item->cuisine_type_id == 1 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                                <div class="card col-sm-3 col-md-3 col-4"
+                                                    onclick="getCountingUnit({{ $item->id }})">
+                                                    <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                        class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                        style='object-fit: cover;'>
+                                                    <div style="height:40px;">
+                                                        <h6 class="card-title text-center font-weight bold"
+                                                            style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                    </div>
 
-                                        <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                            <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                            <div style="height:40px;">
-                                                <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                            </div>
 
+                                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                            {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                        </div>
-                                        @endif
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -157,220 +165,451 @@
 
                             <div class="tab-pane" id="2" role="tabpanel">
                                 <div class="row mt-3 myanTran2">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="3" role="tabpanel">
-                                <div class="row mt-3 myanTran3">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 3 && $item->meal_id == 1  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="4" role="tabpanel">
-                                <div class="row mt-3 myanTran4">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 4 && $item->meal_id == 1  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                    </div>
-                            </div>
-
-                            <div class="tab-pane" id="5" role="tabpanel">
-                                <div class="row mt-3 myanTran5">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 5 && $item->meal_id == 1  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                    <div class="tab-pane" id="2" role="tabpanel">
-
-                                        <div class="row mt-3">
-                                            @foreach($items as $item)
-                                            @if($item->cuisine_type_id == 2 && $item->meal_id == 1  && $item->brake_flag == 1)
-
-                                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                                <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 2 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
                                                 <div style="height:40px;">
-                                                    <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
                                                 </div>
 
 
                                                 {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
                                             </div>
-                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="3" role="tabpanel">
+                                <div class="row mt-3 myanTran3">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 3 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="4" role="tabpanel">
+                                <div class="row mt-3 myanTran4">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 4 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="5" role="tabpanel">
+                                <div class="row mt-3 myanTran5">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 5 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    <div class="tab-pane" id="2" role="tabpanel">
+
+                                        <div class="row mt-3">
+                                            @foreach ($items as $item)
+                                                @if ($item->cuisine_type_id == 2 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                                    <div class="card col-sm-3 col-md-3 col-4"
+                                                        onclick="getCountingUnit({{ $item->id }})">
+                                                        <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                            class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                            style='object-fit: cover;'>
+                                                        <div style="height:40px;">
+                                                            <h6 class="card-title text-center font-weight bold"
+                                                                style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                        </div>
+
+
+                                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         </div>
-                                    </div>        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
                             <div class="tab-pane" id="6" role="tabpanel">
                                 <div class="row mt-3 myanTran6">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 6 && $item->meal_id == 1   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 6 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="7" role="tabpanel">
                                 <div class="row mt-3 myanTran7">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 7 && $item->meal_id == 1   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 7 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="8" role="tabpanel">
                                 <div class="row mt-3 myanTran8">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 8  && $item->meal_id == 1 && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 8 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="9" role="tabpanel">
                                 <div class="row mt-3 myanTran9">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 9 && $item->meal_id == 1  && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 9 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="10" role="tabpanel">
                                 <div class="row mt-3 myanTran10">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 10 && $item->meal_id == 1  && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 10 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="11" role="tabpanel">
                                 <div class="row mt-3 myanTran11">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 11 && $item->meal_id == 1  && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 11 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="12" role="tabpanel">
+                                <div class="row mt-3 myanTran12">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 12 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="13" role="tabpanel">
+                                <div class="row mt-3 myanTran13">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 13 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="14" role="tabpanel">
+                                <div class="row mt-3 myanTran14">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 14 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="15" role="tabpanel">
+                                <div class="row mt-3 myanTran15">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 15 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="16" role="tabpanel">
+                                <div class="row mt-3 myanTran16">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 16 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="17" role="tabpanel">
+                                <div class="row mt-3 myanTran17">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 17 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="18" role="tabpanel">
+                                <div class="row mt-3 myanTran18">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 18 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="19" role="tabpanel">
+                                <div class="row mt-3 myanTran19">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 19 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="20" role="tabpanel">
+                                <div class="row mt-3 myanTran20">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 20 && $item->meal_id == 1 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
 
 
@@ -381,21 +620,22 @@
                     <div class="container">
                         <div class="nav_mobile">
                             <ul class="nav nav-tabs customtab" role="tablist">
-                                @foreach($cuisine_types as $cuisine)
-                                @if ($cuisine->meal_id == 2)
-                                <li class="nav-item flex-shrink-0" style="font-size:14px;">
-                                    <a class="nav-link" data-toggle="tab" href="#drink{{$cuisine->id}}" role="tab">
-                                        <span class="hidden-sm-up">
-                                            <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
-                                            <span>{{$cuisine->name}}</span>
-                                        </span>
-                                        <span class="hidden-xs-down">
-                                            <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
-                                            {{$cuisine->name}}
-                                        </span>
-                                    </a>
-                                </li>
-                                @endif
+                                @foreach ($cuisine_types as $cuisine)
+                                    @if ($cuisine->meal_id == 2)
+                                        <li class="nav-item flex-shrink-0" style="font-size:14px;">
+                                            <a class="nav-link" data-toggle="tab" href="#drink{{ $cuisine->id }}"
+                                                role="tab">
+                                                <span class="hidden-sm-up">
+                                                    <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                                    <span>{{ $cuisine->name }}</span>
+                                                </span>
+                                                <span class="hidden-xs-down">
+                                                    <i class="fa-solid fa-plate-wheat text-warning mr-1"></i>
+                                                    {{ $cuisine->name }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -403,237 +643,458 @@
                         <div class="tab-content">
                             <div class="tab-pane " id="drink1" role="tabpanel">
                                 <div class="row mt-3 myanTranD">
-                                @foreach($items as $item)
-                                @if($item->cuisine_type_id == 1 && $item->meal_id == 2   && $item->brake_flag == 1)
-                                {{-- modify css  --}}
-                                <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                    <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                    </div>
-                                    {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-                                </div>
-                                @endif
-                                @endforeach
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 1 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            {{-- modify css  --}}
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="tab-pane active" id="drink2" role="tabpanel">
 
                                 <div class="row mt-3 myanTranD2">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 2  && $item->meal_id == 2   && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="drink3" role="tabpanel">
-                                <div class="row mt-3 myanTranD3">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 3  && $item->meal_id == 2  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="drink4" role="tabpanel">
-                                <div class="row mt-3 myanTranD4">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 4 && $item->meal_id == 2   && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                    </div>
-                            </div>
-
-                            <div class="tab-pane" id="drink5" role="tabpanel">
-                                <div class="row mt-3 myanTranD5">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 5  && $item->meal_id == 2  && $item->brake_flag == 1)
-
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
-
-
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                    <div class="tab-pane" id="drink2" role="tabpanel">
-
-                                        <div class="row mt-3">
-                                            @foreach($items as $item)
-                                            @if($item->cuisine_type_id == 2  && $item->meal_id == 2  && $item->brake_flag == 1)
-
-                                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                                <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 2 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
                                                 <div style="height:40px;">
-                                                    <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
                                                 </div>
 
 
                                                 {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
                                             </div>
-                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="drink3" role="tabpanel">
+                                <div class="row mt-3 myanTranD3">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 3 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="drink4" role="tabpanel">
+                                <div class="row mt-3 myanTranD4">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 4 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="drink5" role="tabpanel">
+                                <div class="row mt-3 myanTranD5">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 5 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    <div class="tab-pane" id="drink2" role="tabpanel">
+
+                                        <div class="row mt-3">
+                                            @foreach ($items as $item)
+                                                @if ($item->cuisine_type_id == 2 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                                    <div class="card col-sm-3 col-md-3 col-4"
+                                                        onclick="getCountingUnit({{ $item->id }})">
+                                                        <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                            class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                            style='object-fit: cover;'>
+                                                        <div style="height:40px;">
+                                                            <h6 class="card-title text-center font-weight bold"
+                                                                style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                        </div>
+
+
+                                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         </div>
-                                    </div>        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
                             <div class="tab-pane" id="drink6" role="tabpanel">
                                 <div class="row mt-3 myanTranD6">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 6  && $item->meal_id == 2   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 6 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="drink7" role="tabpanel">
                                 <div class="row mt-3 myanTranD7">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 7 && $item->meal_id == 2    && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 7 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane active" id="drink8" role="tabpanel">
                                 <div class="row mt-3 myanTranD8">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 8 && $item->meal_id == 2   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 8 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="drink9" role="tabpanel">
                                 <div class="row mt-3 myanTranD9">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 9 && $item->meal_id == 2   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 9 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="drink10" role="tabpanel">
                                 <div class="row mt-3 myanTranD10">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 10 && $item->meal_id == 2   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 10 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
 
                             </div>
                             <div class="tab-pane" id="drink11" role="tabpanel">
                                 <div class="row mt-3 myanTranD11">
-                                    @foreach($items as $item)
-                                    @if($item->cuisine_type_id == 11 && $item->meal_id == 2   && $item->brake_flag == 1)
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 11 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
 
-                                    <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit({{$item->id}})">
-                                        <img src="{{asset('photo/'.$item->photo_path)}}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                        <div style="height:40px;">
-                                            <h6 class="card-title text-center font-weight bold" style="font-size:12px;">{{$item->item_name}}</h6>
-                                        </div>
 
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
 
-                                        {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
-
-                                    </div>
-                                    @endif
+                                            </div>
+                                        @endif
                                     @endforeach
-                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink12" role="tabpanel">
+                                <div class="row mt-3 myanTranD12">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 12 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink13" role="tabpanel">
+                                <div class="row mt-3 myanTranD13">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 13 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink14" role="tabpanel">
+                                <div class="row mt-3 myanTranD14">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 14 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>
+
+
+                                                {{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink15" role="tabpanel">
+                                <div class="row mt-3 myanTranD15">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 15 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink16" role="tabpanel">
+                                <div class="row mt-3 myanTranD16">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 16 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink17" role="tabpanel">
+                                <div class="row mt-3 myanTranD17">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 17 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink18" role="tabpanel">
+                                <div class="row mt-3 myanTranD18">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 18 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink19" role="tabpanel">
+                                <div class="row mt-3 myanTranD19">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 19 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="drink20" role="tabpanel">
+                                <div class="row mt-3 myanTranD20">
+                                    @foreach ($items as $item)
+                                        @if ($item->cuisine_type_id == 20 && $item->meal_id == 2 && $item->brake_flag == 1)
+                                            <div class="card col-sm-3 col-md-3 col-4"
+                                                onclick="getCountingUnit({{ $item->id }})">
+                                                <img src="{{ asset('photo/' . $item->photo_path) }}"
+                                                    class="card-img-top mb-3 mt-2" height="125rem" alt="..."
+                                                    style='object-fit: cover;'>
+                                                <div style="height:40px;">
+                                                    <h6 class="card-title text-center font-weight bold"
+                                                        style="font-size:12px;">{{ $item->item_name }}</h6>
+                                                </div>{{-- <i class="btn btn-sm btn-success" onclick="getCountingUnit({{$item->id}})"><i class="fas fa-plus"></i>Sale</i> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
 
                             </div>
                         </div>
@@ -647,8 +1108,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Choose Remark Infomation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
-                          <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal"
+                            data-bs-toggle="modal">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
@@ -664,8 +1126,10 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal" class="btn btn-secondary">Cancel</button>
-                        <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
+                        <button type="button" data-dismiss="modal" aria-label="Close" id="#close_modal"
+                            data-bs-toggle="modal" class="btn btn-secondary">Cancel</button>
+                        <button class="btn btn-info" onclick="save_note()" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Save</button>
                     </div>
                 </div>
             </div>
@@ -675,22 +1139,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Choose Option Infomation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal" data-bs-toggle="modal">
-                          <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="#close_modal"
+                            data-bs-toggle="modal">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
                     <div class="modal-body col-12" id="checkout_modal_body">
                         <table class="table">
                             <thead>
-                                <tr >
+                                <tr>
                                     <th>Item Name</th>
                                     <th>Unit Name</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="count_unit" >
+                            <tbody id="count_unit">
 
                             </tbody>
                         </table>
@@ -701,93 +1166,99 @@
 
 
 
-         <!-- Modal -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <a type="button" class="btn"  aria-label="Close" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-xmark"></i></a>
-                </div>
-                <div class="modal-body" style="padding: 0px">
-                            <div class="card">
-                                @if($table == 0)
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a type="button" class="btn" aria-label="Close" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                    <div class="modal-body" style="padding: 0px">
+                        <div class="card">
+                            @if ($table == 0)
                                 <h3 style="color:#49A8EF"><b>For Delivery<b></h3>
-                                @endif
-                                    <div class="card-title">
-                                        <a href="" class="float-right" onclick="deleteItems()">Refresh Here &nbsp<i class="fas fa-sync"></i></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row justify-content-center">
-                                            {{-- Modify Style BST --}}
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="font-weight-bold text-info">Menu Item</th>
-                                                        <th class="font-weight-bold text-info">Option</th>
-                                                        <th class="font-weight-bold text-info">Quantity</th>
-                                                        <th class="font-weight-bold text-info">Price</th>
-                                                        <th class="font-weight-bold text-info">Note</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="sale">
-                                                   <tr>
+                            @endif
+                            <div class="card-title">
+                                <a href="" class="float-right" onclick="deleteItems()">Refresh Here &nbsp<i
+                                        class="fas fa-sync"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    {{-- Modify Style BST --}}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-weight-bold text-info">Menu Item</th>
+                                                <th class="font-weight-bold text-info">Option</th>
+                                                <th class="font-weight-bold text-info">Quantity</th>
+                                                <th class="font-weight-bold text-info">Price</th>
+                                                <th class="font-weight-bold text-info">Note</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="sale">
+                                            <tr>
 
-                                                   </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr class="text-center">
-                                                        <td class="font-weight-bold text-info" colspan="3">Total Quantity</td>
-                                                        <td class="font-weight-bold text-info" id="total_quantity">0</td>
-                                                    </tr>
-                                                    <tr class="text-center">
-                                                        <td class="font-weight-bold text-info" colspan="3">Sub Total Price</td>
-                                                        <td class="font-weight-bold text-info" id="sub_total">0</td>
-                                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                                                        {{-- <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
-                                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td>
-                                                        <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
-                                                    </tr>
-                                                    {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                                                </tfoot>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="text-center">
+                                                <td class="font-weight-bold text-info" colspan="3">Total Quantity</td>
+                                                <td class="font-weight-bold text-info" id="total_quantity">0</td>
+                                            </tr>
+                                            <tr class="text-center">
+                                                <td class="font-weight-bold text-info" colspan="3">Sub Total Price</td>
+                                                <td class="font-weight-bold text-info" id="sub_total">0</td>
                                                 {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                                            </table>
-                                        </div>
-                                        <div class="row ml-2 justify-content-center">
+                                                {{-- <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
+                                                {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td>
+                                                        <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
+                                            </tr>
+                                            {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
+                                        </tfoot>
+                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
+                                    </table>
+                                </div>
+                                <div class="row ml-2 justify-content-center">
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
 
     </div>
 
-    <div class="container" style="bottom:20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
+    <div class="container"
+        style="bottom:20px;position:fixed;justify-content: center;display :flex;left: 50%; transform: translate(-50%) ">
         <!-- Start Button trigger modal -->
         <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-cart-shopping text-danger"></i>
         </a>
         <!-- End Button trigger modal -->
-        @if(isset($order) && $table==2)
-        <div class="col-md-2">
-            <i class="btn btn-success mr-2" onclick="DeliAddMoreItem({{$order->id}})"><i class="fas fa-plus"></i> Add More Item </i>
-        </div>
+        @if (isset($order) && $table == 2)
+            <div class="col-md-2">
+                <i class="btn btn-success mr-2" onclick="DeliAddMoreItem({{ $order->id }})"><i
+                        class="fas fa-plus"></i> Add More Item </i>
+            </div>
         @elseif(isset($order))
-                <a class="btn btn-success mr-2 hidden-sm-up d-flex" style="width: 250px;"  onclick="AddMoreItem({{$order->id}})">
-                    <table>
-                        <span id="2total_quantity" class="text-white font-weight-bold">0</span>
-                    </table>
-                    <span class="ml-4">
-                        <i class="fa-regular fa-circle-check"></i>Check Out&nbsp;!
-                    </span>
-                    <table>
-                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
-                    </table>
-                </a>
+            <a class="btn btn-success mr-2 hidden-sm-up d-flex" style="width: 250px;"
+                onclick="AddMoreItem({{ $order->id }})">
+                <table>
+                    <span id="2total_quantity" class="text-white font-weight-bold">0</span>
+                </table>
+                <span class="ml-4">
+                    <i class="fa-regular fa-circle-check"></i>Check Out&nbsp;!
+                </span>
+                <table>
+                    <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                </table>
+            </a>
         @else
-            @if($table_number != 0)
+            @if ($table_number != 0)
                 <a class="btn btn-primary hidden-sm-up d-flex" style="width: 250px;" onclick="showCheckOut()">
                     <table>
                         <span id="2total_quantity" class="text-white font-weight-bold">0</span>
@@ -796,17 +1267,18 @@
                         <i class="fa-regular fa-circle-check"></i> <span> Check Out&nbsp;!</span>
                     </span>
                     <table>
-                            <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
+                        <span id="2sub_total" class="text-warning font-weight-bold ml-4">0</span>
                     </table>
                 </a>
-            </div>
-            @endif
-            @if($table_number == 0)
-            <div class="col-md-2">
-                <i class="btn btn-success mr-2"  data-toggle="modal" data-target="#myModal" onclick="storeoption()"><i class="fas fa-calendar-check"></i>Check Out</i>
-            </div>
-            @endif
-        @endif
+    </div>
+    @endif
+    @if ($table_number == 0)
+        <div class="col-md-2">
+            <i class="btn btn-success mr-2" data-toggle="modal" data-target="#myModal" onclick="storeoption()"><i
+                    class="fas fa-calendar-check"></i>Check Out</i>
+        </div>
+    @endif
+    @endif
     </div>
 
 
@@ -815,573 +1287,954 @@
 
 @section('js')
 
-<script type="text/javascript">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#select2').select2();
+            showmodal();
+            $('#table_1').DataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+            });
 
-    $(document).ready(function() {
-        $('#select2').select2();
-        showmodal();
-        $('#table_1').DataTable( {
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
+            $('#table_2').DataTable({
+
+                "paging": false,
+                "ordering": false,
+                "info": false,
+
+            });
+
+            $('#table_3').DataTable({
+
+                "paging": false,
+                "ordering": false,
+                "info": false,
+
+            });
         });
 
-        $('#table_2').DataTable( {
+        function deleteItems() {
 
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
+            localStorage.clear();
+        }
 
-        });
+        function engMyanTranslate() {
+            var engMyanTran = $(".engMyanTran option:selected").val();
+            var html = "";
+            var html2 = "";
+            var html3 = "";
+            var html4 = "";
+            var html5 = "";
+            var html6 = "";
+            var html7 = "";
+            var html8 = "";
+            var html9 = "";
+            var html10 = "";
+            var html11 = "";
+            var html12 = "";
+            var html13 = "";
+            var html14 = "";
+            var html15 = "";
+            var html16 = "";
+            var html17 = "";
+            var html18 = "";
+            var html19 = "";
+            var html20 = "";
 
-        $('#table_3').DataTable( {
+            var htmlD = "";
+            var htmlD2 = "";
+            var htmlD3 = "";
+            var htmlD4 = "";
+            var htmlD5 = "";
+            var htmlD6 = "";
+            var htmlD7 = "";
+            var htmlD8 = "";
+            var htmlD9 = "";
+            var htmlD10 = "";
+            var htmlD11 = "";
+            var htmlD12 = "";
+            var htmlD13 = "";
+            var htmlD14 = "";
+            var htmlD15 = "";
+            var htmlD16 = "";
+            var htmlD17 = "";
+            var htmlD18 = "";
+            var htmlD19 = "";
+            var htmlD20 = "";
 
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
 
-        });
-    });
+            var itemName = [];
+            $.ajax({
+                type: 'GET',
+                url: '/customer/menuItemsList',
+                contentType: 'application/json',
+                success: function(data) {
+                    if (engMyanTran == 1) {
+                        $.each(data.menu_items, function(i, v) {
+                            var itemName = [v.item_name, v.item_name_burmese];
+                            var photo_path = '{{ asset('/photo') }}' + "/" + v.photo_path;
+                            var cuisine_type_id = v.cuisine_type_id;
+                            var meal_id = v.meal_id;
+                            var brake_flag = v.brake_flag;
+                            if (cuisine_type_id == 1 && meal_id == 1 && brake_flag == 1) {
+                                html += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 2 && meal_id == 1 && brake_flag == 1) {
+                                html2 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 3 && meal_id == 1 && brake_flag == 1) {
+                                html3 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 4 && meal_id == 1 && brake_flag == 1) {
+                                html4 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 5 && meal_id == 1 && brake_flag == 1) {
+                                html5 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 6 && meal_id == 1 && brake_flag == 1) {
+                                html6 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 7 && meal_id == 1 && brake_flag == 1) {
+                                html7 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 8 && meal_id == 1 && brake_flag == 1) {
+                                html8 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 9 && meal_id == 1 && brake_flag == 1) {
+                                html9 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 10 && meal_id == 1 && brake_flag == 1) {
+                                html10 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 11 && meal_id == 1 && brake_flag == 1) {
+                                html11 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 12 && meal_id == 1 && brake_flag == 1) {
+                                html12 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 13 && meal_id == 1 && brake_flag == 1) {
+                                html13 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 14 && meal_id == 1 && brake_flag == 1) {
+                                html14 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 15 && meal_id == 1 && brake_flag == 1) {
+                                html15 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 16 && meal_id == 1 && brake_flag == 1) {
+                                html16 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 17 && meal_id == 1 && brake_flag == 1) {
+                                html17 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 18 && meal_id == 1 && brake_flag == 1) {
+                                html18 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 19 && meal_id == 1 && brake_flag == 1) {
+                                html19 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 20 && meal_id == 1 && brake_flag == 1) {
+                                html20 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 1 && meal_id == 2 && brake_flag == 1) {
+                                htmlD += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 2 && meal_id == 2 && brake_flag == 1) {
+                                htmlD2 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 3 && meal_id == 2 && brake_flag == 1) {
+                                htmlD3 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 4 && meal_id == 2 && brake_flag == 1) {
+                                htmlD4 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 5 && meal_id == 2 && brake_flag == 1) {
+                                htmlD5 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 6 && meal_id == 2 && brake_flag == 1) {
+                                htmlD6 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 7 && meal_id == 2 && brake_flag == 1) {
+                                htmlD7 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 8 && meal_id == 2 && brake_flag == 1) {
+                                htmlD8 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 9 && meal_id == 2 && brake_flag == 1) {
+                                htmlD9 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 10 && meal_id == 2 && brake_flag == 1) {
+                                htmlD10 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 11 && meal_id == 2 && brake_flag == 1) {
+                                htmlD11 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 12 && meal_id == 2 && brake_flag == 1) {
+                                htmlD12 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 13 && meal_id == 2 && brake_flag == 1) {
+                                htmlD13 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 14 && meal_id == 2 && brake_flag == 1) {
+                                htmlD14 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 15 && meal_id == 2 && brake_flag == 1) {
+                                htmlD15 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 16 && meal_id == 2 && brake_flag == 1) {
+                                htmlD16 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 17 && meal_id == 2 && brake_flag == 1) {
+                                htmlD17 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 18 && meal_id == 2 && brake_flag == 1) {
+                                htmlD18 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 19 && meal_id == 2 && brake_flag == 1) {
+                                htmlD19 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 20 && meal_id == 2 && brake_flag == 1) {
+                                htmlD20 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
+                                    </div>
+                                </div>`;
+                            }
 
-    function deleteItems() {
-
-      localStorage.clear();
-    }
-
-    function engMyanTranslate(){
-        var engMyanTran = $(".engMyanTran option:selected").val();
-        var html = "";
-        var html2 = "";
-        var html3 = "";
-        var html4 = "";
-        var html5 = "";
-        var html6 = "";
-        var html7 = "";
-        var html8 = "";
-        var html9 = "";
-        var html10 = "";
-        var html11 = "";
-
-        var htmlD = "";
-        var htmlD2 = "";
-        var htmlD3 = "";
-        var htmlD4 = "";
-        var htmlD5 = "";
-        var htmlD6 = "";
-        var htmlD7 = "";
-        var htmlD8 = "";
-        var htmlD9 = "";
-        var htmlD10 = "";
-        var htmlD11 = "";
-        var itemName = [];
-        $.ajax({
-            type: 'GET',
-            url: '/customer/menuItemsList',
-            contentType: 'application/json',
-            success: function(data) {
-                if(engMyanTran == 1){
-                    $.each(data.menu_items, function(i, v) {
-                        var itemName = [v.item_name,v.item_name_burmese];
-                        var photo_path =  '{{asset('/photo')}}'+ "/" + v.photo_path;
-                        var cuisine_type_id = v.cuisine_type_id;
-                        var meal_id =  v.meal_id;
-                        var brake_flag =  v.brake_flag;
-                        if(cuisine_type_id == 1 && meal_id == 1 && brake_flag ==1){
-                            html+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 2 && meal_id == 1 && brake_flag ==1){
-                            html2+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 3 && meal_id == 1 && brake_flag ==1){
-                            html3+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 4 && meal_id == 1 && brake_flag ==1){
-                            html4+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 5 && meal_id == 1 && brake_flag ==1){
-                            html5+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 6 && meal_id == 1 && brake_flag ==1){
-                            html6+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 7 && meal_id == 1 && brake_flag ==1){
-                            html7+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 8 && meal_id == 1 && brake_flag ==1){
-                            html8+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 9 && meal_id == 1 && brake_flag ==1){
-                            html9+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 10 && meal_id == 1 && brake_flag ==1){
-                            html10+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 11 && meal_id == 1 && brake_flag ==1){
-                            html11+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 1 && meal_id == 2 && brake_flag ==1){
-                            htmlD+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 2 && meal_id == 2 && brake_flag ==1){
-                            htmlD2+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 3 && meal_id == 2 && brake_flag ==1){
-                            htmlD3+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 4 && meal_id == 2 && brake_flag ==1){
-                            htmlD4+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 5 && meal_id == 2 && brake_flag ==1){
-                            htmlD5+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 6 && meal_id == 2 && brake_flag ==1){
-                            htmlD6+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 7 && meal_id == 2 && brake_flag ==1){
-                            htmlD7+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 8 && meal_id == 2 && brake_flag ==1){
-                            htmlD8+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 9 && meal_id == 2 && brake_flag ==1){
-                            htmlD9+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 10 && meal_id == 2 && brake_flag ==1){
-                            htmlD10+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-                        if(cuisine_type_id == 11 && meal_id == 2 && brake_flag ==1){
-                            htmlD11+=`
-                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
-                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
-                                    <div style="height:40px;">
-                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[0]}</h6>
-                                    </div>
-                                </div>`;
-                        }
-
-                        $('.myanTran').html(html);
-                        $('.myanTran2').html(html2);
-                        $('.myanTran3').html(html3);
-                        $('.myanTran4').html(html4);
-                        $('.myanTran5').html(html5);
-                        $('.myanTran6').html(html6);
-                        $('.myanTran7').html(html7);
-                        $('.myanTran8').html(html8);
-                        $('.myanTran9').html(html9);
-                        $('.myanTran10').html(html10);
-                        $('.myanTran11').html(html11);
-                        $('.myanTranD').html(htmlD);
-                        $('.myanTranD2').html(htmlD2);
-                        $('.myanTranD3').html(htmlD3);
-                        $('.myanTranD4').html(htmlD4);
-                        $('.myanTranD5').html(htmlD5);
-                        $('.myanTranD6').html(htmlD6);
-                        $('.myanTranD7').html(htmlD7);
-                        $('.myanTranD8').html(htmlD8);
-                        $('.myanTranD9').html(htmlD9);
-                        $('.myanTranD10').html(htmlD10);
-                        $('.myanTranD11').html(htmlD11);
-                    });
-                }else{
-                    $.each(data.menu_items, function(i, v) {
-                        var itemName = [v.item_name,v.item_name_burmese];
-                        var photo_path =  '{{asset('/photo')}}'+ "/" + v.photo_path;
-                        var cuisine_type_id = v.cuisine_type_id;
-                        var meal_id =  v.meal_id;
-                        var brake_flag =  v.brake_flag;
-                        if(cuisine_type_id == 1 && meal_id == 1 && brake_flag ==1){
-                            html+=`
+                            $('.myanTran').html(html);
+                            $('.myanTran2').html(html2);
+                            $('.myanTran3').html(html3);
+                            $('.myanTran4').html(html4);
+                            $('.myanTran5').html(html5);
+                            $('.myanTran6').html(html6);
+                            $('.myanTran7').html(html7);
+                            $('.myanTran8').html(html8);
+                            $('.myanTran9').html(html9);
+                            $('.myanTran10').html(html10);
+                            $('.myanTran11').html(html11);
+                            $('.myanTran12').html(html12);
+                            $('.myanTran13').html(html13);
+                            $('.myanTran14').html(html14);
+                            $('.myanTran15').html(html15);
+                            $('.myanTran16').html(html16);
+                            $('.myanTran17').html(html17);
+                            $('.myanTran18').html(html18);
+                            $('.myanTran19').html(html19);
+                            $('.myanTran20').html(html20);
+                            $('.myanTranD').html(htmlD);
+                            $('.myanTranD2').html(htmlD2);
+                            $('.myanTranD3').html(htmlD3);
+                            $('.myanTranD4').html(htmlD4);
+                            $('.myanTranD5').html(htmlD5);
+                            $('.myanTranD6').html(htmlD6);
+                            $('.myanTranD7').html(htmlD7);
+                            $('.myanTranD8').html(htmlD8);
+                            $('.myanTranD9').html(htmlD9);
+                            $('.myanTranD10').html(htmlD10);
+                            $('.myanTranD11').html(htmlD11);
+                            $('.myanTranD12').html(htmlD12);
+                            $('.myanTranD13').html(htmlD13);
+                            $('.myanTranD14').html(htmlD14);
+                            $('.myanTranD15').html(htmlD15);
+                            $('.myanTranD16').html(htmlD16);
+                            $('.myanTranD17').html(htmlD17);
+                            $('.myanTranD18').html(htmlD18);
+                            $('.myanTranD19').html(htmlD19);
+                            $('.myanTranD20').html(htmlD20);
+                        });
+                    } else {
+                        $.each(data.menu_items, function(i, v) {
+                            var itemName = [v.item_name, v.item_name_burmese];
+                            var photo_path = '{{ asset('/photo') }}' + "/" + v.photo_path;
+                            var cuisine_type_id = v.cuisine_type_id;
+                            var meal_id = v.meal_id;
+                            var brake_flag = v.brake_flag;
+                            if (cuisine_type_id == 1 && meal_id == 1 && brake_flag == 1) {
+                                html += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 2 && meal_id == 1 && brake_flag ==1){
-                                html2+=`
+                            }
+                            if (cuisine_type_id == 2 && meal_id == 1 && brake_flag == 1) {
+                                html2 += `
                                 <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                         <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                         <div style="height:40px;">
                                             <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                         </div>
                                     </div>`;
-                        }
-                        if(cuisine_type_id == 3 && meal_id == 1 && brake_flag ==1){
-                            html3+=`
+                            }
+                            if (cuisine_type_id == 3 && meal_id == 1 && brake_flag == 1) {
+                                html3 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 4 && meal_id == 1 && brake_flag ==1){
-                            html4+=`
+                            }
+                            if (cuisine_type_id == 4 && meal_id == 1 && brake_flag == 1) {
+                                html4 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 5 && meal_id == 1 && brake_flag ==1){
-                            html5+=`
+                            }
+                            if (cuisine_type_id == 5 && meal_id == 1 && brake_flag == 1) {
+                                html5 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 6 && meal_id == 1 && brake_flag ==1){
-                            html6+=`
+                            }
+                            if (cuisine_type_id == 6 && meal_id == 1 && brake_flag == 1) {
+                                html6 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 7 && meal_id == 1 && brake_flag ==1){
-                            html7+=`
+                            }
+                            if (cuisine_type_id == 7 && meal_id == 1 && brake_flag == 1) {
+                                html7 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 8 && meal_id == 1 && brake_flag ==1){
-                            html8+=`
+                            }
+                            if (cuisine_type_id == 8 && meal_id == 1 && brake_flag == 1) {
+                                html8 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 9 && meal_id == 1 && brake_flag ==1){
-                            html9+=`
+                            }
+                            if (cuisine_type_id == 9 && meal_id == 1 && brake_flag == 1) {
+                                html9 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 10 && meal_id == 1 && brake_flag ==1){
-                            html10+=`
+                            }
+                            if (cuisine_type_id == 10 && meal_id == 1 && brake_flag == 1) {
+                                html10 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 11 && meal_id == 1 && brake_flag ==1){
-                            html11+=`
+                            }
+                            if (cuisine_type_id == 11 && meal_id == 1 && brake_flag == 1) {
+                                html11 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 1 && meal_id == 2 && brake_flag ==1){
-                            htmlD+=`
+                            }
+                            if (cuisine_type_id == 12 && meal_id == 1 && brake_flag == 1) {
+                                html12 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 2 && meal_id == 2 && brake_flag ==1){
-                            htmlD2+=`
+                            }
+                            if (cuisine_type_id == 13 && meal_id == 1 && brake_flag == 1) {
+                                html13 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 3 && meal_id == 2 && brake_flag ==1){
-                            htmlD3+=`
+                            }
+                            if (cuisine_type_id == 14 && meal_id == 1 && brake_flag == 1) {
+                                html14 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 4 && meal_id == 2 && brake_flag ==1){
-                            htmlD4+=`
+                            }
+                            if (cuisine_type_id == 15 && meal_id == 1 && brake_flag == 1) {
+                                html15 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 5 && meal_id == 2 && brake_flag ==1){
-                            htmlD5+=`
+                            }
+                            if (cuisine_type_id == 16 && meal_id == 1 && brake_flag == 1) {
+                                html16 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 6 && meal_id == 2 && brake_flag ==1){
-                            htmlD6+=`
+                            }
+                            if (cuisine_type_id == 17 && meal_id == 1 && brake_flag == 1) {
+                                html17 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 7 && meal_id == 2 && brake_flag ==1){
-                            htmlD7+=`
+                            }
+                            if (cuisine_type_id == 18 && meal_id == 1 && brake_flag == 1) {
+                                html18 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 8 && meal_id == 2 && brake_flag ==1){
-                            htmlD8+=`
+                            }
+                            if (cuisine_type_id == 19 && meal_id == 1 && brake_flag == 1) {
+                                html19 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 9 && meal_id == 2 && brake_flag ==1){
-                            htmlD9+=`
+                            }
+                            if (cuisine_type_id == 20 && meal_id == 1 && brake_flag == 1) {
+                                html20 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 10 && meal_id == 2 && brake_flag ==1){
-                            htmlD10+=`
+                            }
+
+                            if (cuisine_type_id == 1 && meal_id == 2 && brake_flag == 1) {
+                                htmlD += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        if(cuisine_type_id == 11 && meal_id == 2 && brake_flag ==1){
-                            htmlD11+=`
+                            }
+                            if (cuisine_type_id == 2 && meal_id == 2 && brake_flag == 1) {
+                                htmlD2 += `
                             <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
                                     <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
                                     <div style="height:40px;">
                                         <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
                                     </div>
                                 </div>`;
-                        }
-                        $('.myanTran').html(html);
-                        $('.myanTran2').html(html2);
-                        $('.myanTran3').html(html3);
-                        $('.myanTran4').html(html4);
-                        $('.myanTran5').html(html5);
-                        $('.myanTran6').html(html6);
-                        $('.myanTran7').html(html7);
-                        $('.myanTran8').html(html8);
-                        $('.myanTran9').html(html9);
-                        $('.myanTran10').html(html10);
-                        $('.myanTran11').html(html11);
-                        $('.myanTranD').html(htmlD);
-                        $('.myanTranD2').html(htmlD2);
-                        $('.myanTranD3').html(htmlD3);
-                        $('.myanTranD4').html(htmlD4);
-                        $('.myanTranD5').html(htmlD5);
-                        $('.myanTranD6').html(htmlD6);
-                        $('.myanTranD7').html(htmlD7);
-                        $('.myanTranD8').html(htmlD8);
-                        $('.myanTranD9').html(htmlD9);
-                        $('.myanTranD10').html(htmlD10);
-                        $('.myanTranD11').html(htmlD11);
-                    });
+                            }
+                            if (cuisine_type_id == 3 && meal_id == 2 && brake_flag == 1) {
+                                htmlD3 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 4 && meal_id == 2 && brake_flag == 1) {
+                                htmlD4 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 5 && meal_id == 2 && brake_flag == 1) {
+                                htmlD5 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 6 && meal_id == 2 && brake_flag == 1) {
+                                htmlD6 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 7 && meal_id == 2 && brake_flag == 1) {
+                                htmlD7 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 8 && meal_id == 2 && brake_flag == 1) {
+                                htmlD8 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 9 && meal_id == 2 && brake_flag == 1) {
+                                htmlD9 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 10 && meal_id == 2 && brake_flag == 1) {
+                                htmlD10 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 11 && meal_id == 2 && brake_flag == 1) {
+                                htmlD11 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 12 && meal_id == 2 && brake_flag == 1) {
+                                htmlD12 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 13 && meal_id == 2 && brake_flag == 1) {
+                                htmlD13 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 14 && meal_id == 2 && brake_flag == 1) {
+                                htmlD14 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 15 && meal_id == 2 && brake_flag == 1) {
+                                htmlD15 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 16 && meal_id == 2 && brake_flag == 1) {
+                                htmlD16 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 17 && meal_id == 2 && brake_flag == 1) {
+                                htmlD17 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+
+                            if (cuisine_type_id == 18 && meal_id == 2 && brake_flag == 1) {
+                                htmlD18 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 19 && meal_id == 2 && brake_flag == 1) {
+                                htmlD19 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            if (cuisine_type_id == 20 && meal_id == 2 && brake_flag == 1) {
+                                htmlD20 += `
+                            <div class="card col-sm-3 col-md-3 col-4" onclick="getCountingUnit(${v.id})">
+                                    <img src="${photo_path}" class="card-img-top mb-3 mt-2" height="125rem" alt="..." style='object-fit: cover;'>
+                                    <div style="height:40px;">
+                                        <h6 class="card-title text-center font-weight bold" style="font-size:12px;" >${itemName[1]}</h6>
+                                    </div>
+                                </div>`;
+                            }
+                            $('.myanTran').html(html);
+                            $('.myanTran2').html(html2);
+                            $('.myanTran3').html(html3);
+                            $('.myanTran4').html(html4);
+                            $('.myanTran5').html(html5);
+                            $('.myanTran6').html(html6);
+                            $('.myanTran7').html(html7);
+                            $('.myanTran8').html(html8);
+                            $('.myanTran9').html(html9);
+                            $('.myanTran10').html(html10);
+                            $('.myanTran11').html(html11);
+                            $('.myanTran12').html(html12);
+                            $('.myanTran13').html(html13);
+                            $('.myanTran14').html(html14);
+                            $('.myanTran15').html(html15);
+                            $('.myanTran16').html(html16);
+                            $('.myanTran17').html(html17);
+                            $('.myanTran18').html(html18);
+                            $('.myanTran19').html(html19);
+                            $('.myanTran20').html(html20);
+                            $('.myanTranD').html(htmlD);
+                            $('.myanTranD2').html(htmlD2);
+                            $('.myanTranD3').html(htmlD3);
+                            $('.myanTranD4').html(htmlD4);
+                            $('.myanTranD5').html(htmlD5);
+                            $('.myanTranD6').html(htmlD6);
+                            $('.myanTranD7').html(htmlD7);
+                            $('.myanTranD8').html(htmlD8);
+                            $('.myanTranD9').html(htmlD9);
+                            $('.myanTranD10').html(htmlD10);
+                            $('.myanTranD11').html(htmlD11);
+                            $('.myanTranD12').html(htmlD12);
+                            $('.myanTranD13').html(htmlD13);
+                            $('.myanTranD14').html(htmlD14);
+                            $('.myanTranD15').html(htmlD15);
+                            $('.myanTranD16').html(htmlD16);
+                            $('.myanTranD17').html(htmlD17);
+                            $('.myanTranD18').html(htmlD18);
+                            $('.myanTranD19').html(htmlD19);
+                            $('.myanTranD20').html(htmlD20);
+                        });
+                    }
                 }
-            }
-        });
+            });
 
 
-    }
+        }
 
-    function storeoption(){
-        var mycart = localStorage.getItem('mycart');
-        var grandTotal = localStorage.getItem('grandTotal');
-        var myremark = localStorage.getItem('myremark');
-        var grandTotal_obj = JSON.parse(grandTotal);
-        $('#cus_remark').attr('value',myremark);
-        $("#itemdeli").attr('value', mycart);
-        $("#totalqty").attr('value',grandTotal_obj.total_qty);
-        localStorage.clear();
-    }
+        function storeoption() {
+            var mycart = localStorage.getItem('mycart');
+            var grandTotal = localStorage.getItem('grandTotal');
+            var myremark = localStorage.getItem('myremark');
+            var grandTotal_obj = JSON.parse(grandTotal);
+            $('#cus_remark').attr('value', myremark);
+            $("#itemdeli").attr('value', mycart);
+            $("#totalqty").attr('value', grandTotal_obj.total_qty);
+            localStorage.clear();
+        }
 
-    function searchByCuisineOne(value){
+        function searchByCuisineOne(value) {
 
-         $('#table_1').empty();
+            $('#table_1').empty();
 
-         $.ajax({
+            $.ajax({
 
-           type:'POST',
+                type: 'POST',
 
-           url:'/searchByCuisine',
+                url: '/searchByCuisine',
 
-           data:{
-            "_token":"{{csrf_token()}}",
-            "cuisine_id":value,
-           },
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "cuisine_id": value,
+                },
 
-            success:function(data){
+                success: function(data) {
 
-                var html = "";
+                    var html = "";
 
-                $.each(data,function(i, v){
+                    $.each(data, function(i, v) {
 
-                    var id = v.id;
+                        var id = v.id;
 
-                    var item = v.item_name;
+                        var item = v.item_name;
 
-                    var photo_path =  '{{asset('/photo/Item/')}}'+ "/" + v.photo_path;
+                        var photo_path = '{{ asset('/photo/Item/') }}' + "/" + v.photo_path;
 
-                    html+=`<tr>
+                        html += `<tr>
                                 <td>${item}</td>
                                 <td>
                                     <img src="${photo_path}" class="img-rounded" width="100" height="70" />
@@ -1390,72 +2243,71 @@
                                     <i class="btn btn-success" onclick="getCountingUnit(${id})"><i class="fas fa-plus"></i>Sale</i>
                                 </td>
                             </tr>`
-                });
+                    });
 
-                $("#table_1").html(html);
-            }
+                    $("#table_1").html(html);
+                }
 
-        });
+            });
 
-    }
+        }
 
-    function deli_pay(val){
-        // alert(val);
-        $.ajax({
+        function deli_pay(val) {
+            // alert(val);
+            $.ajax({
 
-            type:'POST',
+                type: 'POST',
 
-            url:'/searchDelicharges',
+                url: '/searchDelicharges',
 
-            data:{
-            "_token":"{{csrf_token()}}",
-            "town_id":val,
-            },
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "town_id": val,
+                },
 
-            success:function(data){
-                // alert(data.status);
-               if(data.status == 0){
-                swal({
-                title:"Don't Allow Delivery",
-                text:"This town is not allowed delivery!",
-                icon:"info",
-                 });
-               }
-               else{
-                $('#deli_charges').val(data.delivery_charges);
-               }
-            }
-        })
-    }
+                success: function(data) {
+                    // alert(data.status);
+                    if (data.status == 0) {
+                        swal({
+                            title: "Don't Allow Delivery",
+                            text: "This town is not allowed delivery!",
+                            icon: "info",
+                        });
+                    } else {
+                        $('#deli_charges').val(data.delivery_charges);
+                    }
+                }
+            })
+        }
 
-    function searchByCuisineTwo(value){
+        function searchByCuisineTwo(value) {
 
-        $('#table_2').empty();
+            $('#table_2').empty();
 
-         $.ajax({
+            $.ajax({
 
-           type:'POST',
+                type: 'POST',
 
-           url:'/searchByCuisine',
+                url: '/searchByCuisine',
 
-           data:{
-            "_token":"{{csrf_token()}}",
-            "cuisine_id":value,
-           },
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "cuisine_id": value,
+                },
 
-            success:function(data){
+                success: function(data) {
 
-                var html = "";
+                    var html = "";
 
-                $.each(data,function(i, v){
+                    $.each(data, function(i, v) {
 
-                    var id = v.id;
+                        var id = v.id;
 
-                    var item = v.item_name;
+                        var item = v.item_name;
 
-                    var photo_path =  '{{asset('/photo/Item/')}}'+ "/" + v.photo_path;
+                        var photo_path = '{{ asset('/photo/Item/') }}' + "/" + v.photo_path;
 
-                    html+=`<tr>
+                        html += `<tr>
                                 <td>${item}</td>
                                 <td>
                                     <img src="${photo_path}" class="img-rounded" width="100" height="70" />
@@ -1464,43 +2316,43 @@
                                     <i class="btn btn-success" onclick="getCountingUnit(${id})"><i class="fas fa-plus"></i>Sale</i>
                                 </td>
                             </tr>`
-                });
+                    });
 
-                $("#table_2").html(html);
-            }
+                    $("#table_2").html(html);
+                }
 
-        });
+            });
 
-    }
+        }
 
-    function searchByCuisineThree(value){
+        function searchByCuisineThree(value) {
 
-         $('#table_3').empty();
+            $('#table_3').empty();
 
-         $.ajax({
+            $.ajax({
 
-           type:'POST',
+                type: 'POST',
 
-           url:'/searchByCuisine',
+                url: '/searchByCuisine',
 
-           data:{
-            "_token":"{{csrf_token()}}",
-            "cuisine_id":value,
-           },
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "cuisine_id": value,
+                },
 
-            success:function(data){
+                success: function(data) {
 
-                var html = "";
+                    var html = "";
 
-                $.each(data,function(i, v){
+                    $.each(data, function(i, v) {
 
-                    var id = v.id;
+                        var id = v.id;
 
-                    var item = v.item_name;
+                        var item = v.item_name;
 
-                    var photo_path =  '{{asset('/photo/Item/')}}'+ "/" + v.photo_path;
+                        var photo_path = '{{ asset('/photo/Item/') }}' + "/" + v.photo_path;
 
-                    html+=`<tr>
+                        html += `<tr>
                                 <td>${item}</td>
                                 <td>
                                     <img src="${photo_path}" class="img-rounded" width="100" height="70" />
@@ -1509,32 +2361,32 @@
                                     <i class="btn btn-success" onclick="getCountingUnit(${id})"><i class="fas fa-plus"></i>Sale</i>
                                 </td>
                             </tr>`
-                });
+                    });
 
-                $("#table_3").html(html);
-            }
+                    $("#table_3").html(html);
+                }
 
-        });
-    }
+            });
+        }
 
-    function getCountingUnit(item_id){
-        var html = "";
-        // console.log(item_id);
-        $.ajax({
+        function getCountingUnit(item_id) {
+            var html = "";
+            // console.log(item_id);
+            $.ajax({
 
-           type:'POST',
+                type: 'POST',
 
-           url:'/getCustomerCountingUnitsByItemId',
+                url: '/getCustomerCountingUnitsByItemId',
 
-           data:{
-            "_token":"{{csrf_token()}}",
-            "item_id":item_id,
-           },
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "item_id": item_id,
+                },
 
-            success:function(data){
-                $.each(data, function(i, unit) {
-                    if(unit.brake_flag == 2){
-                            html+=`<tr>
+                success: function(data) {
+                    $.each(data, function(i, unit) {
+                        if (unit.brake_flag == 2) {
+                            html += `<tr>
                                 <input type="hidden" id="item_name" value="${unit.menu_item.item_name}">
                                 <input type="hidden" id="price_${unit.id}" value="${unit.sale_price}">
                                 <td>${unit.menu_item.item_name}</td>
@@ -1543,9 +2395,8 @@
                                 <td><i class="btn btn-danger">Brake</i></td>
                                 </tr>
                             `;
-                        }
-                        else{
-                            html+=`<tr>
+                        } else {
+                            html += `<tr>
                                 <input type="hidden" id="item_name" value="${unit.menu_item.item_name}">
                                 <input type="hidden" id="price_${unit.id}" value="${unit.sale_price}">
                                 <td >${unit.menu_item.item_name}</td>
@@ -1563,206 +2414,215 @@
                     // console.log('total brake flag is',found);
 
 
-                $("#count_unit").html(html);
+                    $("#count_unit").html(html);
 
-                $("#unit_table_modal").modal('show');
-            }
-
-        });
-    }
-
-    function AddMoreItem(order){
-        if($('.custom-control-input').prop('checked')){
-            // alert('success');
-            var take_away = 1;
-        }else{
-            var take_away = 0;
-        }
-
-        var mycart = localStorage.getItem('mycart');
-
-        var myremark = localStorage.getItem('myremark');
-
-        if(!mycart){
-
-            swal({
-                title:"Please Check",
-                text:"Menu Item Cannot be Empty to Check Out",
-                icon:"info",
-            });
-
-        }else{
-            $('#add_complain').attr('value',myremark);
-
-            $("#option_lists").attr('value', mycart);
-
-            $("#order_id").attr('value', order);
-
-            $("#t_add_away").attr('value', take_away);
-
-            $("#add_more_item").submit();
-
-            localStorage.clear();
-
-        }
-
-    }
-
-    function tgPanel(id){
-
-        // alert(id);
-
-var item_name = $('#item_name').val();
-console.log(item_name);
-
-var item_price_check = $('#price_' + id).val();
-
-var name = $('#name_' + id).text();
-
-var qty_check = $('#qty_' + id).val();
-
-var qty = parseInt(qty_check);
-
-var price = parseInt(item_price_check);
-
-if( item_price_check == ""){
-
-Swal.fire({
-    title:"Please Check",
-    text:"Please Select Price To Sell",
-    icon:"info",
-});
-}
-else{
-
-// swal("Please Enter Quantity:", {
-//     content: "input",
-// })
-
-// .then((value) => {
-//     if(value.toString().match(/^\d+$/)){
-//     if (value > qty ) {
-
-//         swal({
-//             title:"Can't Add",
-//             text:"Your Input is higher than Current Quantity!",
-//             icon:"info",
-//         });
-
-//     }else{
-
-        // alert('hello!');
-
-        $('.note_class').hide();
-
-
-        var total_price = price * 1 ;
-
-        var item={id:id,item_name:item_name,unit_name:name,current_qty:qty,order_qty:1,selling_price:price};
-        console.log(item);
-        var total_amount = {sub_total:total_price,total_qty:1};
-
-        var mycart = localStorage.getItem('mycart');
-
-        var grand_total = localStorage.getItem('grandTotal');
-        // var new_grand_total = localStorage.getItem('grandTotal');
-        console.log(grand_total);
-        //console.log(item);
-
-        if(mycart == null ){
-
-            mycart = '[]';
-
-            var mycartobj = JSON.parse(mycart);
-
-            mycartobj.push(item);
-
-            localStorage.setItem('mycart',JSON.stringify(mycartobj));
-
-        }else{
-
-            var mycartobj = JSON.parse(mycart);
-
-            var hasid = false;
-
-            $.each(mycartobj,function(i,v){
-
-                if(v.id == id ){
-
-                    hasid = true;
-
-                    v.order_qty = parseInt(1) + parseInt(v.order_qty);
+                    $("#unit_table_modal").modal('show');
                 }
-            })
 
-            if(!hasid){
+            });
+        }
 
-                mycartobj.push(item);
+        function AddMoreItem(order) {
+            if ($('.custom-control-input').prop('checked')) {
+                // alert('success');
+                var take_away = 1;
+            } else {
+                var take_away = 0;
             }
 
-            localStorage.setItem('mycart',JSON.stringify(mycartobj));
+            var mycart = localStorage.getItem('mycart');
+
+            var myremark = localStorage.getItem('myremark');
+
+            if (!mycart) {
+
+                swal({
+                    title: "Please Check",
+                    text: "Menu Item Cannot be Empty to Check Out",
+                    icon: "info",
+                });
+
+            } else {
+                $('#add_complain').attr('value', myremark);
+
+                $("#option_lists").attr('value', mycart);
+
+                $("#order_id").attr('value', order);
+
+                $("#t_add_away").attr('value', take_away);
+
+                $("#add_more_item").submit();
+
+                localStorage.clear();
+
+            }
+
         }
 
-        if(grand_total == null ){
+        function tgPanel(id) {
 
-            localStorage.setItem('grandTotal',JSON.stringify(total_amount));
+            // alert(id);
 
-        }else{
+            var item_name = $('#item_name').val();
+            console.log(item_name);
 
-            var grand_total_obj = JSON.parse(grand_total);
+            var item_price_check = $('#price_' + id).val();
 
-            grand_total_obj.sub_total = total_price + grand_total_obj.sub_total;
+            var name = $('#name_' + id).text();
 
-            grand_total_obj.total_qty = parseInt(1) + parseInt(grand_total_obj.total_qty);
+            var qty_check = $('#qty_' + id).val();
 
-            localStorage.setItem('grandTotal',JSON.stringify(grand_total_obj));
+            var qty = parseInt(qty_check);
+
+            var price = parseInt(item_price_check);
+
+            if (item_price_check == "") {
+
+                Swal.fire({
+                    title: "Please Check",
+                    text: "Please Select Price To Sell",
+                    icon: "info",
+                });
+            } else {
+
+                // swal("Please Enter Quantity:", {
+                //     content: "input",
+                // })
+
+                // .then((value) => {
+                //     if(value.toString().match(/^\d+$/)){
+                //     if (value > qty ) {
+
+                //         swal({
+                //             title:"Can't Add",
+                //             text:"Your Input is higher than Current Quantity!",
+                //             icon:"info",
+                //         });
+
+                //     }else{
+
+                // alert('hello!');
+
+                $('.note_class').hide();
+
+
+                var total_price = price * 1;
+
+                var item = {
+                    id: id,
+                    item_name: item_name,
+                    unit_name: name,
+                    current_qty: qty,
+                    order_qty: 1,
+                    selling_price: price
+                };
+                console.log(item);
+                var total_amount = {
+                    sub_total: total_price,
+                    total_qty: 1
+                };
+
+                var mycart = localStorage.getItem('mycart');
+
+                var grand_total = localStorage.getItem('grandTotal');
+                // var new_grand_total = localStorage.getItem('grandTotal');
+                console.log(grand_total);
+                //console.log(item);
+
+                if (mycart == null) {
+
+                    mycart = '[]';
+
+                    var mycartobj = JSON.parse(mycart);
+
+                    mycartobj.push(item);
+
+                    localStorage.setItem('mycart', JSON.stringify(mycartobj));
+
+                } else {
+
+                    var mycartobj = JSON.parse(mycart);
+
+                    var hasid = false;
+
+                    $.each(mycartobj, function(i, v) {
+
+                        if (v.id == id) {
+
+                            hasid = true;
+
+                            v.order_qty = parseInt(1) + parseInt(v.order_qty);
+                        }
+                    })
+
+                    if (!hasid) {
+
+                        mycartobj.push(item);
+                    }
+
+                    localStorage.setItem('mycart', JSON.stringify(mycartobj));
+                }
+
+                if (grand_total == null) {
+
+                    localStorage.setItem('grandTotal', JSON.stringify(total_amount));
+
+                } else {
+
+                    var grand_total_obj = JSON.parse(grand_total);
+
+                    grand_total_obj.sub_total = total_price + grand_total_obj.sub_total;
+
+                    grand_total_obj.total_qty = parseInt(1) + parseInt(grand_total_obj.total_qty);
+
+                    localStorage.setItem('grandTotal', JSON.stringify(grand_total_obj));
+                }
+
+                $("#unit_table_modal").modal('hide');
+
+                showmodal();
+
+            }
+            //     }else{
+            //         swal({
+            //             title:"Input Invalid",
+            //             text:"Please only input english digit",
+            //             icon:"info",
+            //         });
+            //     }
+            // })
+
+            // }
         }
 
-        $("#unit_table_modal").modal('hide');
+        function showmodal() {
 
-        showmodal();
+            var mycart = localStorage.getItem('mycart');
+            console.log(mycart);
+            var grandTotal = localStorage.getItem('grandTotal');
 
-    }
-//     }else{
-//         swal({
-//             title:"Input Invalid",
-//             text:"Please only input english digit",
-//             icon:"info",
-//         });
-//     }
-// })
+            var grandTotal_obj = JSON.parse(grandTotal);
+            console.log(grandTotal_obj);
 
-// }
-}
+            if (mycart) {
 
-    function showmodal(){
+                var mycartobj = JSON.parse(mycart);
 
-        var mycart = localStorage.getItem('mycart');
-        console.log(mycart);
-        var grandTotal = localStorage.getItem('grandTotal');
+                var html = '';
 
-        var grandTotal_obj = JSON.parse(grandTotal);
-        console.log(grandTotal_obj);
+                if (mycartobj.length > 0) {
 
-        if(mycart){
+                    $.each(mycartobj, function(i, v) {
 
-            var mycartobj = JSON.parse(mycart);
+                        var id = v.id;
 
-            var html='';
+                        var item = v.item_name;
 
-            if(mycartobj.length>0){
+                        var qty = v.order_qty;
 
-                $.each(mycartobj,function(i,v){
+                        var count_name = v.unit_name
 
-                    var id=v.id;
-
-                    var item=v.item_name;
-
-                    var qty=v.order_qty;
-
-                    var count_name = v.unit_name
-
-                    html+=`<tr>
+                        html += `<tr>
 
                             <td class="text-success font-weight-bold"><p style="width: 50px;white-space: nowrap;overflow: hidden;text-overflow: clip;">${item}</p></td>
 
@@ -1784,285 +2644,287 @@ else{
                             `;
 
 
-                });
+                    });
+                }
+
+                $("#total_quantity").text(grandTotal_obj.total_qty);
+                $("#2total_quantity").text(grandTotal_obj.total_qty);
+                $("#sub_total").text(grandTotal_obj.sub_total);
+                $("#1sub_total").text(grandTotal_obj.sub_total);
+                $("#2sub_total").text(grandTotal_obj.sub_total + ' Ks');
+                $("#sale").html(html);
             }
-
-            $("#total_quantity").text(grandTotal_obj.total_qty);
-            $("#2total_quantity").text(grandTotal_obj.total_qty);
-            $("#sub_total").text(grandTotal_obj.sub_total);
-            $("#1sub_total").text(grandTotal_obj.sub_total);
-            $("#2sub_total").text(grandTotal_obj.sub_total+' Ks');
-            $("#sale").html(html);
         }
-    }
 
-    function plus(id){
-
+        function plus(id) {
 
 
 
 
-            count_change(id,'plus',1);
+
+            count_change(id, 'plus', 1);
 
 
-    }
+        }
 
-    function minus(id){
-
-
-
-            count_change(id,'minus',1);
+        function minus(id) {
 
 
-    }
 
-    function count_change(id,action,qty){
+            count_change(id, 'minus', 1);
 
-        var grand_total = localStorage.getItem('grandTotal');
 
-        var mycart=localStorage.getItem('mycart');
+        }
 
-        var mycartobj=JSON.parse(mycart);
+        function count_change(id, action, qty) {
 
-        var grand_total_obj = JSON.parse(grand_total);
+            var grand_total = localStorage.getItem('grandTotal');
 
-        var item = mycartobj.filter(item =>item.id == id);
+            var mycart = localStorage.getItem('mycart');
 
-        if( action == 'plus'){
+            var mycartobj = JSON.parse(mycart);
 
-            if (item[0].order_qty == item[0].current_qty) {
+            var grand_total_obj = JSON.parse(grand_total);
+
+            var item = mycartobj.filter(item => item.id == id);
+
+            if (action == 'plus') {
+
+                if (item[0].order_qty == item[0].current_qty) {
+
+                    swal({
+                        title: "Can't Add",
+                        text: "Can't Added Anymore!",
+                        icon: "info",
+                    });
+
+                    $('#btn_plus_' + item[0].id).attr('disabled', 'disabled');
+                }
+                item[0].order_qty++;
+
+                grand_total_obj.sub_total += parseInt(item[0].selling_price);
+
+                grand_total_obj.total_qty++;
+
+                localStorage.setItem('mycart', JSON.stringify(mycartobj));
+
+                localStorage.setItem('grandTotal', JSON.stringify(grand_total_obj));
+
+
+
+                showmodal();
+            } else if (action == 'minus') {
+                console.log(item[0].order_qty);
+                if (item[0].order_qty == 1) {
+
+                    var ans = confirm('Are you sure');
+
+                    if (ans) {
+
+                        let item_cart = mycartobj.filter(item => item.id !== id);
+
+                        grand_total_obj.sub_total -= parseInt(item[0].selling_price);
+
+                        grand_total_obj.total_qty--;
+
+                        localStorage.setItem('mycart', JSON.stringify(item_cart));
+
+                        localStorage.setItem('grandTotal', JSON.stringify(grand_total_obj));
+
+                        showmodal();
+
+                    } else {
+
+                        item[0].order_qty;
+
+                        localStorage.setItem('mycart', JSON.stringify(mycartobj));
+
+                        localStorage.setItem('grandTotal', JSON.stringify(grand_total_obj));
+
+                        showmodal();
+                    }
+
+                } else {
+
+                    item[0].order_qty--;
+
+                    grand_total_obj.sub_total -= parseInt(item[0].selling_price);
+
+                    grand_total_obj.total_qty--;
+
+                    localStorage.setItem('mycart', JSON.stringify(mycartobj));
+
+                    localStorage.setItem('grandTotal', JSON.stringify(grand_total_obj));
+
+                    // count_item();
+
+                    showmodal();
+                }
+            }
+        }
+
+        function showCheckOut() {
+            // alert('showingCheckout');
+            if ($('.custom-control-input').prop('checked')) {
+                // alert('success');
+                var take_away = 1;
+            } else {
+                var take_away = 0;
+            }
+            var mycart = localStorage.getItem('mycart');
+
+            var myremark = localStorage.getItem('myremark');
+            // console.log(mycart);
+            // console.log(myremark);
+            if (!mycart) {
 
                 swal({
-                    title:"Can't Add",
-                    text:"Can't Added Anymore!",
-                    icon:"info",
+                    title: "Please Check",
+                    text: "Menu Item Cannot be Empty to Check Out",
+                    icon: "info",
                 });
 
-                $('#btn_plus_' + item[0].id).attr('disabled', 'disabled');
+            } else {
+                $("#t_away").attr('value', take_away);
+
+                $("#item").attr('value', mycart);
+
+                $('#cus_complain').attr('value', myremark);
+
+
+                $("#vourcher_page").submit();
+
+                localStorage.clear();
+
             }
-            item[0].order_qty++;
-
-          grand_total_obj.sub_total += parseInt(item[0].selling_price);
-
-          grand_total_obj.total_qty ++;
-
-          localStorage.setItem('mycart',JSON.stringify(mycartobj));
-
-          localStorage.setItem('grandTotal',JSON.stringify(grand_total_obj));
-
-
-
-            showmodal();
-        }
-        else if (action == 'minus') {
-            console.log(item[0].order_qty);
-            if(item[0].order_qty == 1){
-
-              var ans=confirm('Are you sure');
-
-              if(ans){
-
-                let item_cart = mycartobj.filter(item =>item.id !== id );
-
-                grand_total_obj.sub_total -= parseInt(item[0].selling_price);
-
-                grand_total_obj.total_qty -- ;
-
-                localStorage.setItem('mycart',JSON.stringify(item_cart));
-
-                localStorage.setItem('grandTotal',JSON.stringify(grand_total_obj));
-
-                  showmodal();
-
-              }else{
-
-                item[0].order_qty;
-
-                localStorage.setItem('mycart',JSON.stringify(mycartobj));
-
-                localStorage.setItem('grandTotal',JSON.stringify(grand_total_obj));
-
-                  showmodal();
-              }
-
-          }else{
-
-            item[0].order_qty--;
-
-            grand_total_obj.sub_total -= parseInt(item[0].selling_price);
-
-            grand_total_obj.total_qty -- ;
-
-            localStorage.setItem('mycart',JSON.stringify(mycartobj));
-
-            localStorage.setItem('grandTotal',JSON.stringify(grand_total_obj));
-
-            // count_item();
-
-            showmodal();
-          }
-      }
-  }
-
-    function showCheckOut(){
-        // alert('showingCheckout');
-        if($('.custom-control-input').prop('checked')){
-            // alert('success');
-            var take_away = 1;
-        }else{
-            var take_away = 0;
-        }
-        var mycart = localStorage.getItem('mycart');
-
-        var myremark = localStorage.getItem('myremark');
-        // console.log(mycart);
-        // console.log(myremark);
-        if(!mycart){
-
-            swal({
-                title:"Please Check",
-                text:"Menu Item Cannot be Empty to Check Out",
-                icon:"info",
-            });
-
-        }else{
-            $("#t_away").attr('value', take_away);
-
-            $("#item").attr('value', mycart);
-
-            $('#cus_complain').attr('value',myremark);
-
-
-            $("#vourcher_page").submit();
-
-            localStorage.clear();
-
-        }
-    }
-
-    function AddMoreItem(order){
-        if($('.custom-control-input').prop('checked')){
-            // alert('success');
-            var take_away = 1;
-        }else{
-            var take_away = 0;
         }
 
-        var mycart = localStorage.getItem('mycart');
+        function AddMoreItem(order) {
+            if ($('.custom-control-input').prop('checked')) {
+                // alert('success');
+                var take_away = 1;
+            } else {
+                var take_away = 0;
+            }
 
-        var myremark = localStorage.getItem('myremark');
+            var mycart = localStorage.getItem('mycart');
 
-        if(!mycart){
+            var myremark = localStorage.getItem('myremark');
 
-            swal({
-                title:"Please Check",
-                text:"Menu Item Cannot be Empty to Check Out",
-                icon:"info",
-            });
+            if (!mycart) {
 
-        }else{
-            $('#add_complain').attr('value',myremark);
+                swal({
+                    title: "Please Check",
+                    text: "Menu Item Cannot be Empty to Check Out",
+                    icon: "info",
+                });
 
-            $("#option_lists").attr('value', mycart);
+            } else {
+                $('#add_complain').attr('value', myremark);
 
-            $("#order_id").attr('value', order);
+                $("#option_lists").attr('value', mycart);
 
-            $("#t_add_away").attr('value', take_away);
+                $("#order_id").attr('value', order);
 
-            $("#add_more_item").submit();
+                $("#t_add_away").attr('value', take_away);
 
-            localStorage.clear();
+                $("#add_more_item").submit();
+
+                localStorage.clear();
+
+            }
 
         }
 
-    }
-    function DeliAddMoreItem(order){
+        function DeliAddMoreItem(order) {
 
-var mycart = localStorage.getItem('mycart');
+            var mycart = localStorage.getItem('mycart');
 
-var myremark = localStorage.getItem('myremark');
+            var myremark = localStorage.getItem('myremark');
 
-if(!mycart){
+            if (!mycart) {
 
-    swal({
-        title:"Please Check",
-        text:"Menu Item Cannot be Empty to Check Out",
-        icon:"info",
-    });
+                swal({
+                    title: "Please Check",
+                    text: "Menu Item Cannot be Empty to Check Out",
+                    icon: "info",
+                });
 
-}else{
+            } else {
 
-    $("#deli_option_lists").attr('value', mycart);
+                $("#deli_option_lists").attr('value', mycart);
 
-    $('#add_deli_complain').attr('value',myremark);
+                $('#add_deli_complain').attr('value', myremark);
 
-    $("#deli_order_id").attr('value', order);
+                $("#deli_order_id").attr('value', order);
 
-    $("#deli_add_more_item").submit();
+                $("#deli_add_more_item").submit();
 
-    localStorage.clear();
+                localStorage.clear();
 
-}
+            }
 
-}
-
-    $( document ).ready(function() {
-    $('#name').val('');
-    $('#phone').val('');
-    $('#address').val('');
-    $('#order_date').val('');
-    $('#note').val('');
-});
-
-function fill_remark(){
-    var text = ($("#select2 option:selected").text());
-    $('#complain').val(text);
-}
-
-function note(id){
-        $('#remark_table_modal').modal('show');
-        $('#note_id').val(id);
-
-        $('.note_class').show();
-        // $('#select2').text('Select_code');
-
-    }
-function  save_note(){
-    // alert('hello');
-    var note_id = $('#note_id').val();
-    var complain = $('#complain').val();
-    // alert(complain);
-    $('#remark_table_modal').modal('hide');
-
-    $('#note_remark_'+note_id).text(complain);
-    var note = {id:note_id,remark:complain};
-    var myremark = localStorage.getItem('myremark');
-    console.log(note);
-    if(myremark == null ){
-
-        myremark = '[]';
-
-        var myremarkobj = JSON.parse(myremark);
-
-        myremarkobj.push(note);
-
-        localStorage.setItem('myremark',JSON.stringify(myremarkobj));
-
-        }else{
-            var myremarkobj = JSON.parse(myremark);
-
-            myremarkobj.push(note);
-
-            localStorage.setItem('myremark',JSON.stringify(myremarkobj));
         }
-    // $('#select2').empty();
-    // $('#select2').clear();
-    // $('#select2').text('Select Code');
-    $('#select2').val(null).trigger('change');
 
-}
+        $(document).ready(function() {
+            $('#name').val('');
+            $('#phone').val('');
+            $('#address').val('');
+            $('#order_date').val('');
+            $('#note').val('');
+        });
 
+        function fill_remark() {
+            var text = ($("#select2 option:selected").text());
+            $('#complain').val(text);
+        }
 
-</script>
+        function note(id) {
+            $('#remark_table_modal').modal('show');
+            $('#note_id').val(id);
+
+            $('.note_class').show();
+            // $('#select2').text('Select_code');
+
+        }
+
+        function save_note() {
+            // alert('hello');
+            var note_id = $('#note_id').val();
+            var complain = $('#complain').val();
+            // alert(complain);
+            $('#remark_table_modal').modal('hide');
+
+            $('#note_remark_' + note_id).text(complain);
+            var note = {
+                id: note_id,
+                remark: complain
+            };
+            var myremark = localStorage.getItem('myremark');
+            console.log(note);
+            if (myremark == null) {
+
+                myremark = '[]';
+
+                var myremarkobj = JSON.parse(myremark);
+
+                myremarkobj.push(note);
+
+                localStorage.setItem('myremark', JSON.stringify(myremarkobj));
+
+            } else {
+                var myremarkobj = JSON.parse(myremark);
+
+                myremarkobj.push(note);
+
+                localStorage.setItem('myremark', JSON.stringify(myremarkobj));
+            }
+            // $('#select2').empty();
+            // $('#select2').clear();
+            // $('#select2').text('Select Code');
+            $('#select2').val(null).trigger('change');
+
+        }
+    </script>
 
 @endsection
