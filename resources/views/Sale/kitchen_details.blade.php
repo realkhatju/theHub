@@ -59,15 +59,17 @@
                                                 <td><b style="font-size:17px;">{{$option->name}}</b></td>
                                                 <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
                                             </tr>
-                                            <tr style="width:100%; font-size:12px">
-                                                <th class="font-weight-bold">Notes</th>
-                                                <td class="font-weight-bold">note</td>
+                                            @if ($option->pivot->note != null && $option->pivot->note != 'Note Default')
+                                            <tr>
+                                                <th class="text-danger font-weight-bold">Notes</th>
+                                                <td class="text-danger" colspan="3">{{$option->pivot->note}}</td>
                                             </tr>
+                                            @endif
                                         {{-- @endif --}}
                                         @endif
                                 @endforeach
                             </tbody>
-                                @foreach ($notes as $item)
+                                {{-- @foreach ($notes as $item)
                                     @foreach ($option_id as $opid)
                                         @if ($item->option_id == $opid->id)
                                             @if ($mealItem1)
@@ -81,7 +83,7 @@
                                             @endif
                                         @endif
                                     @endforeach
-                                @endforeach
+                                @endforeach --}}
                         </table>
                         <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
                     </div>
@@ -130,30 +132,21 @@
                                 @foreach($pending_order_details->option as $option)
                                         @if ($option->menu_item->meal_id == 2)
                                         {{-- @if ($option->pivot->tocook == 0) --}}
-                                            <tr>
-                                                <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
-                                                <td><b style="font-size:17px;">{{$option->name}}</b></td>
-                                                <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
-                                            </tr>
+                                        <tr>
+                                            <td><b style="font-size:17px;">{{$option->menu_item->item_name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->name}}</b></td>
+                                            <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
+                                        </tr>
+                                        @if ($option->pivot->note != null && $option->pivot->note != 'Note Default')
+                                        <tr>
+                                            <th class="text-danger font-weight-bold">Notes</th>
+                                            <td class="text-danger" colspan="3">{{$option->pivot->note}}</td>
+                                        </tr>
+                                        @endif
                                         {{-- @endif --}}
                                         @endif
                                 @endforeach
                             </tbody>
-                                @foreach ($notes as $item)
-                                    @foreach ($option_id as $opid)
-                                        @if ($item->option_id == $opid->id)
-                                            @if ($mealItem1)
-                                                @if ($item->note != null && $item->note != 'Note Default')
-                                                <tr>
-                                                    <th class="text-danger font-weight-bold">Notes</th>
-                                                    <td class="text-danger font-weight-bold">{{$opid->name}}</td>
-                                                    <td class="text-danger" colspan="3">{{$item->note}}</td>
-                                                </tr>
-                                                @endif
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                @endforeach
                         </table>
                         <h6 class=" font-weight-bold" style="text-align:center;">***************</h6>
                     </div>

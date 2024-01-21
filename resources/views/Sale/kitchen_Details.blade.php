@@ -54,6 +54,12 @@
                                                     <td><b style="font-size:17px;">{{$option->name}}</b></td>
                                                     <td><b style="font-size:17px;">{{$option->pivot->quantity}}</b></td>
                                                 </tr>
+                                                @if ($option->pivot->note != null && $option->pivot->note != 'Note Default')
+                                                <tr>
+                                                    <th class="text-danger font-weight-bold">Notes</th>
+                                                    <td class="text-danger" colspan="3">{{$option->pivot->note}}</td>
+                                                </tr>
+                                                @endif
                                     @endforeach
                                 </tbody>
                             </table>
