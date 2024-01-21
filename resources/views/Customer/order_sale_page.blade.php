@@ -1170,6 +1170,8 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
+
+                <div class="row justify-content-center">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a type="button" class="btn" aria-label="Close" data-bs-toggle="modal"
@@ -1181,13 +1183,12 @@
                                 <h3 style="color:#49A8EF"><b>For Delivery<b></h3>
                             @endif
                             <div class="card-title">
-                                <a href="" class="float-right" onclick="deleteItems()">Refresh Here &nbsp<i
+                                <a onclick="deleteItems()">Refresh Here &nbsp<i
                                         class="fas fa-sync"></i></a>
                             </div>
                             <div class="card-body">
-                                <div class="row justify-content-center">
                                     {{-- Modify Style BST --}}
-                                    <table class="table">
+                                    <table class="table row justify-content-center">
                                         <thead>
                                             <tr>
                                                 <th class="font-weight-bold text-info">Menu Item</th>
@@ -1203,28 +1204,19 @@
                                             </tr>
                                         </tbody>
                                         <tfoot>
-                                            <tr class="text-center">
-                                                <td class="font-weight-bold text-info" colspan="3">Total Quantity</td>
+                                            <tr>
+                                                <td class="font-weight-bold text-info">Total Quantity</td>
                                                 <td class="font-weight-bold text-info" id="total_quantity">0</td>
                                             </tr>
-                                            <tr class="text-center">
-                                                <td class="font-weight-bold text-info" colspan="3">Sub Total Price</td>
+                                            <tr>
+                                                <td class="font-weight-bold text-info">Sub Total Price</td>
                                                 <td class="font-weight-bold text-info" id="sub_total">0</td>
-                                                {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
-                                                {{-- <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
-                                                {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td>
-                                                        <td class="font-weight-bold text-info" id="2sub_total">0</td> --}}
                                             </tr>
-                                            {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
                                         </tfoot>
-                                        {{-- <td class="font-weight-bold text-info" id="1sub_total">0</td> --}}
                                     </table>
-                                </div>
-                                <div class="row ml-2 justify-content-center">
-
-                                </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -2624,9 +2616,9 @@
 
                         html += `<tr>
 
-                            <td class="text-success font-weight-bold"><p style="width: 50px;white-space: nowrap;overflow: hidden;text-overflow: clip;">${item}</p></td>
+                            <td class="text-success font-weight-bold">${item}</td>
 
-                            <td class="text-success font-weight-bold"><p style="width: 50px;white-space: nowrap;overflow: hidden;text-overflow: clip;">${count_name}</p></td>
+                            <td class="text-success font-weight-bold">${count_name}</td>
 
                             <td>
                                 <i class="fa fa-plus-circle btnplus" onclick="plus(${id})" id="${id}"></i>
