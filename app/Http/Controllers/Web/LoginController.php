@@ -41,6 +41,84 @@ class LoginController extends Controller
 
 	}
 
+    // protected function loginProcess(Request $request){
+
+    //     $validator = Validator::make($request->all(), [
+    //         'email' => 'required',
+    //         'password' => 'required',
+    //     ]);
+
+    //     if ($validator->fails()) {
+
+    //         alert()->error('Something Wrong! Validation Error!');
+
+    //         return redirect()->back()->withErrors($validator)->withInput();
+    //     }
+
+    //     $user = User::where('email', $request->email)->first();
+
+    //     if (!isset($user)) {
+
+    //         alert()->error('Wrong Email!');
+
+    //         return redirect()->back();
+    //     }
+    //     elseif (!\Hash::check($request->password, $user->password)) {
+
+    //         alert()->error('Wrong Password!');
+
+    //         return redirect()->back();
+    //     }
+
+    //     session()->put('user', $user);
+
+    //     if ($user->role_flag == 1 || $user->role_flag == 5 || $user->role_flag == 6) {
+
+    //         alert()->success("Successfully Login");
+
+    //         $voucher = Voucher::where('status',0)->get();
+    //         $purchase = Purchase::all();
+    //         $expense = Expense::all();
+    //         $total_sale = 0;$today_sale = 0;$total_inventory = 0;$total_expense=0;$total_profit= 0;
+    //         $today = date("Y-m-d");
+    //         foreach($voucher as $vou){
+    //             $total_sale += $vou->total_price;
+    //         }
+    //         $tod_voucher = Voucher::where('date',$today)->where('status',0)->get();
+    //            foreach($tod_voucher as $tod){
+    //             $today_sale += $tod->total_price;
+    //         }
+    //         foreach($purchase as $pur){
+    //             $total_inventory += $pur->total_price;
+    //         }
+    //         foreach($expense as $exp){
+    //             $total_expense += $exp->amount;
+    //         }
+    //         $menu = MenuItem::all()->count();
+    //         return view('report',compact('total_sale','today_sale','total_inventory','menu','total_expense'));
+    //     }
+    //     elseif ($user->role_flag == 2 || $user->role_flag == 3 || $user->role_flag == 4) {
+    //         return redirect()->route('pending_lists');
+
+    //     }
+    //     // elseif ($user->role_flag == 4) {
+
+    //     //     alert()->success("Successfully Login");
+
+    //     //     return redirect()->route('inven_dashboard');
+
+    //     // }
+    //     else{
+
+    //         Session::flush();
+
+    //         return redirect()->route('index');
+
+    //     }
+
+    // }
+
+
     protected function loginProcess(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -49,74 +127,66 @@ class LoginController extends Controller
         ]);
 
         if ($validator->fails()) {
-
             alert()->error('Something Wrong! Validation Error!');
-
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $user = User::where('email', $request->email)->first();
 
         if (!isset($user)) {
-
             alert()->error('Wrong Email!');
-
             return redirect()->back();
         }
         elseif (!\Hash::check($request->password, $user->password)) {
-
             alert()->error('Wrong Password!');
-
             return redirect()->back();
         }
 
-        session()->put('user', $user);
+        // Make a POST request to the API endpoint to verify app accessibility
+        $client = new \GuzzleHttp\Client();
+        try {
+            $response = $client->post('http://crmbackend.kwintechnologies.com:3500/api/verify-app-accessibility', [
+                'json' => [
+                    "deal" => "65cdd64ab9386b6326e6fb6b"
+                ]
+            ]);
 
-        if ($user->role_flag == 1 || $user->role_flag == 5 || $user->role_flag == 6) {
+            $statusCode = $response->getStatusCode();
+            $responseData = json_decode($response->getBody(), true);
 
-            alert()->success("Successfully Login");
+            // Check if the API call was successful and data is accessible
+            if ($statusCode == 200 && isset($responseData['data']['isAccessible']) && $responseData['data']['isAccessible'] === true) {
+                // API call was successful and data is accessible, proceed with the login process
 
-            $voucher = Voucher::where('status',0)->get();
-            $purchase = Purchase::all();
-            $expense = Expense::all();
-            $total_sale = 0;$today_sale = 0;$total_inventory = 0;$total_expense=0;$total_profit= 0;
-            $today = date("Y-m-d");
-            foreach($voucher as $vou){
-                $total_sale += $vou->total_price;
+                // Store the user in the session
+                session()->put('user', $user);
+
+                // Redirect based on user role
+                if ($user->role_flag == 1 || $user->role_flag == 5 || $user->role_flag == 6) {
+                    // Additional logic for admin users
+                    alert()->success("Successfully Login");
+                    return redirect()->route('admin_dashboard');
+                } elseif ($user->role_flag == 2 || $user->role_flag == 3 || $user->role_flag == 4) {
+                    // Additional logic for other roles
+                    return redirect()->route('pending_lists');
+                } else {
+                    // Additional logic for other cases
+                    return redirect()->route('index');
+                }
+            } else {
+                // API call was not successful or data is not accessible
+                alert()->error(' Expired');
+                return redirect()->back();
             }
-            $tod_voucher = Voucher::where('date',$today)->where('status',0)->get();
-               foreach($tod_voucher as $tod){
-                $today_sale += $tod->total_price;
-            }
-            foreach($purchase as $pur){
-                $total_inventory += $pur->total_price;
-            }
-            foreach($expense as $exp){
-                $total_expense += $exp->amount;
-            }
-            $menu = MenuItem::all()->count();
-            return view('report',compact('total_sale','today_sale','total_inventory','menu','total_expense'));
+        } catch (\Exception $e) {
+            // Error occurred while making the API call
+            alert()->error('wrong');
+            return redirect()->back();
         }
-        elseif ($user->role_flag == 2 || $user->role_flag == 3 || $user->role_flag == 4) {
-            return redirect()->route('pending_lists');
-
-        }
-        // elseif ($user->role_flag == 4) {
-
-        //     alert()->success("Successfully Login");
-
-        //     return redirect()->route('inven_dashboard');
-
-        // }
-        else{
-
-            Session::flush();
-
-            return redirect()->route('index');
-
-        }
-
     }
+
+
+
 
     protected function logoutProcess(Request $request){
 

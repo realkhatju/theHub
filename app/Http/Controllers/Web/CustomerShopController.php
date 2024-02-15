@@ -217,7 +217,7 @@ class CustomerShopController extends Controller
         return view('customer.pending_order_details', compact('pending_order_details','total_qty','total_price','table_number'));
     }
     protected function storeShopOrder(Request $request){
-        // dd($request->all());
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'table_id' => 'required',
             'option_lists' => 'required',

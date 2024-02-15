@@ -766,6 +766,7 @@ class SaleController extends Controller
     }
 
 	protected function storeShopOrder(Request $request){
+        // dd($request->all());
         // Validation Start
 		$validator = Validator::make($request->all(), [
 			'table_id' => 'required',
@@ -778,6 +779,7 @@ class SaleController extends Controller
 		$user_name =  session()->get('user')->name;
 		$take_away = $request->take_away;
 		$option_lists = json_decode($request->option_lists);
+        dd($option_lists);
 		try {
 			$table = Table::where('id', $request->table_id)->first();
 				if (empty($table)) {
