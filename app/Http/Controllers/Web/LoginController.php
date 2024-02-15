@@ -175,12 +175,12 @@ class LoginController extends Controller
                 }
             } else {
                 // API call was not successful or data is not accessible
-                alert()->error(' Expired');
+                alert()->error('Subscription Expired!');
                 return redirect()->back();
             }
         } catch (\Exception $e) {
             // Error occurred while making the API call
-            alert()->error('wrong');
+            alert()->error('Data is not accessible');
             return redirect()->back();
         }
     }
