@@ -19,7 +19,7 @@ class MenuItemApiController extends Controller
                 "id" => $menuItem->id,
                 "name" => $menuItem->name,
                 "description" => "",
-                "selling_price" => $menuItem->sale_price,
+                "sellingPrice" => $menuItem->sale_price,
                 "discount" => "",
                 "discountType" => "",
                 "discountValue" => "",
