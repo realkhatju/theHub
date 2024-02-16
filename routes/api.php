@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\MenuItemApiController;
+use App\MenuItem;
 use App\PushSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +31,10 @@ Route::post('facebookLogin', 'Api\LoginController@facebookLogin');
 Route::post('Register', 'Api\LoginController@register');
 
 Route::post('New_Register','Api\LoginController@new_register');
+
+Route::get('market-place/products',[MenuItemApiController::class,'getMenuItems']);
+
+Route::get('market-place/products/{id}',[MenuItemApiController::class,'getMenuItem']);
 
 Route::group(['middleware' => ['auth:api','CustomerPermissionAPI']], function () {
 

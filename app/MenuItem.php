@@ -32,6 +32,10 @@ class MenuItem extends Model
         return $this->belongsTo(CuisineType::class);
     }
 
+    public function meal(){
+        return $this->belongsTo(Meal::class);
+    }
+
     public function option(){
         return $this->hasMany(Option::class);
     }
