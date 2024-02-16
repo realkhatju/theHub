@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\MenuItem;
+use App\CuisineType;
+use App\Meal;
 use App\Option;
+use App\MenuItem;
 use Illuminate\Http\Request;
 
 class MenuItemApiController extends Controller
@@ -59,5 +61,19 @@ class MenuItemApiController extends Controller
         ]);
     }
 
+    public function getCategories(){
+        $meals = Meal::get();
+        return response()->json([
+                "status" => "success",
+                "data" => $meals
+        ]);
+    }
 
+    public function getSubCategories(){
+        $cuisine_types = CuisineType::get();
+        return response()->json([
+            "status" => "success",
+            "data" => $cuisine_types
+        ]);
+    }
 }
