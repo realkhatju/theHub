@@ -14,12 +14,24 @@ class MenuItemApiController extends Controller
         // Validate the request parameters
         $request->validate([
             'per_page' => 'nullable|integer|min:1', // Ensure per_page is an integer greater than or equal to 1
-            'current_page' => 'nullable|integer|min:1', // Ensure current_page is an integer greater than or equal to 1
+            'current_page' => 'nullable', // Allow current_page to be any value
         ]);
 
-        // Get the per_page and current_page parameters from the request, default to 3 and 1 respectively if not provided
-        $perPage = intval($request->query('per_page', 3)); // Cast to integer
-        $currentPage = $request->query('current_page', 1);
+        // Get the per_page and current_page parameters from the request, default to 0 (all) and a very large number respectively if not provided
+        $perPage = $request->query('per_page', 0); // Default to 0 (all)
+        $currentPage = $request->query('current_page', PHP_INT_MAX); // Default to a very large number
+
+        // If per_page is set to 0 (all), set it to a very large number to retrieve all items
+        if ($perPage == 0) {
+            $perPage = PHP_INT_MAX; // Set to maximum integer value
+        } else {
+            $perPage = intval($perPage); // Cast to integer for other values
+        }
+
+        // If current_page is set to a very large number, set it to 1 to retrieve the first page
+        if ($currentPage == PHP_INT_MAX) {
+            $currentPage = 1;
+        }
 
         // Retrieve menu items with pagination
         $menu_items = Option::with('menu_item.cuisine_type', 'menu_item.meal')->paginate($perPage, ['*'], 'page', $currentPage);
@@ -41,12 +53,11 @@ class MenuItemApiController extends Controller
         });
 
         return response()->json([
-            "status" => "success",
             "data" => $transformedMenuItems,
             "count" => $menu_items->total(),
             "_metadata" => [
                 "current_page" => $menu_items->currentPage(),
-                "per_page" => $menu_items->perPage(),
+                "per_page" => $perPage,
                 "total_pages" => $menu_items->lastPage()
             ]
         ]);
