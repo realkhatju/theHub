@@ -38,9 +38,9 @@ Route::get('market-place/products',[MenuItemApiController::class,'getMenuItems']
 
 Route::get('market-place/products/{id}',[MenuItemApiController::class,'getMenuItem']);
 
-Route::get('categories',[MenuItemApiController::class,'getCategories']);
+Route::get('market-place/categories',[MenuItemApiController::class,'getCategories']);
 
-Route::get('subcategories',[MenuItemApiController::class,'getSubCategories']);
+Route::get('market-place/subcategories',[MenuItemApiController::class,'getSubCategories']);
 
 //
 
