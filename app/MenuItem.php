@@ -24,6 +24,12 @@ class MenuItem extends Model
         'item_name_burmese'
     ];
 
+    protected $appends = ['imageURL'];
+    public function getImageUrlAttribute()
+    {
+        return asset('photo/' . $this->photo_path);
+    }
+
     protected $hidden = [
         'created_at','updated_at'
     ];

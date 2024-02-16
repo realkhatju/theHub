@@ -12,9 +12,9 @@ class MenuItemApiController extends Controller
 {
     //GET
     public function getMenuItems(){
-        $menu_items = Option::with('menu_item.cuisine_type','menu_item.meal')->get();
-         // Transform the menu items to change the field name
-         $transformedMenuItems = $menu_items->map(function ($menuItem) {
+        $menu_items = Option::with('menu_item.cuisine_type', 'menu_item.meal')->get();
+
+        $transformedMenuItems = $menu_items->map(function ($menuItem) {
             return [
                 "id" => $menuItem->id,
                 "name" => $menuItem->name,
@@ -24,16 +24,18 @@ class MenuItemApiController extends Controller
                 "discountType" => "",
                 "discountValue" => "",
                 "stockQty" => "",
-                "image" => $menuItem->menu_item->photo_path,
+                "image" => $menuItem->menu_item->imageURL,
                 "category" => $menuItem->menu_item->meal->name,
                 "subcategory" => $menuItem->menu_item->cuisine_type->name
             ];
         });
+
         return response()->json([
             "status" => "success",
             "data" => $transformedMenuItems
         ]);
     }
+
 
 
     public function getMenuItem($id){
