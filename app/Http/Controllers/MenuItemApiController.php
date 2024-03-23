@@ -92,17 +92,33 @@ class MenuItemApiController extends Controller
 
     public function getCategories(){
         $meals = Meal::get();
+        $formattedMeals = $meals->map(function ($meal) {
+            return [
+                "id" => $meal->id,
+                "title" => $meal->name
+            ];
+        });
+
         return response()->json([
-                "status" => "success",
-                "data" => $meals
+            "status" => 200,
+            "Category" => $formattedMeals
         ]);
     }
 
+
     public function getSubCategories(){
         $cuisine_types = CuisineType::get();
+        $formattedCuisineTypes = $cuisine_types->map(function ($cuisine_types) {
+            return [
+                "id" => $cuisine_types->id,
+                "title" => $cuisine_types->name,
+                "category" => $cuisine_types->meal_id
+            ];
+        });
+
         return response()->json([
-            "status" => "success",
-            "data" => $cuisine_types
+            "status" => 200,
+            "SubCategory" => $formattedCuisineTypes
         ]);
     }
     public function getMenuItemsCategories($id){
