@@ -42,6 +42,10 @@ Route::get('market-place/categories',[MenuItemApiController::class,'getCategorie
 
 Route::get('market-place/subcategories',[MenuItemApiController::class,'getSubCategories']);
 
+Route::get('market-place/categories/{id}',[MenuItemApiController::class,'getMenuItemsCategories']);
+
+Route::get('market-place/subcategories/{id}',[MenuItemApiController::class,'getMenuItemsSubCategories']);
+
 //
 
 Route::group(['middleware' => ['auth:api','CustomerPermissionAPI']], function () {
