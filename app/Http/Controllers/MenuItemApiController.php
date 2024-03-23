@@ -101,7 +101,7 @@ class MenuItemApiController extends Controller
 
         return response()->json([
             "status" => 200,
-            "Category" => $formattedMeals
+            "data" => $formattedMeals
         ]);
     }
 
@@ -118,22 +118,7 @@ class MenuItemApiController extends Controller
 
         return response()->json([
             "status" => 200,
-            "SubCategory" => $formattedCuisineTypes
-        ]);
-    }
-    public function getMenuItemsCategories($id){
-        $Category = Meal::findOrFail($id);
-        return response()->json([
-            "status" => 200,
-            "title" => $Category->name
-        ]);
-    }
-    public function getMenuItemsSubCategories($id){
-        $SubCategory = CuisineType::findOrFail($id);
-        return response()->json([
-            "status" => 200,
-            "title" => $SubCategory->name,
-            "category" => $SubCategory->meal_id
+            "data" => $formattedCuisineTypes
         ]);
     }
 }
