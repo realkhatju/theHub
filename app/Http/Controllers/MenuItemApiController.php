@@ -11,30 +11,38 @@ use Illuminate\Http\Request;
 class MenuItemApiController extends Controller
 {
     public function getMenuItems(Request $request){
-        // Validate the request parameters
         $request->validate([
-            'per_page' => 'nullable|integer|min:1', // Ensure per_page is an integer greater than or equal to 1
-            'current_page' => 'nullable', // Allow current_page to be any value
+            'per_page' => 'nullable|integer|min:1',
+            'current_page' => 'nullable',
+            'category' => 'nullable|integer|min:1',
+            'subcategory' => 'nullable|integer|min:1',
         ]);
 
-        // Get the per_page and current_page parameters from the request, default to 0 (all) and a very large number respectively if not provided
-        $perPage = $request->query('per_page', 0); // Default to 0 (all)
-        $currentPage = $request->query('current_page', PHP_INT_MAX); // Default to a very large number
+        $perPage = $request->query('per_page', 0);
+        $currentPage = $request->query('current_page', 1);
+        $category = $request->query('category');
+        $subcategory = $request->query('subcategory');
 
-        // If per_page is set to 0 (all), set it to a very large number to retrieve all items
         if ($perPage == 0) {
-            $perPage = PHP_INT_MAX; // Set to maximum integer value
+            $perPage = PHP_INT_MAX;
         } else {
-            $perPage = intval($perPage); // Cast to integer for other values
+            $perPage = intval($perPage);
         }
 
-        // If current_page is set to a very large number, set it to 1 to retrieve the first page
-        if ($currentPage == PHP_INT_MAX) {
-            $currentPage = 1;
+        // Filter menu items by category and/or subcategory if provided
+        $menu_items_query = Option::with('menu_item.cuisine_type', 'menu_item.meal');
+        if ($category) {
+            $menu_items_query->whereHas('menu_item.meal', function($query) use ($category) {
+                $query->where('meal_id', $category);
+            });
+        }
+        if ($subcategory) {
+            $menu_items_query->whereHas('menu_item.cuisine_type', function($query) use ($subcategory) {
+                $query->where('cuisine_type_id', $subcategory);
+            });
         }
 
-        // Retrieve menu items with pagination
-        $menu_items = Option::with('menu_item.cuisine_type', 'menu_item.meal')->paginate($perPage, ['*'], 'page', $currentPage);
+        $menu_items = $menu_items_query->paginate($perPage, ['*'], 'page', $currentPage);
 
         $transformedMenuItems = $menu_items->map(function ($menuItem) {
             return [
@@ -62,6 +70,7 @@ class MenuItemApiController extends Controller
             ]
         ]);
     }
+
 
 
 
